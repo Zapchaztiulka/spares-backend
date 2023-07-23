@@ -1,0 +1,8 @@
+{
+  "restartable": "rs",
+  "ignore": [".git", "node_modules/"],
+  "ext": "js, yaml",
+  "execMap": { "js": "node" },
+  "delay": "1000",
+  "legacyWatch": true
+}
