@@ -9,7 +9,9 @@ module.exports = async (req, res) => {
   const { id } = req.user;
 
   if (!req.body) throw new HttpError({ message: 'Missing field' });
+
   const { password1, password2 } = req.body;
+
   if (password1 === password2) {
     const hashPassword = await bcrypt.hash(password1, 10);
     const user = await User.findByIdAndUpdate(id, {

@@ -8,7 +8,7 @@ sgMail.setApiKey(SENDGRID_API_KEY);
 module.exports = async (email, verificationToken) => {
   const newEmail = {
     to: email,
-    subject: 'Goose Track - Verify your email',
+    subject: 'Spare parts store "Zapchaztiulka" - Verify your email',
     html: `
       <html>
         <head>
@@ -60,13 +60,13 @@ module.exports = async (email, verificationToken) => {
           </style>
         </head>
         <body>
-          <h3>The Goose Track welcomes you!</h3>
+          <h3>Вас вітає магазин запасних частин агротехніки "Запчастулька"!</h3>
           <div class="image-container">
-            <img src="https://oleh-kliapko.github.io/GooseTrack_front/static/media/goose2x.16fd9b28530c95574467.png" alt="Goose Flying" />
+            <img src="" alt="Spare parts store" />
           </div>
-          <p>Please click the button below to verify your email:</p>
+          <p>Натисніть кнопку нижче, щоб підтвердити свою електронну адресу:</p>
           <a class="verification-link" target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">
-            <p class="verification-text">Verify Email</p>
+            <p class="verification-text">Підтвердити мій імейл</p>
           </a>
 
         </body>

@@ -8,14 +8,8 @@ const {
 } = require('../helpers');
 
 const validationAuthUser = Joi.object({
-  username: Joi.string()
-    .max(32)
-    .required()
-    .messages(templatesMsgJoi('Username')),
-  userSurname: Joi.string()
-    .max(32)
-    .required()
-    .messages(templatesMsgJoi('User surname')),
+  username: Joi.string().max(32).messages(templatesMsgJoi('Username')),
+  userSurname: Joi.string().max(32).messages(templatesMsgJoi('User surname')),
   password: Joi.string()
     .pattern(patterns.passwordPattern)
     .required()
@@ -27,8 +21,19 @@ const validationAuthUser = Joi.object({
     .messages(templatesMsgJoi('Email')),
   role: Joi.string()
     .valid(...patterns.roles)
-    .required()
-    .messages(templatesMsgJoi('Role')),
+    .messages(templatesMsgJoi('Role', patterns.roles)),
+});
+
+const validationUpdateUser = Joi.object({
+  username: Joi.string().max(32).messages(templatesMsgJoi('Username')),
+  userSurname: Joi.string().max(32).messages(templatesMsgJoi('User surname')),
+  email: Joi.string()
+    .email({ minDomainSegments: 2 })
+    .pattern(patterns.emailPattern)
+    .messages(templatesMsgJoi('Email')),
+  role: Joi.string()
+    .valid(...patterns.roles)
+    .messages(templatesMsgJoi('Role', patterns.roles)),
 });
 
 const validationEmailUser = Joi.object({
@@ -91,5 +96,6 @@ const User = model('user', userSchema);
 module.exports = {
   User,
   validationAuthUser,
+  validationUpdateUser,
   validationEmailUser,
 };

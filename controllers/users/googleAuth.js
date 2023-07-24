@@ -21,8 +21,6 @@ module.exports = {
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: EXPIRES_TOKEN });
     await User.findByIdAndUpdate(id, { token });
 
-    res.redirect(
-      `https://oleh-kliapko.github.io/GooseTrack_front?token=${token}`,
-    );
+    res.redirect(`https://github.com/Zapchaztiulka?token=${token}`);
   },
 };

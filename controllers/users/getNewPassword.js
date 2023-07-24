@@ -23,6 +23,7 @@ module.exports = async (req, res) => {
       password: hashPassword,
     },
   );
+
   await sendEmailWithPassword(email, newPassword);
 
   return res.status(201).json({

@@ -7,10 +7,9 @@ const {
   authenticate,
   isValidId,
   passportConfig,
-  uploadCloud,
 } = require('../../middlewares');
 const {
-  user: { validationAuthUser, validationEmailUser },
+  user: { validationAuthUser, validationUpdateUser, validationEmailUser },
 } = require('../../models');
 
 router.post('/register', validateBody(validationAuthUser), ctrl.register);
@@ -35,14 +34,14 @@ router.post(
   ctrl.resendVerifyEmail,
 );
 
+router.get('/role', ctrl.getUserByRole);
 router.get('/current', authenticate, ctrl.getCurrentUser);
 router.get('/:id', isValidId, ctrl.getById);
-router.get('/:role', ctrl.getUserByRole);
 
 router.patch(
   '/update',
   authenticate,
-  uploadCloud.single('avatarURL'),
+  validateBody(validationUpdateUser),
   ctrl.updateUser,
 );
 

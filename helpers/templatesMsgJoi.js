@@ -1,4 +1,4 @@
-module.exports = credential => {
+module.exports = (credential, others) => {
   return {
     'string.empty': `${credential} cannot be an empty`,
     'any.required': `missing required field ${credential}`,
@@ -9,6 +9,6 @@ module.exports = credential => {
     'number.base': `Invalid type for ${credential}`,
     'number.min': `${credential} should be greater than or equal to {#limit}`,
     'number.max': `${credential} should be less than or equal to {#limit}`,
-    'any.only': `${credential} must equal one of certain values. Check conditions`,
+    'any.only': `${credential} must equal one of certain values: ${others}`,
   };
 };

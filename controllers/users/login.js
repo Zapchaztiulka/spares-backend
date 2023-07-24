@@ -37,17 +37,12 @@ module.exports = async (req, res) => {
     { new: true }, // to return upgraded user after searching because Mongoose returns user as he was before the update
   );
 
-  const { avatarURL, username, birthday, phone, skype } = loggedUser;
+  const { username, userSurname, role } = loggedUser;
   return res.status(200).json({
-    data: {
-      avatarURL,
-      username,
-      email,
-      birthday,
-      phone,
-      skype,
-      token,
-    },
-    message: `User by email: ${email} has been logged in`,
+    username,
+    userSurname,
+    email,
+    role,
+    token,
   });
 };

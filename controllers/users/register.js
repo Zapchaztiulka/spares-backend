@@ -7,10 +7,11 @@ const {
 const { HttpError, sendEmail } = require('../../helpers');
 
 module.exports = async (req, res) => {
-  const { email, password, username } = req.body;
+  const { email, password, username, userSurname, role } = req.body;
   const pureEmail = email.trim();
   const purePassword = password.trim();
-  const pureUsername = username.trim();
+  const pureUsername = username?.trim();
+  const pureUserSurname = userSurname?.trim();
 
   const user = await User.findOne({ email: pureEmail });
   if (user) {
@@ -27,18 +28,19 @@ module.exports = async (req, res) => {
     ...req.body,
     email: pureEmail,
     username: pureUsername,
+    userSurname: pureUserSurname,
     password: hashPassword,
+    role,
     verificationToken,
   });
 
   await sendEmail(pureEmail, verificationToken);
 
   return res.status(201).json({
-    data: {
-      id: newUser._id,
-      email: newUser.email,
-      username: newUser.username,
-    },
-    message: `User with email: ${newUser.email} has been created`,
+    id: newUser._id,
+    email: newUser.email,
+    username: newUser.username,
+    userSurname: newUser.userSurname,
+    role: newUser.role,
   });
 };

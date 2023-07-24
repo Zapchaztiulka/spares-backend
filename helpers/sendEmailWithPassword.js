@@ -8,7 +8,7 @@ sgMail.setApiKey(SENDGRID_API_KEY);
 module.exports = async (email, newPassword) => {
   const newEmail = {
     to: email,
-    subject: 'Goose Track - New Password',
+    subject: 'Spare parts store "Zapchaztiulka" - New Password',
     html: `
       <html>
         <head>
@@ -45,11 +45,11 @@ module.exports = async (email, newPassword) => {
           </style>
         </head>
         <body>
-          <h3>Your new password: ${newPassword}.</h3>
-          <p> Next time sign in with it </p>
-          <p>You can change it in the User Profile.</p>
+          <h3>Ваш новий пароль: ${newPassword}.</h3>
+          <p>Наступного разу використовуйте його при вході в магазин</p>
+          <p>Також Ви можете змінити пароль в сторінці Профілю користувача.</p>
           <div class="image-container">
-            <img src="https://oleh-kliapko.github.io/GooseTrack_front/static/media/goose2x.16fd9b28530c95574467.png" alt="Goose Flying" />
+            <img src="" alt="Spare parts store" />
           </div>
         </body>
       </html>

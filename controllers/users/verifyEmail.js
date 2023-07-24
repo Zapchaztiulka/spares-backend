@@ -16,5 +16,5 @@ module.exports = async (req, res) => {
     verificationToken: '',
   });
 
-  res.redirect('https://oleh-kliapko.github.io/GooseTrack_front/login');
+  res.redirect('https://github.com/Zapchaztiulka');
 };
