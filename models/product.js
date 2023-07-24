@@ -104,8 +104,9 @@ const productSchema = new Schema(
       },
     },
     category: {
-      type: [String],
-      default: [],
+      type: Schema.Types.ObjectId,
+      ref: 'category',
+      required: true,
     },
     creator: {
       type: Schema.Types.ObjectId,

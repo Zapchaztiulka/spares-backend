@@ -7,7 +7,11 @@ const YAML = require('yamljs');
 require('dotenv').config();
 
 const swaggerJSDocs = YAML.load('./api.yaml');
-const { usersRouter, productsRouter } = require('./routes/api');
+const {
+  usersRouter,
+  productsRouter,
+  categoriesRouter,
+} = require('./routes/api');
 const { SECRET_KEY } = process.env; // secret key was came up with developer
 
 const app = express();
@@ -29,6 +33,7 @@ app.use(
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerJSDocs));
 app.use('/api/users', usersRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/categories', categoriesRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: 'Not found' });

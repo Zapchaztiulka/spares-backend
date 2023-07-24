@@ -8,9 +8,9 @@ const {
 
 const router = express.Router();
 
-router.get('/', ctrl.getAllProducts);
+router.get('/', ctrl.getProductsByQuery);
 
-router.get('/:id', ctrl.getProductByCreator);
+router.get('/:id', ctrl.getProductsByCreator);
 
 router.post(
   '/',
