@@ -3,9 +3,9 @@ const {
 } = require('../../models');
 
 module.exports = async (req, res) => {
-  const { id } = req.query;
+  const { id } = req.params;
 
   const category = await Category.findById(id);
 
-  res.status(200).json({ category });
+  res.status(200).json(category);
 };

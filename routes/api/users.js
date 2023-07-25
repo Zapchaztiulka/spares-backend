@@ -9,12 +9,18 @@ const {
   passportConfig,
 } = require('../../middlewares');
 const {
-  user: { validationAuthUser, validationUpdateUser, validationEmailUser },
+  user: {
+    validationAuthUser,
+    validationUpdateUser,
+    validationEmailUser,
+    validationPasswordUser,
+  },
 } = require('../../models');
 
 router.post('/register', validateBody(validationAuthUser), ctrl.register);
 router.post('/login', validateBody(validationAuthUser), ctrl.login);
 router.post('/login-with-token', ctrl.loginWithToken);
+router.post('/logout', authenticate, ctrl.logout);
 
 // Initialize Passport middleware
 router.use(passportConfig.initialize());
@@ -24,7 +30,7 @@ router.use(passportConfig.session());
 router.get('/google', googleAuth.auth);
 router.get('/google/callback', googleAuth.callback, googleAuth.successCallback);
 
-// router for email verification
+// email verification
 router.get('/verify/:verificationToken', ctrl.verifyEmail);
 
 // resend email letter for verification
@@ -34,10 +40,12 @@ router.post(
   ctrl.resendVerifyEmail,
 );
 
+// get users by different way
 router.get('/role', ctrl.getUserByRole);
 router.get('/current', authenticate, ctrl.getCurrentUser);
 router.get('/:id', isValidId, ctrl.getById);
 
+// update user data
 router.patch(
   '/update',
   authenticate,
@@ -52,6 +60,12 @@ router.patch(
   ctrl.getNewPassword,
 );
 
-router.post('/logout', authenticate, ctrl.logout);
+// create new password
+router.patch(
+  '/createNewPassword',
+  authenticate,
+  validateBody(validationPasswordUser),
+  ctrl.createNewPassword,
+);
 
 module.exports = router;

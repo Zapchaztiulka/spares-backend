@@ -9,20 +9,21 @@ const {
 } = require('../helpers');
 
 const validationProduct = Joi.object({
-  name: Joi.string().required().messages(templatesMsgJoi('Product name')),
+  name: Joi.string().required().messages(templatesMsgJoi('product name')),
   manufactureId: Joi.string()
     .required()
-    .messages(templatesMsgJoi('Manufacture Id')),
-  price: Joi.number().min(0).required().messages(templatesMsgJoi('Price')),
+    .messages(templatesMsgJoi('manufacture Id')),
+  price: Joi.number().min(0).required().messages(templatesMsgJoi('price')),
   availability: Joi.string()
     .valid(...patterns.availability)
     .required()
-    .messages(templatesMsgJoi('Availability')),
+    .messages(templatesMsgJoi('availability', patterns.availability)),
   weight: Joi.number().messages(templatesMsgJoi('Weight')),
-  units: Joi.string().required().messages(templatesMsgJoi('units')),
+  units: Joi.string()
+    .valid(...patterns.units)
+    .messages(templatesMsgJoi('units', patterns.units)),
   photo: Joi.array().items(
     Joi.object({
-      id: Joi.string().messages(templatesMsgJoi('photo ID of product')),
       url: Joi.string()
         .uri()
         .required()
@@ -38,7 +39,22 @@ const validationProduct = Joi.object({
   })
     .required()
     .messages(templatesMsgJoi('Manufacturer')),
-  category: Joi.array().items(Joi.string()),
+  category: Joi.string().required().messages(templatesMsgJoi('Category')),
+});
+
+const manufacturerSchema = new Schema({
+  country: {
+    type: String,
+    default: '',
+  },
+  factory: {
+    type: String,
+    default: '',
+  },
+  trademark: {
+    type: String,
+    required: true,
+  },
 });
 
 const productSchema = new Schema(
@@ -67,14 +83,11 @@ const productSchema = new Schema(
     },
     units: {
       type: String,
+      enum: patterns.units,
       default: 'шт',
     },
     photo: [
       {
-        id: {
-          type: String,
-          default: () => nanoid(4),
-        },
         url: {
           type: String,
           required: true,
@@ -90,18 +103,8 @@ const productSchema = new Schema(
       default: '',
     },
     manufacturer: {
-      country: {
-        type: String,
-        default: '',
-      },
-      factory: {
-        type: String,
-        default: '',
-      },
-      trademark: {
-        type: String,
-        required: true,
-      },
+      type: manufacturerSchema,
+      required: true,
     },
     category: {
       type: Schema.Types.ObjectId,

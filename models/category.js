@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
-const { nanoid } = require('nanoid');
 
 const { templatesMsgJoi, handleMongooseError } = require('../helpers');
 
@@ -8,9 +7,17 @@ const validationCategory = Joi.object({
   categoryName: Joi.string()
     .required()
     .messages(templatesMsgJoi('Category name')),
-  subcategory: Joi.array().items(
+  subcategories: Joi.array().items(
     Joi.object({
-      id: Joi.string(),
+      subcategoryName: Joi.string().required(),
+    }),
+  ),
+});
+
+const validationUpdateCategory = Joi.object({
+  categoryName: Joi.string().messages(templatesMsgJoi('Category name')),
+  subcategories: Joi.array().items(
+    Joi.object({
       subcategoryName: Joi.string(),
     }),
   ),
@@ -22,12 +29,8 @@ const categorySchema = new Schema(
       type: String,
       required: true,
     },
-    subcategory: [
+    subcategories: [
       {
-        id: {
-          type: String,
-          default: () => nanoid(8),
-        },
         subcategoryName: {
           type: String,
           required: true,
@@ -49,4 +52,5 @@ const Category = model('category', categorySchema);
 module.exports = {
   Category,
   validationCategory,
+  validationUpdateCategory,
 };

@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     throw HttpError(400, 'Missing body of request');
   }
 
-  const { _id, role } = req.user;
+  const { role } = req.user;
 
   if (role !== 'admin') {
     throw HttpError(403, 'Forbidden');
@@ -23,12 +23,5 @@ module.exports = async (req, res) => {
     throw HttpError(404, 'Not found');
   }
 
-  const { createdAt, updatedAt } = category;
-
-  return res.status(200).json({
-    ...category,
-    creator: _id,
-    createdAt,
-    updatedAt,
-  });
+  return res.status(200).json(category);
 };

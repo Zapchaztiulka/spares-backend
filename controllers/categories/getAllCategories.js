@@ -11,5 +11,5 @@ module.exports = async (req, res) => {
     limit,
   });
 
-  res.status(200).json({ categories });
+  res.status(200).json(categories);
 };

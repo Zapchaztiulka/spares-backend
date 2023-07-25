@@ -10,5 +10,6 @@ module.exports = (credential, others) => {
     'number.min': `${credential} should be greater than or equal to {#limit}`,
     'number.max': `${credential} should be less than or equal to {#limit}`,
     'any.only': `${credential} must equal one of certain values: ${others}`,
+    'array.min': `${credential} must contain at least one element`,
   };
 };

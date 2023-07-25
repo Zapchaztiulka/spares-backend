@@ -1,4 +1,5 @@
-const availability = ['є в наявності', 'під замовлення'];
+const availability = ['є в наявності', 'під замовлення', 'відсутній'];
+const units = ['кг', 'шт', 'л'];
 const roles = ['public', 'user', 'admin'];
 
 const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -7,6 +8,7 @@ const passwordPattern = /^.*(?=.{6,})((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/; // 6 
 const patterns = {
   availability,
   roles,
+  units,
   emailPattern,
   passwordPattern,
 };

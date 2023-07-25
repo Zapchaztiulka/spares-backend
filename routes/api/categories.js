@@ -3,7 +3,7 @@ const express = require('express');
 const ctrl = require('../../controllers/categories');
 const { authenticate, validateBody, isValidId } = require('../../middlewares');
 const {
-  category: { validationCategory },
+  category: { validationCategory, validationUpdateCategory },
 } = require('../../models');
 
 const router = express.Router();
@@ -23,7 +23,7 @@ router.patch(
   '/:id',
   authenticate,
   isValidId,
-  validateBody(validationCategory),
+  validateBody(validationUpdateCategory),
   ctrl.updateCategoryById,
 );
 

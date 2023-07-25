@@ -15,10 +15,5 @@ module.exports = async (req, res) => {
     creator: _id,
   });
 
-  const { creator, createdAt } = newProduct;
-  return res.status(201).json({
-    ...newProduct,
-    creator,
-    createdAt,
-  });
+  return res.status(201).json(newProduct);
 };
