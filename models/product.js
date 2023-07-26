@@ -38,7 +38,10 @@ const validationProduct = Joi.object({
   })
     .required()
     .messages(templatesMsgJoi('Manufacturer')),
-  category: Joi.string().required().messages(templatesMsgJoi('Category')),
+  categories: Joi.array()
+    .items(Joi.string().length(24))
+    .required()
+    .messages(templatesMsgJoi('Categories')),
   subcategories: Joi.array()
     .items(Joi.string().length(24))
     .messages(templatesMsgJoi('Subcategories')),
@@ -108,17 +111,8 @@ const productSchema = new Schema(
       type: manufacturerSchema,
       required: true,
     },
-    category: {
-      type: Schema.Types.ObjectId,
-      ref: 'category',
-      required: true,
-    },
-    subcategories: [
-      {
-        type: Schema.Types.ObjectId,
-        required: true,
-      },
-    ],
+    categories: [{ _id: Schema.Types.ObjectId, categoryName: String }],
+    subcategories: [{ _id: Schema.Types.ObjectId, subcategoryName: String }],
     creator: {
       type: Schema.Types.ObjectId,
       ref: 'user',
