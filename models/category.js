@@ -23,20 +23,20 @@ const validationUpdateCategory = Joi.object({
   ),
 });
 
+const subcategorySchema = new Schema({
+  subcategoryName: {
+    type: String,
+    required: true,
+  },
+});
+
 const categorySchema = new Schema(
   {
     categoryName: {
       type: String,
       required: true,
     },
-    subcategories: [
-      {
-        subcategoryName: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
+    subcategories: [subcategorySchema],
     creator: {
       type: Schema.Types.ObjectId,
       ref: 'user',

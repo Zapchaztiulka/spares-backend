@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
-const { nanoid } = require('nanoid');
 
 const {
   templatesMsgJoi,
@@ -40,6 +39,9 @@ const validationProduct = Joi.object({
     .required()
     .messages(templatesMsgJoi('Manufacturer')),
   category: Joi.string().required().messages(templatesMsgJoi('Category')),
+  subcategories: Joi.array()
+    .items(Joi.string().length(24))
+    .messages(templatesMsgJoi('Subcategories')),
 });
 
 const manufacturerSchema = new Schema({
@@ -111,6 +113,12 @@ const productSchema = new Schema(
       ref: 'category',
       required: true,
     },
+    subcategories: [
+      {
+        type: Schema.Types.ObjectId,
+        required: true,
+      },
+    ],
     creator: {
       type: Schema.Types.ObjectId,
       ref: 'user',
