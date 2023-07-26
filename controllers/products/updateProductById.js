@@ -15,8 +15,9 @@ module.exports = async (req, res) => {
     throw HttpError(403, 'Forbidden');
   }
 
-  const { categories, subcategories } = req.body;
-  let newProductData;
+  const { id } = req.params;
+  const { categories = [], subcategories = [] } = req.body;
+  let newProductData = {};
 
   if (categories || subcategories) {
     const categoryPromises = categories.map(categoryId =>
@@ -45,11 +46,10 @@ module.exports = async (req, res) => {
         subcategoryName: category.subcategories[0].subcategoryName,
       })),
     };
+  } else {
+    newProductData = req.body;
   }
 
-  newProductData = req.body;
-
-  const { id } = req.params;
   const product = await Product.findByIdAndUpdate(id, newProductData, {
     new: true,
   });

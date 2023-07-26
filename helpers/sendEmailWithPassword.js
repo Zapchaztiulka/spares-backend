@@ -47,7 +47,7 @@ module.exports = async (email, newPassword) => {
         <body>
           <h3>Ваш новий пароль: ${newPassword}.</h3>
           <p>Наступного разу використовуйте його при вході в магазин</p>
-          <p>Також Ви можете змінити пароль в сторінці Профілю користувача.</p>
+          <p>Також Ви можете змінити пароль в сторінці "Профілю користувача".</p>
           <div class="image-container">
             <img src="" alt="Spare parts store" />
           </div>
