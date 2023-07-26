@@ -3,14 +3,14 @@ const express = require('express');
 const ctrl = require('../../controllers/products');
 const { authenticate, validateBody, isValidId } = require('../../middlewares');
 const {
-  product: { validationProduct },
+  product: { validationProduct, validationUpdateProduct },
 } = require('../../models');
 
 const router = express.Router();
 
 router.get('/', ctrl.getProductsByQuery);
 
-router.get('/:id', ctrl.getProductsByCreator);
+router.get('/:id', ctrl.getProductById);
 
 router.post(
   '/',
@@ -23,7 +23,7 @@ router.patch(
   '/:id',
   authenticate,
   isValidId,
-  validateBody(validationProduct),
+  validateBody(validationUpdateProduct),
   ctrl.updateProductById,
 );
 

@@ -23,7 +23,6 @@ module.exports = async (req, res) => {
     );
   }
 
-  // Fetch category and subcategory names from their respective models
   const categoryPromises = categories.map(categoryId =>
     Category.findById(categoryId),
   );

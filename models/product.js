@@ -47,6 +47,37 @@ const validationProduct = Joi.object({
     .messages(templatesMsgJoi('Subcategories')),
 });
 
+const validationUpdateProduct = Joi.object({
+  name: Joi.string().messages(templatesMsgJoi('product name')),
+  manufactureId: Joi.string().messages(templatesMsgJoi('manufacture Id')),
+  price: Joi.number().min(0).messages(templatesMsgJoi('price')),
+  availability: Joi.string()
+    .valid(...patterns.availability)
+    .messages(templatesMsgJoi('availability', patterns.availability)),
+  weight: Joi.number().messages(templatesMsgJoi('Weight')),
+  units: Joi.string()
+    .valid(...patterns.units)
+    .messages(templatesMsgJoi('units', patterns.units)),
+  photo: Joi.array().items(
+    Joi.object({
+      url: Joi.string().uri().messages(templatesMsgJoi('URL of photo product')),
+      alt: Joi.string().messages(templatesMsgJoi('Alt name of photo')),
+    }).messages(templatesMsgJoi('Product photo')),
+  ),
+  description: Joi.string().messages(templatesMsgJoi('Description')),
+  manufacturer: Joi.object({
+    country: Joi.string().allow(''),
+    factory: Joi.string().allow(''),
+    trademark: Joi.string(),
+  }),
+  categories: Joi.array()
+    .items(Joi.string().length(24))
+    .messages(templatesMsgJoi('Categories')),
+  subcategories: Joi.array()
+    .items(Joi.string().length(24))
+    .messages(templatesMsgJoi('Subcategories')),
+});
+
 const manufacturerSchema = new Schema({
   country: {
     type: String,
@@ -128,4 +159,5 @@ const Product = model('product', productSchema);
 module.exports = {
   Product,
   validationProduct,
+  validationUpdateProduct,
 };

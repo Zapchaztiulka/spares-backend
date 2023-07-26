@@ -5,6 +5,6 @@ module.exports = {
   updateProductById: ctrlWrapper(require('./updateProductById')),
   deleteProductById: ctrlWrapper(require('./deleteProductById')),
 
-  getProductsByCreator: ctrlWrapper(require('./getProductsByCreator')),
   getProductsByQuery: ctrlWrapper(require('./getProductsByQuery')),
+  getProductById: ctrlWrapper(require('./getProductById')),
 };
