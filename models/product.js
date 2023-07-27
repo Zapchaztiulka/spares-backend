@@ -101,6 +101,7 @@ const productSchema = new Schema(
     },
     manufactureId: {
       type: String,
+      unique: true,
       required: true,
     },
     price: {

@@ -12,5 +12,16 @@ module.exports = async (req, res) => {
     throw HttpError(404, `Users with role ${role} not found`);
   }
 
-  res.status(200).json(users);
+  const totalCount = users.length;
+  const serializeUsers = users.map(user => ({
+    username: user.username,
+    userSurname: user.userSurname,
+    email: user.email,
+    role: user.role,
+  }));
+
+  res.status(200).json({
+    totalCount,
+    users: serializeUsers,
+  });
 };

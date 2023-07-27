@@ -11,5 +11,7 @@ module.exports = async (req, res) => {
     limit,
   });
 
-  res.status(200).json(categories);
+  const totalCount = categories.length;
+
+  res.status(200).json({ totalCount, categories });
 };

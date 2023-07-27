@@ -6,7 +6,7 @@ const { HttpError } = require('../../helpers');
 
 module.exports = async (req, res) => {
   const { _id, role } = req.user;
-  const { manufactureId, categories = [], subcategories = [] } = req.body;
+  const { manufactureId, categories, subcategories = [] } = req.body;
   const pureManufactureId = manufactureId.trim();
 
   if (role !== 'admin') {
@@ -37,6 +37,26 @@ module.exports = async (req, res) => {
     Promise.all(categoryPromises),
     Promise.all(subcategoryPromises),
   ]);
+
+  const areAllCategoriesExist = categoryData.every(
+    category => category !== null,
+  );
+  if (!areAllCategoriesExist) {
+    throw HttpError(
+      404,
+      'One or more categories do not exist in collection "Category"',
+    );
+  }
+
+  const areAllSubcategoriesExist = subcategoryData.every(
+    subcategory => subcategory !== null,
+  );
+  if (!areAllSubcategoriesExist) {
+    throw HttpError(
+      404,
+      'One or more subcategories do not exist in collection "Category"',
+    );
+  }
 
   const newProductData = {
     ...req.body,
