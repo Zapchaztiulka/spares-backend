@@ -1,10 +1,12 @@
 const bcrypt = require('bcrypt');
 const { nanoid } = require('nanoid');
+const { addHours } = require('date-fns');
 
 const {
   user: { User },
 } = require('../../models');
 const { HttpError, sendEmail } = require('../../helpers');
+const { EXPIRES_VERIFICATION_TOKEN } = process.env;
 
 module.exports = async (req, res) => {
   const { email, password, username, userSurname, role } = req.body;
@@ -22,7 +24,10 @@ module.exports = async (req, res) => {
   }
 
   const hashPassword = await bcrypt.hash(purePassword, 10);
-  const verificationToken = nanoid();
+  const verificationToken = `${nanoid()}-${addHours(
+    new Date(),
+    EXPIRES_VERIFICATION_TOKEN,
+  ).getTime()}`; // Append the expiration timestamp to the verification token
 
   const newUser = await User.create({
     ...req.body,

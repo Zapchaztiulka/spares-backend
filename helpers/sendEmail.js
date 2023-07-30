@@ -68,6 +68,7 @@ module.exports = async (email, verificationToken) => {
           <a class="verification-link" target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">
             <p class="verification-text">Підтвердити мій імейл</p>
           </a>
+          <p>ВАЖЛИВО! Підтвердити пошту можна лише протягом 24 годин</p>
 
         </body>
       </html>
