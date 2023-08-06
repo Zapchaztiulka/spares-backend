@@ -8,7 +8,7 @@ const {
 
 const router = express.Router();
 
-router.post('/', authenticate, validateBody(validationOrder), ctrl.addOrder);
+router.post('/', authenticate, validateBody(validationOrder), ctrl.createOrder);
 
 router.delete('/:id', authenticate, isValidId, ctrl.deleteOrder);
 
