@@ -19,12 +19,21 @@ module.exports = async (req, res) => {
     products.map(async product => {
       const { productId, quantity } = product;
 
+      const availableProduct = await Product.findById(productId);
+
+      if (!availableProduct) {
+        throw HttpError(
+          404,
+          `Product with ID ${productId} not found for ordering`,
+        );
+      }
+
       const {
         name,
         price,
         manufactureId,
         quantity: availableQuantity,
-      } = await Product.findById(productId);
+      } = availableProduct;
 
       if (availableQuantity < quantity) {
         throw HttpError(
