@@ -8,19 +8,20 @@ const {
 } = require('../helpers');
 
 const validationProduct = Joi.object({
-  name: Joi.string().required().messages(templatesMsgJoi('product name')),
+  name: Joi.string().required().messages(templatesMsgJoi('Product name')),
   manufactureId: Joi.string()
     .required()
-    .messages(templatesMsgJoi('manufacture Id')),
-  price: Joi.number().min(0).required().messages(templatesMsgJoi('price')),
+    .messages(templatesMsgJoi('Manufacture Id')),
+  price: Joi.number().min(0).required().messages(templatesMsgJoi('Price')),
   availability: Joi.string()
     .valid(...patterns.availability)
     .required()
-    .messages(templatesMsgJoi('availability', patterns.availability)),
+    .messages(templatesMsgJoi('Availability', patterns.availability)),
   weight: Joi.number().messages(templatesMsgJoi('Weight')),
   units: Joi.string()
     .valid(...patterns.units)
     .messages(templatesMsgJoi('units', patterns.units)),
+  quantity: Joi.number().messages(templatesMsgJoi('Quantity of products')),
   photo: Joi.array().items(
     Joi.object({
       url: Joi.string()
@@ -48,16 +49,17 @@ const validationProduct = Joi.object({
 });
 
 const validationUpdateProduct = Joi.object({
-  name: Joi.string().messages(templatesMsgJoi('product name')),
-  manufactureId: Joi.string().messages(templatesMsgJoi('manufacture Id')),
-  price: Joi.number().min(0).messages(templatesMsgJoi('price')),
+  name: Joi.string().messages(templatesMsgJoi('Product name')),
+  manufactureId: Joi.string().messages(templatesMsgJoi('Manufacture Id')),
+  price: Joi.number().min(0).messages(templatesMsgJoi('Price')),
   availability: Joi.string()
     .valid(...patterns.availability)
-    .messages(templatesMsgJoi('availability', patterns.availability)),
+    .messages(templatesMsgJoi('Availability', patterns.availability)),
   weight: Joi.number().messages(templatesMsgJoi('Weight')),
   units: Joi.string()
     .valid(...patterns.units)
-    .messages(templatesMsgJoi('units', patterns.units)),
+    .messages(templatesMsgJoi('Units', patterns.units)),
+  quantity: Joi.number().messages(templatesMsgJoi('Quantity of products')),
   photo: Joi.array().items(
     Joi.object({
       url: Joi.string().uri().messages(templatesMsgJoi('URL of photo product')),
@@ -122,6 +124,10 @@ const productSchema = new Schema(
       type: String,
       enum: patterns.units,
       default: 'шт',
+    },
+    quantity: {
+      type: Number,
+      default: 1,
     },
     photo: [
       {
