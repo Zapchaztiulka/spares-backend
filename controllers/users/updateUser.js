@@ -14,12 +14,13 @@ module.exports = async (req, res) => {
   if (!user) throw new HttpError('User not found');
 
   const updatedUser = await User.findById(id);
-  const { username, userSurname, email, role } = updatedUser;
+  const { username, userSurname, email, phone, role } = updatedUser;
 
   res.status(200).json({
     username,
     userSurname,
     email,
+    phone,
     role,
   });
 };

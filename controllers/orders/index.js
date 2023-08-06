@@ -1,6 +1,8 @@
 const { ctrlWrapper } = require('../../helpers');
 
 module.exports = {
-  createOrder: ctrlWrapper(require('./createOrder')),
-  deleteOrder: ctrlWrapper(require('./deleteOrder')),
+  createOrderbyUser: ctrlWrapper(require('./createOrderbyUser')),
+  deleteOrderbyUser: ctrlWrapper(require('./deleteOrderbyUser')),
+  createOrderbyAny: ctrlWrapper(require('./createOrderbyAny')),
+  deleteOrderbyAny: ctrlWrapper(require('./deleteOrderbyAny')),
 };

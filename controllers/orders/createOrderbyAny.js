@@ -5,15 +5,7 @@ const {
 const { HttpError } = require('../../helpers');
 
 module.exports = async (req, res) => {
-  const { _id, role, username, userSurname, email } = req.user;
-  const { products } = req.body;
-
-  if (role === 'admin') {
-    throw HttpError(
-      403,
-      'Forbidden. User with role "admin" can not order products. Change the role',
-    );
-  }
+  const { products, phone, email = '' } = req.body;
 
   const productDetails = await Promise.all(
     products.map(async product => {
@@ -52,9 +44,7 @@ module.exports = async (req, res) => {
   );
 
   const newOrder = await Order.create({
-    userId: _id,
-    username,
-    userSurname,
+    phone,
     email,
     products: productDetails,
     totalTypeOfProducts: productDetails.length,

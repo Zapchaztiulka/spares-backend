@@ -9,11 +9,12 @@ const { HttpError, sendEmail } = require('../../helpers');
 const { EXPIRES_VERIFICATION_TOKEN } = process.env;
 
 module.exports = async (req, res) => {
-  const { email, password, username, userSurname, role } = req.body;
+  const { email, password, username, userSurname, phone, role } = req.body;
   const pureEmail = email.trim();
   const purePassword = password.trim();
   const pureUsername = username?.trim();
   const pureUserSurname = userSurname?.trim();
+  const purePhone = phone?.trim();
 
   const user = await User.findOne({ email: pureEmail });
   if (user) {
@@ -35,6 +36,7 @@ module.exports = async (req, res) => {
     username: pureUsername,
     userSurname: pureUserSurname,
     password: hashPassword,
+    phone: purePhone,
     role,
     verificationToken,
   });
@@ -44,6 +46,7 @@ module.exports = async (req, res) => {
   return res.status(201).json({
     id: newUser._id,
     email: newUser.email,
+    phone: newUser.phone,
     username: newUser.username,
     userSurname: newUser.userSurname,
     role: newUser.role,

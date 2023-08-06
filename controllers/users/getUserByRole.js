@@ -17,6 +17,7 @@ module.exports = async (req, res) => {
     username: user.username,
     userSurname: user.userSurname,
     email: user.email,
+    phone: user.phone,
     role: user.role,
   }));
 

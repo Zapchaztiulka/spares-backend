@@ -7,7 +7,32 @@ const {
   patterns,
 } = require('../helpers');
 
-const validationOrder = Joi.object({
+const validationOrderByUser = Joi.object({
+  products: Joi.array()
+    .items(
+      Joi.object({
+        productId: Joi.string()
+          .length(24)
+          .required()
+          .messages(templatesMsgJoi('Product Id')),
+        quantity: Joi.number().messages(
+          templatesMsgJoi('Quantity of ordered products'),
+        ),
+      }),
+    )
+    .required()
+    .messages(templatesMsgJoi('Products')),
+});
+
+const validationOrderByAny = Joi.object({
+  phone: Joi.string()
+    .pattern(patterns.phonePattern)
+    .required()
+    .messages(templatesMsgJoi('Phone')),
+  email: Joi.string()
+    .email({ minDomainSegments: 2 })
+    .pattern(patterns.emailPattern)
+    .messages(templatesMsgJoi('Email')),
   products: Joi.array()
     .items(
       Joi.object({
@@ -50,16 +75,22 @@ const orderSchema = new Schema(
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'user',
-      required: true,
     },
     username: {
       type: String,
+      default: '',
     },
     userSurname: {
       type: String,
+      default: '',
     },
     email: {
       type: String,
+      default: '',
+    },
+    phone: {
+      type: String,
+      default: '',
     },
     products: [orderProductSchema],
     status: {
@@ -84,5 +115,6 @@ const Order = model('order', orderSchema);
 
 module.exports = {
   Order,
-  validationOrder,
+  validationOrderByUser,
+  validationOrderByAny,
 };

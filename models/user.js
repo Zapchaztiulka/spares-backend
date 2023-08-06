@@ -19,6 +19,9 @@ const validationAuthUser = Joi.object({
     .pattern(patterns.emailPattern)
     .required()
     .messages(templatesMsgJoi('Email')),
+  phone: Joi.string()
+    .pattern(patterns.phonePattern)
+    .messages(templatesMsgJoi('Phone')),
   role: Joi.string()
     .valid(...patterns.roles)
     .messages(templatesMsgJoi('Role', patterns.roles)),
@@ -31,6 +34,9 @@ const validationUpdateUser = Joi.object({
     .email({ minDomainSegments: 2 })
     .pattern(patterns.emailPattern)
     .messages(templatesMsgJoi('Email')),
+  phone: Joi.string()
+    .pattern(patterns.phonePattern)
+    .messages(templatesMsgJoi('Phone')),
   role: Joi.string()
     .valid(...patterns.roles)
     .messages(templatesMsgJoi('Role', patterns.roles)),
@@ -69,6 +75,15 @@ const userSchema = new Schema(
         'The email is required. Please provide an email address for user',
       ],
     },
+    phone: {
+      type: String,
+      unique: true,
+      match: patterns.phonePattern,
+      required: [
+        true,
+        'The phone is required. Please provide a phone for user',
+      ],
+    },
     password: {
       type: String,
       match: patterns.passwordPattern,
@@ -77,7 +92,7 @@ const userSchema = new Schema(
     role: {
       type: String,
       enum: patterns.roles,
-      default: 'public',
+      default: 'user',
     },
     token: {
       type: String,

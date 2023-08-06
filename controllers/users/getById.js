@@ -12,6 +12,6 @@ module.exports = async (req, res) => {
     throw HttpError(404, 'User not found');
   }
 
-  const { username, userSurname, email, role } = user;
-  res.status(200).json({ username, userSurname, email, role });
+  const { username, userSurname, email, phone, role } = user;
+  res.status(200).json({ username, userSurname, email, phone, role });
 };
