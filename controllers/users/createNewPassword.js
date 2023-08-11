@@ -8,7 +8,7 @@ const { HttpError } = require('../../helpers');
 module.exports = async (req, res) => {
   const { id } = req.user;
 
-  if (!req.body) throw new HttpError({ message: 'Missing field' });
+  if (!req.body) throw new HttpError({ message: 'Missing all fields' });
 
   const { password1, password2 } = req.body;
 

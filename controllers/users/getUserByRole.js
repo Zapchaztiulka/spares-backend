@@ -8,8 +8,8 @@ module.exports = async (req, res) => {
 
   const users = await User.find({ role });
 
-  if (!users) {
-    throw HttpError(404, `Users with role ${role} not found`);
+  if (!users || !users.length) {
+    throw HttpError(404, `Users with role "${role}" not found`);
   }
 
   const totalCount = users.length;

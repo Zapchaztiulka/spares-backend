@@ -51,5 +51,9 @@ module.exports = async (req, res) => {
     totalProducts,
   });
 
-  res.status(201).json(newOrder);
+  const newOrderResponse = newOrder.toObject();
+  delete newOrderResponse.username;
+  delete newOrderResponse.userSurname;
+
+  res.status(201).json(newOrderResponse);
 };
