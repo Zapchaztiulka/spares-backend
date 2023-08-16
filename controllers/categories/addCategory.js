@@ -4,13 +4,9 @@ const {
 const { HttpError } = require('../../helpers');
 
 module.exports = async (req, res) => {
-  const { _id, role } = req.user;
+  const { _id } = req.user;
   const { categoryName } = req.body;
   const pureCategoryName = categoryName.trim();
-
-  if (role !== 'admin') {
-    throw HttpError(403, 'Forbidden');
-  }
 
   const existedCategory = await Category.findOne({
     categoryName: pureCategoryName,

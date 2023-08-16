@@ -1,7 +1,12 @@
 const express = require('express');
 
 const ctrl = require('../../controllers/products');
-const { authenticate, validateBody, isValidId } = require('../../middlewares');
+const {
+  authenticate,
+  validateBody,
+  isValidId,
+  hasRole,
+} = require('../../middlewares');
 const {
   product: { validationProduct, validationUpdateProduct },
 } = require('../../models');
@@ -15,6 +20,7 @@ router.get('/:id', ctrl.getProductById);
 router.post(
   '/',
   authenticate,
+  hasRole('admin'),
   validateBody(validationProduct),
   ctrl.addProduct,
 );
@@ -22,11 +28,18 @@ router.post(
 router.patch(
   '/:id',
   authenticate,
+  hasRole('admin'),
   isValidId,
   validateBody(validationUpdateProduct),
   ctrl.updateProductById,
 );
 
-router.delete('/:id', authenticate, isValidId, ctrl.deleteProductById);
+router.delete(
+  '/:id',
+  authenticate,
+  hasRole('admin'),
+  isValidId,
+  ctrl.deleteProductById,
+);
 
 module.exports = router;

@@ -5,11 +5,6 @@ const { HttpError } = require('../../helpers');
 
 module.exports = async (req, res) => {
   const { id } = req.params;
-  const { role } = req.user;
-
-  if (role !== 'admin') {
-    throw HttpError(403, 'Forbidden');
-  }
 
   const product = await Product.findByIdAndDelete(id);
 

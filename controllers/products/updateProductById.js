@@ -9,12 +9,6 @@ module.exports = async (req, res) => {
     throw HttpError(400, 'Missing body of request or no changes provided');
   }
 
-  const { role } = req.user;
-
-  if (role !== 'admin') {
-    throw HttpError(403, 'Forbidden');
-  }
-
   const { id } = req.params;
   const { categories = [], subcategories = [] } = req.body;
   const newProductData = req.body;

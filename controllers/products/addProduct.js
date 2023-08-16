@@ -5,13 +5,9 @@ const {
 const { HttpError } = require('../../helpers');
 
 module.exports = async (req, res) => {
-  const { _id, role } = req.user;
+  const { _id } = req.user;
   const { manufactureId, categories, subcategories = [] } = req.body;
   const pureManufactureId = manufactureId.trim();
-
-  if (role !== 'admin') {
-    throw HttpError(403, 'Forbidden');
-  }
 
   const existedProduct = await Product.findOne({
     manufactureId: pureManufactureId,

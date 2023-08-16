@@ -4,4 +4,5 @@ module.exports = {
   authenticate: require('./authenticate'),
   passportConfig: require('./passportConfig'),
   uploadCloud: require('./uploadAvatar'),
+  hasRole: require('./hasRole'),
 };

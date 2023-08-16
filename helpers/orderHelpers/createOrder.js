@@ -52,25 +52,17 @@ module.exports = async (products, user, phone, email) => {
   if (user) {
     const {
       _id,
-      role,
       username,
       userSurname,
       email: userEmail,
       phone: userPhone,
     } = user;
 
-    if (role !== 'admin') {
-      orderData.userId = _id;
-      orderData.username = username;
-      orderData.userSurname = userSurname;
-      orderData.email = userEmail;
-      orderData.phone = userPhone;
-    } else {
-      throw HttpError(
-        403,
-        'Forbidden. User with role "admin" can not order products. Change the role',
-      );
-    }
+    orderData.userId = _id;
+    orderData.username = username;
+    orderData.userSurname = userSurname;
+    orderData.email = userEmail;
+    orderData.phone = userPhone;
   } else {
     orderData.email = email;
     orderData.phone = phone;
