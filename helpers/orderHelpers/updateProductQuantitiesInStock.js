@@ -30,7 +30,7 @@ module.exports = async (previousProducts, updatedProducts) => {
         if (existingProduct.quantity < Math.abs(quantityDifference)) {
           throw HttpError(
             400,
-            `Insufficient quantity of product "${existingProduct.name}" in stock`,
+            `Product "${existingProduct.name}" is out of stock: availability - ${existingProduct.quantity}, user request - ${updatedProduct.quantity}`,
           );
         }
 
@@ -59,7 +59,7 @@ module.exports = async (previousProducts, updatedProducts) => {
       if (existingProduct.quantity < updatedProduct.quantity) {
         throw HttpError(
           400,
-          `Insufficient quantity of product "${existingProduct.name}" in stock`,
+          `Product "${existingProduct.name}" is out of stock: availability - ${existingProduct.quantity}, user request - ${updatedProduct.quantity}`,
         );
       }
 

@@ -5,7 +5,7 @@ const {
 module.exports = async (req, res) => {
   const { _id, role } = req.user;
 
-  if (role === 'admin' && req.params.userId) {
+  if (role !== 'user' && req.params.userId) {
     // Admin user can view orders of a specific user
     const orders = await Order.find({ userId: req.params.userId });
     res.json({ orders, totalCount: orders.length });
