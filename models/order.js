@@ -49,6 +49,21 @@ const validationOrderByAny = Joi.object({
     .messages(templatesMsgJoi('Products')),
 });
 
+const validationUpdateOrder = Joi.object({
+  products: Joi.array()
+    .items(
+      Joi.object({
+        productId: Joi.string()
+          .length(24)
+          .messages(templatesMsgJoi('Product Id')),
+        quantity: Joi.number().messages(
+          templatesMsgJoi('Quantity of ordered products'),
+        ),
+      }),
+    )
+    .messages(templatesMsgJoi('Products')),
+});
+
 const orderProductSchema = new Schema({
   productId: {
     type: Schema.Types.ObjectId,
@@ -117,4 +132,5 @@ module.exports = {
   Order,
   validationOrderByUser,
   validationOrderByAny,
+  validationUpdateOrder,
 };

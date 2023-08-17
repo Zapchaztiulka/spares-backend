@@ -1,4 +1,5 @@
 module.exports = {
   createOrder: require('./createOrder'),
-  increaseProductQuantities: require('./increaseProductQuantities'),
+  updateProductInOrder: require('./updateProductInOrder'),
+  updateProductQuantitiesInStock: require('./updateProductQuantitiesInStock'),
 };

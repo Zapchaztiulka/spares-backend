@@ -8,10 +8,21 @@ const {
   hasRole,
 } = require('../../middlewares');
 const {
-  order: { validationOrderByUser, validationOrderByAny },
+  order: { validationOrderByUser, validationOrderByAny, validationUpdateOrder },
 } = require('../../models');
 
 const router = express.Router();
+
+router.get('/', authenticate, hasRole('admin'), ctrl.getAllOrders);
+router.get('/own', authenticate, ctrl.getUserOrders); // for getting user's orders
+router.get('/user/:id', authenticate, isValidId, ctrl.getUserOrders); // for getting user's orders by admin
+router.get(
+  '/:id',
+  authenticate,
+  hasRole('admin'),
+  isValidId,
+  ctrl.getOrderDetails,
+);
 
 router.post(
   '/',
@@ -21,6 +32,15 @@ router.post(
   ctrl.createOrderbyUser,
 );
 router.post('/any', validateBody(validationOrderByAny), ctrl.createOrderbyAny);
+
+router.put(
+  '/:id',
+  authenticate,
+  hasRole('admin'),
+  isValidId,
+  validateBody(validationUpdateOrder),
+  ctrl.updateOrderProducts,
+);
 
 router.delete(
   '/:id',

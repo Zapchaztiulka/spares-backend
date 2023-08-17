@@ -1,0 +1,73 @@
+const {
+  product: { Product },
+} = require('../../models');
+const { HttpError } = require('../../helpers');
+
+module.exports = async (order, productUpdates) => {
+  const updatedOrder = JSON.parse(JSON.stringify(order));
+
+  for (const productUpdate of productUpdates) {
+    const { productId, quantity } = productUpdate;
+
+    const existingProductIndex = updatedOrder.products.findIndex(
+      product => product.productId.toString() === productId,
+    );
+
+    if (existingProductIndex !== -1) {
+      const newProduct = await Product.findById(productId);
+
+      if (!newProduct) {
+        throw HttpError(404, `Product with ID ${productId} not found`);
+      }
+
+      if (newProduct.quantity < quantity) {
+        throw HttpError(
+          400,
+          `Insufficient quantity of product "${newProduct.name}" in stock`,
+        );
+      }
+
+      updatedOrder.products[existingProductIndex].quantity = quantity;
+      updatedOrder.products[existingProductIndex].name = newProduct.name;
+      updatedOrder.products[existingProductIndex].manufactureId =
+        newProduct.manufactureId;
+      updatedOrder.products[existingProductIndex].price = newProduct.price;
+    } else {
+      const newProduct = await Product.findById(productId);
+
+      if (!newProduct) {
+        throw HttpError(404, `Product with ID ${productId} not found`);
+      }
+
+      if (newProduct.quantity < quantity) {
+        throw HttpError(
+          400,
+          `Insufficient quantity of product "${newProduct.name}" in stock`,
+        );
+      }
+
+      updatedOrder.products.push({
+        productId,
+        quantity,
+        name: newProduct.name,
+        manufactureId: newProduct.manufactureId,
+        price: newProduct.price,
+      });
+    }
+  }
+
+  updatedOrder.products = updatedOrder.products.filter(product => {
+    return productUpdates.some(
+      update => update.productId === product.productId.toString(),
+    );
+  });
+
+  updatedOrder.totalTypeOfProducts = updatedOrder.products.length;
+  updatedOrder.totalProducts = updatedOrder.products.reduce(
+    (total, product) => total + product.quantity,
+    0,
+  );
+  updatedOrder.updatedAt = new Date();
+
+  return updatedOrder;
+};
