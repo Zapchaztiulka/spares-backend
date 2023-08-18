@@ -50,17 +50,23 @@ const validationOrderByAny = Joi.object({
 });
 
 const validationUpdateOrder = Joi.object({
+  status: Joi.string()
+    .valid(...patterns.orderStatus)
+    .required()
+    .messages(templatesMsgJoi('Status', patterns.orderStatus)),
   products: Joi.array()
     .items(
       Joi.object({
         productId: Joi.string()
           .length(24)
+          .required()
           .messages(templatesMsgJoi('Product Id')),
-        quantity: Joi.number().messages(
-          templatesMsgJoi('Quantity of ordered products'),
-        ),
+        quantity: Joi.number()
+          .required()
+          .messages(templatesMsgJoi('Quantity of ordered products')),
       }),
     )
+    .required()
     .messages(templatesMsgJoi('Products')),
 });
 

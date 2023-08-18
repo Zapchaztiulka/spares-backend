@@ -1,9 +1,24 @@
 const {
   product: { Product },
 } = require('../../models');
-const { HttpError } = require('../../helpers');
+const { HttpError, patterns } = require('../../helpers');
 
-module.exports = async (previousProducts, updatedProducts) => {
+module.exports = async (previousProducts, updatedProducts, status) => {
+  if (
+    status === patterns.orderStatus[3] ||
+    status === patterns.orderStatus[4]
+  ) {
+    // Increase product quantities in stock for cancelled or returned orders
+    for (const product of updatedProducts) {
+      const existingProduct = await Product.findById(product.productId);
+      if (existingProduct) {
+        existingProduct.quantity += product.quantity;
+        await existingProduct.save();
+      }
+    }
+    return;
+  }
+
   for (const previousProduct of previousProducts) {
     const updatedProduct = updatedProducts.find(
       product =>

@@ -8,5 +8,5 @@ module.exports = {
   getAllOrders: ctrlWrapper(require('./getAllOrders')),
   getUserOrders: ctrlWrapper(require('./getUserOrders')),
   getOrderDetails: ctrlWrapper(require('./getOrderDetails')),
-  updateOrderProducts: ctrlWrapper(require('./updateOrderProducts')),
+  updateOrder: ctrlWrapper(require('./updateOrder')),
 };

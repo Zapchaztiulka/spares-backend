@@ -39,7 +39,7 @@ router.put(
   hasRole('admin'),
   isValidId,
   validateBody(validationUpdateOrder),
-  ctrl.updateOrderProducts,
+  ctrl.updateOrder,
 );
 
 router.delete(
