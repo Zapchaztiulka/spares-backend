@@ -4,6 +4,7 @@ const {
 } = require('../../models');
 const { HttpError } = require('../../helpers');
 const { createOrder } = require('../../helpers/orderHelpers');
+const { sendEmailWithOrderDetails } = require('../../helpers/sendEmail');
 
 module.exports = async (req, res) => {
   const { products, phone, email = '' } = req.body;
@@ -20,9 +21,13 @@ module.exports = async (req, res) => {
   const orderData = await createOrder(products, null, phone, email);
   const newOrder = await Order.create(orderData);
 
+  if (email) {
+    await sendEmailWithOrderDetails(newOrder);
+  }
+
   const newOrderResponse = newOrder.toObject();
   delete newOrderResponse.username;
   delete newOrderResponse.userSurname;
 
-  res.status(201).json(newOrderResponse);
+  return res.status(201).json(newOrderResponse);
 };

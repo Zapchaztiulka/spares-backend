@@ -1,7 +1,8 @@
 const {
   user: { User },
 } = require('../../models');
-const { HttpError, sendEmail } = require('../../helpers');
+const { HttpError } = require('../../helpers');
+const { sendEmailForVerification } = require('../../helpers/sendEmail');
 
 module.exports = async (req, res) => {
   const { email } = req.body;
@@ -15,7 +16,7 @@ module.exports = async (req, res) => {
     throw HttpError(400, 'Verification has already been passed');
   }
 
-  await sendEmail(email, user.verificationToken);
+  await sendEmailForVerification(email, user.verificationToken);
 
   return res
     .status(200)

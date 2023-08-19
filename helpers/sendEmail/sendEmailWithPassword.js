@@ -49,7 +49,7 @@ module.exports = async (email, newPassword) => {
           <p>Наступного разу використовуйте його при вході в магазин</p>
           <p>Також Ви можете змінити пароль в сторінці "Профілю користувача".</p>
           <div class="image-container">
-            <img src="" alt="Spare parts store" />
+            <img src="https://i.ibb.co/0r0Dqsf/logo.png" alt="Spare parts store" />
           </div>
         </body>
       </html>

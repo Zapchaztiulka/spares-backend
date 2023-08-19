@@ -5,7 +5,8 @@ const { addHours } = require('date-fns');
 const {
   user: { User },
 } = require('../../models');
-const { HttpError, sendEmail } = require('../../helpers');
+const { HttpError } = require('../../helpers');
+const { sendEmailForVerification } = require('../../helpers/sendEmail');
 const { EXPIRES_VERIFICATION_TOKEN } = process.env;
 
 module.exports = async (req, res) => {
@@ -41,7 +42,7 @@ module.exports = async (req, res) => {
     verificationToken,
   });
 
-  await sendEmail(pureEmail, verificationToken);
+  await sendEmailForVerification(pureEmail, verificationToken);
 
   return res.status(201).json({
     id: newUser._id,

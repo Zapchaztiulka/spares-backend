@@ -4,7 +4,8 @@ const { nanoid } = require('nanoid');
 const {
   user: { User },
 } = require('../../models');
-const { HttpError, sendEmailWithPassword } = require('../../helpers');
+const { HttpError } = require('../../helpers');
+const { sendEmailWithPassword } = require('../../helpers/sendEmail');
 
 module.exports = async (req, res) => {
   const { email } = req.body;
