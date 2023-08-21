@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 
 const ctrl = require('../../controllers/products');
 const {
@@ -6,12 +7,21 @@ const {
   validateBody,
   isValidId,
   hasRole,
+  uploadFile,
 } = require('../../middlewares');
 const {
   product: { validationProduct, validationUpdateProduct },
 } = require('../../models');
 
 const router = express.Router();
+
+router.post(
+  '/upload',
+  authenticate,
+  hasRole('admin'),
+  uploadFile.single('file'),
+  ctrl.uploadProducts,
+);
 
 router.get('/', ctrl.getProductsByQuery);
 

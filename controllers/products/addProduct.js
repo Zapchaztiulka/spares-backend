@@ -6,17 +6,19 @@ const { HttpError } = require('../../helpers');
 
 module.exports = async (req, res) => {
   const { _id } = req.user;
-  const { manufactureId, categories, subcategories = [] } = req.body;
-  const pureManufactureId = manufactureId.trim();
+  const { vendorCode, categories, subcategories = [] } = req.body;
 
-  const existedProduct = await Product.findOne({
-    manufactureId: pureManufactureId,
-  });
-  if (existedProduct) {
-    throw HttpError(
-      409,
-      `Product with manufacture Id: ${manufactureId} has already existed`,
-    );
+  if (vendorCode) {
+    const pureVendorCode = vendorCode.trim();
+    const existedProduct = await Product.findOne({
+      vendorCode: pureVendorCode,
+    });
+    if (existedProduct) {
+      throw HttpError(
+        409,
+        `Product with vendor code: ${vendorCode} has already existed`,
+      );
+    }
   }
 
   const categoryPromises = categories.map(categoryId =>

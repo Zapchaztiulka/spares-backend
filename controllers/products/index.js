@@ -7,4 +7,6 @@ module.exports = {
 
   getProductsByQuery: ctrlWrapper(require('./getProductsByQuery')),
   getProductById: ctrlWrapper(require('./getProductById')),
+
+  uploadProducts: ctrlWrapper(require('./uploadProducts')),
 };

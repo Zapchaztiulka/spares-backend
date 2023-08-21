@@ -9,9 +9,7 @@ const {
 
 const validationProduct = Joi.object({
   name: Joi.string().required().messages(templatesMsgJoi('Product name')),
-  manufactureId: Joi.string()
-    .required()
-    .messages(templatesMsgJoi('Manufacture Id')),
+  vendorCode: Joi.string().allow('').messages(templatesMsgJoi('Vendor Code')),
   price: Joi.number().min(0).required().messages(templatesMsgJoi('Price')),
   availability: Joi.string()
     .valid(...patterns.availability)
@@ -24,18 +22,15 @@ const validationProduct = Joi.object({
   quantity: Joi.number().messages(templatesMsgJoi('Quantity of products')),
   photo: Joi.array().items(
     Joi.object({
-      url: Joi.string()
-        .uri()
-        .required()
-        .messages(templatesMsgJoi('URL of photo product')),
+      url: Joi.string().uri().messages(templatesMsgJoi('URL of photo product')),
       alt: Joi.string().messages(templatesMsgJoi('Alt name of photo')),
     }).messages(templatesMsgJoi('Product photo')),
   ),
   description: Joi.string().allow('').messages(templatesMsgJoi('Description')),
   manufacturer: Joi.object({
-    country: Joi.string().allow(''),
-    factory: Joi.string().allow(''),
-    trademark: Joi.string().required(),
+    country: Joi.string().allow('').messages(templatesMsgJoi('Country')),
+    factory: Joi.string().allow('').messages(templatesMsgJoi('Factory')),
+    trademark: Joi.string().required().messages(templatesMsgJoi('Trademark')),
   })
     .required()
     .messages(templatesMsgJoi('Manufacturer')),
@@ -50,7 +45,7 @@ const validationProduct = Joi.object({
 
 const validationUpdateProduct = Joi.object({
   name: Joi.string().messages(templatesMsgJoi('Product name')),
-  manufactureId: Joi.string().messages(templatesMsgJoi('Manufacture Id')),
+  vendorCode: Joi.string().allow('').messages(templatesMsgJoi('Vendor Code')),
   price: Joi.number().min(0).messages(templatesMsgJoi('Price')),
   availability: Joi.string()
     .valid(...patterns.availability)
@@ -68,9 +63,9 @@ const validationUpdateProduct = Joi.object({
   ),
   description: Joi.string().messages(templatesMsgJoi('Description')),
   manufacturer: Joi.object({
-    country: Joi.string().allow(''),
-    factory: Joi.string().allow(''),
-    trademark: Joi.string(),
+    country: Joi.string().allow('').messages(templatesMsgJoi('Country')),
+    factory: Joi.string().allow('').messages(templatesMsgJoi('Factory')),
+    trademark: Joi.string().messages(templatesMsgJoi('Trademark')),
   }),
   categories: Joi.array()
     .items(Joi.string().length(24))
@@ -78,6 +73,17 @@ const validationUpdateProduct = Joi.object({
   subcategories: Joi.array()
     .items(Joi.string().length(24))
     .messages(templatesMsgJoi('Subcategories')),
+});
+
+const photoSchema = new Schema({
+  url: {
+    type: String,
+    default: '',
+  },
+  alt: {
+    type: String,
+    default: 'Some spare',
+  },
 });
 
 const manufacturerSchema = new Schema({
@@ -101,10 +107,9 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    manufactureId: {
+    vendorCode: {
       type: String,
-      unique: true,
-      required: true,
+      default: '',
     },
     price: {
       type: Number,
@@ -129,18 +134,7 @@ const productSchema = new Schema(
       type: Number,
       default: 1,
     },
-    photo: [
-      {
-        url: {
-          type: String,
-          required: true,
-        },
-        alt: {
-          type: String,
-          default: this.name,
-        },
-      },
-    ],
+    photo: [photoSchema],
     description: {
       type: String,
       default: '',

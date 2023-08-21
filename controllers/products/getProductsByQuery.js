@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
           {
             'manufacturer.factory': { $regex: formattedQuery, $options: 'i' },
           },
-          { manufactureId: { $regex: formattedQuery, $options: 'i' } },
+          { vendorCode: { $regex: formattedQuery, $options: 'i' } },
         ],
       },
     },
