@@ -89,6 +89,11 @@ const orderProductSchema = new Schema({
     type: Number,
     default: 1,
   },
+  units: {
+    type: String,
+    enum: patterns.units,
+    default: 'шт',
+  },
 });
 
 const orderSchema = new Schema(

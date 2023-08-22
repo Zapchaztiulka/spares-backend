@@ -21,6 +21,7 @@ module.exports = async (products, user, phone, email) => {
         name,
         price,
         manufactureId,
+        units,
         quantity: availableQuantity,
       } = availableProduct;
 
@@ -34,7 +35,7 @@ module.exports = async (products, user, phone, email) => {
       availableProduct.quantity -= quantity;
       await availableProduct.save();
 
-      return { productId, quantity, manufactureId, name, price };
+      return { productId, quantity, manufactureId, name, price, units };
     }),
   );
 

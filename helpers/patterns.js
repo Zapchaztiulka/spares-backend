@@ -13,6 +13,13 @@ const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const passwordPattern = /^.*(?=.{6,})((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/; // 6 characters, at least one upperCase and one lowercase
 const phonePattern = /^0\d{9}$/;
 
+const companyData = {
+  firstPhone: '+38 067 111 22 33',
+  secondPhone: '+38 095 111 22 33',
+  thirdPhone: '+38 063 111 22 33',
+  addressCompany: 'м. Кропивницький, вул. назва вулиці, номер будинку.',
+};
+
 const patterns = {
   availability,
   roles,
@@ -21,6 +28,7 @@ const patterns = {
   passwordPattern,
   phonePattern,
   orderStatus,
+  companyData,
 };
 
 module.exports = patterns;

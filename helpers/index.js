@@ -5,4 +5,5 @@ module.exports = {
   patterns: require('./patterns'),
   templatesMsgJoi: require('./templatesMsgJoi'),
   formatDate: require('./formatDate'),
+  formatNumber: require('./formatNumber'),
 };
