@@ -20,6 +20,18 @@ module.exports = {
     'comma-dangle': ['error', 'always-multiline'],
     'no-unused-vars': 'warn',
     'no-console': 'off',
-    camelcase: ['error', { allow: ['_id', 'given_name', 'family_name'] }],
+    camelcase: [
+      'error',
+      {
+        allow: [
+          '_id',
+          'given_name',
+          'family_name',
+          'cloud_name',
+          'api_key',
+          'api_secret',
+        ],
+      },
+    ],
   },
 };

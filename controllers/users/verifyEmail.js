@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
   const user = await User.findOne({ verificationToken });
 
   // Check if the verification token has expired
-  if (isNaN(expirationTime) || isVerifyTokenExpired) {
+  if (token && (isNaN(expirationTime) || isVerifyTokenExpired)) {
     if (user) {
       await User.findByIdAndDelete(user._id);
     }
