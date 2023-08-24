@@ -1,7 +1,7 @@
 const { ctrlWrapper } = require('../../helpers');
 
 module.exports = {
-  addProduct: ctrlWrapper(require('./addProduct')),
+  addProducts: ctrlWrapper(require('./addProducts')),
   updateProductById: ctrlWrapper(require('./updateProductById')),
   deleteProductById: ctrlWrapper(require('./deleteProductById')),
 

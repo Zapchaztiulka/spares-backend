@@ -9,7 +9,7 @@ const {
   uploadFile,
 } = require('../../middlewares');
 const {
-  product: { validationProduct, validationUpdateProduct },
+  product: { validationAddProducts, validationUpdateProduct },
 } = require('../../models');
 
 const router = express.Router();
@@ -30,8 +30,8 @@ router.post(
   '/',
   authenticate,
   hasRole('admin'),
-  validateBody(validationProduct),
-  ctrl.addProduct,
+  validateBody(validationAddProducts),
+  ctrl.addProducts,
 );
 
 router.patch(
