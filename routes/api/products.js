@@ -24,7 +24,8 @@ router.post(
 
 router.get('/', ctrl.getProductsByQuery);
 
-router.get('/:id', ctrl.getProductById);
+router.get('/:id', isValidId, ctrl.getProductById);
+router.get('/vendorCode/:vendorCode', ctrl.getUniqueVendorCode);
 
 router.post(
   '/',

@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.get('/', ctrl.getAllCategories);
 
-router.get('/:id', ctrl.getCategoryById);
+router.get('/:id', isValidId, ctrl.getCategoryById);
 
 router.post(
   '/',
