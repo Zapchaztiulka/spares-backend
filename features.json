@@ -1,0 +1,200 @@
+{
+  "router": "addProducts",
+  "options": [
+    {
+      "key": "name",
+      "title": "Назва товару",
+      "type": "input",
+      "placeholder": "Введіть назву товару (обов'язково)",
+      "validation": [
+        {
+          "name": "maxLength",
+          "value": 300,
+          "errorMessage": "Довжина повинна бути до 300 символів"
+        },
+        {
+          "name": "isRequired",
+          "value": true,
+          "errorMessage": "Обов'язковe до заповнення поле"
+        }
+      ]
+    },
+    {
+      "key": "vendorCode",
+      "title": "Артикул",
+      "type": "input",
+      "placeholder": "Введіть артикул товару (не обов'язково)",
+      "validation": [
+        {
+          "name": "maxLength",
+          "value": 300,
+          "errorMessage": "Довжина повинна бути до 300 символів"
+        }
+      ],
+      "defaultValue": ""
+    },
+    {
+      "key": "price",
+      "title": "Ціна за одиницю товару",
+      "type": "input",
+      "placeholder": "Введіть ціну одиниці товару (обов'язково)",
+      "validation": [
+        {
+          "name": "min",
+          "value": 0,
+          "errorMessage": "Ціна повинна бути більше 0"
+        },
+        {
+          "name": "precision",
+          "errorMessage": "Ціна повинна мати не більше двох знаків після десяткової крапки."
+        },
+        {
+          "name": "isRequired",
+          "value": true,
+          "errorMessage": "Обов'язкове до заповнення поле"
+        }
+      ],
+      "defaultValue": 0
+    },
+    {
+      "key": "availability",
+      "title": "Наявність товару на складі",
+      "type": "select",
+      "placeholder": "Оберіть значення (не обов'язково)",
+      "list": [
+        {
+          "value": "є в наявності"
+        },
+        {
+          "value": "відсутній"
+        },
+        {
+          "value": "під замовлення"
+        }
+      ],
+      "validation": [
+        {
+          "name": "isRequired",
+          "value": true,
+          "errorMessage": "Обов'язкове до заповнення поле"
+        }
+      ]
+    },
+    {
+      "key": "weight",
+      "title": "Вага товару",
+      "type": "input",
+      "placeholder": "Введіть вагу товару (не обов'язково)",
+      "defaultValue": 0
+    },
+    {
+      "key": "units",
+      "title": "Одиниці вимірювання",
+      "type": "select",
+      "placeholder": "Оберіть значення (не обов'язково)",
+      "list": [
+        {
+          "value": "кг"
+        },
+        {
+          "value": "шт"
+        },
+        {
+          "value": "л"
+        }
+      ],
+      "defaultValue": "шт"
+    },
+    {
+      "key": "quantity",
+      "title": "Кількість товару на складі",
+      "type": "input",
+      "placeholder": "Введіть кількість товару на складі (не обов'язково)",
+      "defaultValue": 1
+    },
+    {
+      "key": "photo",
+      "title": "Фото товару",
+      "type": "filesList",
+      "objectSchema": [
+        {
+          "key": "url",
+          "title": "Посилання на файл",
+          "validation": [
+            {
+              "name": "uri",
+              "errorMessage": "Введіть коректне посилання на фото"
+            }
+          ]
+        },
+        {
+          "key": "alt",
+          "title": "Опис картинки"
+        },
+        {
+          "key": "_id",
+          "title": "Унікальний ідентифікатор (створюється автоматично)"
+        }
+      ]
+    },
+    {
+      "key": "description",
+      "title": "Опис",
+      "type": "input",
+      "placeholder": "Введіть описання товару для споживача (не обов'язково)",
+      "defaultValue": ""
+    },
+    {
+      "key": "manufacturer",
+      "title": "Виробник",
+      "type": "container",
+      "options": [
+        {
+          "key": "country",
+          "title": "Країна виробник",
+          "type": "select",
+          "placeholder": "Оберіть значення (не обов'язково)",
+          "defaultValue": ""
+        },
+        {
+          "key": "factory",
+          "title": "Завод виробник",
+          "type": "input",
+          "placeholder": "Введіть завод-виробник товару (не обов'язково)",
+          "defaultValue": ""
+        },
+        {
+          "key": "trademark",
+          "title": "Торгова марка",
+          "type": "input",
+          "validation": [
+            {
+              "name": "isRequired",
+              "value": true,
+              "errorMessage": "Обов'язкове до заповнення поле"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "categories",
+      "title": "Категорія",
+      "type": "select",
+      "placeholder": "Оберіть значення (обов'язково)",
+      "validation": [
+        {
+          "name": "isRequired",
+          "value": true,
+          "errorMessage": "Обов'язкове до вибору поле"
+        }
+      ]
+    },
+    {
+      "key": "subcategories",
+      "title": "Субкатегорія",
+      "type": "select",
+      "placeholder": "Оберіть значення (не обов'язково)"
+    }
+  ]
+}

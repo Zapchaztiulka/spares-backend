@@ -15,11 +15,11 @@ module.exports = {
     ecmaVersion: 12,
   },
   rules: {
-    quotes: ['error', 'single'],
     semi: ['error', 'always'],
     'comma-dangle': ['error', 'always-multiline'],
     'no-unused-vars': 'warn',
     'no-console': 'off',
+    'space-before-function-paren': 'off',
     camelcase: [
       'error',
       {

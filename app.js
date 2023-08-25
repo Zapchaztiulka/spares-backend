@@ -12,6 +12,7 @@ const {
   productsRouter,
   categoriesRouter,
   ordersRouter,
+  optionsRouter,
 } = require('./routes/api');
 const { SECRET_KEY } = process.env; // secret key was came up with developer
 
@@ -36,6 +37,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/orders', ordersRouter);
+app.use('/api/options', optionsRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: 'Not found' });

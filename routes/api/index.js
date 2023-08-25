@@ -3,4 +3,5 @@ module.exports = {
   productsRouter: require('./products'),
   categoriesRouter: require('./categories'),
   ordersRouter: require('./orders'),
+  optionsRouter: require('./options'),
 };

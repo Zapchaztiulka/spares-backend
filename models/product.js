@@ -9,9 +9,16 @@ const {
 
 const validationAddProducts = Joi.array().items(
   Joi.object({
-    name: Joi.string().required().messages(templatesMsgJoi('Product name')),
+    name: Joi.string()
+      .max(300)
+      .required()
+      .messages(templatesMsgJoi('Product name')),
     vendorCode: Joi.string().allow('').messages(templatesMsgJoi('Vendor Code')),
-    price: Joi.number().min(0).required().messages(templatesMsgJoi('Price')),
+    price: Joi.number()
+      .min(0)
+      .precision(2)
+      .required()
+      .messages(templatesMsgJoi('Price')),
     availability: Joi.string()
       .valid(...patterns.availability)
       .required()
@@ -50,7 +57,9 @@ const validationAddProducts = Joi.array().items(
 );
 
 const validationUpdateProduct = Joi.object({
-  name: Joi.string().messages(templatesMsgJoi('Product name')),
+  name: Joi.string()
+    .max(300)
+    .messages(templatesMsgJoi('Product name')),
   vendorCode: Joi.string().allow('').messages(templatesMsgJoi('Vendor Code')),
   price: Joi.number().min(0).messages(templatesMsgJoi('Price')),
   availability: Joi.string()
