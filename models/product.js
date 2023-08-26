@@ -11,27 +11,36 @@ const validationAddProducts = Joi.array().items(
   Joi.object({
     name: Joi.string()
       .max(300)
+      .description('Max length of name must be no more than 300 characters')
       .required()
       .messages(templatesMsgJoi('Product name')),
     vendorCode: Joi.string().allow('').messages(templatesMsgJoi('Vendor Code')),
     price: Joi.number()
       .min(0)
       .precision(2)
+      .description('The price should have at most 2 decimal places')
       .required()
       .messages(templatesMsgJoi('Price')),
     availability: Joi.string()
       .valid(...patterns.availability)
+      .description(
+        `The availability must equal one of certain values:${patterns.availability}`,
+      )
       .required()
       .messages(templatesMsgJoi('Availability', patterns.availability)),
     weight: Joi.number().messages(templatesMsgJoi('Weight')),
     units: Joi.string()
       .valid(...patterns.units)
+      .description(
+        `The units must equal one of certain values:${patterns.units}`,
+      )
       .messages(templatesMsgJoi('units', patterns.units)),
     quantity: Joi.number().messages(templatesMsgJoi('Quantity of products')),
     photo: Joi.array().items(
       Joi.object({
         url: Joi.string()
           .uri()
+          .description('Invalid URL format')
           .messages(templatesMsgJoi('URL of photo product')),
         alt: Joi.string().messages(templatesMsgJoi('Alt name of photo')),
       }).messages(templatesMsgJoi('Product photo')),
@@ -59,20 +68,31 @@ const validationAddProducts = Joi.array().items(
 const validationUpdateProduct = Joi.object({
   name: Joi.string()
     .max(300)
+    .description('Max length of name must be no more than 300 characters')
     .messages(templatesMsgJoi('Product name')),
   vendorCode: Joi.string().allow('').messages(templatesMsgJoi('Vendor Code')),
-  price: Joi.number().min(0).messages(templatesMsgJoi('Price')),
+  price: Joi.number()
+    .min(0)
+    .description('The price should have at most 2 decimal places')
+    .messages(templatesMsgJoi('Price')),
   availability: Joi.string()
     .valid(...patterns.availability)
+    .description(
+      `The availability must equal one of certain values:${patterns.availability}`,
+    )
     .messages(templatesMsgJoi('Availability', patterns.availability)),
   weight: Joi.number().messages(templatesMsgJoi('Weight')),
   units: Joi.string()
     .valid(...patterns.units)
+    .description(`The units must equal one of certain values:${patterns.units}`)
     .messages(templatesMsgJoi('Units', patterns.units)),
   quantity: Joi.number().messages(templatesMsgJoi('Quantity of products')),
   photo: Joi.array().items(
     Joi.object({
-      url: Joi.string().uri().messages(templatesMsgJoi('URL of photo product')),
+      url: Joi.string()
+        .uri()
+        .description('Invalid URL format')
+        .messages(templatesMsgJoi('URL of photo product')),
       alt: Joi.string().messages(templatesMsgJoi('Alt name of photo')),
     }).messages(templatesMsgJoi('Product photo')),
   ),
