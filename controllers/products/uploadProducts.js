@@ -23,6 +23,21 @@ module.exports = async (req, res) => {
 
   const products = xlsx.utils.sheet_to_json(sheet);
 
+  for (const product of products) {
+    const { vendorCode } = product;
+    if (vendorCode) {
+      const existingProduct = await Product.findOne({
+        vendorCode,
+      });
+      if (existingProduct) {
+        throw HttpError(
+          400,
+          `Product with vendorCode "${vendorCode}" already exists`,
+        );
+      }
+    }
+  }
+
   await fetchCategoriesAndSubcategories(products, _id);
 
   await Product.insertMany(products);
