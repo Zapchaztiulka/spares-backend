@@ -18,6 +18,10 @@ router.get('/product', authenticate, hasRole('admin'), async (_, res) => {
   const addProductsOptions = parse(validationAddProducts);
   addProductsOptions.router = 'add products';
 
+  // const keysAddProductsOptions =
+  //   validationAddProducts.$_terms.items[0].$_terms.keys;
+  // return res.json(keysAddProductsOptions);
+
   const updateProductOptions = parse(validationUpdateProduct);
   updateProductOptions.router = 'update product by id';
 

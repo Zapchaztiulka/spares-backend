@@ -8,7 +8,6 @@ module.exports = async (req, res) => {
   const { _id } = req.user;
   const productsData = req.body;
 
-  // Validate productsData format
   if (!Array.isArray(productsData) || productsData.length === 0) {
     throw HttpError(400, 'Invalid request format');
   }
@@ -20,6 +19,7 @@ module.exports = async (req, res) => {
       vendorCode,
       categories,
       subcategories = [],
+      price,
       ...restFields
     } = productData;
 
@@ -69,6 +69,7 @@ module.exports = async (req, res) => {
     productsToCreate.push({
       ...restFields,
       vendorCode,
+      price: price.toFixed(2),
       categories: categoryData.map(category => ({
         _id: category._id,
         categoryName: category.categoryName,

@@ -9,80 +9,87 @@ const {
 
 const validationAuthUser = Joi.object({
   username: Joi.string()
+    .min(3)
     .max(32)
-    .description('Max length of username must be no more than 32 characters')
-    .messages(templatesMsgJoi('Username')),
+    .messages(templatesMsgJoi('Username').textRules),
   userSurname: Joi.string()
+    .min(3)
     .max(32)
-    .description('Max length of username must be no more than 32 characters')
-    .messages(templatesMsgJoi('User surname')),
+    .messages(templatesMsgJoi('Surname of user').textRules),
   password: Joi.string()
     .pattern(patterns.passwordPattern)
-    .description(
-      'Passwords must be 6 and more characters, at least one lowercase and one uppercase letter',
-    )
     .required()
-    .messages(templatesMsgJoi('Password')),
+    .messages({
+      ...templatesMsgJoi('Password', patterns.passwordPatternMessage)
+        .regExpRules,
+      ...templatesMsgJoi('Password').commonRules,
+    }),
   email: Joi.string()
     .email({ minDomainSegments: 2 })
     .pattern(patterns.emailPattern)
-    .description('Email must be valid')
     .required()
-    .messages(templatesMsgJoi('Email')),
+    .messages({
+      ...templatesMsgJoi('Email').emailRules,
+      ...templatesMsgJoi('Email').commonRules,
+    }),
   phone: Joi.string()
     .pattern(patterns.phonePattern)
-    .description('The phone must start with "0" and contains 10 digits')
-    .messages(templatesMsgJoi('Phone')),
+    .messages(
+      templatesMsgJoi('Phone', patterns.phonePatternMessage).regExpRules,
+    ),
   role: Joi.string()
     .valid(...patterns.roles)
-    .description(`The role must equal one of certain values:${patterns.roles}`)
-    .messages(templatesMsgJoi('Role', patterns.roles)),
+    .messages(templatesMsgJoi('Role', patterns.roles).enumRules),
 });
 
 const validationUpdateUser = Joi.object({
   username: Joi.string()
+    .min(3)
     .max(32)
-    .description('Max length of username must be no more than 32 characters')
-    .messages(templatesMsgJoi('Username')),
+    .messages(templatesMsgJoi('Username').textRules),
   userSurname: Joi.string()
+    .min(3)
     .max(32)
-    .description('Max length of username must be no more than 32 characters')
-    .messages(templatesMsgJoi('User surname')),
+    .messages(templatesMsgJoi('Surname of user').textRules),
   email: Joi.string()
     .email({ minDomainSegments: 2 })
     .pattern(patterns.emailPattern)
-    .description('Email must be valid')
-    .messages(templatesMsgJoi('Email')),
+    .messages({
+      ...templatesMsgJoi('Email').emailRules,
+      ...templatesMsgJoi('Email').commonRules,
+    }),
   phone: Joi.string()
     .pattern(patterns.phonePattern)
-    .description('The phone must start with "0" and contains 10 digits')
-    .messages(templatesMsgJoi('Phone')),
+    .messages(
+      templatesMsgJoi('Phone', patterns.phonePatternMessage).regExpRules,
+    ),
   role: Joi.string()
     .valid(...patterns.roles)
-    .description(`The role must equal one of certain values:${patterns.roles}`)
-    .messages(templatesMsgJoi('Role', patterns.roles)),
+    .messages(templatesMsgJoi('Role', patterns.roles).enumRules),
 });
 
 const validationEmailUser = Joi.object({
   email: Joi.string()
     .email({ minDomainSegments: 2 })
     .pattern(patterns.emailPattern)
-    .description('Email must be valid')
-    .required()
-    .messages(templatesMsgJoi('Email')),
+    .messages({
+      ...templatesMsgJoi('Email').emailRules,
+      ...templatesMsgJoi('Email').commonRules,
+    }),
 });
 
 const validationPasswordUser = Joi.object({
   password1: Joi.string()
     .pattern(patterns.passwordPattern)
-    .description(
-      'Passwords must be 6 and more characters, at least one lowercase and one uppercase letter',
-    )
-    .required(),
-  password2: Joi.string()
-    .valid(Joi.ref('password1'))
-    .description('Confirmation of password must match')
-    .required(),
+    .required()
+    .messages({
+      ...templatesMsgJoi('Password', patterns.passwordPatternMessage)
+        .regExpRules,
+      ...templatesMsgJoi('Password').commonRules,
+    }),
+  password2: Joi.string().valid(Joi.ref('password1')).required().messages({
+    'any.only': 'Confirmation of password must match',
+  }),
 });
 
 // ====================================================

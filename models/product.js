@@ -10,104 +10,224 @@ const {
 const validationAddProducts = Joi.array().items(
   Joi.object({
     name: Joi.string()
+      .min(3)
       .max(300)
-      .description('Max length of name must be no more than 300 characters')
       .required()
-      .messages(templatesMsgJoi('Product name')),
-    vendorCode: Joi.string().allow('').messages(templatesMsgJoi('Vendor Code')),
+      .messages({
+        ...templatesMsgJoi('Product name').commonRules,
+        ...templatesMsgJoi('Product name').textRules,
+      }),
+    vendorCode: Joi.string()
+      .min(2)
+      .max(300)
+      .allow('')
+      .messages(templatesMsgJoi('Vendor code').textRules),
     price: Joi.number()
-      .min(0)
-      .precision(2)
-      .description('The price should have at most 2 decimal places')
+      .min(0.01)
+      .max(1000000000)
       .required()
-      .messages(templatesMsgJoi('Price')),
+      .messages({
+        ...templatesMsgJoi('Price').numberRules,
+        ...templatesMsgJoi('Price').commonRules,
+      }),
     availability: Joi.string()
       .valid(...patterns.availability)
-      .description(
-        `The availability must equal one of certain values:${patterns.availability}`,
-      )
       .required()
-      .messages(templatesMsgJoi('Availability', patterns.availability)),
-    weight: Joi.number().messages(templatesMsgJoi('Weight')),
+      .messages({
+        ...templatesMsgJoi('Availability', patterns.availability).enumRules,
+        ...templatesMsgJoi('Availability').commonRules,
+      }),
+    weight: Joi.number()
+      .min(0.001)
+      .max(1000000000)
+      .messages(templatesMsgJoi('Weight').numberRules),
     units: Joi.string()
       .valid(...patterns.units)
-      .description(
-        `The units must equal one of certain values:${patterns.units}`,
-      )
-      .messages(templatesMsgJoi('units', patterns.units)),
-    quantity: Joi.number().messages(templatesMsgJoi('Quantity of products')),
+      .messages(templatesMsgJoi('Units', patterns.units).enumRules),
+    quantity: Joi.number()
+      .min(1)
+      .max(1000)
+      .messages({
+        ...templatesMsgJoi('Quantity').numberRules,
+        ...templatesMsgJoi('Quantity').integerNumberRules,
+        ...templatesMsgJoi('Quantity').commonRules,
+      }),
     photo: Joi.array().items(
       Joi.object({
         url: Joi.string()
           .uri()
-          .description('Invalid URL format')
-          .messages(templatesMsgJoi('URL of photo product')),
-        alt: Joi.string().messages(templatesMsgJoi('Alt name of photo')),
-      }).messages(templatesMsgJoi('Product photo')),
+          .required()
+          .messages({
+            ...templatesMsgJoi('URL of photo').urlRules,
+            ...templatesMsgJoi('URL of photo').commonRules,
+          }),
+        alt: Joi.string()
+          .min(1)
+          .max(100)
+          .required()
+          .messages({
+            ...templatesMsgJoi('Alt of photo').textRules,
+            ...templatesMsgJoi('URL of photo').commonRules,
+          }),
+      })
+        .min(0)
+        .messages(templatesMsgJoi('Photo').arrayRules),
     ),
     description: Joi.string()
       .allow('')
-      .messages(templatesMsgJoi('Description')),
+      .min(0)
+      .max(2000)
+      .messages(templatesMsgJoi('Description').textRules),
     manufacturer: Joi.object({
-      country: Joi.string().allow('').messages(templatesMsgJoi('Country')),
-      factory: Joi.string().allow('').messages(templatesMsgJoi('Factory')),
-      trademark: Joi.string().required().messages(templatesMsgJoi('Trademark')),
+      country: Joi.string()
+        .allow('')
+        .min(0)
+        .max(100)
+        .messages(templatesMsgJoi('Country').textRules),
+      factory: Joi.string()
+        .allow('')
+        .min(0)
+        .max(300)
+        .messages(templatesMsgJoi('Factory').textRules),
+      trademark: Joi.string()
+        .min(2)
+        .max(300)
+        .required()
+        .messages({
+          ...templatesMsgJoi('Trademark').textRules,
+          ...templatesMsgJoi('Trademark').commonRules,
+        }),
     })
       .required()
-      .messages(templatesMsgJoi('Manufacturer')),
+      .messages(templatesMsgJoi('Manufacturer').commonRules),
     categories: Joi.array()
-      .items(Joi.string().length(24))
+      .items(
+        Joi.string()
+          .length(24)
+          .required()
+          .messages(templatesMsgJoi('Category ID').commonRules),
+      )
+      .min(1)
       .required()
-      .messages(templatesMsgJoi('Categories')),
+      .messages(templatesMsgJoi('Categories').arrayRules),
     subcategories: Joi.array()
-      .items(Joi.string().length(24))
-      .messages(templatesMsgJoi('Subcategories')),
-  }),
+      .items(
+        Joi.string()
+          .length(24)
+          .required()
+          .messages(templatesMsgJoi('Subcategory ID').commonRules),
+      )
+      .min(0)
+      .messages(templatesMsgJoi('Subcategories').arrayRules),
+  })
+    .required()
+    .min(1)
+    .messages({
+      ...templatesMsgJoi('Adding products array').arrayRules,
+      ...templatesMsgJoi('Adding products array').commonRules,
+    }),
 );
 
 const validationUpdateProduct = Joi.object({
   name: Joi.string()
+    .min(3)
     .max(300)
-    .description('Max length of name must be no more than 300 characters')
-    .messages(templatesMsgJoi('Product name')),
-  vendorCode: Joi.string().allow('').messages(templatesMsgJoi('Vendor Code')),
+    .messages({
+      ...templatesMsgJoi('Product name').commonRules,
+      ...templatesMsgJoi('Product name').textRules,
+    }),
+  vendorCode: Joi.string()
+    .min(2)
+    .max(300)
+    .allow('')
+    .messages(templatesMsgJoi('Vendor code').textRules),
   price: Joi.number()
-    .min(0)
-    .description('The price should have at most 2 decimal places')
-    .messages(templatesMsgJoi('Price')),
+    .min(0.01)
+    .max(1000000000)
+    .messages({
+      ...templatesMsgJoi('Price').numberRules,
+      ...templatesMsgJoi('Price').commonRules,
+    }),
   availability: Joi.string()
     .valid(...patterns.availability)
-    .description(
-      `The availability must equal one of certain values:${patterns.availability}`,
-    )
-    .messages(templatesMsgJoi('Availability', patterns.availability)),
-  weight: Joi.number().messages(templatesMsgJoi('Weight')),
+    .messages({
+      ...templatesMsgJoi('Availability', patterns.availability).enumRules,
+      ...templatesMsgJoi('Availability').commonRules,
+    }),
+  weight: Joi.number()
+    .min(0)
+    .max(1000000000)
+    .messages(templatesMsgJoi('Weight').numberRules),
   units: Joi.string()
     .valid(...patterns.units)
-    .description(`The units must equal one of certain values:${patterns.units}`)
-    .messages(templatesMsgJoi('Units', patterns.units)),
-  quantity: Joi.number().messages(templatesMsgJoi('Quantity of products')),
+    .messages(templatesMsgJoi('Units', patterns.units).enumRules),
+  quantity: Joi.number()
+    .min(0.01)
+    .max(1000000000)
+    .messages({
+      ...templatesMsgJoi('Quantity').numberRules,
+      ...templatesMsgJoi('Quantity').integerNumberRules,
+      ...templatesMsgJoi('Quantity').commonRules,
+    }),
   photo: Joi.array().items(
     Joi.object({
       url: Joi.string()
         .uri()
-        .description('Invalid URL format')
-        .messages(templatesMsgJoi('URL of photo product')),
-      alt: Joi.string().messages(templatesMsgJoi('Alt name of photo')),
-    }).messages(templatesMsgJoi('Product photo')),
+        .messages({
+          ...templatesMsgJoi('URL of photo').urlRules,
+          ...templatesMsgJoi('URL of photo').commonRules,
+        }),
+      alt: Joi.string()
+        .min(1)
+        .max(100)
+        .messages({
+          ...templatesMsgJoi('Alt of photo').textRules,
+          ...templatesMsgJoi('URL of photo').commonRules,
+        }),
+    })
+      .min(0)
+      .messages(templatesMsgJoi('Photo').arrayRules),
   ),
-  description: Joi.string().messages(templatesMsgJoi('Description')),
+  description: Joi.string()
+    .allow('')
+    .min(0)
+    .max(2000)
+    .messages(templatesMsgJoi('Description').textRules),
   manufacturer: Joi.object({
-    country: Joi.string().allow('').messages(templatesMsgJoi('Country')),
-    factory: Joi.string().allow('').messages(templatesMsgJoi('Factory')),
-    trademark: Joi.string().messages(templatesMsgJoi('Trademark')),
-  }),
+    country: Joi.string()
+      .allow('')
+      .min(0)
+      .max(100)
+      .messages(templatesMsgJoi('Country').textRules),
+    factory: Joi.string()
+      .allow('')
+      .min(0)
+      .max(300)
+      .messages(templatesMsgJoi('Factory').textRules),
+    trademark: Joi.string()
+      .min(2)
+      .max(300)
+      .messages({
+        ...templatesMsgJoi('Trademark').textRules,
+        ...templatesMsgJoi('Trademark').commonRules,
+      }),
+  }).messages(templatesMsgJoi('Manufacturer').commonRules),
   categories: Joi.array()
-    .items(Joi.string().length(24))
-    .messages(templatesMsgJoi('Categories')),
+    .items(
+      Joi.string()
+        .length(24)
+        .messages(templatesMsgJoi('Category ID').commonRules),
+    )
+    .min(1)
+    .messages(templatesMsgJoi('Categories').arrayRules),
   subcategories: Joi.array()
-    .items(Joi.string().length(24))
-    .messages(templatesMsgJoi('Subcategories')),
+    .items(
+      Joi.string()
+        .length(24)
+        .messages(templatesMsgJoi('Subcategory ID').commonRules),
+    )
+    .min(0)
+    .messages(templatesMsgJoi('Subcategories').arrayRules),
 });
 
 const photoSchema = new Schema({

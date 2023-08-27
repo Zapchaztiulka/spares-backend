@@ -5,22 +5,45 @@ const { templatesMsgJoi, handleMongooseError } = require('../helpers');
 
 const validationCategory = Joi.object({
   categoryName: Joi.string()
+    .min(3)
+    .max(50)
     .required()
-    .messages(templatesMsgJoi('Category name')),
-  subcategories: Joi.array().items(
-    Joi.object({
-      subcategoryName: Joi.string().required(),
+    .messages({
+      ...templatesMsgJoi('Category name').commonRules,
+      ...templatesMsgJoi('Category name').textRules,
     }),
-  ),
+  subcategories: Joi.array()
+    .items(
+      Joi.object({
+        subcategoryName: Joi.string()
+          .min(3)
+          .max(50)
+          .required()
+          .messages({
+            ...templatesMsgJoi('Subcategory name').commonRules,
+            ...templatesMsgJoi('Subcategory name').textRules,
+          }),
+      }),
+    )
+    .min(1)
+    .messages(templatesMsgJoi('Subcategories').arrayRules),
 });
 
 const validationUpdateCategory = Joi.object({
-  categoryName: Joi.string().messages(templatesMsgJoi('Category name')),
-  subcategories: Joi.array().items(
-    Joi.object({
-      subcategoryName: Joi.string(),
-    }),
-  ),
+  categoryName: Joi.string()
+    .min(3)
+    .max(50)
+    .messages(templatesMsgJoi('Category name').textRules),
+  subcategories: Joi.array()
+    .items(
+      Joi.object({
+        subcategoryName: Joi.string()
+          .min(3)
+          .max(50)
+          .messages(templatesMsgJoi('Subcategory name').textRules),
+      }),
+    )
+    .messages(templatesMsgJoi('Subcategories').arrayRules),
 });
 
 const subcategorySchema = new Schema({

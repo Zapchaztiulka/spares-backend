@@ -11,8 +11,11 @@ const orderStatus = [
 
 const namePattern = /^[A-Za-zА-Яа-яёЁЇїІіЄєҐґ0-9]+$/;
 const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-const passwordPattern = /^.*(?=.{6,})((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/; // 6 characters, at least one upperCase and one lowercase
+const passwordPattern = /^.*(?=.{6,})((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/;
+const passwordPatternMessage =
+  'must have min 6 characters, at least one upperCase and one lowercase';
 const phonePattern = /^0\d{9}$/;
+const phonePatternMessage = `must start with ${0} and contains 10 digits`;
 
 const companyData = {
   firstPhone: '+38 067 111 22 33',
@@ -28,7 +31,9 @@ const patterns = {
   namePattern,
   emailPattern,
   passwordPattern,
+  passwordPatternMessage,
   phonePattern,
+  phonePatternMessage,
   orderStatus,
   companyData,
 };

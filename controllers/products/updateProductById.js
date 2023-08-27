@@ -62,6 +62,12 @@ module.exports = async (req, res) => {
     }));
   }
 
+  const { price } = newProductData;
+
+  if (price) {
+    newProductData.price = price.toFixed(2);
+  }
+
   const product = await Product.findByIdAndUpdate(id, newProductData, {
     new: true,
   });
