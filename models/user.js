@@ -56,7 +56,7 @@ const validationAuthUser = Joi.object({
     ),
   role: Joi.string()
     .description('Роль користувача')
-    .note('input')
+    .note('select')
     .example('Введіть роль користувача')
     .valid(...patterns.roles)
     .messages(templatesMsgJoi('Role', patterns.roles).enumRules),

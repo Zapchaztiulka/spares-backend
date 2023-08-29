@@ -6,8 +6,8 @@ module.exports = (key, data) => {
 
   const textRules = {
     'string.empty': `${key} cannot be empty`,
-    'string.min': `${key} should have a minimum {#limit} characters`,
-    'string.max': `${key} should have a maximum {#limit} characters`,
+    'string.min': `${key} should have from {#limit}`,
+    'string.max': ' to {#limit} characters',
   };
 
   const urlRules = {
@@ -26,8 +26,8 @@ module.exports = (key, data) => {
 
   const numberRules = {
     'number.base': `Invalid type for ${key}, must be a number`,
-    'number.min': `${key} should be greater than or equal to {#limit}`,
-    'number.max': `${key} should be less than or equal to {#limit}`,
+    'number.min': `${key} should be greater than or equal {#limit} `,
+    'number.max': ' and less than or equal to {#limit}',
     'number.positive': `${key} must be a positive number`,
   };
 
