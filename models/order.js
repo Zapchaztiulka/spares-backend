@@ -16,8 +16,8 @@ const validationOrderByUser = Joi.object({
           .required()
           .messages(templatesMsgJoi('Product ID').commonRules),
         quantity: Joi.number()
-          .min(1)
-          .max(1000)
+          .min(patterns.min.quantity)
+          .max(patterns.max.quantity)
           .messages({
             ...templatesMsgJoi('Quantity').numberRules,
             ...templatesMsgJoi('Quantity').integerNumberRules,
@@ -25,7 +25,6 @@ const validationOrderByUser = Joi.object({
           }),
       }),
     )
-    .min(1)
     .required()
     .messages({
       ...templatesMsgJoi('Products array in order').arrayRules,
@@ -55,8 +54,8 @@ const validationOrderByAny = Joi.object({
           .required()
           .messages(templatesMsgJoi('Product ID').commonRules),
         quantity: Joi.number()
-          .min(1)
-          .max(1000)
+          .min(patterns.min.quantity)
+          .max(patterns.max.quantity)
           .messages({
             ...templatesMsgJoi('Quantity').numberRules,
             ...templatesMsgJoi('Quantity').integerNumberRules,
@@ -64,7 +63,6 @@ const validationOrderByAny = Joi.object({
           }),
       }),
     )
-    .min(1)
     .required()
     .messages({
       ...templatesMsgJoi('Products array in order').arrayRules,
@@ -88,8 +86,8 @@ const validationUpdateOrder = Joi.object({
           .required()
           .messages(templatesMsgJoi('Product ID').commonRules),
         quantity: Joi.number()
-          .min(1)
-          .max(1000)
+          .min(patterns.min.quantity)
+          .max(patterns.max.quantity)
           .messages({
             ...templatesMsgJoi('Quantity').numberRules,
             ...templatesMsgJoi('Quantity').integerNumberRules,

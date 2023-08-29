@@ -10,21 +10,21 @@ const {
 const validationAddProducts = Joi.array().items(
   Joi.object({
     name: Joi.string()
-      .min(3)
-      .max(300)
+      .min(patterns.min.productName)
+      .max(patterns.max.productName)
       .required()
       .messages({
         ...templatesMsgJoi('Product name').commonRules,
         ...templatesMsgJoi('Product name').textRules,
       }),
     vendorCode: Joi.string()
-      .min(2)
-      .max(300)
+      .min(patterns.min.vendorCode)
+      .max(patterns.max.vendorCode)
       .allow('')
       .messages(templatesMsgJoi('Vendor code').textRules),
     price: Joi.number()
-      .min(0.01)
-      .max(1000000000)
+      .min(patterns.min.price)
+      .max(patterns.max.price)
       .required()
       .messages({
         ...templatesMsgJoi('Price').numberRules,
@@ -38,15 +38,15 @@ const validationAddProducts = Joi.array().items(
         ...templatesMsgJoi('Availability').commonRules,
       }),
     weight: Joi.number()
-      .min(0.001)
-      .max(1000000000)
+      .min(patterns.min.weight)
+      .max(patterns.max.weight)
       .messages(templatesMsgJoi('Weight').numberRules),
     units: Joi.string()
       .valid(...patterns.units)
       .messages(templatesMsgJoi('Units', patterns.units).enumRules),
     quantity: Joi.number()
-      .min(1)
-      .max(1000)
+      .min(patterns.min.quantity)
+      .max(patterns.max.quantity)
       .messages({
         ...templatesMsgJoi('Quantity').numberRules,
         ...templatesMsgJoi('Quantity').integerNumberRules,
@@ -62,36 +62,34 @@ const validationAddProducts = Joi.array().items(
             ...templatesMsgJoi('URL of photo').commonRules,
           }),
         alt: Joi.string()
-          .min(1)
-          .max(100)
+          .min(patterns.min.alt)
+          .max(patterns.max.alt)
           .required()
           .messages({
             ...templatesMsgJoi('Alt of photo').textRules,
             ...templatesMsgJoi('URL of photo').commonRules,
           }),
-      })
-        .min(0)
-        .messages(templatesMsgJoi('Photo').arrayRules),
+      }).messages(templatesMsgJoi('Photo').arrayRules),
     ),
     description: Joi.string()
       .allow('')
-      .min(0)
-      .max(2000)
+      .min(patterns.min.description)
+      .max(patterns.max.description)
       .messages(templatesMsgJoi('Description').textRules),
     manufacturer: Joi.object({
       country: Joi.string()
         .allow('')
-        .min(0)
-        .max(100)
+        .min(patterns.min.manufacturer)
+        .max(patterns.max.manufacturer)
         .messages(templatesMsgJoi('Country').textRules),
       factory: Joi.string()
         .allow('')
-        .min(0)
-        .max(300)
+        .min(patterns.min.manufacturer)
+        .max(patterns.max.manufacturer)
         .messages(templatesMsgJoi('Factory').textRules),
       trademark: Joi.string()
-        .min(2)
-        .max(300)
+        .min(patterns.min.manufacturer)
+        .max(patterns.max.manufacturer)
         .required()
         .messages({
           ...templatesMsgJoi('Trademark').textRules,
@@ -107,7 +105,6 @@ const validationAddProducts = Joi.array().items(
           .required()
           .messages(templatesMsgJoi('Category ID').commonRules),
       )
-      .min(1)
       .required()
       .messages(templatesMsgJoi('Categories').arrayRules),
     subcategories: Joi.array()
@@ -117,11 +114,9 @@ const validationAddProducts = Joi.array().items(
           .required()
           .messages(templatesMsgJoi('Subcategory ID').commonRules),
       )
-      .min(0)
       .messages(templatesMsgJoi('Subcategories').arrayRules),
   })
     .required()
-    .min(1)
     .messages({
       ...templatesMsgJoi('Adding products array').arrayRules,
       ...templatesMsgJoi('Adding products array').commonRules,
@@ -130,20 +125,20 @@ const validationAddProducts = Joi.array().items(
 
 const validationUpdateProduct = Joi.object({
   name: Joi.string()
-    .min(3)
-    .max(300)
+    .min(patterns.min.productName)
+    .max(patterns.max.productName)
     .messages({
       ...templatesMsgJoi('Product name').commonRules,
       ...templatesMsgJoi('Product name').textRules,
     }),
   vendorCode: Joi.string()
-    .min(2)
-    .max(300)
+    .min(patterns.min.vendorCode)
+    .max(patterns.max.vendorCode)
     .allow('')
     .messages(templatesMsgJoi('Vendor code').textRules),
   price: Joi.number()
-    .min(0.01)
-    .max(1000000000)
+    .min(patterns.min.price)
+    .max(patterns.max.price)
     .messages({
       ...templatesMsgJoi('Price').numberRules,
       ...templatesMsgJoi('Price').commonRules,
@@ -155,15 +150,15 @@ const validationUpdateProduct = Joi.object({
       ...templatesMsgJoi('Availability').commonRules,
     }),
   weight: Joi.number()
-    .min(0)
-    .max(1000000000)
+    .min(patterns.min.weight)
+    .max(patterns.max.weight)
     .messages(templatesMsgJoi('Weight').numberRules),
   units: Joi.string()
     .valid(...patterns.units)
     .messages(templatesMsgJoi('Units', patterns.units).enumRules),
   quantity: Joi.number()
-    .min(0.01)
-    .max(1000000000)
+    .min(patterns.min.quantity)
+    .max(patterns.max.quantity)
     .messages({
       ...templatesMsgJoi('Quantity').numberRules,
       ...templatesMsgJoi('Quantity').integerNumberRules,
@@ -178,35 +173,33 @@ const validationUpdateProduct = Joi.object({
           ...templatesMsgJoi('URL of photo').commonRules,
         }),
       alt: Joi.string()
-        .min(1)
-        .max(100)
+        .min(patterns.min.alt)
+        .max(patterns.max.alt)
         .messages({
           ...templatesMsgJoi('Alt of photo').textRules,
           ...templatesMsgJoi('URL of photo').commonRules,
         }),
-    })
-      .min(0)
-      .messages(templatesMsgJoi('Photo').arrayRules),
+    }).messages(templatesMsgJoi('Photo').arrayRules),
   ),
   description: Joi.string()
     .allow('')
-    .min(0)
-    .max(2000)
+    .min(patterns.min.description)
+    .max(patterns.max.description)
     .messages(templatesMsgJoi('Description').textRules),
   manufacturer: Joi.object({
     country: Joi.string()
       .allow('')
-      .min(0)
-      .max(100)
+      .min(patterns.min.manufacturer)
+      .max(patterns.max.manufacturer)
       .messages(templatesMsgJoi('Country').textRules),
     factory: Joi.string()
       .allow('')
-      .min(0)
-      .max(300)
+      .min(patterns.min.manufacturer)
+      .max(patterns.max.manufacturer)
       .messages(templatesMsgJoi('Factory').textRules),
     trademark: Joi.string()
-      .min(2)
-      .max(300)
+      .min(patterns.min.manufacturer)
+      .max(patterns.max.manufacturer)
       .messages({
         ...templatesMsgJoi('Trademark').textRules,
         ...templatesMsgJoi('Trademark').commonRules,
@@ -218,7 +211,6 @@ const validationUpdateProduct = Joi.object({
         .length(24)
         .messages(templatesMsgJoi('Category ID').commonRules),
     )
-    .min(1)
     .messages(templatesMsgJoi('Categories').arrayRules),
   subcategories: Joi.array()
     .items(
@@ -226,7 +218,6 @@ const validationUpdateProduct = Joi.object({
         .length(24)
         .messages(templatesMsgJoi('Subcategory ID').commonRules),
     )
-    .min(0)
     .messages(templatesMsgJoi('Subcategories').arrayRules),
 });
 

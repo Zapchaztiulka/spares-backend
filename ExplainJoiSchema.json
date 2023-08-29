@@ -1,0 +1,25 @@
+[
+  {
+    "key": "username", // "key"
+    "title": "Ім'я користувача", // schema._flags.description
+    "type": "input", // schema.$_terms.notes[0]
+    "placeholder": "Введіть ім'я користувача", // schema.$_terms.examples[0]
+    "validation": {
+      "regexp": false, // schema._rules[0].args.regex ? schema._rules[0].args.regex : false
+      "required": false, // schema._flags.presence ? true : false
+      "min": 3, // if schema._rules[0] contain "name":"min" -  schema._rules[0].args.limit
+      "max": 32, // if schema._rules[0] contain "name":"max" -  schema._rules[0].args.limit
+      "unique": false, // schema.$_terms.tags[0] === 'unique' ? true : false
+      "enum": false, // schema._valids ? [...schema._valids._values] : false
+      "warningMessages": {
+        "regexp": "", // schema._preferences.messages['string.pattern.base'] ? schema._preferences.messages['string.pattern.base'].rendered : ''
+        "min": "", // if (schema.type === 'string') {schema._preferences.messages['string.min'] ? schema._preferences.messages['string.min']._template[0] + schema._rules[0].args.limit + schema._preferences.messages['string.min']._template[2], : ''} else {schema._preferences.messages['number.min'] ? schema._preferences.messages['number.min']._template[0] + schema._rules[0].args.limit + schema._preferences.messages['number.min']._template[2], : ''}
+        "max": "", // if (schema.type === 'string') {schema._preferences.messages['string.max'] ? schema._preferences.messages['string.max']._template[0] + schema._rules[0].args.limit + schema._preferences.messages['string.max']._template[2], : ''} else {schema._preferences.messages['number.max'] ? schema._preferences.messages['number.max']._template[0] + schema._rules[0].args.limit + schema._preferences.messages['number.max']._template[2], : ''}
+        "required": "", // schema._preferences.messages['any.required'] ? schema._preferences.messages['any.required'].rendered : ''
+        "unique": "", // schema.$_terms.tags[0] === 'unique' ? `${this.key} is unique. Please change it` : ''
+        "enum": "" //schema._preferences.messages['any.only'] ? schema._preferences.messages['any.only'].rendered : ''
+      }
+    }
+  }
+  // ... other keys
+]

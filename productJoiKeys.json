@@ -1,0 +1,2822 @@
+[
+  {
+    "key": "name",
+    "schema": {
+      "type": "string",
+      "$_root": {
+        "_types": {},
+        "version": "17.9.2",
+        "cache": {}
+      },
+      "$_temp": {
+        "ruleset": false,
+        "whens": {}
+      },
+      "_ids": {
+        "_byId": {},
+        "_byKey": {},
+        "_schemaChain": false
+      },
+      "_preferences": {
+        "messages": {
+          "any.required": {
+            "source": "Missing required field Product name",
+            "rendered": "Missing required field Product name",
+            "_template": null
+          },
+          "any.empty": {
+            "source": "Product name cannot be empty",
+            "rendered": "Product name cannot be empty",
+            "_template": null
+          },
+          "string.empty": {
+            "source": "Product name cannot be empty",
+            "rendered": "Product name cannot be empty",
+            "_template": null
+          },
+          "string.min": {
+            "source": "Product name should have a minimum {#limit} characters",
+            "rendered": "Product name should have a minimum {#limit} characters",
+            "_template": [
+              "Product name should have a minimum ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              },
+              " characters"
+            ]
+          },
+          "string.max": {
+            "source": "Product name should have a maximum {#limit} characters",
+            "rendered": "Product name should have a maximum {#limit} characters",
+            "_template": [
+              "Product name should have a maximum ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              },
+              " characters"
+            ]
+          }
+        }
+      },
+      "_valids": null,
+      "_invalids": null,
+      "_rules": [
+        {
+          "name": "min",
+          "method": "length",
+          "args": {
+            "limit": 3
+          },
+          "operator": ">=",
+          "_resolve": []
+        },
+        {
+          "name": "max",
+          "method": "length",
+          "args": {
+            "limit": 300
+          },
+          "operator": "<=",
+          "_resolve": []
+        }
+      ],
+      "_singleRules": {},
+      "_refs": {
+        "refs": []
+      },
+      "_flags": {
+        "presence": "required"
+      },
+      "_cache": null,
+      "$_terms": {
+        "alterations": null,
+        "examples": null,
+        "externals": null,
+        "metas": [],
+        "notes": [],
+        "shared": null,
+        "tags": [],
+        "whens": null,
+        "replacements": null
+      },
+      "$_super": {}
+    }
+  },
+  {
+    "key": "vendorCode",
+    "schema": {
+      "type": "string",
+      "$_root": {
+        "_types": {},
+        "version": "17.9.2",
+        "cache": {}
+      },
+      "$_temp": {
+        "ruleset": null,
+        "whens": {}
+      },
+      "_ids": {
+        "_byId": {},
+        "_byKey": {},
+        "_schemaChain": false
+      },
+      "_preferences": {
+        "messages": {
+          "string.empty": {
+            "source": "Vendor code cannot be empty",
+            "rendered": "Vendor code cannot be empty",
+            "_template": null
+          },
+          "string.min": {
+            "source": "Vendor code should have a minimum {#limit} characters",
+            "rendered": "Vendor code should have a minimum {#limit} characters",
+            "_template": [
+              "Vendor code should have a minimum ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              },
+              " characters"
+            ]
+          },
+          "string.max": {
+            "source": "Vendor code should have a maximum {#limit} characters",
+            "rendered": "Vendor code should have a maximum {#limit} characters",
+            "_template": [
+              "Vendor code should have a maximum ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              },
+              " characters"
+            ]
+          }
+        }
+      },
+      "_valids": {
+        "_values": {},
+        "_refs": {},
+        "_lowercase": {},
+        "_override": false
+      },
+      "_invalids": null,
+      "_rules": [
+        {
+          "name": "min",
+          "method": "length",
+          "args": {
+            "limit": 2
+          },
+          "operator": ">=",
+          "_resolve": []
+        },
+        {
+          "name": "max",
+          "method": "length",
+          "args": {
+            "limit": 300
+          },
+          "operator": "<=",
+          "_resolve": []
+        }
+      ],
+      "_singleRules": {},
+      "_refs": {
+        "refs": []
+      },
+      "_flags": {},
+      "_cache": null,
+      "$_terms": {
+        "alterations": null,
+        "examples": null,
+        "externals": null,
+        "metas": [],
+        "notes": [],
+        "shared": null,
+        "tags": [],
+        "whens": null,
+        "replacements": null
+      },
+      "$_super": {}
+    }
+  },
+  {
+    "key": "price",
+    "schema": {
+      "type": "number",
+      "$_root": {
+        "_types": {},
+        "version": "17.9.2",
+        "cache": {}
+      },
+      "$_temp": {
+        "ruleset": false,
+        "whens": {}
+      },
+      "_ids": {
+        "_byId": {},
+        "_byKey": {},
+        "_schemaChain": false
+      },
+      "_preferences": {
+        "messages": {
+          "number.base": {
+            "source": "Invalid type for Price, must be a number",
+            "rendered": "Invalid type for Price, must be a number",
+            "_template": null
+          },
+          "number.min": {
+            "source": "Price should be greater than or equal to {#limit}",
+            "rendered": "Price should be greater than or equal to {#limit}",
+            "_template": [
+              "Price should be greater than or equal to ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              }
+            ]
+          },
+          "number.max": {
+            "source": "Price should be less than or equal to {#limit}",
+            "rendered": "Price should be less than or equal to {#limit}",
+            "_template": [
+              "Price should be less than or equal to ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              }
+            ]
+          },
+          "number.positive": {
+            "source": "Price must be a positive number",
+            "rendered": "Price must be a positive number",
+            "_template": null
+          },
+          "any.required": {
+            "source": "Missing required field Price",
+            "rendered": "Missing required field Price",
+            "_template": null
+          },
+          "any.empty": {
+            "source": "Price cannot be empty",
+            "rendered": "Price cannot be empty",
+            "_template": null
+          }
+        }
+      },
+      "_valids": null,
+      "_invalids": null,
+      "_rules": [
+        {
+          "name": "min",
+          "method": "compare",
+          "args": {
+            "limit": 0.01
+          },
+          "operator": ">=",
+          "_resolve": []
+        },
+        {
+          "name": "max",
+          "method": "compare",
+          "args": {
+            "limit": 1000000000
+          },
+          "operator": "<=",
+          "_resolve": []
+        }
+      ],
+      "_singleRules": {},
+      "_refs": {
+        "refs": []
+      },
+      "_flags": {
+        "presence": "required"
+      },
+      "_cache": null,
+      "$_terms": {
+        "alterations": null,
+        "examples": null,
+        "externals": null,
+        "metas": [],
+        "notes": [],
+        "shared": null,
+        "tags": [],
+        "whens": null
+      },
+      "$_super": {}
+    }
+  },
+  {
+    "key": "availability",
+    "schema": {
+      "type": "string",
+      "$_root": {
+        "_types": {},
+        "version": "17.9.2",
+        "cache": {}
+      },
+      "$_temp": {
+        "ruleset": false,
+        "whens": {}
+      },
+      "_ids": {
+        "_byId": {},
+        "_byKey": {},
+        "_schemaChain": false
+      },
+      "_preferences": {
+        "messages": {
+          "any.only": {
+            "source": "Availability must equal one of certain values: є в наявності,під замовлення,відсутній",
+            "rendered": "Availability must equal one of certain values: є в наявності,під замовлення,відсутній",
+            "_template": null
+          },
+          "any.required": {
+            "source": "Missing required field Availability",
+            "rendered": "Missing required field Availability",
+            "_template": null
+          },
+          "any.empty": {
+            "source": "Availability cannot be empty",
+            "rendered": "Availability cannot be empty",
+            "_template": null
+          }
+        }
+      },
+      "_valids": {
+        "_values": {},
+        "_refs": {},
+        "_lowercase": {},
+        "_override": false
+      },
+      "_invalids": null,
+      "_rules": [],
+      "_singleRules": {},
+      "_refs": {
+        "refs": []
+      },
+      "_flags": {
+        "only": true,
+        "presence": "required"
+      },
+      "_cache": null,
+      "$_terms": {
+        "alterations": null,
+        "examples": null,
+        "externals": null,
+        "metas": [],
+        "notes": [],
+        "shared": null,
+        "tags": [],
+        "whens": null,
+        "replacements": null
+      },
+      "$_super": {}
+    }
+  },
+  {
+    "key": "weight",
+    "schema": {
+      "type": "number",
+      "$_root": {
+        "_types": {},
+        "version": "17.9.2",
+        "cache": {}
+      },
+      "$_temp": {
+        "ruleset": null,
+        "whens": {}
+      },
+      "_ids": {
+        "_byId": {},
+        "_byKey": {},
+        "_schemaChain": false
+      },
+      "_preferences": {
+        "messages": {
+          "number.base": {
+            "source": "Invalid type for Weight, must be a number",
+            "rendered": "Invalid type for Weight, must be a number",
+            "_template": null
+          },
+          "number.min": {
+            "source": "Weight should be greater than or equal to {#limit}",
+            "rendered": "Weight should be greater than or equal to {#limit}",
+            "_template": [
+              "Weight should be greater than or equal to ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              }
+            ]
+          },
+          "number.max": {
+            "source": "Weight should be less than or equal to {#limit}",
+            "rendered": "Weight should be less than or equal to {#limit}",
+            "_template": [
+              "Weight should be less than or equal to ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              }
+            ]
+          },
+          "number.positive": {
+            "source": "Weight must be a positive number",
+            "rendered": "Weight must be a positive number",
+            "_template": null
+          }
+        }
+      },
+      "_valids": null,
+      "_invalids": null,
+      "_rules": [
+        {
+          "name": "min",
+          "method": "compare",
+          "args": {
+            "limit": 0.001
+          },
+          "operator": ">=",
+          "_resolve": []
+        },
+        {
+          "name": "max",
+          "method": "compare",
+          "args": {
+            "limit": 1000000000
+          },
+          "operator": "<=",
+          "_resolve": []
+        }
+      ],
+      "_singleRules": {},
+      "_refs": {
+        "refs": []
+      },
+      "_flags": {},
+      "_cache": null,
+      "$_terms": {
+        "alterations": null,
+        "examples": null,
+        "externals": null,
+        "metas": [],
+        "notes": [],
+        "shared": null,
+        "tags": [],
+        "whens": null
+      },
+      "$_super": {}
+    }
+  },
+  {
+    "key": "units",
+    "schema": {
+      "type": "string",
+      "$_root": {
+        "_types": {},
+        "version": "17.9.2",
+        "cache": {}
+      },
+      "$_temp": {
+        "ruleset": false,
+        "whens": {}
+      },
+      "_ids": {
+        "_byId": {},
+        "_byKey": {},
+        "_schemaChain": false
+      },
+      "_preferences": {
+        "messages": {
+          "any.only": {
+            "source": "Units must equal one of certain values: кг,шт,л",
+            "rendered": "Units must equal one of certain values: кг,шт,л",
+            "_template": null
+          }
+        }
+      },
+      "_valids": {
+        "_values": {},
+        "_refs": {},
+        "_lowercase": {},
+        "_override": false
+      },
+      "_invalids": null,
+      "_rules": [],
+      "_singleRules": {},
+      "_refs": {
+        "refs": []
+      },
+      "_flags": {
+        "only": true
+      },
+      "_cache": null,
+      "$_terms": {
+        "alterations": null,
+        "examples": null,
+        "externals": null,
+        "metas": [],
+        "notes": [],
+        "shared": null,
+        "tags": [],
+        "whens": null,
+        "replacements": null
+      },
+      "$_super": {}
+    }
+  },
+  {
+    "key": "quantity",
+    "schema": {
+      "type": "number",
+      "$_root": {
+        "_types": {},
+        "version": "17.9.2",
+        "cache": {}
+      },
+      "$_temp": {
+        "ruleset": null,
+        "whens": {}
+      },
+      "_ids": {
+        "_byId": {},
+        "_byKey": {},
+        "_schemaChain": false
+      },
+      "_preferences": {
+        "messages": {
+          "number.base": {
+            "source": "Invalid type for Quantity, must be a number",
+            "rendered": "Invalid type for Quantity, must be a number",
+            "_template": null
+          },
+          "number.min": {
+            "source": "Quantity should be greater than or equal to {#limit}",
+            "rendered": "Quantity should be greater than or equal to {#limit}",
+            "_template": [
+              "Quantity should be greater than or equal to ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              }
+            ]
+          },
+          "number.max": {
+            "source": "Quantity should be less than or equal to {#limit}",
+            "rendered": "Quantity should be less than or equal to {#limit}",
+            "_template": [
+              "Quantity should be less than or equal to ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              }
+            ]
+          },
+          "number.positive": {
+            "source": "Quantity must be a positive number",
+            "rendered": "Quantity must be a positive number",
+            "_template": null
+          },
+          "number.integer": {
+            "source": "Quantity must be an integer",
+            "rendered": "Quantity must be an integer",
+            "_template": null
+          },
+          "any.required": {
+            "source": "Missing required field Quantity",
+            "rendered": "Missing required field Quantity",
+            "_template": null
+          },
+          "any.empty": {
+            "source": "Quantity cannot be empty",
+            "rendered": "Quantity cannot be empty",
+            "_template": null
+          }
+        }
+      },
+      "_valids": null,
+      "_invalids": null,
+      "_rules": [
+        {
+          "name": "min",
+          "method": "compare",
+          "args": {
+            "limit": 1
+          },
+          "operator": ">=",
+          "_resolve": []
+        },
+        {
+          "name": "max",
+          "method": "compare",
+          "args": {
+            "limit": 1000
+          },
+          "operator": "<=",
+          "_resolve": []
+        }
+      ],
+      "_singleRules": {},
+      "_refs": {
+        "refs": []
+      },
+      "_flags": {},
+      "_cache": null,
+      "$_terms": {
+        "alterations": null,
+        "examples": null,
+        "externals": null,
+        "metas": [],
+        "notes": [],
+        "shared": null,
+        "tags": [],
+        "whens": null
+      },
+      "$_super": {}
+    }
+  },
+  {
+    "key": "photo",
+    "schema": {
+      "type": "array",
+      "$_root": {
+        "_types": {},
+        "version": "17.9.2",
+        "cache": {}
+      },
+      "$_temp": {
+        "ruleset": false,
+        "whens": {}
+      },
+      "_ids": {
+        "_byId": {},
+        "_byKey": {},
+        "_schemaChain": false
+      },
+      "_preferences": null,
+      "_valids": null,
+      "_invalids": null,
+      "_rules": [
+        {
+          "name": "items",
+          "_resolve": [],
+          "method": "items"
+        }
+      ],
+      "_singleRules": {},
+      "_refs": {
+        "refs": []
+      },
+      "_flags": {},
+      "_cache": null,
+      "$_terms": {
+        "alterations": null,
+        "examples": null,
+        "externals": null,
+        "metas": [],
+        "notes": [],
+        "shared": null,
+        "tags": [],
+        "whens": null,
+        "items": [
+          {
+            "type": "object",
+            "$_root": {
+              "_types": {},
+              "version": "17.9.2",
+              "cache": {}
+            },
+            "$_temp": {
+              "ruleset": null,
+              "whens": {}
+            },
+            "_ids": {
+              "_byId": {},
+              "_byKey": {},
+              "_schemaChain": false
+            },
+            "_preferences": {
+              "messages": {
+                "array.base": {
+                  "source": "Photo must be an array",
+                  "rendered": "Photo must be an array",
+                  "_template": null
+                },
+                "array.min": {
+                  "source": "Photo should have a minimum {#limit} items",
+                  "rendered": "Photo should have a minimum {#limit} items",
+                  "_template": [
+                    "Photo should have a minimum ",
+                    {
+                      "ref": {
+                        "adjust": null,
+                        "in": false,
+                        "iterables": null,
+                        "map": null,
+                        "separator": ".",
+                        "type": "local",
+                        "path": ["limit"],
+                        "depth": 1,
+                        "key": "limit",
+                        "root": "limit",
+                        "display": "ref:local:limit"
+                      },
+                      "raw": true,
+                      "refs": [
+                        {
+                          "adjust": null,
+                          "in": false,
+                          "iterables": null,
+                          "map": null,
+                          "separator": ".",
+                          "type": "local",
+                          "path": ["limit"],
+                          "depth": 1,
+                          "key": "limit",
+                          "root": "limit",
+                          "display": "ref:local:limit"
+                        }
+                      ],
+                      "wrapped": false
+                    },
+                    " items"
+                  ]
+                }
+              }
+            },
+            "_valids": null,
+            "_invalids": null,
+            "_rules": [
+              {
+                "name": "min",
+                "method": "length",
+                "args": {
+                  "limit": 0
+                },
+                "operator": ">=",
+                "_resolve": []
+              }
+            ],
+            "_singleRules": {},
+            "_refs": {
+              "refs": []
+            },
+            "_flags": {},
+            "_cache": null,
+            "$_terms": {
+              "alterations": null,
+              "examples": null,
+              "externals": null,
+              "metas": [],
+              "notes": [],
+              "shared": null,
+              "tags": [],
+              "whens": null,
+              "dependencies": null,
+              "keys": [
+                {
+                  "key": "url",
+                  "schema": {
+                    "type": "string",
+                    "$_root": {
+                      "_types": {},
+                      "version": "17.9.2",
+                      "cache": {}
+                    },
+                    "$_temp": {
+                      "ruleset": false,
+                      "whens": {}
+                    },
+                    "_ids": {
+                      "_byId": {},
+                      "_byKey": {},
+                      "_schemaChain": false
+                    },
+                    "_preferences": {
+                      "messages": {
+                        "string.empty": {
+                          "source": "URL of photo cannot be empty",
+                          "rendered": "URL of photo cannot be empty",
+                          "_template": null
+                        },
+                        "string.uri": {
+                          "source": "Invalid URL format for URL of photo",
+                          "rendered": "Invalid URL format for URL of photo",
+                          "_template": null
+                        },
+                        "any.required": {
+                          "source": "Missing required field URL of photo",
+                          "rendered": "Missing required field URL of photo",
+                          "_template": null
+                        },
+                        "any.empty": {
+                          "source": "URL of photo cannot be empty",
+                          "rendered": "URL of photo cannot be empty",
+                          "_template": null
+                        }
+                      }
+                    },
+                    "_valids": null,
+                    "_invalids": null,
+                    "_rules": [
+                      {
+                        "name": "uri",
+                        "args": {
+                          "options": {}
+                        },
+                        "regex": {},
+                        "domain": null,
+                        "scheme": "",
+                        "_resolve": [],
+                        "method": "uri"
+                      }
+                    ],
+                    "_singleRules": {},
+                    "_refs": {
+                      "refs": []
+                    },
+                    "_flags": {
+                      "presence": "required"
+                    },
+                    "_cache": null,
+                    "$_terms": {
+                      "alterations": null,
+                      "examples": null,
+                      "externals": null,
+                      "metas": [],
+                      "notes": [],
+                      "shared": null,
+                      "tags": [],
+                      "whens": null,
+                      "replacements": null
+                    },
+                    "$_super": {}
+                  }
+                },
+                {
+                  "key": "alt",
+                  "schema": {
+                    "type": "string",
+                    "$_root": {
+                      "_types": {},
+                      "version": "17.9.2",
+                      "cache": {}
+                    },
+                    "$_temp": {
+                      "ruleset": false,
+                      "whens": {}
+                    },
+                    "_ids": {
+                      "_byId": {},
+                      "_byKey": {},
+                      "_schemaChain": false
+                    },
+                    "_preferences": {
+                      "messages": {
+                        "string.empty": {
+                          "source": "Alt of photo cannot be empty",
+                          "rendered": "Alt of photo cannot be empty",
+                          "_template": null
+                        },
+                        "string.min": {
+                          "source": "Alt of photo should have a minimum {#limit} characters",
+                          "rendered": "Alt of photo should have a minimum {#limit} characters",
+                          "_template": [
+                            "Alt of photo should have a minimum ",
+                            {
+                              "ref": {
+                                "adjust": null,
+                                "in": false,
+                                "iterables": null,
+                                "map": null,
+                                "separator": ".",
+                                "type": "local",
+                                "path": ["limit"],
+                                "depth": 1,
+                                "key": "limit",
+                                "root": "limit",
+                                "display": "ref:local:limit"
+                              },
+                              "raw": true,
+                              "refs": [
+                                {
+                                  "adjust": null,
+                                  "in": false,
+                                  "iterables": null,
+                                  "map": null,
+                                  "separator": ".",
+                                  "type": "local",
+                                  "path": ["limit"],
+                                  "depth": 1,
+                                  "key": "limit",
+                                  "root": "limit",
+                                  "display": "ref:local:limit"
+                                }
+                              ],
+                              "wrapped": false
+                            },
+                            " characters"
+                          ]
+                        },
+                        "string.max": {
+                          "source": "Alt of photo should have a maximum {#limit} characters",
+                          "rendered": "Alt of photo should have a maximum {#limit} characters",
+                          "_template": [
+                            "Alt of photo should have a maximum ",
+                            {
+                              "ref": {
+                                "adjust": null,
+                                "in": false,
+                                "iterables": null,
+                                "map": null,
+                                "separator": ".",
+                                "type": "local",
+                                "path": ["limit"],
+                                "depth": 1,
+                                "key": "limit",
+                                "root": "limit",
+                                "display": "ref:local:limit"
+                              },
+                              "raw": true,
+                              "refs": [
+                                {
+                                  "adjust": null,
+                                  "in": false,
+                                  "iterables": null,
+                                  "map": null,
+                                  "separator": ".",
+                                  "type": "local",
+                                  "path": ["limit"],
+                                  "depth": 1,
+                                  "key": "limit",
+                                  "root": "limit",
+                                  "display": "ref:local:limit"
+                                }
+                              ],
+                              "wrapped": false
+                            },
+                            " characters"
+                          ]
+                        },
+                        "any.required": {
+                          "source": "Missing required field URL of photo",
+                          "rendered": "Missing required field URL of photo",
+                          "_template": null
+                        },
+                        "any.empty": {
+                          "source": "URL of photo cannot be empty",
+                          "rendered": "URL of photo cannot be empty",
+                          "_template": null
+                        }
+                      }
+                    },
+                    "_valids": null,
+                    "_invalids": null,
+                    "_rules": [
+                      {
+                        "name": "min",
+                        "method": "length",
+                        "args": {
+                          "limit": 1
+                        },
+                        "operator": ">=",
+                        "_resolve": []
+                      },
+                      {
+                        "name": "max",
+                        "method": "length",
+                        "args": {
+                          "limit": 100
+                        },
+                        "operator": "<=",
+                        "_resolve": []
+                      }
+                    ],
+                    "_singleRules": {},
+                    "_refs": {
+                      "refs": []
+                    },
+                    "_flags": {
+                      "presence": "required"
+                    },
+                    "_cache": null,
+                    "$_terms": {
+                      "alterations": null,
+                      "examples": null,
+                      "externals": null,
+                      "metas": [],
+                      "notes": [],
+                      "shared": null,
+                      "tags": [],
+                      "whens": null,
+                      "replacements": null
+                    },
+                    "$_super": {}
+                  }
+                }
+              ],
+              "patterns": null,
+              "renames": null
+            },
+            "$_super": {}
+          }
+        ],
+        "ordered": [],
+        "_exclusions": [],
+        "_inclusions": [
+          {
+            "type": "object",
+            "$_root": {
+              "_types": {},
+              "version": "17.9.2",
+              "cache": {}
+            },
+            "$_temp": {
+              "ruleset": null,
+              "whens": {}
+            },
+            "_ids": {
+              "_byId": {},
+              "_byKey": {},
+              "_schemaChain": false
+            },
+            "_preferences": {
+              "messages": {
+                "array.base": {
+                  "source": "Photo must be an array",
+                  "rendered": "Photo must be an array",
+                  "_template": null
+                },
+                "array.min": {
+                  "source": "Photo should have a minimum {#limit} items",
+                  "rendered": "Photo should have a minimum {#limit} items",
+                  "_template": [
+                    "Photo should have a minimum ",
+                    {
+                      "ref": {
+                        "adjust": null,
+                        "in": false,
+                        "iterables": null,
+                        "map": null,
+                        "separator": ".",
+                        "type": "local",
+                        "path": ["limit"],
+                        "depth": 1,
+                        "key": "limit",
+                        "root": "limit",
+                        "display": "ref:local:limit"
+                      },
+                      "raw": true,
+                      "refs": [
+                        {
+                          "adjust": null,
+                          "in": false,
+                          "iterables": null,
+                          "map": null,
+                          "separator": ".",
+                          "type": "local",
+                          "path": ["limit"],
+                          "depth": 1,
+                          "key": "limit",
+                          "root": "limit",
+                          "display": "ref:local:limit"
+                        }
+                      ],
+                      "wrapped": false
+                    },
+                    " items"
+                  ]
+                }
+              }
+            },
+            "_valids": null,
+            "_invalids": null,
+            "_rules": [
+              {
+                "name": "min",
+                "method": "length",
+                "args": {
+                  "limit": 0
+                },
+                "operator": ">=",
+                "_resolve": []
+              }
+            ],
+            "_singleRules": {},
+            "_refs": {
+              "refs": []
+            },
+            "_flags": {},
+            "_cache": null,
+            "$_terms": {
+              "alterations": null,
+              "examples": null,
+              "externals": null,
+              "metas": [],
+              "notes": [],
+              "shared": null,
+              "tags": [],
+              "whens": null,
+              "dependencies": null,
+              "keys": [
+                {
+                  "key": "url",
+                  "schema": {
+                    "type": "string",
+                    "$_root": {
+                      "_types": {},
+                      "version": "17.9.2",
+                      "cache": {}
+                    },
+                    "$_temp": {
+                      "ruleset": false,
+                      "whens": {}
+                    },
+                    "_ids": {
+                      "_byId": {},
+                      "_byKey": {},
+                      "_schemaChain": false
+                    },
+                    "_preferences": {
+                      "messages": {
+                        "string.empty": {
+                          "source": "URL of photo cannot be empty",
+                          "rendered": "URL of photo cannot be empty",
+                          "_template": null
+                        },
+                        "string.uri": {
+                          "source": "Invalid URL format for URL of photo",
+                          "rendered": "Invalid URL format for URL of photo",
+                          "_template": null
+                        },
+                        "any.required": {
+                          "source": "Missing required field URL of photo",
+                          "rendered": "Missing required field URL of photo",
+                          "_template": null
+                        },
+                        "any.empty": {
+                          "source": "URL of photo cannot be empty",
+                          "rendered": "URL of photo cannot be empty",
+                          "_template": null
+                        }
+                      }
+                    },
+                    "_valids": null,
+                    "_invalids": null,
+                    "_rules": [
+                      {
+                        "name": "uri",
+                        "args": {
+                          "options": {}
+                        },
+                        "regex": {},
+                        "domain": null,
+                        "scheme": "",
+                        "_resolve": [],
+                        "method": "uri"
+                      }
+                    ],
+                    "_singleRules": {},
+                    "_refs": {
+                      "refs": []
+                    },
+                    "_flags": {
+                      "presence": "required"
+                    },
+                    "_cache": null,
+                    "$_terms": {
+                      "alterations": null,
+                      "examples": null,
+                      "externals": null,
+                      "metas": [],
+                      "notes": [],
+                      "shared": null,
+                      "tags": [],
+                      "whens": null,
+                      "replacements": null
+                    },
+                    "$_super": {}
+                  }
+                },
+                {
+                  "key": "alt",
+                  "schema": {
+                    "type": "string",
+                    "$_root": {
+                      "_types": {},
+                      "version": "17.9.2",
+                      "cache": {}
+                    },
+                    "$_temp": {
+                      "ruleset": false,
+                      "whens": {}
+                    },
+                    "_ids": {
+                      "_byId": {},
+                      "_byKey": {},
+                      "_schemaChain": false
+                    },
+                    "_preferences": {
+                      "messages": {
+                        "string.empty": {
+                          "source": "Alt of photo cannot be empty",
+                          "rendered": "Alt of photo cannot be empty",
+                          "_template": null
+                        },
+                        "string.min": {
+                          "source": "Alt of photo should have a minimum {#limit} characters",
+                          "rendered": "Alt of photo should have a minimum {#limit} characters",
+                          "_template": [
+                            "Alt of photo should have a minimum ",
+                            {
+                              "ref": {
+                                "adjust": null,
+                                "in": false,
+                                "iterables": null,
+                                "map": null,
+                                "separator": ".",
+                                "type": "local",
+                                "path": ["limit"],
+                                "depth": 1,
+                                "key": "limit",
+                                "root": "limit",
+                                "display": "ref:local:limit"
+                              },
+                              "raw": true,
+                              "refs": [
+                                {
+                                  "adjust": null,
+                                  "in": false,
+                                  "iterables": null,
+                                  "map": null,
+                                  "separator": ".",
+                                  "type": "local",
+                                  "path": ["limit"],
+                                  "depth": 1,
+                                  "key": "limit",
+                                  "root": "limit",
+                                  "display": "ref:local:limit"
+                                }
+                              ],
+                              "wrapped": false
+                            },
+                            " characters"
+                          ]
+                        },
+                        "string.max": {
+                          "source": "Alt of photo should have a maximum {#limit} characters",
+                          "rendered": "Alt of photo should have a maximum {#limit} characters",
+                          "_template": [
+                            "Alt of photo should have a maximum ",
+                            {
+                              "ref": {
+                                "adjust": null,
+                                "in": false,
+                                "iterables": null,
+                                "map": null,
+                                "separator": ".",
+                                "type": "local",
+                                "path": ["limit"],
+                                "depth": 1,
+                                "key": "limit",
+                                "root": "limit",
+                                "display": "ref:local:limit"
+                              },
+                              "raw": true,
+                              "refs": [
+                                {
+                                  "adjust": null,
+                                  "in": false,
+                                  "iterables": null,
+                                  "map": null,
+                                  "separator": ".",
+                                  "type": "local",
+                                  "path": ["limit"],
+                                  "depth": 1,
+                                  "key": "limit",
+                                  "root": "limit",
+                                  "display": "ref:local:limit"
+                                }
+                              ],
+                              "wrapped": false
+                            },
+                            " characters"
+                          ]
+                        },
+                        "any.required": {
+                          "source": "Missing required field URL of photo",
+                          "rendered": "Missing required field URL of photo",
+                          "_template": null
+                        },
+                        "any.empty": {
+                          "source": "URL of photo cannot be empty",
+                          "rendered": "URL of photo cannot be empty",
+                          "_template": null
+                        }
+                      }
+                    },
+                    "_valids": null,
+                    "_invalids": null,
+                    "_rules": [
+                      {
+                        "name": "min",
+                        "method": "length",
+                        "args": {
+                          "limit": 1
+                        },
+                        "operator": ">=",
+                        "_resolve": []
+                      },
+                      {
+                        "name": "max",
+                        "method": "length",
+                        "args": {
+                          "limit": 100
+                        },
+                        "operator": "<=",
+                        "_resolve": []
+                      }
+                    ],
+                    "_singleRules": {},
+                    "_refs": {
+                      "refs": []
+                    },
+                    "_flags": {
+                      "presence": "required"
+                    },
+                    "_cache": null,
+                    "$_terms": {
+                      "alterations": null,
+                      "examples": null,
+                      "externals": null,
+                      "metas": [],
+                      "notes": [],
+                      "shared": null,
+                      "tags": [],
+                      "whens": null,
+                      "replacements": null
+                    },
+                    "$_super": {}
+                  }
+                }
+              ],
+              "patterns": null,
+              "renames": null
+            },
+            "$_super": {}
+          }
+        ],
+        "_requireds": []
+      },
+      "$_super": {}
+    }
+  },
+  {
+    "key": "description",
+    "schema": {
+      "type": "string",
+      "$_root": {
+        "_types": {},
+        "version": "17.9.2",
+        "cache": {}
+      },
+      "$_temp": {
+        "ruleset": null,
+        "whens": {}
+      },
+      "_ids": {
+        "_byId": {},
+        "_byKey": {},
+        "_schemaChain": false
+      },
+      "_preferences": {
+        "messages": {
+          "string.empty": {
+            "source": "Description cannot be empty",
+            "rendered": "Description cannot be empty",
+            "_template": null
+          },
+          "string.min": {
+            "source": "Description should have a minimum {#limit} characters",
+            "rendered": "Description should have a minimum {#limit} characters",
+            "_template": [
+              "Description should have a minimum ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              },
+              " characters"
+            ]
+          },
+          "string.max": {
+            "source": "Description should have a maximum {#limit} characters",
+            "rendered": "Description should have a maximum {#limit} characters",
+            "_template": [
+              "Description should have a maximum ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              },
+              " characters"
+            ]
+          }
+        }
+      },
+      "_valids": {
+        "_values": {},
+        "_refs": {},
+        "_lowercase": {},
+        "_override": false
+      },
+      "_invalids": null,
+      "_rules": [
+        {
+          "name": "min",
+          "method": "length",
+          "args": {
+            "limit": 0
+          },
+          "operator": ">=",
+          "_resolve": []
+        },
+        {
+          "name": "max",
+          "method": "length",
+          "args": {
+            "limit": 2000
+          },
+          "operator": "<=",
+          "_resolve": []
+        }
+      ],
+      "_singleRules": {},
+      "_refs": {
+        "refs": []
+      },
+      "_flags": {},
+      "_cache": null,
+      "$_terms": {
+        "alterations": null,
+        "examples": null,
+        "externals": null,
+        "metas": [],
+        "notes": [],
+        "shared": null,
+        "tags": [],
+        "whens": null,
+        "replacements": null
+      },
+      "$_super": {}
+    }
+  },
+  {
+    "key": "manufacturer",
+    "schema": {
+      "type": "object",
+      "$_root": {
+        "_types": {},
+        "version": "17.9.2",
+        "cache": {}
+      },
+      "$_temp": {
+        "ruleset": false,
+        "whens": {}
+      },
+      "_ids": {
+        "_byId": {},
+        "_byKey": {},
+        "_schemaChain": false
+      },
+      "_preferences": {
+        "messages": {
+          "any.required": {
+            "source": "Missing required field Manufacturer",
+            "rendered": "Missing required field Manufacturer",
+            "_template": null
+          },
+          "any.empty": {
+            "source": "Manufacturer cannot be empty",
+            "rendered": "Manufacturer cannot be empty",
+            "_template": null
+          }
+        }
+      },
+      "_valids": null,
+      "_invalids": null,
+      "_rules": [],
+      "_singleRules": {},
+      "_refs": {
+        "refs": []
+      },
+      "_flags": {
+        "presence": "required"
+      },
+      "_cache": null,
+      "$_terms": {
+        "alterations": null,
+        "examples": null,
+        "externals": null,
+        "metas": [],
+        "notes": [],
+        "shared": null,
+        "tags": [],
+        "whens": null,
+        "dependencies": null,
+        "keys": [
+          {
+            "key": "country",
+            "schema": {
+              "type": "string",
+              "$_root": {
+                "_types": {},
+                "version": "17.9.2",
+                "cache": {}
+              },
+              "$_temp": {
+                "ruleset": null,
+                "whens": {}
+              },
+              "_ids": {
+                "_byId": {},
+                "_byKey": {},
+                "_schemaChain": false
+              },
+              "_preferences": {
+                "messages": {
+                  "string.empty": {
+                    "source": "Country cannot be empty",
+                    "rendered": "Country cannot be empty",
+                    "_template": null
+                  },
+                  "string.min": {
+                    "source": "Country should have a minimum {#limit} characters",
+                    "rendered": "Country should have a minimum {#limit} characters",
+                    "_template": [
+                      "Country should have a minimum ",
+                      {
+                        "ref": {
+                          "adjust": null,
+                          "in": false,
+                          "iterables": null,
+                          "map": null,
+                          "separator": ".",
+                          "type": "local",
+                          "path": ["limit"],
+                          "depth": 1,
+                          "key": "limit",
+                          "root": "limit",
+                          "display": "ref:local:limit"
+                        },
+                        "raw": true,
+                        "refs": [
+                          {
+                            "adjust": null,
+                            "in": false,
+                            "iterables": null,
+                            "map": null,
+                            "separator": ".",
+                            "type": "local",
+                            "path": ["limit"],
+                            "depth": 1,
+                            "key": "limit",
+                            "root": "limit",
+                            "display": "ref:local:limit"
+                          }
+                        ],
+                        "wrapped": false
+                      },
+                      " characters"
+                    ]
+                  },
+                  "string.max": {
+                    "source": "Country should have a maximum {#limit} characters",
+                    "rendered": "Country should have a maximum {#limit} characters",
+                    "_template": [
+                      "Country should have a maximum ",
+                      {
+                        "ref": {
+                          "adjust": null,
+                          "in": false,
+                          "iterables": null,
+                          "map": null,
+                          "separator": ".",
+                          "type": "local",
+                          "path": ["limit"],
+                          "depth": 1,
+                          "key": "limit",
+                          "root": "limit",
+                          "display": "ref:local:limit"
+                        },
+                        "raw": true,
+                        "refs": [
+                          {
+                            "adjust": null,
+                            "in": false,
+                            "iterables": null,
+                            "map": null,
+                            "separator": ".",
+                            "type": "local",
+                            "path": ["limit"],
+                            "depth": 1,
+                            "key": "limit",
+                            "root": "limit",
+                            "display": "ref:local:limit"
+                          }
+                        ],
+                        "wrapped": false
+                      },
+                      " characters"
+                    ]
+                  }
+                }
+              },
+              "_valids": {
+                "_values": {},
+                "_refs": {},
+                "_lowercase": {},
+                "_override": false
+              },
+              "_invalids": null,
+              "_rules": [
+                {
+                  "name": "min",
+                  "method": "length",
+                  "args": {
+                    "limit": 0
+                  },
+                  "operator": ">=",
+                  "_resolve": []
+                },
+                {
+                  "name": "max",
+                  "method": "length",
+                  "args": {
+                    "limit": 100
+                  },
+                  "operator": "<=",
+                  "_resolve": []
+                }
+              ],
+              "_singleRules": {},
+              "_refs": {
+                "refs": []
+              },
+              "_flags": {},
+              "_cache": null,
+              "$_terms": {
+                "alterations": null,
+                "examples": null,
+                "externals": null,
+                "metas": [],
+                "notes": [],
+                "shared": null,
+                "tags": [],
+                "whens": null,
+                "replacements": null
+              },
+              "$_super": {}
+            }
+          },
+          {
+            "key": "factory",
+            "schema": {
+              "type": "string",
+              "$_root": {
+                "_types": {},
+                "version": "17.9.2",
+                "cache": {}
+              },
+              "$_temp": {
+                "ruleset": null,
+                "whens": {}
+              },
+              "_ids": {
+                "_byId": {},
+                "_byKey": {},
+                "_schemaChain": false
+              },
+              "_preferences": {
+                "messages": {
+                  "string.empty": {
+                    "source": "Factory cannot be empty",
+                    "rendered": "Factory cannot be empty",
+                    "_template": null
+                  },
+                  "string.min": {
+                    "source": "Factory should have a minimum {#limit} characters",
+                    "rendered": "Factory should have a minimum {#limit} characters",
+                    "_template": [
+                      "Factory should have a minimum ",
+                      {
+                        "ref": {
+                          "adjust": null,
+                          "in": false,
+                          "iterables": null,
+                          "map": null,
+                          "separator": ".",
+                          "type": "local",
+                          "path": ["limit"],
+                          "depth": 1,
+                          "key": "limit",
+                          "root": "limit",
+                          "display": "ref:local:limit"
+                        },
+                        "raw": true,
+                        "refs": [
+                          {
+                            "adjust": null,
+                            "in": false,
+                            "iterables": null,
+                            "map": null,
+                            "separator": ".",
+                            "type": "local",
+                            "path": ["limit"],
+                            "depth": 1,
+                            "key": "limit",
+                            "root": "limit",
+                            "display": "ref:local:limit"
+                          }
+                        ],
+                        "wrapped": false
+                      },
+                      " characters"
+                    ]
+                  },
+                  "string.max": {
+                    "source": "Factory should have a maximum {#limit} characters",
+                    "rendered": "Factory should have a maximum {#limit} characters",
+                    "_template": [
+                      "Factory should have a maximum ",
+                      {
+                        "ref": {
+                          "adjust": null,
+                          "in": false,
+                          "iterables": null,
+                          "map": null,
+                          "separator": ".",
+                          "type": "local",
+                          "path": ["limit"],
+                          "depth": 1,
+                          "key": "limit",
+                          "root": "limit",
+                          "display": "ref:local:limit"
+                        },
+                        "raw": true,
+                        "refs": [
+                          {
+                            "adjust": null,
+                            "in": false,
+                            "iterables": null,
+                            "map": null,
+                            "separator": ".",
+                            "type": "local",
+                            "path": ["limit"],
+                            "depth": 1,
+                            "key": "limit",
+                            "root": "limit",
+                            "display": "ref:local:limit"
+                          }
+                        ],
+                        "wrapped": false
+                      },
+                      " characters"
+                    ]
+                  }
+                }
+              },
+              "_valids": {
+                "_values": {},
+                "_refs": {},
+                "_lowercase": {},
+                "_override": false
+              },
+              "_invalids": null,
+              "_rules": [
+                {
+                  "name": "min",
+                  "method": "length",
+                  "args": {
+                    "limit": 0
+                  },
+                  "operator": ">=",
+                  "_resolve": []
+                },
+                {
+                  "name": "max",
+                  "method": "length",
+                  "args": {
+                    "limit": 300
+                  },
+                  "operator": "<=",
+                  "_resolve": []
+                }
+              ],
+              "_singleRules": {},
+              "_refs": {
+                "refs": []
+              },
+              "_flags": {},
+              "_cache": null,
+              "$_terms": {
+                "alterations": null,
+                "examples": null,
+                "externals": null,
+                "metas": [],
+                "notes": [],
+                "shared": null,
+                "tags": [],
+                "whens": null,
+                "replacements": null
+              },
+              "$_super": {}
+            }
+          },
+          {
+            "key": "trademark",
+            "schema": {
+              "type": "string",
+              "$_root": {
+                "_types": {},
+                "version": "17.9.2",
+                "cache": {}
+              },
+              "$_temp": {
+                "ruleset": false,
+                "whens": {}
+              },
+              "_ids": {
+                "_byId": {},
+                "_byKey": {},
+                "_schemaChain": false
+              },
+              "_preferences": {
+                "messages": {
+                  "string.empty": {
+                    "source": "Trademark cannot be empty",
+                    "rendered": "Trademark cannot be empty",
+                    "_template": null
+                  },
+                  "string.min": {
+                    "source": "Trademark should have a minimum {#limit} characters",
+                    "rendered": "Trademark should have a minimum {#limit} characters",
+                    "_template": [
+                      "Trademark should have a minimum ",
+                      {
+                        "ref": {
+                          "adjust": null,
+                          "in": false,
+                          "iterables": null,
+                          "map": null,
+                          "separator": ".",
+                          "type": "local",
+                          "path": ["limit"],
+                          "depth": 1,
+                          "key": "limit",
+                          "root": "limit",
+                          "display": "ref:local:limit"
+                        },
+                        "raw": true,
+                        "refs": [
+                          {
+                            "adjust": null,
+                            "in": false,
+                            "iterables": null,
+                            "map": null,
+                            "separator": ".",
+                            "type": "local",
+                            "path": ["limit"],
+                            "depth": 1,
+                            "key": "limit",
+                            "root": "limit",
+                            "display": "ref:local:limit"
+                          }
+                        ],
+                        "wrapped": false
+                      },
+                      " characters"
+                    ]
+                  },
+                  "string.max": {
+                    "source": "Trademark should have a maximum {#limit} characters",
+                    "rendered": "Trademark should have a maximum {#limit} characters",
+                    "_template": [
+                      "Trademark should have a maximum ",
+                      {
+                        "ref": {
+                          "adjust": null,
+                          "in": false,
+                          "iterables": null,
+                          "map": null,
+                          "separator": ".",
+                          "type": "local",
+                          "path": ["limit"],
+                          "depth": 1,
+                          "key": "limit",
+                          "root": "limit",
+                          "display": "ref:local:limit"
+                        },
+                        "raw": true,
+                        "refs": [
+                          {
+                            "adjust": null,
+                            "in": false,
+                            "iterables": null,
+                            "map": null,
+                            "separator": ".",
+                            "type": "local",
+                            "path": ["limit"],
+                            "depth": 1,
+                            "key": "limit",
+                            "root": "limit",
+                            "display": "ref:local:limit"
+                          }
+                        ],
+                        "wrapped": false
+                      },
+                      " characters"
+                    ]
+                  },
+                  "any.required": {
+                    "source": "Missing required field Trademark",
+                    "rendered": "Missing required field Trademark",
+                    "_template": null
+                  },
+                  "any.empty": {
+                    "source": "Trademark cannot be empty",
+                    "rendered": "Trademark cannot be empty",
+                    "_template": null
+                  }
+                }
+              },
+              "_valids": null,
+              "_invalids": null,
+              "_rules": [
+                {
+                  "name": "min",
+                  "method": "length",
+                  "args": {
+                    "limit": 2
+                  },
+                  "operator": ">=",
+                  "_resolve": []
+                },
+                {
+                  "name": "max",
+                  "method": "length",
+                  "args": {
+                    "limit": 300
+                  },
+                  "operator": "<=",
+                  "_resolve": []
+                }
+              ],
+              "_singleRules": {},
+              "_refs": {
+                "refs": []
+              },
+              "_flags": {
+                "presence": "required"
+              },
+              "_cache": null,
+              "$_terms": {
+                "alterations": null,
+                "examples": null,
+                "externals": null,
+                "metas": [],
+                "notes": [],
+                "shared": null,
+                "tags": [],
+                "whens": null,
+                "replacements": null
+              },
+              "$_super": {}
+            }
+          }
+        ],
+        "patterns": null,
+        "renames": null
+      },
+      "$_super": {}
+    }
+  },
+  {
+    "key": "categories",
+    "schema": {
+      "type": "array",
+      "$_root": {
+        "_types": {},
+        "version": "17.9.2",
+        "cache": {}
+      },
+      "$_temp": {
+        "ruleset": false,
+        "whens": {}
+      },
+      "_ids": {
+        "_byId": {},
+        "_byKey": {},
+        "_schemaChain": false
+      },
+      "_preferences": {
+        "messages": {
+          "array.base": {
+            "source": "Categories must be an array",
+            "rendered": "Categories must be an array",
+            "_template": null
+          },
+          "array.min": {
+            "source": "Categories should have a minimum {#limit} items",
+            "rendered": "Categories should have a minimum {#limit} items",
+            "_template": [
+              "Categories should have a minimum ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              },
+              " items"
+            ]
+          }
+        }
+      },
+      "_valids": null,
+      "_invalids": null,
+      "_rules": [
+        {
+          "name": "items",
+          "_resolve": [],
+          "method": "items"
+        },
+        {
+          "name": "min",
+          "method": "length",
+          "args": {
+            "limit": 1
+          },
+          "operator": ">=",
+          "_resolve": []
+        }
+      ],
+      "_singleRules": {},
+      "_refs": {
+        "refs": []
+      },
+      "_flags": {
+        "presence": "required"
+      },
+      "_cache": null,
+      "$_terms": {
+        "alterations": null,
+        "examples": null,
+        "externals": null,
+        "metas": [],
+        "notes": [],
+        "shared": null,
+        "tags": [],
+        "whens": null,
+        "items": [
+          {
+            "type": "string",
+            "$_root": {
+              "_types": {},
+              "version": "17.9.2",
+              "cache": {}
+            },
+            "$_temp": {
+              "ruleset": false,
+              "whens": {}
+            },
+            "_ids": {
+              "_byId": {},
+              "_byKey": {},
+              "_schemaChain": false
+            },
+            "_preferences": {
+              "messages": {
+                "any.required": {
+                  "source": "Missing required field Category ID",
+                  "rendered": "Missing required field Category ID",
+                  "_template": null
+                },
+                "any.empty": {
+                  "source": "Category ID cannot be empty",
+                  "rendered": "Category ID cannot be empty",
+                  "_template": null
+                }
+              }
+            },
+            "_valids": null,
+            "_invalids": null,
+            "_rules": [
+              {
+                "name": "length",
+                "method": "length",
+                "args": {
+                  "limit": 24
+                },
+                "operator": "=",
+                "_resolve": []
+              }
+            ],
+            "_singleRules": {},
+            "_refs": {
+              "refs": []
+            },
+            "_flags": {
+              "presence": "required"
+            },
+            "_cache": null,
+            "$_terms": {
+              "alterations": null,
+              "examples": null,
+              "externals": null,
+              "metas": [],
+              "notes": [],
+              "shared": null,
+              "tags": [],
+              "whens": null,
+              "replacements": null
+            },
+            "$_super": {}
+          }
+        ],
+        "ordered": [],
+        "_exclusions": [],
+        "_inclusions": [],
+        "_requireds": [
+          {
+            "type": "string",
+            "$_root": {
+              "_types": {},
+              "version": "17.9.2",
+              "cache": {}
+            },
+            "$_temp": {
+              "ruleset": false,
+              "whens": {}
+            },
+            "_ids": {
+              "_byId": {},
+              "_byKey": {},
+              "_schemaChain": false
+            },
+            "_preferences": {
+              "messages": {
+                "any.required": {
+                  "source": "Missing required field Category ID",
+                  "rendered": "Missing required field Category ID",
+                  "_template": null
+                },
+                "any.empty": {
+                  "source": "Category ID cannot be empty",
+                  "rendered": "Category ID cannot be empty",
+                  "_template": null
+                }
+              }
+            },
+            "_valids": null,
+            "_invalids": null,
+            "_rules": [
+              {
+                "name": "length",
+                "method": "length",
+                "args": {
+                  "limit": 24
+                },
+                "operator": "=",
+                "_resolve": []
+              }
+            ],
+            "_singleRules": {},
+            "_refs": {
+              "refs": []
+            },
+            "_flags": {
+              "presence": "required"
+            },
+            "_cache": null,
+            "$_terms": {
+              "alterations": null,
+              "examples": null,
+              "externals": null,
+              "metas": [],
+              "notes": [],
+              "shared": null,
+              "tags": [],
+              "whens": null,
+              "replacements": null
+            },
+            "$_super": {}
+          }
+        ]
+      },
+      "$_super": {}
+    }
+  },
+  {
+    "key": "subcategories",
+    "schema": {
+      "type": "array",
+      "$_root": {
+        "_types": {},
+        "version": "17.9.2",
+        "cache": {}
+      },
+      "$_temp": {
+        "ruleset": null,
+        "whens": {}
+      },
+      "_ids": {
+        "_byId": {},
+        "_byKey": {},
+        "_schemaChain": false
+      },
+      "_preferences": {
+        "messages": {
+          "array.base": {
+            "source": "Subcategories must be an array",
+            "rendered": "Subcategories must be an array",
+            "_template": null
+          },
+          "array.min": {
+            "source": "Subcategories should have a minimum {#limit} items",
+            "rendered": "Subcategories should have a minimum {#limit} items",
+            "_template": [
+              "Subcategories should have a minimum ",
+              {
+                "ref": {
+                  "adjust": null,
+                  "in": false,
+                  "iterables": null,
+                  "map": null,
+                  "separator": ".",
+                  "type": "local",
+                  "path": ["limit"],
+                  "depth": 1,
+                  "key": "limit",
+                  "root": "limit",
+                  "display": "ref:local:limit"
+                },
+                "raw": true,
+                "refs": [
+                  {
+                    "adjust": null,
+                    "in": false,
+                    "iterables": null,
+                    "map": null,
+                    "separator": ".",
+                    "type": "local",
+                    "path": ["limit"],
+                    "depth": 1,
+                    "key": "limit",
+                    "root": "limit",
+                    "display": "ref:local:limit"
+                  }
+                ],
+                "wrapped": false
+              },
+              " items"
+            ]
+          }
+        }
+      },
+      "_valids": null,
+      "_invalids": null,
+      "_rules": [
+        {
+          "name": "items",
+          "_resolve": [],
+          "method": "items"
+        },
+        {
+          "name": "min",
+          "method": "length",
+          "args": {
+            "limit": 0
+          },
+          "operator": ">=",
+          "_resolve": []
+        }
+      ],
+      "_singleRules": {},
+      "_refs": {
+        "refs": []
+      },
+      "_flags": {},
+      "_cache": null,
+      "$_terms": {
+        "alterations": null,
+        "examples": null,
+        "externals": null,
+        "metas": [],
+        "notes": [],
+        "shared": null,
+        "tags": [],
+        "whens": null,
+        "items": [
+          {
+            "type": "string",
+            "$_root": {
+              "_types": {},
+              "version": "17.9.2",
+              "cache": {}
+            },
+            "$_temp": {
+              "ruleset": false,
+              "whens": {}
+            },
+            "_ids": {
+              "_byId": {},
+              "_byKey": {},
+              "_schemaChain": false
+            },
+            "_preferences": {
+              "messages": {
+                "any.required": {
+                  "source": "Missing required field Subcategory ID",
+                  "rendered": "Missing required field Subcategory ID",
+                  "_template": null
+                },
+                "any.empty": {
+                  "source": "Subcategory ID cannot be empty",
+                  "rendered": "Subcategory ID cannot be empty",
+                  "_template": null
+                }
+              }
+            },
+            "_valids": null,
+            "_invalids": null,
+            "_rules": [
+              {
+                "name": "length",
+                "method": "length",
+                "args": {
+                  "limit": 24
+                },
+                "operator": "=",
+                "_resolve": []
+              }
+            ],
+            "_singleRules": {},
+            "_refs": {
+              "refs": []
+            },
+            "_flags": {
+              "presence": "required"
+            },
+            "_cache": null,
+            "$_terms": {
+              "alterations": null,
+              "examples": null,
+              "externals": null,
+              "metas": [],
+              "notes": [],
+              "shared": null,
+              "tags": [],
+              "whens": null,
+              "replacements": null
+            },
+            "$_super": {}
+          }
+        ],
+        "ordered": [],
+        "_exclusions": [],
+        "_inclusions": [],
+        "_requireds": [
+          {
+            "type": "string",
+            "$_root": {
+              "_types": {},
+              "version": "17.9.2",
+              "cache": {}
+            },
+            "$_temp": {
+              "ruleset": false,
+              "whens": {}
+            },
+            "_ids": {
+              "_byId": {},
+              "_byKey": {},
+              "_schemaChain": false
+            },
+            "_preferences": {
+              "messages": {
+                "any.required": {
+                  "source": "Missing required field Subcategory ID",
+                  "rendered": "Missing required field Subcategory ID",
+                  "_template": null
+                },
+                "any.empty": {
+                  "source": "Subcategory ID cannot be empty",
+                  "rendered": "Subcategory ID cannot be empty",
+                  "_template": null
+                }
+              }
+            },
+            "_valids": null,
+            "_invalids": null,
+            "_rules": [
+              {
+                "name": "length",
+                "method": "length",
+                "args": {
+                  "limit": 24
+                },
+                "operator": "=",
+                "_resolve": []
+              }
+            ],
+            "_singleRules": {},
+            "_refs": {
+              "refs": []
+            },
+            "_flags": {
+              "presence": "required"
+            },
+            "_cache": null,
+            "$_terms": {
+              "alterations": null,
+              "examples": null,
+              "externals": null,
+              "metas": [],
+              "notes": [],
+              "shared": null,
+              "tags": [],
+              "whens": null,
+              "replacements": null
+            },
+            "$_super": {}
+          }
+        ]
+      },
+      "$_super": {}
+    }
+  }
+]

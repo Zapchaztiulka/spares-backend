@@ -1,7 +1,6 @@
 const express = require('express');
 const parse = require('joi-to-json');
 
-const { authenticate, hasRole } = require('../../middlewares');
 const {
   product: { validationAddProducts, validationUpdateProduct },
   category: { validationCategory, validationUpdateCategory },
@@ -12,44 +11,33 @@ const {
     validationPasswordUser,
   },
 } = require('../../models');
+const { optionsFromObject } = require('../../helpers/optionsHelper');
 const router = express.Router();
 
-router.get('/product', authenticate, hasRole('admin'), async (_, res) => {
-  const addProductsOptions = parse(validationAddProducts);
-  addProductsOptions.router = 'add products';
+router.get('/user', async (_, res) => {
+  const optionsUserAuthentication = optionsFromObject(validationAuthUser);
+  const userAuthentication = {
+    title: 'Реєстрація/логінізація користувача',
+    options: optionsUserAuthentication,
+  };
 
-  // const keysAddProductsOptions =
-  //   validationAddProducts.$_terms.items[0].$_terms.keys;
-  // return res.json(keysAddProductsOptions);
+  const optionsUpdateUser = optionsFromObject(validationUpdateUser);
+  const updateUserInfo = {
+    title: 'Оновлення даних користувача',
+    options: optionsUpdateUser,
+  };
 
-  const updateProductOptions = parse(validationUpdateProduct);
-  updateProductOptions.router = 'update product by id';
+  const optionsEmailValidation = optionsFromObject(validationEmailUser);
+  const emailValidation = {
+    title: 'Валідація e-mail користувача',
+    options: optionsEmailValidation,
+  };
 
-  return res.json({ addProductsOptions, updateProductOptions });
-});
-
-router.get('/category', authenticate, hasRole('admin'), async (_, res) => {
-  const addCategoryOptions = parse(validationCategory);
-  addCategoryOptions.router = 'add category';
-
-  const updateCategoryOptions = parse(validationUpdateCategory);
-  updateCategoryOptions.router = 'update category by id';
-
-  return res.json({ addCategoryOptions, updateCategoryOptions });
-});
-
-router.get('/user', authenticate, hasRole('admin'), async (_, res) => {
-  const userAuthentication = parse(validationAuthUser);
-  userAuthentication.router = "user's authentication";
-
-  const updateUserInfo = parse(validationUpdateUser);
-  updateUserInfo.router = "update user's info";
-
-  const emailValidation = parse(validationEmailUser);
-  emailValidation.router = 'email validation';
-
-  const passwordValidation = parse(validationPasswordUser);
-  passwordValidation.router = 'password validation';
+  const optionsPasswordValidation = optionsFromObject(validationPasswordUser);
+  const passwordValidation = {
+    title: 'Валідація паролю користувача',
+    options: optionsPasswordValidation,
+  };
 
   return res.json({
     userAuthentication,
@@ -57,6 +45,26 @@ router.get('/user', authenticate, hasRole('admin'), async (_, res) => {
     emailValidation,
     passwordValidation,
   });
+});
+
+router.get('/product', async (_, res) => {
+  const addProductsOptions = parse(validationAddProducts);
+  addProductsOptions.router = 'add products';
+
+  const updateProductOptions = parse(validationUpdateProduct);
+  updateProductOptions.router = 'update product by id';
+
+  return res.json({ addProductsOptions, updateProductOptions });
+});
+
+router.get('/category', async (_, res) => {
+  const addCategoryOptions = parse(validationCategory);
+  addCategoryOptions.router = 'add category';
+
+  const updateCategoryOptions = parse(validationUpdateCategory);
+  updateCategoryOptions.router = 'update category by id';
+
+  return res.json({ addCategoryOptions, updateCategoryOptions });
 });
 
 module.exports = router;

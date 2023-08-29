@@ -1,0 +1,219 @@
+{
+    "title": "Додати новий товар",
+    "options": [
+        {
+            "key": "name",
+            "title": "Назва товару",
+            "type": "input",
+            "placeholder": "Введіть назву товару",
+            "validation": [
+                {
+                    "name": "minLength",
+                    "value": 3,
+                    "errorMessage": "Довжина повинна бути від 3 до 300 символів"
+                },
+                {
+                    "name": "maxLength",
+                    "value": 300,
+                    "errorMessage": "Довжина повинна бути від 3 до 300 символів"
+                },
+                {
+                    "name": "regExp",
+                    "value": "^[A-Za-zА-Яа-яёЁЇїІіЄєҐґ0-9]+$",
+                    "errorMessage": "Назва товару може містити лише літери українського/англійського алфавіту та цифри"
+                },
+                {
+                    "name": "isRequired",
+                    "value": true,
+                    "errorMessage": "oбов'язковe до заповнення поле"
+                }
+            ]
+        },
+
+        {
+           
+            "key": "manufactureId",
+            "title": "Артикул",
+            "type": "input",
+            "placeholder": "",
+            "validation": [
+                {
+                    "name": "minLength",
+                    "value": 3,
+                    "errorMessage": ""
+                },
+                {
+                    "name": "maxLength",
+                    "value": 300,
+                    "errorMessage": ""
+                },
+                {
+                    "name": "isUnique",
+                    "value": true,
+                    "errorMessage": "може містити лише літери українського/англійського алфавіту та цифри"
+                }
+            ]
+        },
+        
+        {
+            "key": "price",
+            "title": "Ціна за одиницю товару",
+            "type": "input",
+            "placeholder": "",
+            "validation": [
+                {
+                    "name": "minValue",
+                    "value": 1,
+                    "errorMessage": "Ціна повинна бути від 1 до 1000000000"
+                },
+                {
+                    "name": "maxValue",
+                    "value": 1000000000,
+                    "errorMessage": "Ціна повинна бути від 1 до 1000000000"
+                },
+                {
+                    "name": "regExp",
+                    "value": "/^\\d+\\.\\d{2}$/",
+                    "errorMessage": "Використовуйте формат з двома цифрами після крапки ХХ.ХХ"
+                },
+                {
+                    "name": "isRequired",
+                    "value": true,
+                    "errorMessage": "обов'язкове до заповнення поле"
+                }
+            ]
+
+        },
+
+        {
+            "key": "units",
+            "title": "Одиниці вимірювання",
+            "type": "select",
+            "placeholder": "",
+            "list": [
+                {
+                    "_id": "",
+                    "value": "кг"
+                },
+                {
+                    "_id": "",
+                    "value": "шт"
+                },
+                {
+                    "_id": "",
+                    "value": "л"
+                }
+            ]
+        },
+
+        {
+            "key": "availability",
+            "title": "Наявність",
+            "type": "select",
+            "placeholder": "Оберіть значення",
+            "list": [
+                {
+                    "_id": "present",
+                    "value": "є в наявності"
+                },
+                {
+                    "_id": "absent",
+                    "value": "немає"
+                },
+                {
+                    "_id": "toOrder",
+                    "value": "під замовлення"
+                }
+            ],
+            "validation": [
+                {
+                    "name": "isRequired",
+                    "value": true,
+                    "errorMessage": "обов'язкове до заповнення поле"
+                }
+            ]
+        },
+
+        {
+            "key": "quantity",
+            "title": "Кількість",
+            "type": "input",
+            "placeholder": ""
+        },
+
+        {
+            "key": "weight",
+            "title": "Вага",
+            "type": "input",
+            "placeholder": ""
+        },
+        
+        {
+            "key": "photo",
+            "title": "Фото",
+            "type": "filesList",
+            "objectSchema": [
+                {
+                    "key": "url",
+                    "title": "Посилання на файл",
+                    "validation": []
+                },
+                {
+                    "key": "alt",
+                    "title": "Опис картинки",
+                    "validation": []
+                },
+                {
+                    "key": "_id",
+                    "title": "Унікальний ідентифікатов",
+                    "validation": []
+                }
+            ]
+            
+        },
+
+        {
+            "key": "description",
+            "title": "Опис",
+            "type": "input"
+        },
+        
+        {
+            "key": "manufacturer",
+            "title": "Виробник",
+            "type": "container",
+            "options": [
+                {
+                    "key": "country",
+                    "title": "країна виробник",
+                    "type": "select",
+                    "list": "byRequest"
+                },
+                {
+                    "key": "factory",
+                    "title": "завод виробник",
+                    "type": "input"
+                },
+                {
+                    "key": "trademark",
+                    "title": "торгова марка",
+                    "type": "input"
+                }
+            ]
+        },
+        
+        { 
+            "key": "categories",
+            "title": "Категорія",
+            "type": "checkboxList",
+            "list": "byRequest"
+        },
+
+        { 
+            "key": "subcategories",
+            "title": "Субкатегорія",
+            "type": "checkboxList",
+            "list": "byRequest"
+        }
+    ]
+}

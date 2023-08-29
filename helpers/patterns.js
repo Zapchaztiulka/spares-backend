@@ -9,6 +9,32 @@ const orderStatus = [
   'замовлення повернуто',
 ];
 
+const min = {
+  user: 3,
+  productName: 3,
+  vendorCode: 2,
+  price: 0.01,
+  weight: 0.001,
+  quantity: 1,
+  alt: 2,
+  description: 10,
+  manufacturer: 3,
+  category: 3,
+};
+
+const max = {
+  user: 32,
+  productName: 300,
+  vendorCode: 50,
+  price: 1000000000,
+  weight: 1000000,
+  quantity: 100,
+  alt: 50,
+  description: 2000,
+  manufacturer: 100,
+  category: 50,
+};
+
 const namePattern = /^[A-Za-zА-Яа-яёЁЇїІіЄєҐґ0-9]+$/;
 const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const passwordPattern = /^.*(?=.{6,})((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/;
@@ -28,6 +54,8 @@ const patterns = {
   availability,
   roles,
   units,
+  min,
+  max,
   namePattern,
   emailPattern,
   passwordPattern,

@@ -1,6 +1,6 @@
 module.exports = (key, data) => {
   const commonRules = {
-    'any.required': `Missing required field ${key}`,
+    'any.required': `${key} is required`,
     'any.empty': `${key} cannot be empty`,
   };
 

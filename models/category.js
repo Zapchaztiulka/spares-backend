@@ -1,12 +1,16 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
 
-const { templatesMsgJoi, handleMongooseError } = require('../helpers');
+const {
+  templatesMsgJoi,
+  handleMongooseError,
+  patterns,
+} = require('../helpers');
 
 const validationCategory = Joi.object({
   categoryName: Joi.string()
-    .min(3)
-    .max(50)
+    .min(patterns.min.category)
+    .max(patterns.max.category)
     .required()
     .messages({
       ...templatesMsgJoi('Category name').commonRules,
@@ -16,8 +20,8 @@ const validationCategory = Joi.object({
     .items(
       Joi.object({
         subcategoryName: Joi.string()
-          .min(3)
-          .max(50)
+          .min(patterns.min.category)
+          .max(patterns.max.category)
           .required()
           .messages({
             ...templatesMsgJoi('Subcategory name').commonRules,
@@ -25,21 +29,20 @@ const validationCategory = Joi.object({
           }),
       }),
     )
-    .min(1)
     .messages(templatesMsgJoi('Subcategories').arrayRules),
 });
 
 const validationUpdateCategory = Joi.object({
   categoryName: Joi.string()
-    .min(3)
-    .max(50)
+    .min(patterns.min.category)
+    .max(patterns.max.category)
     .messages(templatesMsgJoi('Category name').textRules),
   subcategories: Joi.array()
     .items(
       Joi.object({
         subcategoryName: Joi.string()
-          .min(3)
-          .max(50)
+          .min(patterns.min.category)
+          .max(patterns.max.category)
           .messages(templatesMsgJoi('Subcategory name').textRules),
       }),
     )
