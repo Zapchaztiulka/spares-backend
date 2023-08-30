@@ -1,23 +1,23 @@
 module.exports = (key, data) => {
   const commonRules = {
-    'any.required': `${key} is required`,
-    'any.empty': `${key} cannot be empty`,
+    'any.required': `${key} є обов'язковим`,
+    'any.empty': `${key} не може бути порожнім`,
   };
 
   const textRules = {
-    'string.empty': `${key} cannot be empty`,
-    'string.min': `${key} should have from {#limit}`,
-    'string.max': ' to {#limit} characters',
+    'string.empty': `${key} не може бути порожнім`,
+    'string.min': `${key} має мати від {#limit}`,
+    'string.max': ' до {#limit} символів',
   };
 
   const urlRules = {
-    'string.empty': `${key} cannot be empty`,
-    'string.uri': `Invalid URL format for ${key}`,
+    'string.empty': `${key} не може бути порожнім`,
+    'string.uri': `Недійсний формат URL для ${key}`,
   };
 
   const emailRules = {
-    'string.empty': `${key} cannot be empty`,
-    'string.email': `${key} must be a valid email`,
+    'string.empty': `${key} не може бути порожнім`,
+    'string.email': `${key} має бути валідною електронною адресою`,
   };
 
   const regExpRules = {
@@ -25,24 +25,26 @@ module.exports = (key, data) => {
   };
 
   const numberRules = {
-    'number.base': `Invalid type for ${key}, must be a number`,
-    'number.min': `${key} should be greater than or equal {#limit} `,
-    'number.max': ' and less than or equal to {#limit}',
-    'number.positive': `${key} must be a positive number`,
+    'number.base': `Недійсний тип для ${key}, має бути числом`,
+    'number.min': `${key} має бути більшим або дорівнювати {#limit} `,
+    'number.max': ' і менше або дорівнює {#limit}',
+    'number.positive': `${key} має бути додатним числом`,
   };
 
   const integerNumberRules = {
-    'number.integer': `${key} must be an integer`,
+    'number.integer': `${key} має бути цілим числом`,
   };
 
   const enumRules = {
-    'any.only': `${key} must equal one of certain values: ${data}`,
+    'any.only': `${key} має дорівнювати одному з наступних значень: ${data}`,
   };
 
   const arrayRules = {
-    'array.base': `${key} must be an array`,
-    'array.min': `${key} should have a minimum {#limit} items`,
+    'array.base': `${key} має бути масивом`,
+    'array.min': `${key} має містити мінімум {#limit} елементів`,
   };
+
+  const uniqueRules = `${key} є унікальним. Будь ласка, змініть його`;
 
   return {
     commonRules,
@@ -54,18 +56,6 @@ module.exports = (key, data) => {
     integerNumberRules,
     arrayRules,
     enumRules,
+    uniqueRules,
   };
-  // return {
-  //   'string.empty': `${credential} cannot be an empty`,
-  //   'any.required': `missing required field ${credential}`,
-  //   'string.min': `${credential} should have a minimum length of {#limit}`,
-  //   'string.max': `${credential} should have a maximum length of {#limit}`,
-  //   'string.pattern.base': `invalid ${credential}, please provide a valid ${credential}`,
-  //   'string.uri': `Invalid URL format for ${credential}`,
-  //   'number.base': `Invalid type for ${credential}`,
-  //   'number.min': `${credential} should be greater than or equal to {#limit}`,
-  //   'number.max': `${credential} should be less than or equal to {#limit}`,
-  //   'any.only': `${credential} must equal one of certain values: ${others}`,
-  //   'array.min': `${credential} must contain at least one element`,
-  // };
 };

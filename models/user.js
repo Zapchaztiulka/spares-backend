@@ -14,14 +14,14 @@ const validationAuthUser = Joi.object({
     .example("Введіть ім'я користувача")
     .min(patterns.min.user)
     .max(patterns.max.user)
-    .messages(templatesMsgJoi('Username').textRules),
+    .messages(templatesMsgJoi("Ім'я користувача").textRules),
   userSurname: Joi.string()
     .description('Прізвище користувача')
     .note('input')
     .example('Введіть прізвище користувача')
     .min(patterns.min.user)
     .max(patterns.max.user)
-    .messages(templatesMsgJoi('Surname of user').textRules),
+    .messages(templatesMsgJoi('Прізвище користувача').textRules),
   password: Joi.string()
     .description('Пароль')
     .note('input')
@@ -29,9 +29,8 @@ const validationAuthUser = Joi.object({
     .pattern(patterns.passwordPattern)
     .required()
     .messages({
-      ...templatesMsgJoi('Password', patterns.passwordPatternMessage)
-        .regExpRules,
-      ...templatesMsgJoi('Password').commonRules,
+      ...templatesMsgJoi('Пароль', patterns.passwordPatternMessage).regExpRules,
+      ...templatesMsgJoi('Пароль').commonRules,
     }),
   email: Joi.string()
     .description('Електронна адреса')
@@ -42,8 +41,8 @@ const validationAuthUser = Joi.object({
     .pattern(patterns.emailPattern)
     .required()
     .messages({
-      ...templatesMsgJoi('Email').emailRules,
-      ...templatesMsgJoi('Email').commonRules,
+      ...templatesMsgJoi('Електронна адреса').emailRules,
+      ...templatesMsgJoi('Електронна адреса').commonRules,
     }),
   phone: Joi.string()
     .description('Телефон')
@@ -52,14 +51,14 @@ const validationAuthUser = Joi.object({
     .tag('unique')
     .pattern(patterns.phonePattern)
     .messages(
-      templatesMsgJoi('Phone', patterns.phonePatternMessage).regExpRules,
+      templatesMsgJoi('Телефон', patterns.phonePatternMessage).regExpRules,
     ),
   role: Joi.string()
     .description('Роль користувача')
     .note('select')
     .example('Введіть роль користувача')
     .valid(...patterns.roles)
-    .messages(templatesMsgJoi('Role', patterns.roles).enumRules),
+    .messages(templatesMsgJoi('Роль користувача', patterns.roles).enumRules),
 });
 
 const validationUpdateUser = Joi.object({
@@ -69,14 +68,14 @@ const validationUpdateUser = Joi.object({
     .example("Введіть ім'я користувача")
     .min(patterns.min.user)
     .max(patterns.max.user)
-    .messages(templatesMsgJoi('Username').textRules),
+    .messages(templatesMsgJoi("Ім'я користувача").textRules),
   userSurname: Joi.string()
     .description('Прізвище користувача')
     .note('input')
     .example('Введіть прізвище користувача')
     .min(patterns.min.user)
     .max(patterns.max.user)
-    .messages(templatesMsgJoi('Surname of user').textRules),
+    .messages(templatesMsgJoi('Прізвище користувача').textRules),
   email: Joi.string()
     .description('Електронна адреса')
     .note('input')
@@ -84,7 +83,7 @@ const validationUpdateUser = Joi.object({
     .tag('unique')
     .email({ minDomainSegments: 2 })
     .pattern(patterns.emailPattern)
-    .messages(templatesMsgJoi('Email').emailRules),
+    .messages(templatesMsgJoi('Електронна адреса').emailRules),
   phone: Joi.string()
     .description('Телефон')
     .note('input')
@@ -92,14 +91,14 @@ const validationUpdateUser = Joi.object({
     .tag('unique')
     .pattern(patterns.phonePattern)
     .messages(
-      templatesMsgJoi('Phone', patterns.phonePatternMessage).regExpRules,
+      templatesMsgJoi('Телефон', patterns.phonePatternMessage).regExpRules,
     ),
   role: Joi.string()
     .description('Роль користувача')
     .note('select')
     .example('Введіть роль користувача')
     .valid(...patterns.roles)
-    .messages(templatesMsgJoi('Role', patterns.roles).enumRules),
+    .messages(templatesMsgJoi('Роль користувача', patterns.roles).enumRules),
 });
 
 const validationEmailUser = Joi.object({
@@ -111,8 +110,8 @@ const validationEmailUser = Joi.object({
     .pattern(patterns.emailPattern)
     .required()
     .messages({
-      ...templatesMsgJoi('Email').emailRules,
-      ...templatesMsgJoi('Email').commonRules,
+      ...templatesMsgJoi('Електронна адреса').emailRules,
+      ...templatesMsgJoi('Електронна адреса').commonRules,
     }),
 });
 
@@ -124,18 +123,21 @@ const validationPasswordUser = Joi.object({
     .pattern(patterns.passwordPattern)
     .required()
     .messages({
-      ...templatesMsgJoi('Password', patterns.passwordPatternMessage)
-        .regExpRules,
-      ...templatesMsgJoi('Password').commonRules,
+      ...templatesMsgJoi('Пароль', patterns.passwordPatternMessage).regExpRules,
+      ...templatesMsgJoi('Пароль').commonRules,
     }),
   password2: Joi.string()
-    .description('Пароль')
+    .description('Підтвердження паролю')
     .note('input')
     .example('Введіть пароль ще раз')
-    .valid(Joi.ref('password1'))
+    .pattern(patterns.passwordPattern)
     .required()
     .messages({
-      'any.only': 'Confirmation of password must match',
+      ...templatesMsgJoi(
+        'Підтвердження паролю',
+        patterns.passwordPatternMessage,
+      ).regExpRules,
+      ...templatesMsgJoi('Підтвердження паролю').commonRules,
     }),
 });
 

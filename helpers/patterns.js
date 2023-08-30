@@ -39,9 +39,9 @@ const namePattern = /^[A-Za-zА-Яа-яёЁЇїІіЄєҐґ0-9]+$/;
 const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const passwordPattern = /^.*(?=.{6,})((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/;
 const passwordPatternMessage =
-  'must have min 6 characters, at least one upperCase and one lowercase';
+  'має містити щонайменше 6 символів, принаймні один з них у верхньому і один у нижньому регістрі';
 const phonePattern = /^0\d{9}$/;
-const phonePatternMessage = `must start with ${0} and contains 10 digits`;
+const phonePatternMessage = `має починатися з ${0} і містити 10 цифр`;
 
 const companyData = {
   firstPhone: '+38 067 111 22 33',
