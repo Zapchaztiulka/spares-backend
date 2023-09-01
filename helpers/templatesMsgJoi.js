@@ -8,6 +8,7 @@ module.exports = (key, data) => {
     'string.empty': `${key} не може бути порожнім`,
     'string.min': `${key} має мати від {#limit}`,
     'string.max': ' до {#limit} символів',
+    'string.length': `${key} має містити {#limit} символів`,
   };
 
   const urlRules = {
@@ -26,8 +27,8 @@ module.exports = (key, data) => {
 
   const numberRules = {
     'number.base': `Недійсний тип для ${key}, має бути числом`,
-    'number.min': `${key} має бути більшим або дорівнювати {#limit} `,
-    'number.max': ' і менше або дорівнює {#limit}',
+    'number.min': `${key} має бути ≥ {#limit} `,
+    'number.max': ' і ≤ {#limit}',
     'number.positive': `${key} має бути додатним числом`,
   };
 
