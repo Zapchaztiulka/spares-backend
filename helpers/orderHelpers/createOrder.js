@@ -3,7 +3,7 @@ const {
 } = require('../../models');
 const { HttpError } = require('..');
 
-module.exports = async (products, user, phone, email) => {
+module.exports = async (products, user, phone, email, adminTag) => {
   const productDetails = await Promise.all(
     products.map(async product => {
       const { productId, quantity } = product;
@@ -48,6 +48,7 @@ module.exports = async (products, user, phone, email) => {
     products: productDetails,
     totalTypeOfProducts: productDetails.length,
     totalProducts,
+    adminTag,
   };
 
   if (user) {

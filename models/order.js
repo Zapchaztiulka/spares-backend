@@ -30,6 +30,14 @@ const validationOrderByUser = Joi.object({
       ...templatesMsgJoi('Products array in order').arrayRules,
       ...templatesMsgJoi('Products array in order').commonRules,
     }),
+  adminTag: Joi.string()
+    .description('AdminTag')
+    .note('input')
+    .example('Введіть adminTag')
+    .allow('')
+    .min(patterns.min.adminTag)
+    .max(patterns.max.adminTag)
+    .messages(templatesMsgJoi('AdminTag').textRules),
 });
 
 const validationOrderByAny = Joi.object({
@@ -68,6 +76,14 @@ const validationOrderByAny = Joi.object({
       ...templatesMsgJoi('Products array in order').arrayRules,
       ...templatesMsgJoi('Products array in order').commonRules,
     }),
+  adminTag: Joi.string()
+    .description('AdminTag')
+    .note('input')
+    .example('Введіть adminTag')
+    .allow('')
+    .min(patterns.min.adminTag)
+    .max(patterns.max.adminTag)
+    .messages(templatesMsgJoi('AdminTag').textRules),
 });
 
 const validationUpdateOrder = Joi.object({
@@ -101,6 +117,36 @@ const validationUpdateOrder = Joi.object({
       ...templatesMsgJoi('Products array in order').arrayRules,
       ...templatesMsgJoi('Products array in order').commonRules,
     }),
+  adminTag: Joi.string()
+    .description('AdminTag')
+    .note('input')
+    .example('Введіть adminTag')
+    .allow('')
+    .min(patterns.min.adminTag)
+    .max(patterns.max.adminTag)
+    .messages(templatesMsgJoi('AdminTag').textRules),
+});
+
+const validationAdminTag = Joi.object({
+  adminTag: Joi.string()
+    .description('AdminTag')
+    .note('input')
+    .example('Введіть adminTag')
+    .required()
+    .min(patterns.min.adminTag)
+    .max(patterns.max.adminTag)
+    .messages({
+      ...templatesMsgJoi('AdminTag').textRules,
+      ...templatesMsgJoi('AdminTag').commonRules,
+    }),
+  phone: Joi.string()
+    .description('Телефон')
+    .note('input')
+    .example('Введіть телефон користувача')
+    .pattern(patterns.phonePattern)
+    .messages(
+      templatesMsgJoi('Телефон', patterns.phonePatternMessage).regExpRules,
+    ),
 });
 
 const orderProductSchema = new Schema({
@@ -165,6 +211,10 @@ const orderSchema = new Schema(
       type: Number,
       default: 0,
     },
+    adminTag: {
+      type: String,
+      default: '',
+    },
   },
   { versionKey: false, timestamps: true },
 );
@@ -177,4 +227,5 @@ module.exports = {
   validationOrderByUser,
   validationOrderByAny,
   validationUpdateOrder,
+  validationAdminTag,
 };

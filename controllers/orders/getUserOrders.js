@@ -10,7 +10,6 @@ module.exports = async (req, res) => {
   if (role !== 'user' && id) {
     // Admin user can view orders of a specific user
     const orders = await Order.find({ userId: id });
-    console.log('🚀 role:', role);
     res.json({ orders, totalCount: orders.length });
   } else if (role === 'user' && !id) {
     // Regular user can view their own orders

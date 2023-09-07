@@ -9,4 +9,8 @@ module.exports = {
   getUserOrders: ctrlWrapper(require('./getUserOrders')),
   getOrderDetails: ctrlWrapper(require('./getOrderDetails')),
   updateOrder: ctrlWrapper(require('./updateOrder')),
+
+  assignAdminTagByPhone: ctrlWrapper(require('./assignAdminTagByPhone')),
+  assignAdminTagById: ctrlWrapper(require('./assignAdminTagById')),
+  getOrdersByAdminTag: ctrlWrapper(require('./getOrdersByAdminTag')),
 };

@@ -7,7 +7,7 @@ const { createOrder } = require('../../helpers/orderHelpers');
 const { sendEmailWithOrderDetails } = require('../../helpers/sendEmail');
 
 module.exports = async (req, res) => {
-  const { products, phone, email = '' } = req.body;
+  const { products, phone, email = '', adminTag } = req.body;
 
   const existingUser = await User.findOne({ phone });
 
@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
     );
   }
 
-  const orderData = await createOrder(products, null, phone, email);
+  const orderData = await createOrder(products, null, phone, email, adminTag);
   const newOrder = await Order.create(orderData);
 
   if (email) {

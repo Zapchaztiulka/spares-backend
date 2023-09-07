@@ -20,6 +20,7 @@ const min = {
   description: 10,
   manufacturer: 3,
   category: 3,
+  adminTag: 2,
 };
 
 const max = {
@@ -33,6 +34,7 @@ const max = {
   description: 2000,
   manufacturer: 100,
   category: 50,
+  adminTag: 30,
 };
 
 const namePattern = /^[A-Za-zА-Яа-яёЁЇїІіЄєҐґ0-9]+$/;

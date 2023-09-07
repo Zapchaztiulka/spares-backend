@@ -8,7 +8,7 @@ const {
 } = require('../../helpers/orderHelpers');
 
 module.exports = async (req, res) => {
-  const { products, status: newStatus } = req.body;
+  const { products, status: newStatus, adminTag: newAdminTag } = req.body;
 
   if (!req.body || !products || !newStatus) {
     throw HttpError(400, 'Missing body of request');
@@ -31,6 +31,10 @@ module.exports = async (req, res) => {
 
   const updatedOrder = await updateProductInOrder(order, products);
   updatedOrder.status = newStatus;
+
+  if (newAdminTag) {
+    updatedOrder.adminTag = newAdminTag;
+  }
 
   await Order.findByIdAndUpdate(id, updatedOrder);
 

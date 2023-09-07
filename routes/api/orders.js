@@ -8,7 +8,12 @@ const {
   hasRole,
 } = require('../../middlewares');
 const {
-  order: { validationOrderByUser, validationOrderByAny, validationUpdateOrder },
+  order: {
+    validationOrderByUser,
+    validationOrderByAny,
+    validationUpdateOrder,
+    validationAdminTag,
+  },
 } = require('../../models');
 
 const router = express.Router();
@@ -23,6 +28,11 @@ router.get(
   isValidId,
   ctrl.getOrderDetails,
 );
+router.get(
+  '/admin-tag/get-orders',
+  validateBody(validationAdminTag),
+  ctrl.getOrdersByAdminTag,
+);
 
 router.post(
   '/',
@@ -32,6 +42,17 @@ router.post(
   ctrl.createOrderbyUser,
 );
 router.post('/any', validateBody(validationOrderByAny), ctrl.createOrderbyAny);
+router.post(
+  '/assign-admin-tag',
+  validateBody(validationAdminTag),
+  ctrl.assignAdminTagByPhone,
+);
+router.post(
+  '/assign-admin-tag/:id',
+  isValidId,
+  validateBody(validationAdminTag),
+  ctrl.assignAdminTagById,
+);
 
 router.put(
   '/:id',
