@@ -9,44 +9,56 @@ const {
 
 const validationCategory = Joi.object({
   categoryName: Joi.string()
+    .description('Назва категорії')
+    .note('input')
+    .example('Введіть назву категорії')
     .min(patterns.min.category)
     .max(patterns.max.category)
     .required()
     .messages({
-      ...templatesMsgJoi('Category name').commonRules,
-      ...templatesMsgJoi('Category name').textRules,
+      ...templatesMsgJoi('Назва категорії').commonRules,
+      ...templatesMsgJoi('Назва категорії').textRules,
     }),
   subcategories: Joi.array()
     .items(
       Joi.object({
         subcategoryName: Joi.string()
+          .description('Назва підкатегорії')
+          .note('input')
+          .example('Введіть назву підкатегорії')
           .min(patterns.min.category)
           .max(patterns.max.category)
           .required()
           .messages({
-            ...templatesMsgJoi('Subcategory name').commonRules,
-            ...templatesMsgJoi('Subcategory name').textRules,
+            ...templatesMsgJoi('Назва підкатегорії').commonRules,
+            ...templatesMsgJoi('Назва підкатегорії').textRules,
           }),
       }),
     )
-    .messages(templatesMsgJoi('Subcategories').arrayRules),
+    .messages(templatesMsgJoi('Перелік субкатегорій').arrayRules),
 });
 
 const validationUpdateCategory = Joi.object({
   categoryName: Joi.string()
+    .description('Назва категорії')
+    .note('input')
+    .example('Введіть назву категорії')
     .min(patterns.min.category)
     .max(patterns.max.category)
-    .messages(templatesMsgJoi('Category name').textRules),
+    .messages(templatesMsgJoi('Назва категорії').textRules),
   subcategories: Joi.array()
     .items(
       Joi.object({
         subcategoryName: Joi.string()
+          .description('Назва підкатегорії')
+          .note('input')
+          .example('Введіть назву підкатегорії')
           .min(patterns.min.category)
           .max(patterns.max.category)
-          .messages(templatesMsgJoi('Subcategory name').textRules),
+          .messages(templatesMsgJoi('Назва підкатегорії').textRules),
       }),
     )
-    .messages(templatesMsgJoi('Subcategories').arrayRules),
+    .messages(templatesMsgJoi('Перелік субкатегорій').arrayRules),
 });
 
 const subcategorySchema = new Schema({

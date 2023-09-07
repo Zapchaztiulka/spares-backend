@@ -14,6 +14,7 @@ const {
 const {
   getPropertiesFromJoi,
   getProductProperties,
+  getCategoryProperties,
 } = require('../../helpers/optionsHelper');
 const router = express.Router();
 
@@ -55,32 +56,39 @@ router.get('/user', async (_, res) => {
 router.get('/product', async (_, res) => {
   const addProductsOptions = getProductProperties(
     validationAddProducts.$_terms.items[0],
+    'add',
   );
   const addProducts = {
     title: 'Додавання нових товарів',
     options: addProductsOptions,
   };
 
-  // const updateProductOptions = getProductProperties(validationUpdateProduct);
-  // const updateProduct = {
-  //   title: 'Оновлення товару',
-  //   options: updateProductOptions,
-  // };
+  const updateProductOptions = getProductProperties(validationUpdateProduct);
+  const updateProduct = {
+    title: 'Оновлення товару',
+    options: updateProductOptions,
+  };
 
   return res.json({
     addProducts,
-    // updateProduct,
+    updateProduct,
   });
 });
 
 router.get('/category', async (_, res) => {
-  const addCategoryOptions = parse(validationCategory);
-  addCategoryOptions.router = 'add category';
+  const addCategoryOptions = getCategoryProperties(validationCategory, 'add');
+  const addCategory = {
+    title: 'Додавання нової категорії товарів',
+    options: addCategoryOptions,
+  };
 
-  const updateCategoryOptions = parse(validationUpdateCategory);
-  updateCategoryOptions.router = 'update category by id';
+  const updateCategoryOptions = getCategoryProperties(validationUpdateCategory);
+  const updateCategory = {
+    title: 'Оновлення категорії товару',
+    options: updateCategoryOptions,
+  };
 
-  return res.json({ addCategoryOptions, updateCategoryOptions });
+  return res.json({ addCategory, updateCategory });
 });
 
 module.exports = router;
