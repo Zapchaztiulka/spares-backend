@@ -145,31 +145,34 @@ const validationAdminTag = Joi.object({
     ),
 });
 
-const orderProductSchema = new Schema({
-  productId: {
-    type: Schema.Types.ObjectId,
-    ref: 'product',
-    required: true,
+const orderProductSchema = new Schema(
+  {
+    productId: {
+      type: Schema.Types.ObjectId,
+      ref: 'product',
+      required: true,
+    },
+    name: {
+      type: String,
+    },
+    vendorCode: {
+      type: String,
+    },
+    price: {
+      type: Number,
+    },
+    quantity: {
+      type: Number,
+      default: 1,
+    },
+    units: {
+      type: String,
+      enum: patterns.units,
+      default: 'шт',
+    },
   },
-  name: {
-    type: String,
-  },
-  vendorCode: {
-    type: String,
-  },
-  price: {
-    type: Number,
-  },
-  quantity: {
-    type: Number,
-    default: 1,
-  },
-  units: {
-    type: String,
-    enum: patterns.units,
-    default: 'шт',
-  },
-});
+  { _id: false },
+);
 
 const orderSchema = new Schema(
   {

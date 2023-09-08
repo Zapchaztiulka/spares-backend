@@ -10,6 +10,10 @@ module.exports = async (req, res) => {
   const order = await Order.findById(id);
   if (!order) throw HttpError(404, 'Order not found');
 
+  if (!adminTag) {
+    throw HttpError(400, 'Missing adminTag parameter in the request body');
+  }
+
   const { phone } = order;
 
   if (!phone) {
