@@ -20,7 +20,7 @@ module.exports = async (products, user, phone, email, adminTag) => {
       const {
         name,
         price,
-        manufactureId,
+        vendorCode,
         units,
         quantity: availableQuantity,
       } = availableProduct;
@@ -35,7 +35,7 @@ module.exports = async (products, user, phone, email, adminTag) => {
       availableProduct.quantity -= quantity;
       await availableProduct.save();
 
-      return { productId, quantity, manufactureId, name, price, units };
+      return { productId, quantity, vendorCode, name, price, units };
     }),
   );
 

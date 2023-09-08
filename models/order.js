@@ -49,11 +49,7 @@ const validationOrderByAny = Joi.object({
   email: Joi.string()
     .email({ minDomainSegments: 2 })
     .pattern(patterns.emailPattern)
-    .required()
-    .messages({
-      ...templatesMsgJoi('Email').emailRules,
-      ...templatesMsgJoi('Email').commonRules,
-    }),
+    .messages(templatesMsgJoi('Email').emailRules),
   products: Joi.array()
     .items(
       Joi.object({
@@ -158,7 +154,7 @@ const orderProductSchema = new Schema({
   name: {
     type: String,
   },
-  manufactureId: {
+  vendorCode: {
     type: String,
   },
   price: {
