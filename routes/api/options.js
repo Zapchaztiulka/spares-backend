@@ -1,5 +1,4 @@
 const express = require('express');
-const parse = require('joi-to-json');
 
 const {
   user: {
@@ -41,7 +40,7 @@ router.get('/user', async (_, res) => {
     validationPasswordUser,
   );
   const passwordValidation = {
-    title: 'Валідація паролю користувача',
+    title: 'Валідація зміни паролю користувача',
     options: optionsPasswordValidation,
   };
 

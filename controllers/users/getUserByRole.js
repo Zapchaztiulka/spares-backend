@@ -19,6 +19,7 @@ module.exports = async (req, res) => {
     email: user.email,
     phone: user.phone,
     role: user.role,
+    access: user.access,
   }));
 
   res.status(200).json({

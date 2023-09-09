@@ -1,6 +1,6 @@
 const availability = ['є в наявності', 'під замовлення', 'відсутній'];
 const units = ['кг', 'шт', 'л'];
-const roles = ['superAdmin', 'user', 'admin'];
+const roles = ['superAdmin', 'admin', 'user'];
 const orderStatus = [
   'в обробці',
   'підтверджено',

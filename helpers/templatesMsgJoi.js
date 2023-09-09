@@ -47,6 +47,10 @@ module.exports = (key, data) => {
 
   const uniqueRules = `${key} є унікальним. Будь ласка, змініть його`;
 
+  const booleanRules = {
+    'boolean.base': `${key} має бути булевим значенням`,
+  };
+
   return {
     commonRules,
     textRules,
@@ -58,5 +62,6 @@ module.exports = (key, data) => {
     arrayRules,
     enumRules,
     uniqueRules,
+    booleanRules,
   };
 };

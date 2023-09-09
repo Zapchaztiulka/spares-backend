@@ -2,11 +2,8 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 const session = require('express-session');
-const swaggerUI = require('swagger-ui-express');
-const YAML = require('yamljs');
 require('dotenv').config();
 
-const swaggerJSDocs = YAML.load('./api.yaml');
 const {
   usersRouter,
   productsRouter,
@@ -32,7 +29,6 @@ app.use(
   }),
 );
 
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerJSDocs));
 app.use('/api/users', usersRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/categories', categoriesRouter);

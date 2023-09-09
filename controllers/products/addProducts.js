@@ -3,9 +3,10 @@ const {
   category: { Category },
 } = require('../../models');
 const { HttpError } = require('../../helpers');
+const { checkAccessToAddPhoto } = require('../../helpers/productHelpers');
 
 module.exports = async (req, res) => {
-  const { _id } = req.user;
+  const { _id, access } = req.user;
   const productsData = req.body;
 
   if (!Array.isArray(productsData) || productsData.length === 0) {
@@ -20,8 +21,12 @@ module.exports = async (req, res) => {
       categories,
       subcategories = [],
       price,
+      photo,
       ...restFields
     } = productData;
+
+    // check - if there is not access and there is photo API throw error
+    checkAccessToAddPhoto(access.photoAddAccess, productData.photo);
 
     if (vendorCode) {
       const pureVendorCode = vendorCode.trim();

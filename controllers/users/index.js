@@ -13,4 +13,5 @@ module.exports = {
   getNewPassword: ctrlWrapper(require('./getNewPassword')),
   createNewPassword: ctrlWrapper(require('./createNewPassword')),
   getUserByRole: ctrlWrapper(require('./getUserByRole')),
+  assignAccess: ctrlWrapper(require('./assignAccess')),
 };

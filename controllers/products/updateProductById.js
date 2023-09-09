@@ -3,15 +3,20 @@ const {
   category: { Category },
 } = require('../../models');
 const { HttpError } = require('../../helpers');
+const { checkAccessToAddPhoto } = require('../../helpers/productHelpers');
 
 module.exports = async (req, res) => {
   if (!req.body || Object.keys(req.body).length === 0) {
-    throw HttpError(400, 'Missing body of request or no changes provided');
+    throw HttpError(400, 'Missing body of request');
   }
 
+  const { access } = req.user;
   const { id } = req.params;
-  const { categories = [], subcategories = [] } = req.body;
+  const { categories = [], subcategories = [], photo } = req.body;
   const newProductData = req.body;
+
+  // check - if there is not access and there is photo API throw error
+  checkAccessToAddPhoto(access.photoAddAccess, photo);
 
   if (categories.length > 0) {
     const categoryPromises = categories.map(categoryId =>

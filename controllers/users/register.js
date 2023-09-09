@@ -5,7 +5,7 @@ const { addHours } = require('date-fns');
 const {
   user: { User },
 } = require('../../models');
-const { HttpError } = require('../../helpers');
+const { HttpError, patterns } = require('../../helpers');
 const { sendEmailForVerification } = require('../../helpers/sendEmail');
 const { EXPIRES_VERIFICATION_TOKEN } = process.env;
 
@@ -16,6 +16,16 @@ module.exports = async (req, res) => {
   const pureUsername = username?.trim();
   const pureUserSurname = userSurname?.trim();
   const purePhone = phone?.trim();
+  const access =
+    role === patterns.roles[0]
+      ? {
+          photoAddAccess: true,
+          deleteProductAccess: true,
+          updateProductAccess: true,
+          deleteCategoryAccess: true,
+          updateCategoryAccess: true,
+        }
+      : {};
 
   const user = await User.findOne({ email: pureEmail });
   if (user) {
@@ -40,6 +50,7 @@ module.exports = async (req, res) => {
     phone: purePhone,
     role,
     verificationToken,
+    access,
   });
 
   await sendEmailForVerification(pureEmail, verificationToken);
@@ -51,5 +62,6 @@ module.exports = async (req, res) => {
     username: newUser.username,
     userSurname: newUser.userSurname,
     role: newUser.role,
+    access: newUser.access,
   });
 };

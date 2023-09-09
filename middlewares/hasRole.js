@@ -1,13 +1,19 @@
 const { HttpError } = require('../helpers');
 
-module.exports = requiredRole => {
+module.exports = requiredRoles => {
   return (req, _, next) => {
     const { role } = req.user;
 
-    if (role !== requiredRole) {
+    if (!Array.isArray(requiredRoles)) {
+      requiredRoles = [requiredRoles];
+    }
+
+    if (!requiredRoles.includes(role)) {
       throw HttpError(
         403,
-        `Forbidden. The role must be "${requiredRole}" to access this resource`,
+        `Forbidden. To access this resource the role must be one of: "${requiredRoles.join(
+          ', ',
+        )}"`,
       );
     }
 

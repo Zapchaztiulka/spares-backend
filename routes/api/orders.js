@@ -6,6 +6,7 @@ const {
   validateBody,
   isValidId,
   hasRole,
+  checkRequestBody,
 } = require('../../middlewares');
 const {
   order: {
@@ -15,16 +16,22 @@ const {
     validationAdminTag,
   },
 } = require('../../models');
+const { patterns } = require('../../helpers');
 
 const router = express.Router();
 
-router.get('/', authenticate, hasRole('admin'), ctrl.getAllOrders);
+router.get(
+  '/',
+  authenticate,
+  hasRole([patterns.roles[0], patterns.roles[1]]),
+  ctrl.getAllOrders,
+);
 router.get('/own', authenticate, ctrl.getUserOrders); // for getting user's orders
 router.get('/user/:id', authenticate, isValidId, ctrl.getUserOrders); // for getting user's orders by admin
 router.get(
   '/:id',
   authenticate,
-  hasRole('admin'),
+  hasRole([patterns.roles[0], patterns.roles[1]]),
   isValidId,
   ctrl.getOrderDetails,
 );
@@ -36,19 +43,27 @@ router.get(
 
 router.post(
   '/',
+  checkRequestBody,
   authenticate,
-  hasRole('user'),
+  hasRole(patterns.roles[2]),
   validateBody(validationOrderByUser),
   ctrl.createOrderbyUser,
 );
-router.post('/any', validateBody(validationOrderByAny), ctrl.createOrderbyAny);
+router.post(
+  '/any',
+  checkRequestBody,
+  validateBody(validationOrderByAny),
+  ctrl.createOrderbyAny,
+);
 router.post(
   '/assign-admin-tag',
+  checkRequestBody,
   validateBody(validationAdminTag),
   ctrl.assignAdminTagByPhone,
 );
 router.post(
   '/assign-admin-tag/:id',
+  checkRequestBody,
   isValidId,
   validateBody(validationAdminTag),
   ctrl.assignAdminTagById,
@@ -56,8 +71,9 @@ router.post(
 
 router.put(
   '/:id',
+  checkRequestBody,
   authenticate,
-  hasRole('admin'),
+  hasRole([patterns.roles[0], patterns.roles[1]]),
   isValidId,
   validateBody(validationUpdateOrder),
   ctrl.updateOrder,
@@ -66,7 +82,7 @@ router.put(
 router.delete(
   '/:id',
   authenticate,
-  hasRole('user'),
+  hasRole(patterns.roles[2]),
   isValidId,
   ctrl.deleteOrderbyUser,
 );

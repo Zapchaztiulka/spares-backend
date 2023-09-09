@@ -141,6 +141,34 @@ const validationPasswordUser = Joi.object({
     }),
 });
 
+const validationAccess = Joi.object({
+  photoAddAccess: Joi.boolean()
+    .description('Доступ на додавання фото товару')
+    .note('checkBox')
+    .example('на додавання фото товару:')
+    .messages(templatesMsgJoi('Доступ на додавання фото товару').booleanRules),
+  deleteProductAccess: Joi.boolean()
+    .description('Доступ на видалення товару')
+    .note('checkBox')
+    .example('на видалення товару:')
+    .messages(templatesMsgJoi('Доступ на видалення товару').booleanRules),
+  updateProductAccess: Joi.boolean()
+    .description('Доступ на оновлення товару')
+    .note('checkBox')
+    .example('на оновлення товару:')
+    .messages(templatesMsgJoi('Доступ на оновлення товару').booleanRules),
+  deleteCategoryAccess: Joi.boolean()
+    .description('Доступ на видалення категорії')
+    .note('checkBox')
+    .example('на видалення категорії:')
+    .messages(templatesMsgJoi('Доступ на видалення категорії').booleanRules),
+  updateCategoryAccess: Joi.boolean()
+    .description('Доступ на оновлення категорії')
+    .note('checkBox')
+    .example('на оновлення категорії:')
+    .messages(templatesMsgJoi('Доступ на оновлення категорії').booleanRules),
+});
+
 // ====================================================
 const userSchema = new Schema(
   {
@@ -192,6 +220,28 @@ const userSchema = new Schema(
       type: String,
       default: '',
     },
+    access: {
+      photoAddAccess: {
+        type: Boolean,
+        default: false,
+      },
+      deleteProductAccess: {
+        type: Boolean,
+        default: false,
+      },
+      updateProductAccess: {
+        type: Boolean,
+        default: false,
+      },
+      deleteCategoryAccess: {
+        type: Boolean,
+        default: false,
+      },
+      updateCategoryAccess: {
+        type: Boolean,
+        default: false,
+      },
+    },
   },
   { versionKey: false, timestamps: true },
 );
@@ -205,4 +255,5 @@ module.exports = {
   validationUpdateUser,
   validationEmailUser,
   validationPasswordUser,
+  validationAccess,
 };

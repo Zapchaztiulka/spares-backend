@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
 
   if (!user) throw HttpError(401, 'Please reload the page');
 
-  const { username, userSurname, role, email, phone } = user;
+  const { username, userSurname, role, email, phone, access } = user;
 
   res.status(200).json({
     username,
@@ -17,5 +17,6 @@ module.exports = async (req, res) => {
     role,
     email,
     phone,
+    access,
   });
 };
