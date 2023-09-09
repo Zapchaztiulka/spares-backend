@@ -47,23 +47,21 @@ module.exports = async (email, verificationToken) => {
             }
 
             .image-container {
-              text-align: center;
-              margin-bottom: 30px;
+              text-align: left;
+              margin: 30px 0px 30px 0px;
             }
             
             img {
               max-width: 100%;
               height: auto;
-              position: relative;
-              left: 20px;
             }
           </style>
         </head>
         <body>
-          <h3>Вас вітає магазин запасних частин агротехніки "Запчастулька"!</h3>
           <div class="image-container">
-            <img src="https://i.ibb.co/0r0Dqsf/logo.png" alt="Spare parts store" />
+            <img src="https://i.ibb.co/bQB6Vxc/Logo-main-brand.png" alt="Spare parts store" />
           </div>
+          <h3>Вас вітає магазин запасних частин агротехніки "Запчастулька"!</h3>
           <p>Натисніть кнопку нижче, щоб підтвердити свою електронну адресу:</p>
           <a class="verification-link" target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">
             <p class="verification-text">Підтвердити мій імейл</p>

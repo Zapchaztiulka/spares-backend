@@ -121,11 +121,8 @@ module.exports = async orderDetails => {
       </head>
       <body>
         <div style="margin-bottom: 24px;">
-          <div style="padding: 20px; border-radius: 8px; background-color: #0165FC; display: flex; align-items: center;">
-            <div style="width: 24px; height: 24px;">
-              <img src="https://i.ibb.co/557D3Gb/logo2.png" alt="Spare parts store" />
-            </div>
-            <p class="title" style="font-size: 20px; color: #FFFFFF; margin-left: 10px;">Запчастюлька</p>
+          <div style="padding: 20px; border-radius: 8px; background-color: #FFFFFF; display: flex; align-items: center;">
+              <img src="https://i.ibb.co/bQB6Vxc/Logo-main-brand.png" alt="Spare parts store" />
           </div>
           <h1 class="title" style="text-align: left; color: #1C1F23; margin-top: 20px; margin-bottom: 12px;">Дякуємо за замовлення!</h1>
           <p class="text" style="text-align: left;"> <b>Вітаємо ${username}!</b> Ваше замовлення прийнято. Очікуйте дзвінка нашого менеджера.</p>
