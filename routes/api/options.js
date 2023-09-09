@@ -6,6 +6,7 @@ const {
     validationUpdateUser,
     validationEmailUser,
     validationPasswordUser,
+    validationAccess,
   },
   product: { validationAddProducts, validationUpdateProduct },
   category: { validationCategory, validationUpdateCategory },
@@ -44,11 +45,18 @@ router.get('/user', async (_, res) => {
     options: optionsPasswordValidation,
   };
 
+  const optionsAccessValidation = getPropertiesFromJoi(validationAccess);
+  const accessValidation = {
+    title: 'Валідація оновлення доступів для адміна',
+    options: optionsAccessValidation,
+  };
+
   return res.json({
     userAuthentication,
     updateUserInfo,
     emailValidation,
     passwordValidation,
+    accessValidation,
   });
 });
 
