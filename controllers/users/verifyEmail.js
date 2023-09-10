@@ -19,8 +19,8 @@ module.exports = async (req, res, next) => {
       await User.findByIdAndDelete(user._id);
     }
     throw HttpError(
-      410,
-      'Verification token has expired. Try register repeatedly',
+      401,
+      'Verification token has expired. Please register repeatedly',
     );
   }
 

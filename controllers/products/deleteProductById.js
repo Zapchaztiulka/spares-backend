@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   const product = await Product.findByIdAndDelete(id);
 
   if (!product) {
-    throw HttpError(404, 'Product not found');
+    throw HttpError(404, `Product with ${id} not found`);
   }
 
   return res.status(200).json({ message: `Product by ID:${id} was deleted` });

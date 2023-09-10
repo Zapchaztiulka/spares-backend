@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
       throw HttpError(404, 'User is not found. Please check email');
     }
   } else {
-    throw HttpError(401, 'Password is not the same, please re-enter');
+    throw HttpError(404, 'Password is not the same, please re-enter');
   }
 
   return res.status(201).json({

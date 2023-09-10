@@ -9,8 +9,8 @@ module.exports = async (req, res) => {
   const category = await Category.findByIdAndDelete(id);
 
   if (!category) {
-    throw HttpError(404, 'category not found');
+    throw HttpError(404, 'Category not found');
   }
 
-  return res.status(200).json({ message: `category by ID:${id} was deleted` });
+  return res.status(204).json({ message: `Category by ID:${id} was deleted` });
 };

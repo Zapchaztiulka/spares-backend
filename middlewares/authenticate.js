@@ -19,7 +19,7 @@ module.exports = async (req, _, next) => {
 
     const user = await User.findById(id);
     if (!user) {
-      next(HttpError(401, 'This user is not in the database'));
+      next(HttpError(404, 'User not found'));
     }
 
     if (!user.token || user.token !== token) {

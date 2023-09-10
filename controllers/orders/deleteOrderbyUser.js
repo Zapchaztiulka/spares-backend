@@ -17,5 +17,7 @@ module.exports = async (req, res) => {
 
   await updateProductQuantitiesInStock(order.products, []);
 
-  res.json({ message: `Order with ID ${id} was deleted successfully` });
+  res
+    .status(204)
+    .json({ message: `Order with ID ${id} was deleted successfully` });
 };

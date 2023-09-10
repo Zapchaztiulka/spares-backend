@@ -11,10 +11,7 @@ module.exports = async (products, user, phone, email, adminTag) => {
       const availableProduct = await Product.findById(productId);
 
       if (!availableProduct) {
-        throw HttpError(
-          404,
-          `Product with ID ${productId} not found for ordering`,
-        );
+        throw HttpError(404, `Product with ID ${productId} not found`);
       }
 
       const {
@@ -27,7 +24,7 @@ module.exports = async (products, user, phone, email, adminTag) => {
 
       if (availableQuantity < quantity) {
         throw HttpError(
-          400,
+          409,
           `Product "${name}" is out of stock: availability - ${availableQuantity}, user request - ${quantity}`,
         );
       }

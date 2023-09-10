@@ -10,8 +10,8 @@ const {
 module.exports = async (req, res) => {
   const { products, status: newStatus, adminTag: newAdminTag } = req.body;
 
-  if (!req.body || !products || !newStatus) {
-    throw HttpError(400, 'Missing body of request');
+  if (!products || !newStatus) {
+    throw HttpError(400, 'Missing fields "products" or "status"');
   }
 
   const { id } = req.params;

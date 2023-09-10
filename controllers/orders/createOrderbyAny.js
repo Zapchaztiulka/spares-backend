@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
 
   if (existingUser) {
     throw HttpError(
-      400,
+      409,
       'An account with this phone number already exists. Please log in first',
     );
   }

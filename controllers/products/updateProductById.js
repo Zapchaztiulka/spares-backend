@@ -6,10 +6,6 @@ const { HttpError } = require('../../helpers');
 const { checkAccessToAddPhoto } = require('../../helpers/productHelpers');
 
 module.exports = async (req, res) => {
-  if (!req.body || Object.keys(req.body).length === 0) {
-    throw HttpError(400, 'Missing body of request');
-  }
-
   const { access } = req.user;
   const { id } = req.params;
   const { categories = [], subcategories = [], photo } = req.body;
@@ -78,7 +74,7 @@ module.exports = async (req, res) => {
   });
 
   if (!product) {
-    throw HttpError(404, 'Not found');
+    throw HttpError(404, `Product with ${id} not found`);
   }
 
   return res.status(200).json(product);

@@ -22,7 +22,7 @@ module.exports = async (order, productUpdates) => {
 
       if (newProduct.quantity < quantity) {
         throw HttpError(
-          400,
+          409,
           `Product "${newProduct.name}" is out of stock: availability - ${newProduct.quantity}, user request - ${quantity}`,
         );
       }
@@ -41,7 +41,7 @@ module.exports = async (order, productUpdates) => {
 
       if (newProduct.quantity < quantity) {
         throw HttpError(
-          400,
+          409,
           `Product "${newProduct.name}" is out of stock: availability - ${newProduct.quantity}, user request - ${quantity}`,
         );
       }

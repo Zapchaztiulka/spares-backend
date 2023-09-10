@@ -4,17 +4,13 @@ const {
 const { HttpError } = require('../../helpers');
 
 module.exports = async (req, res) => {
-  if (!req.body) {
-    throw HttpError(400, 'Missing body of request');
-  }
-
   const { id } = req.params;
   const category = await Category.findByIdAndUpdate(id, req.body, {
     new: true,
   });
 
   if (!category) {
-    throw HttpError(404, 'Not found');
+    throw HttpError(404, `Category with ID ${id} not found`);
   }
 
   return res.status(200).json(category);
