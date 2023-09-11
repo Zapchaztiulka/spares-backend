@@ -2,14 +2,13 @@ const {
   user: { User },
 } = require('../../models');
 
-const { HttpError } = require('../../helpers');
+const { checkNotFound } = require('../../helpers');
 
 module.exports = async (req, res) => {
   const { id } = req.user;
 
   const user = await User.findByIdAndUpdate(id, { ...req.body });
-
-  if (!user) throw HttpError(404, 'User not found');
+  await checkNotFound(user, id, 'User');
 
   const updatedUser = await User.findById(id);
   const { username, userSurname, email, phone, role, access } = updatedUser;

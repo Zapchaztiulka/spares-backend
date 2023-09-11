@@ -1,17 +1,14 @@
 const {
   user: { User },
 } = require('../../models');
-const { HttpError, patterns } = require('../../helpers');
+const { HttpError, patterns, checkNotFound } = require('../../helpers');
 
 module.exports = async (req, res) => {
   const { id } = req.params;
   const updateFields = req.body;
 
   const user = await User.findById(id);
-
-  if (!user) {
-    throw HttpError(404, 'User not found');
-  }
+  await checkNotFound(user, id, 'User');
 
   if (user.role !== patterns.roles[1]) {
     throw HttpError(

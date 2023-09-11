@@ -1,7 +1,7 @@
 const {
   product: { Product },
 } = require('../../models');
-const { HttpError } = require('../../helpers');
+const { HttpError, checkNotFound } = require('../../helpers');
 
 module.exports = async (order, productUpdates) => {
   const updatedOrder = JSON.parse(JSON.stringify(order));
@@ -16,9 +16,7 @@ module.exports = async (order, productUpdates) => {
     if (existingProductIndex !== -1) {
       const newProduct = await Product.findById(productId);
 
-      if (!newProduct) {
-        throw HttpError(404, `Product with ID ${productId} not found`);
-      }
+      await checkNotFound(newProduct, productId, 'Product');
 
       if (newProduct.quantity < quantity) {
         throw HttpError(
@@ -35,9 +33,7 @@ module.exports = async (order, productUpdates) => {
     } else {
       const newProduct = await Product.findById(productId);
 
-      if (!newProduct) {
-        throw HttpError(404, `Product with ID ${productId} not found`);
-      }
+      await checkNotFound(newProduct, productId, 'Product');
 
       if (newProduct.quantity < quantity) {
         throw HttpError(

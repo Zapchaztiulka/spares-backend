@@ -1,7 +1,7 @@
 const {
   product: { Product },
 } = require('../../models');
-const { HttpError } = require('..');
+const { HttpError, checkNotFound } = require('..');
 
 module.exports = async (products, user, phone, email, adminTag) => {
   const productDetails = await Promise.all(
@@ -9,10 +9,7 @@ module.exports = async (products, user, phone, email, adminTag) => {
       const { productId, quantity } = product;
 
       const availableProduct = await Product.findById(productId);
-
-      if (!availableProduct) {
-        throw HttpError(404, `Product with ID ${productId} not found`);
-      }
+      await checkNotFound(availableProduct, productId, 'Product');
 
       const {
         name,

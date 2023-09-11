@@ -1,14 +1,14 @@
 const {
   order: { Order },
 } = require('../../models');
-const { HttpError } = require('../../helpers');
+const { HttpError, checkNotFound } = require('../../helpers');
 
 module.exports = async (req, res) => {
   const { adminTag } = req.body;
   const { id } = req.params;
 
   const order = await Order.findById(id);
-  if (!order) throw HttpError(404, 'Order not found');
+  await checkNotFound(order, id, 'Order');
 
   if (!adminTag) {
     throw HttpError(400, 'Missing adminTag parameter in the request body');

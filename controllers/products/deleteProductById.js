@@ -1,16 +1,13 @@
 const {
   product: { Product },
 } = require('../../models');
-const { HttpError } = require('../../helpers');
+const { checkNotFound } = require('../../helpers');
 
 module.exports = async (req, res) => {
   const { id } = req.params;
 
   const product = await Product.findByIdAndDelete(id);
-
-  if (!product) {
-    throw HttpError(404, `Product with ${id} not found`);
-  }
+  await checkNotFound(product, id, 'Product');
 
   return res.status(200).json({ message: `Product by ID:${id} was deleted` });
 };

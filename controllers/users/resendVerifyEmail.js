@@ -10,7 +10,10 @@ module.exports = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    throw HttpError(404, 'User not found. Please check email');
+    throw HttpError(
+      404,
+      `User with email: ${email} not found. Please check email`,
+    );
   }
   if (user.verify) {
     throw HttpError(400, 'Verification has already been passed');

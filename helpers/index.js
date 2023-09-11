@@ -6,4 +6,5 @@ module.exports = {
   templatesMsgJoi: require('./templatesMsgJoi'),
   formatDate: require('./formatDate'),
   formatNumber: require('./formatNumber'),
+  checkNotFound: require('./checkNotFound'),
 };

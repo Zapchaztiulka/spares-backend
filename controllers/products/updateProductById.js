@@ -2,7 +2,7 @@ const {
   product: { Product },
   category: { Category },
 } = require('../../models');
-const { HttpError } = require('../../helpers');
+const { HttpError, checkNotFound } = require('../../helpers');
 const { checkAccessToAddPhoto } = require('../../helpers/productHelpers');
 
 module.exports = async (req, res) => {
@@ -73,9 +73,7 @@ module.exports = async (req, res) => {
     new: true,
   });
 
-  if (!product) {
-    throw HttpError(404, `Product with ${id} not found`);
-  }
+  await checkNotFound(product, id, 'Product');
 
   return res.status(200).json(product);
 };

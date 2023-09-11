@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const {
   user: { User },
 } = require('../../models');
-const { HttpError } = require('../../helpers');
+const { HttpError, checkNotFound } = require('../../helpers');
 
 module.exports = async (req, res) => {
   const { id } = req.user;
@@ -17,9 +17,7 @@ module.exports = async (req, res) => {
       password: hashPassword,
     });
 
-    if (!user) {
-      throw HttpError(404, 'User is not found. Please check email');
-    }
+    await checkNotFound(user, id, 'User');
   } else {
     throw HttpError(404, 'Password is not the same, please re-enter');
   }
