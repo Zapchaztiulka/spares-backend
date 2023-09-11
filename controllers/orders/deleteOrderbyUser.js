@@ -1,7 +1,7 @@
 const {
   order: { Order },
 } = require('../../models');
-const { HttpError } = require('../../helpers');
+const { checkNotFound } = require('../../helpers');
 const {
   updateProductQuantitiesInStock,
 } = require('../../helpers/orderHelpers');
@@ -11,9 +11,7 @@ module.exports = async (req, res) => {
   const { _id } = req.user;
 
   const order = await Order.findOneAndDelete({ _id: id, userId: _id });
-  if (!order) {
-    throw HttpError(404, 'Order not found');
-  }
+  await checkNotFound(order, id, 'Order');
 
   await updateProductQuantitiesInStock(order.products, []);
 

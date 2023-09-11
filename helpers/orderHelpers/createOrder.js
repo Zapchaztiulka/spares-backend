@@ -1,7 +1,8 @@
 const {
   product: { Product },
 } = require('../../models');
-const { HttpError, checkNotFound } = require('..');
+const { checkNotFound } = require('..');
+const { checkAvailableProductInStock } = require('../productHelpers');
 
 module.exports = async (products, user, phone, email, adminTag) => {
   const productDetails = await Promise.all(
@@ -19,12 +20,7 @@ module.exports = async (products, user, phone, email, adminTag) => {
         quantity: availableQuantity,
       } = availableProduct;
 
-      if (availableQuantity < quantity) {
-        throw HttpError(
-          409,
-          `Product "${name}" is out of stock: availability - ${availableQuantity}, user request - ${quantity}`,
-        );
-      }
+      await checkAvailableProductInStock(name, availableQuantity, quantity);
 
       availableProduct.quantity -= quantity;
       await availableProduct.save();

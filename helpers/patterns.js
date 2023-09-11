@@ -1,3 +1,5 @@
+const alphabet =
+  '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 const availability = ['є в наявності', 'під замовлення', 'відсутній'];
 const units = ['кг', 'шт', 'л'];
 const roles = ['superAdmin', 'admin', 'user'];
@@ -29,7 +31,7 @@ const max = {
   vendorCode: 50,
   price: 1000000000,
   weight: 1000000,
-  quantity: 100,
+  quantity: 10000,
   alt: 50,
   description: 2000,
   manufacturer: 100,
@@ -53,6 +55,7 @@ const companyData = {
 };
 
 const patterns = {
+  alphabet,
   availability,
   roles,
   units,

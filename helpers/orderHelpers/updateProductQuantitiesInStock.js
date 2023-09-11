@@ -2,6 +2,7 @@ const {
   product: { Product },
 } = require('../../models');
 const { HttpError, patterns } = require('../../helpers');
+const { checkAvailableProductInStock } = require('../productHelpers');
 
 module.exports = async (previousProducts, updatedProducts, status) => {
   if (
@@ -42,12 +43,11 @@ module.exports = async (previousProducts, updatedProducts, status) => {
           previousProduct.productId,
         );
 
-        if (existingProduct.quantity < Math.abs(quantityDifference)) {
-          throw HttpError(
-            409,
-            `Product "${existingProduct.name}" is out of stock: availability - ${existingProduct.quantity}, user request - ${updatedProduct.quantity}`,
-          );
-        }
+        await checkAvailableProductInStock(
+          existingProduct.name,
+          existingProduct.quantity,
+          updatedProduct.quantity,
+        );
 
         existingProduct.quantity += quantityDifference;
         await existingProduct.save();
@@ -71,12 +71,11 @@ module.exports = async (previousProducts, updatedProducts, status) => {
       // New product added to updated order, decrease quantity in stock
       const existingProduct = await Product.findById(updatedProduct.productId);
 
-      if (existingProduct.quantity < updatedProduct.quantity) {
-        throw HttpError(
-          409,
-          `Product "${existingProduct.name}" is out of stock: availability - ${existingProduct.quantity}, user request - ${updatedProduct.quantity}`,
-        );
-      }
+      await checkAvailableProductInStock(
+        existingProduct.name,
+        existingProduct.quantity,
+        updatedProduct.quantity,
+      );
 
       existingProduct.quantity -= updatedProduct.quantity;
       await existingProduct.save();

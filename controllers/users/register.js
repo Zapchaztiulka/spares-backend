@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
   }
 
   const hashPassword = await bcrypt.hash(purePassword, 10);
-  const verificationToken = `${nanoid()}-${addHours(
+  const verificationToken = `${nanoid(20, patterns.alphabet)}-${addHours(
     new Date(),
     EXPIRES_VERIFICATION_TOKEN,
   ).getTime()}`; // Append the expiration timestamp to the verification token

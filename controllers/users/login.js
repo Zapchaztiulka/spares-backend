@@ -5,19 +5,15 @@ const {
   user: { User },
 } = require('../../models');
 const { HttpError } = require('../../helpers');
+const { checkAvailableEmail } = require('../../helpers/userHelpers');
+
 const { SECRET_KEY, EXPIRES_TOKEN } = process.env;
 
 module.exports = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
-
-  if (!user) {
-    throw HttpError(
-      404,
-      `User with email: ${email} not found. Please check email`,
-    );
-  }
+  await checkAvailableEmail(user, email);
 
   if (!user.verify) {
     throw HttpError(

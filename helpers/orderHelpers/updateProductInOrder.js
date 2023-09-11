@@ -1,7 +1,8 @@
 const {
   product: { Product },
 } = require('../../models');
-const { HttpError, checkNotFound } = require('../../helpers');
+const { checkNotFound } = require('..');
+const { checkAvailableProductInStock } = require('../productHelpers');
 
 module.exports = async (order, productUpdates) => {
   const updatedOrder = JSON.parse(JSON.stringify(order));
@@ -18,35 +19,33 @@ module.exports = async (order, productUpdates) => {
 
       await checkNotFound(newProduct, productId, 'Product');
 
-      if (newProduct.quantity < quantity) {
-        throw HttpError(
-          409,
-          `Product "${newProduct.name}" is out of stock: availability - ${newProduct.quantity}, user request - ${quantity}`,
-        );
-      }
+      await checkAvailableProductInStock(
+        newProduct.name,
+        newProduct.quantity,
+        quantity,
+      );
 
       updatedOrder.products[existingProductIndex].quantity = quantity;
       updatedOrder.products[existingProductIndex].name = newProduct.name;
-      updatedOrder.products[existingProductIndex].manufactureId =
-        newProduct.manufactureId;
+      updatedOrder.products[existingProductIndex].vendorCode =
+        newProduct.vendorCode;
       updatedOrder.products[existingProductIndex].price = newProduct.price;
     } else {
       const newProduct = await Product.findById(productId);
 
       await checkNotFound(newProduct, productId, 'Product');
 
-      if (newProduct.quantity < quantity) {
-        throw HttpError(
-          409,
-          `Product "${newProduct.name}" is out of stock: availability - ${newProduct.quantity}, user request - ${quantity}`,
-        );
-      }
+      await checkAvailableProductInStock(
+        newProduct.name,
+        newProduct.quantity,
+        quantity,
+      );
 
       updatedOrder.products.push({
         productId,
         quantity,
         name: newProduct.name,
-        manufactureId: newProduct.manufactureId,
+        vendorCode: newProduct.vendorCode,
         price: newProduct.price,
       });
     }

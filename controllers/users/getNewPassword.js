@@ -4,18 +4,14 @@ const { nanoid } = require('nanoid');
 const {
   user: { User },
 } = require('../../models');
-const { HttpError } = require('../../helpers');
 const { sendEmailWithPassword } = require('../../helpers/sendEmail');
+const { checkAvailableEmail } = require('../../helpers/userHelpers');
 
 module.exports = async (req, res) => {
   const { email } = req.body;
+
   const user = await User.findOne({ email });
-  if (!user) {
-    throw HttpError(
-      404,
-      `User with email: ${email} not found. Please check email`,
-    );
-  }
+  await checkAvailableEmail(user, email);
 
   const newPassword = nanoid();
   const hashPassword = await bcrypt.hash(newPassword, 10);
