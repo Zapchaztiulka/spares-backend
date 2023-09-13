@@ -74,7 +74,8 @@ module.exports = async (req, res) => {
     productsToCreate.push({
       ...restFields,
       vendorCode,
-      price: price.toFixed(2),
+      price: { value: price.toFixed(2) },
+      photo,
       categories: categoryData.map(category => ({
         _id: category._id,
         categoryName: category.categoryName,

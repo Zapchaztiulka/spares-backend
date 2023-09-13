@@ -195,13 +195,15 @@ const validationUpdateProduct = Joi.object({
     .max(patterns.max.vendorCode)
     .allow('')
     .messages(templatesMsgJoi('Артикул товару').textRules),
-  price: Joi.number()
-    .description('Ціна за одиницю товару')
-    .note('input')
-    .example('Введіть ціну за одиницю товару')
-    .min(patterns.min.price)
-    .max(patterns.max.price)
-    .messages(templatesMsgJoi('Ціна').numberRules),
+  price: Joi.object({
+    value: Joi.number()
+      .description('Ціна за одиницю товару')
+      .note('input')
+      .example('Введіть ціну за одиницю товару')
+      .min(patterns.min.price)
+      .max(patterns.max.price)
+      .messages(templatesMsgJoi('Ціна').numberRules),
+  }),
   availability: Joi.string()
     .description('Доступність товару на складі')
     .note('select')
@@ -334,6 +336,21 @@ const manufacturerSchema = new Schema({
   },
 });
 
+const priceSchema = new Schema(
+  {
+    value: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+  },
+  {
+    versionKey: false,
+    timestamps: { createdAt: false, updatedAt: true },
+    _id: false,
+  },
+);
+
 const productSchema = new Schema(
   {
     name: {
@@ -344,11 +361,7 @@ const productSchema = new Schema(
       type: String,
       default: '',
     },
-    price: {
-      type: Number,
-      required: true,
-      min: 0,
-    },
+    price: priceSchema,
     availability: {
       type: String,
       required: true,

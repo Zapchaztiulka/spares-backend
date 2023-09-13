@@ -65,8 +65,8 @@ module.exports = async (req, res) => {
 
   const { price } = newProductData;
 
-  if (price) {
-    newProductData.price = price.toFixed(2);
+  if (price?.value) {
+    newProductData.price.value = price.value.toFixed(2);
   }
 
   const product = await Product.findByIdAndUpdate(id, newProductData, {

@@ -97,21 +97,24 @@ module.exports = (schema, typeReq) => {
           },
         }
       : {
-          key: keys[2].key, // price
-          title: keys[2].schema._flags.description,
-          type: keys[2].schema.$_terms.notes[0],
-          placeholder: keys[2].schema.$_terms.examples[0],
+          key: keys[2].schema.$_terms.keys[0].key, // // price - value
+          title: keys[2].schema.$_terms.keys[0].schema._flags.description,
+          type: keys[2].schema.$_terms.keys[0].schema.$_terms.notes[0],
+          placeholder:
+            keys[2].schema.$_terms.keys[0].schema.$_terms.examples[0],
           validation: {
-            min: keys[2].schema._rules[0].args.limit,
-            max: keys[2].schema._rules[1].args.limit,
+            min: keys[2].schema.$_terms.keys[0].schema._rules[0].args.limit,
+            max: keys[2].schema.$_terms.keys[0].schema._rules[1].args.limit,
             warningMessages: {
               length:
-                keys[2].schema._preferences.messages['number.min']
-                  ._template[0] +
-                keys[2].schema._rules[0].args.limit +
-                keys[2].schema._preferences.messages['number.max']
-                  ._template[0] +
-                keys[2].schema._rules[1].args.limit,
+                keys[2].schema.$_terms.keys[0].schema._preferences.messages[
+                  'number.min'
+                ]._template[0] +
+                keys[2].schema.$_terms.keys[0].schema._rules[0].args.limit +
+                keys[2].schema.$_terms.keys[0].schema._preferences.messages[
+                  'number.max'
+                ]._template[0] +
+                keys[2].schema.$_terms.keys[0].schema._rules[1].args.limit,
             },
           },
         },
