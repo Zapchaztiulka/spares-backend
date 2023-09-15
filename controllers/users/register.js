@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { nanoid } = require('nanoid');
+const { customAlphabet } = require('nanoid');
 const { addHours } = require('date-fns');
 
 const {
@@ -35,8 +35,9 @@ module.exports = async (req, res) => {
     );
   }
 
+  const generatedToken = customAlphabet(patterns.alphabet, 20);
   const hashPassword = await bcrypt.hash(purePassword, 10);
-  const verificationToken = `${nanoid(20, patterns.alphabet)}-${addHours(
+  const verificationToken = `${generatedToken()}-${addHours(
     new Date(),
     EXPIRES_VERIFICATION_TOKEN,
   ).getTime()}`; // Append the expiration timestamp to the verification token
