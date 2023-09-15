@@ -53,10 +53,9 @@ const validationAuthUser = Joi.object({
     .tag('unique')
     .allow('')
     .pattern(patterns.phonePattern)
-    .messages({
-      ...templatesMsgJoi('Телефон', patterns.phonePatternMessage).regExpRules,
-      ...templatesMsgJoi('Прізвище користувача').textRules,
-    }),
+    .messages(
+      templatesMsgJoi('Телефон', patterns.phonePatternMessage).regExpRules,
+    ),
   role: Joi.string()
     .description('Роль користувача')
     .note('select')
