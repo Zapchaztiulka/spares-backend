@@ -1,7 +1,7 @@
 const {
   product: { Product },
 } = require('../../models');
-const { HttpError, patterns } = require('../../helpers');
+const { patterns } = require('../../helpers');
 const { checkAvailableProductInStock } = require('../productHelpers');
 
 module.exports = async (previousProducts, updatedProducts, status) => {

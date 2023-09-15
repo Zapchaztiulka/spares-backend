@@ -10,11 +10,12 @@ module.exports = async (products, user, phone, email, adminTag) => {
       const { productId, quantity } = product;
 
       const availableProduct = await Product.findById(productId);
+      console.log('🚀 availableProduct:', availableProduct);
       await checkNotFound(availableProduct, productId, 'Product');
 
       const {
         name,
-        price,
+        price: { value },
         vendorCode,
         units,
         quantity: availableQuantity,
@@ -25,7 +26,7 @@ module.exports = async (products, user, phone, email, adminTag) => {
       availableProduct.quantity -= quantity;
       await availableProduct.save();
 
-      return { productId, quantity, vendorCode, name, price, units };
+      return { productId, quantity, vendorCode, name, price: value, units };
     }),
   );
 
