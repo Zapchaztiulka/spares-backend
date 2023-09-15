@@ -33,6 +33,7 @@ module.exports = async (email, newPassword) => {
             
             .image-container {
               text-align: left;
+              width: 210px;
               margin: 30px 0px 30px 0px;
             }
             
@@ -46,7 +47,7 @@ module.exports = async (email, newPassword) => {
         </head>
         <body>
           <div class="image-container">
-            <img src="https://i.ibb.co/bQB6Vxc/Logo-main-brand.png" alt="Spare parts store" />
+            <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
           </div>
           <h3>Ваш новий пароль: ${newPassword}.</h3>
           <p>Наступного разу використовуйте його при вході в магазин</p>
