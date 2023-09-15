@@ -12,6 +12,7 @@ const validationAuthUser = Joi.object({
     .description("Ім'я користувача")
     .note('input')
     .example("Введіть ім'я користувача")
+    .allow('')
     .min(patterns.min.user)
     .max(patterns.max.user)
     .messages(templatesMsgJoi("Ім'я користувача").textRules),
@@ -19,6 +20,7 @@ const validationAuthUser = Joi.object({
     .description('Прізвище користувача')
     .note('input')
     .example('Введіть прізвище користувача')
+    .allow('')
     .min(patterns.min.user)
     .max(patterns.max.user)
     .messages(templatesMsgJoi('Прізвище користувача').textRules),
@@ -49,10 +51,12 @@ const validationAuthUser = Joi.object({
     .note('input')
     .example('Введіть телефон користувача')
     .tag('unique')
+    .allow('')
     .pattern(patterns.phonePattern)
-    .messages(
-      templatesMsgJoi('Телефон', patterns.phonePatternMessage).regExpRules,
-    ),
+    .messages({
+      ...templatesMsgJoi('Телефон', patterns.phonePatternMessage).regExpRules,
+      ...templatesMsgJoi('Прізвище користувача').textRules,
+    }),
   role: Joi.string()
     .description('Роль користувача')
     .note('select')
@@ -174,7 +178,7 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      default: 'Anonymous',
+      default: '',
     },
     userSurname: {
       type: String,
@@ -193,10 +197,7 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       match: patterns.phonePattern,
-      required: [
-        true,
-        'The phone is required. Please provide a phone for user',
-      ],
+      default: '',
     },
     password: {
       type: String,
