@@ -14,15 +14,13 @@ module.exports = async (req, res) => {
   );
 
   if (notFoundProductIds.length === 0) {
-    const updateResult = await Product.updateMany(
-      { _id: { $in: foundProductIds } },
-      { 'price.updatedAt': new Date() },
-    );
+    const deleteResult = await Product.deleteMany({ _id: { $in: productIds } });
+    console.log('🚀  deleteResult:', deleteResult);
 
-    const { modifiedCount } = updateResult;
-    if (modifiedCount > 0) {
+    const { deletedCount } = deleteResult;
+    if (deletedCount > 0) {
       return res.status(200).json({
-        message: `Dates of price checking by ${modifiedCount} products were updated successfully`,
+        message: `${deletedCount} products were deleted successfully`,
       });
     }
   } else {

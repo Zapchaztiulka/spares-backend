@@ -310,13 +310,13 @@ const validationUpdateProduct = Joi.object({
     .messages(templatesMsgJoi('Підкатегорії товару').arrayRules),
 });
 
-const validationUpdatePriceDates = Joi.object({
+const validationProductIdsArray = Joi.object({
   productIds: Joi.array()
     .items(
       Joi.string()
         .description('ІД товару')
         .note('checkBox')
-        .example('Оберіть ІД товару для перевірки цін')
+        .example('Оберіть ІД товару')
         .length(24)
         .messages({
           ...templatesMsgJoi('ІД товару').textRules,
@@ -425,5 +425,5 @@ module.exports = {
   Product,
   validationAddProducts,
   validationUpdateProduct,
-  validationUpdatePriceDates,
+  validationProductIdsArray,
 };

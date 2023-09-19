@@ -14,7 +14,7 @@ const {
   product: {
     validationAddProducts,
     validationUpdateProduct,
-    validationUpdatePriceDates,
+    validationProductIdsArray,
   },
 } = require('../../models');
 const { patterns } = require('../../helpers');
@@ -58,8 +58,18 @@ router.patch(
   authenticate,
   hasRole([patterns.roles[0], patterns.roles[1]]),
   checkAccess('updateProductAccess', 'Оновлення товару'),
-  validateBody(validationUpdatePriceDates),
+  validateBody(validationProductIdsArray),
   ctrl.updatePriceDates,
+);
+
+router.delete(
+  '/',
+  checkRequestBody,
+  authenticate,
+  hasRole([patterns.roles[0], patterns.roles[1]]),
+  checkAccess('deleteProductAccess', 'Видалення товару'),
+  validateBody(validationProductIdsArray),
+  ctrl.deleteProducts,
 );
 
 router.delete(
