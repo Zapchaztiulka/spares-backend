@@ -168,7 +168,7 @@ const orderProductSchema = new Schema(
     units: {
       type: String,
       enum: patterns.units,
-      default: 'шт',
+      default: patterns.units[0],
     },
   },
   { _id: false },
@@ -200,7 +200,7 @@ const orderSchema = new Schema(
     status: {
       type: String,
       enum: patterns.orderStatus,
-      default: 'в обробці',
+      default: patterns.orderStatus[0],
     },
     totalTypeOfProducts: {
       type: Number,

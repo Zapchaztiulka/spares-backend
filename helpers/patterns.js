@@ -10,6 +10,10 @@ const orderStatus = [
   'замовлення скасовано',
   'замовлення повернуто',
 ];
+const chatStatus = ['in progress', 'completed'];
+const chatRating = [1, 2, 3, 4, 5];
+const welcomeMessage =
+  "Вас вітає служба підтримки магазину. Очікуйте на з'єднання з менеджером...";
 
 const min = {
   user: 3,
@@ -68,6 +72,9 @@ const patterns = {
   phonePattern,
   phonePatternMessage,
   orderStatus,
+  chatStatus,
+  chatRating,
+  welcomeMessage,
   companyData,
 };
 

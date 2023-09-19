@@ -310,6 +310,24 @@ const validationUpdateProduct = Joi.object({
     .messages(templatesMsgJoi('Підкатегорії товару').arrayRules),
 });
 
+const validationUpdatePriceDates = Joi.object({
+  productIds: Joi.array()
+    .items(
+      Joi.string()
+        .description('ІД товару')
+        .note('checkBox')
+        .example('Оберіть ІД товару для перевірки цін')
+        .length(24)
+        .messages({
+          ...templatesMsgJoi('ІД товару').textRules,
+          ...templatesMsgJoi('ІД товару').commonRules,
+        }),
+    )
+    .min(1)
+    .required()
+    .messages(templatesMsgJoi('Масив ІД товарів').arrayRules),
+});
+
 const photoSchema = new Schema({
   url: {
     type: String,
@@ -374,7 +392,7 @@ const productSchema = new Schema(
     units: {
       type: String,
       enum: patterns.units,
-      default: 'шт',
+      default: patterns.units[0],
     },
     quantity: {
       type: Number,
@@ -407,4 +425,5 @@ module.exports = {
   Product,
   validationAddProducts,
   validationUpdateProduct,
+  validationUpdatePriceDates,
 };

@@ -47,6 +47,7 @@
     "nanoid": "^3.3.4",
     "passport": "^0.6.0",
     "passport-google-oauth": "^2.0.0",
+    "socket.io": "^4.7.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.3",
     "xlsx": "^0.18.5",

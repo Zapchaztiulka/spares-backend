@@ -11,7 +11,11 @@ const {
   uploadFile,
 } = require('../../middlewares');
 const {
-  product: { validationAddProducts, validationUpdateProduct },
+  product: {
+    validationAddProducts,
+    validationUpdateProduct,
+    validationUpdatePriceDates,
+  },
 } = require('../../models');
 const { patterns } = require('../../helpers');
 
@@ -46,6 +50,16 @@ router.patch(
   isValidId,
   validateBody(validationUpdateProduct),
   ctrl.updateProductById,
+);
+
+router.patch(
+  '/update/price-dates',
+  checkRequestBody,
+  authenticate,
+  hasRole([patterns.roles[0], patterns.roles[1]]),
+  checkAccess('updateProductAccess', 'Оновлення товару'),
+  validateBody(validationUpdatePriceDates),
+  ctrl.updatePriceDates,
 );
 
 router.delete(

@@ -47,7 +47,7 @@ const validationAuthUser = Joi.object({
       ...templatesMsgJoi('Електронна адреса').commonRules,
     }),
   phone: Joi.string()
-    .description('Телефон')
+    .description('Телефон користувача')
     .note('input')
     .example('Введіть телефон користувача')
     .tag('unique')
@@ -206,7 +206,7 @@ const userSchema = new Schema(
     role: {
       type: String,
       enum: patterns.roles,
-      default: 'user',
+      default: patterns.roles[2],
     },
     token: {
       type: String,
