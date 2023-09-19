@@ -60,15 +60,19 @@ module.exports = async (email, verificationToken) => {
         </head>
         <body>
           <div class="image-container">
-            <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
+            <a href="https://zapchaztiulka-catalog-frontend.vercel.app">
+              <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
+            <a/>
           </div>
           <h3>Вас вітає магазин запасних частин агротехніки "Запчастулька"!</h3>
           <p>Натисніть кнопку нижче, щоб підтвердити свою електронну адресу:</p>
           <a class="verification-link" target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">
-            <p class="verification-text">Підтвердити мій імейл</p>
+            <p class="verification-text">Підтвердити email</p>
           </a>
           <p>ВАЖЛИВО! Підтвердити пошту можна лише протягом 24 годин</p>
-
+          <h4>
+            <a href="https://zapchaztiulka-catalog-frontend.vercel.app"> Повернутися в магазин >>> <a/>
+          </h4>
         </body>
       </html>
     `,

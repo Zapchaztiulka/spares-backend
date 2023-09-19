@@ -47,11 +47,16 @@ module.exports = async (email, newPassword) => {
         </head>
         <body>
           <div class="image-container">
-            <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
+            <a href="https://zapchaztiulka-catalog-frontend.vercel.app">
+              <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
+            <a/>
           </div>
           <h3>Ваш новий пароль: ${newPassword}.</h3>
           <p>Наступного разу використовуйте його при вході в магазин</p>
           <p>Також Ви можете змінити пароль в сторінці "Профілю користувача".</p>
+          <h3>
+            <a href="https://zapchaztiulka-catalog-frontend.vercel.app"> Повернутися в магазин >>> <a/>
+          </h3>
         </body>
       </html>
     `,

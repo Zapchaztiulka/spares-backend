@@ -122,7 +122,9 @@ module.exports = async orderDetails => {
       <body>
         <div style="margin-bottom: 24px;">
           <div style="padding: 20px; border-radius: 8px; background-color: #FFFFFF; display: flex; align-items: center; width: 210px;">
+            <a href="https://zapchaztiulka-catalog-frontend.vercel.app">
               <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
+            <a/>
           </div>
           <h1 class="title" style="text-align: left; color: #1C1F23; margin-top: 20px; margin-bottom: 12px;">Дякуємо за замовлення!</h1>
           <p class="text" style="text-align: left;"> <b>Вітаємо ${username}!</b> Ваше замовлення прийнято. Очікуйте дзвінка нашого менеджера.</p>
@@ -184,6 +186,9 @@ module.exports = async orderDetails => {
           <p style="margin-bottom: 12px;">Email: ${email}</p>
           <p>Адреса доставки: ${addressDelivery}</p>
         </div>
+        <h3>
+          <a href="https://zapchaztiulka-catalog-frontend.vercel.app"> Повернутися в магазин >>> <a/>
+        </h3>
         <div class="footer">
           <p style="margin-right: 12px;">${firstPhone}</p>
           <p style="margin-right: 12px;">${secondPhone}</p>

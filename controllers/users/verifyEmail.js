@@ -1,7 +1,7 @@
 const {
   user: { User },
 } = require('../../models');
-const { HttpError } = require('../../helpers');
+const { HttpError, patterns } = require('../../helpers');
 
 module.exports = async (req, res, next) => {
   const { verificationToken } = req.params;
@@ -34,7 +34,11 @@ module.exports = async (req, res, next) => {
   });
 
   try {
-    res.redirect('https://github.com/Zapchaztiulka');
+    if (user.role === patterns.roles[2]) {
+      res.redirect('https://zapchaztiulka-catalog-frontend.vercel.app');
+    } else {
+      res.redirect('https://beamish-pudding-ee7a33.netlify.app/login');
+    }
   } catch (err) {
     return next(
       HttpError(
