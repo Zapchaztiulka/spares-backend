@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
     const { modifiedCount } = updateResult;
     if (modifiedCount > 0) {
       return res.status(200).json({
-        message: `Dates of price checking by ${modifiedCount} products were updated successfully`,
+        message: `Dates of price checking in ${modifiedCount} products were updated successfully`,
       });
     }
   } else {

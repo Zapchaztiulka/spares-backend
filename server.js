@@ -1,41 +1,30 @@
 const mongoose = require('mongoose');
+mongoose.set('strictQuery', true);
+
 const app = require('./app');
-const http = require('http');
-const { Server } = require('socket.io');
+const http = require('http').Server(app);
+const cors = require('cors');
 
 const { DB_HOST, PORT = 5000 } = process.env;
 
-mongoose.set('strictQuery', true);
+const socketIO = require('socket.io')(http, {
+  cors: {
+    origin: '*', // замінити на бойове посилання веб-сайту чату
+  },
+});
 
-const server = http.createServer(app);
-const io = new Server(server);
+socketIO.on('connection', socket => {
+  console.log(`${socket.id} user connected`);
 
-io.on('connection', socket => {
-  console.log('A user connected');
-
-  // Обробник події для надсилання повідомлення клієнту
-  socket.on('clientMessage', async (message, chatId) => {
-    // Тут має бути логіка для збереження повідомлення в чаті у базі даних
-    // Проставлення messageOwner в "user"
-
-    io.to(chatId).emit('message', message);
+  socketIO.on('disconnect', socket => {
+    console.log(`${socket.id} user was disconnected`);
   });
-
-  // Обробник події для надсилання повідомлення менеджера
-  socket.on('managerMessage', async (message, chatId) => {
-    // Тут має бути логіка для збереження повідомлення в чаті у базі даних
-    // Проставлення messageOwner в "admin"
-
-    io.to(chatId).emit('message', message);
-  });
-
-  // Інші обробники подій WebSocket
 });
 
 mongoose
   .connect(DB_HOST)
   .then(() => {
-    server.listen(PORT, () => {
+    http.listen(PORT, () => {
       console.log(
         'Database connection successful and socket-server is running on port',
         PORT,
