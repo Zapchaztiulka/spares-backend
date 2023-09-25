@@ -135,9 +135,9 @@ module.exports = async orderDetails => {
             <thead>
               <tr style="font-size: 14px; line-height: 1.4; color: #6B7075; background-color: #f5f5f5;">
                 <th>Товар</th>
-                <th style="text-align: center;">Кількість</th>
-                <th style="text-align: center;">Ціна одиниці</th>
-                <th style="text-align: center;">Загальна сума</th>
+                <th style="text-align: center; white-space: nowrap;">Кількість</th>
+                <th style="text-align: center; white-space: nowrap;">Ціна одиниці</th>
+                <th style="text-align: center; white-space: nowrap;">Загальна сума</th>
               </tr>
             </thead>
             <tbody>
@@ -146,13 +146,13 @@ module.exports = async orderDetails => {
                   ({ name, quantity, price, units }) => `
                 <tr class="text">
                   <td style="text-align: left;">${name}</td>
-                  <td style="font-weight: 400; text-align: center; color: #6B7075;">${formatNumber(
+                  <td style="font-weight: 400; text-align: center; color: #6B7075; white-space: nowrap;">${formatNumber(
                     quantity,
                   )} ${units}</td>
-                  <td style="font-weight: 400; text-align: center;">${formatNumber(
+                  <td style="font-weight: 400; text-align: center; white-space: nowrap;">${formatNumber(
                     price,
                   )}  грн.</td>
-                  <td style="font-weight: 400; text-align: center;">${formatNumber(
+                  <td style="font-weight: 400; text-align: center; white-space: nowrap;">${formatNumber(
                     price * quantity,
                   )}  грн.</td>
                 </tr>
@@ -161,18 +161,18 @@ module.exports = async orderDetails => {
                 .join('')}
               <tr class="text">
                 <td colspan="3" style="text-align: left;">Сума</td>
-                <td style="text-align: center;">${formatNumber(
+                <td style="text-align: center; white-space: nowrap;">${formatNumber(
                   totalAmount,
                 )}  грн.</td>
               </tr>
               <tr class="text">
                 <td colspan="2">Доставка</td>
-                <td style="color: #6B7075; text-align: center;">${delivery}</td>
-                <td style="text-align: center;">${costDelivery} грн.</td>
+                <td style="color: #6B7075; text-align: center; white-space: nowrap;">${delivery}</td>
+                <td style="text-align: center; white-space: nowrap;">${costDelivery} грн.</td>
               </tr>
               <tr class="title" style="color: #1D4ED8;">
                 <td colspan="3" style="text-align: left;">Загалом</td>
-                <td style="text-align: center;">${formatNumber(
+                <td style="text-align: center; white-space: nowrap;">${formatNumber(
                   totalAmount + costDelivery,
                 )}  грн.</td>
               </tr>
