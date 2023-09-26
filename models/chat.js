@@ -12,27 +12,26 @@ const validationCreateChatRoom = Joi.object({
     .description('ІД користувача')
     .note('input')
     .example('Введіть ІД користувача')
-    .allow('')
-    .length(24)
+    .required()
     .messages(templatesMsgJoi('ІД категорії товару').textRules),
-  username: Joi.string()
-    .description("Ім'я користувача")
-    .note('input')
-    .example("Введіть ім'я користувача")
-    .allow('')
-    .min(patterns.min.user)
-    .max(patterns.max.user)
-    .messages(templatesMsgJoi("Ім'я користувача").textRules),
-  userPhone: Joi.string()
-    .description('Телефон користувача')
-    .note('input')
-    .example('Введіть телефон користувача')
-    .tag('unique')
-    .allow('')
-    .pattern(patterns.phonePattern)
-    .messages(
-      templatesMsgJoi('Телефон', patterns.phonePatternMessage).regExpRules,
-    ),
+  // username: Joi.string()
+  //   .description("Ім'я користувача")
+  //   .note('input')
+  //   .example("Введіть ім'я користувача")
+  //   .allow('')
+  //   .min(patterns.min.user)
+  //   .max(patterns.max.user)
+  //   .messages(templatesMsgJoi("Ім'я користувача").textRules),
+  // userPhone: Joi.string()
+  //   .description('Телефон користувача')
+  //   .note('input')
+  //   .example('Введіть телефон користувача')
+  //   .tag('unique')
+  //   .allow('')
+  //   .pattern(patterns.phonePattern)
+  //   .messages(
+  //     templatesMsgJoi('Телефон', patterns.phonePatternMessage).regExpRules,
+  //   ),
 });
 
 const messageSchema = new Schema(
@@ -57,7 +56,7 @@ const chatRoomSchema = new Schema(
   {
     userId: {
       type: String,
-      default: '',
+      required: [true, 'User ID is required'],
     },
     username: {
       type: String,

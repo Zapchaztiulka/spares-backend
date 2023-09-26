@@ -1,5 +1,3 @@
-const { isValidObjectId } = require('mongoose');
-
 const {
   chat: { Chat },
   user: { User },
@@ -7,12 +5,19 @@ const {
 const { HttpError, patterns } = require('../../helpers');
 
 module.exports = async (req, res) => {
-  const { userId } = req.body;
+  const { userId, userPhone, username } = req.body;
+  if (!userId && !userPhone) {
+    throw HttpError(
+      400,
+      'User phone is required if there is not user ID in request',
+    );
+  }
 
+  let existingUserId = '';
   let existingUserName = '';
   let existingUserPhone = '';
 
-  if (userId && isValidObjectId(userId)) {
+  if (userId) {
     const userById = await User.findById(userId);
 
     if (userById?.role && userById?.role !== patterns.roles[2]) {
@@ -28,15 +33,24 @@ module.exports = async (req, res) => {
     }
   }
 
+  if (userPhone) {
+    const userByPhone = await User.findOne({ phone: userPhone });
+
+    if (userByPhone) {
+      existingUserId = userByPhone._id;
+      existingUserName = userByPhone.username;
+    }
+  }
+
   const welcomeMessage = {
     messageOwner: patterns.roles[0],
-    message: patterns.welcomeMessage(existingUserName),
+    message: patterns.welcomeMessage,
   };
 
   const newChat = await Chat.create({
-    userId,
-    username: existingUserName,
-    userPhone: existingUserPhone,
+    userId: existingUserId || userId,
+    username: existingUserName || username,
+    userPhone: existingUserPhone || userPhone,
     messages: welcomeMessage,
   });
 

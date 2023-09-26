@@ -10,10 +10,22 @@ const orderStatus = [
   'замовлення скасовано',
   'замовлення повернуто',
 ];
+const productSortRules = [
+  'name',
+  'manufacturer.trademark',
+  'categories.categoryName',
+  'subcategories.subcategoryName',
+  'description',
+  'manufacturer.country',
+  'manufacturer.factory',
+  'vendorCode',
+];
 const chatStatus = ['in progress', 'completed'];
 const chatRating = [1, 2, 3, 4, 5];
-const welcomeMessage =
-  "Вас вітає служба підтримки магазину. Очікуйте на з'єднання з менеджером...";
+const welcomeMessage = username =>
+  `Шановний ${
+    username.length === 0 ? 'клієнте' : username
+  }. Вас вітає служба підтримки магазину. Очікуйте на з'єднання з менеджером...`;
 
 const min = {
   user: 3,
@@ -72,6 +84,7 @@ const patterns = {
   phonePattern,
   phonePatternMessage,
   orderStatus,
+  productSortRules,
   chatStatus,
   chatRating,
   welcomeMessage,
