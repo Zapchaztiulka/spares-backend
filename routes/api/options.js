@@ -8,11 +8,7 @@ const {
     validationPasswordUser,
     validationAccess,
   },
-  product: {
-    validationAddProducts,
-    validationUpdateProduct,
-    validationUpdatePriceDates,
-  },
+  product: { validationAddProducts, validationUpdateProduct },
   category: { validationCategory, validationUpdateCategory },
 } = require('../../models');
 const {
@@ -80,19 +76,9 @@ router.get('/product', async (_, res) => {
     options: updateProductOptions,
   };
 
-  const validationUpdatePriceDatesOptions = getProductProperties(
-    validationUpdatePriceDates,
-    'updatePriceDates',
-  );
-  const updatePriceDates = {
-    title: 'Оновлення дат перевірки цін товарів',
-    options: validationUpdatePriceDatesOptions,
-  };
-
   return res.json({
     addProducts,
     updateProduct,
-    updatePriceDates,
   });
 });
 

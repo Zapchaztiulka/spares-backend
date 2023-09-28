@@ -1,10 +1,14 @@
 const { isValidObjectId } = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const {
   chat: { Chat },
   user: { User },
 } = require('../../models');
 const { HttpError, patterns } = require('../../helpers');
+
+require('dotenv').config();
+const { SECRET_KEY } = process.env;
 
 module.exports = async (req, res) => {
   const { userId } = req.body;
@@ -33,14 +37,23 @@ module.exports = async (req, res) => {
     message: patterns.welcomeMessage(existingUserName),
   };
 
-  const newChat = await Chat.create({
-    userId,
-    username: existingUserName,
-    userPhone: existingUserPhone,
-    messages: welcomeMessage,
-  });
+  let existingChat = await Chat.findOne({ userId });
 
-  // Реалізувати надсилання повідомлень менеджерам через WebSocket
+  if (existingChat && existingChat.chatStatus === patterns.chatStatus[1]) {
+    existingChat = null;
+  }
 
-  res.status(201).json(newChat);
+  if (!existingChat) {
+    existingChat = await Chat.create({
+      userId,
+      username: existingUserName,
+      userPhone: existingUserPhone,
+      messages: welcomeMessage,
+    });
+  }
+
+  existingChat.token = jwt.sign({ userId: existingChat.userId }, SECRET_KEY);
+  await existingChat.save();
+
+  res.status(201).json(existingChat);
 };
