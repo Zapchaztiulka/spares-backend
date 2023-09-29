@@ -8,15 +8,19 @@ module.exports = async (req, res) => {
   const skip = (page - 1) * limit;
 
   const formattedQuery = query.trim();
-  const products = [];
+  let products = [];
 
-  for (const field of patterns.productSortRules) {
-    const filter = {
-      [field]: { $regex: formattedQuery, $options: 'i' },
-    };
+  if (formattedQuery) {
+    for (const field of patterns.productSortRules) {
+      const filter = {
+        [field]: { $regex: formattedQuery, $options: 'i' },
+      };
 
-    const existingProducts = await Product.find(filter);
-    products.push(...existingProducts);
+      const existingProducts = await Product.find(filter);
+      products.push(...existingProducts);
+    }
+  } else {
+    products = await Product.find({});
   }
 
   const paginatedProducts = products.slice(skip, skip + limit);

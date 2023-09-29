@@ -1,59 +1,34 @@
-const { isValidObjectId } = require('mongoose');
-const jwt = require('jsonwebtoken');
-
 const {
   chat: { Chat },
-  user: { User },
 } = require('../../models');
-const { HttpError, patterns } = require('../../helpers');
-
-require('dotenv').config();
-const { SECRET_KEY } = process.env;
+const { patterns, checkNotFound } = require('../../helpers');
+const { checkExistingRoom } = require('../../helpers/chatHelper');
 
 module.exports = async (req, res) => {
   const { userId } = req.body;
 
-  let existingUserName = '';
-  let existingUserPhone = '';
+  const chat = await Chat.findOne({ userId });
 
-  if (userId && isValidObjectId(userId)) {
-    const userById = await User.findById(userId);
-
-    if (userById?.role && userById?.role !== patterns.roles[2]) {
-      throw HttpError(
-        400,
-        `Only user with role "${patterns.roles[2]}" can start a chat`,
-      );
-    }
-
-    if (userById) {
-      existingUserPhone = userById.phone;
-      existingUserName = userById.username;
-    }
+  if (!chat) {
+    await checkNotFound(chat, userId, 'User');
   }
 
-  const welcomeMessage = {
-    messageOwner: patterns.roles[0],
-    message: patterns.welcomeMessage(existingUserName),
-  };
+  const existingRoom = await checkExistingRoom(
+    chat.chatRooms,
+    patterns.chatRoomStatus[0],
+  );
 
-  let existingChat = await Chat.findOne({ userId });
-
-  if (existingChat && existingChat.chatStatus === patterns.chatStatus[1]) {
-    existingChat = null;
+  if (!existingRoom) {
+    chat.chatRooms.push({ userId });
+    await chat.save();
   }
 
-  if (!existingChat) {
-    existingChat = await Chat.create({
-      userId,
-      username: existingUserName,
-      userPhone: existingUserPhone,
-      messages: welcomeMessage,
-    });
-  }
+  const updatedChat = await Chat.findOne({ userId });
 
-  existingChat.token = jwt.sign({ userId: existingChat.userId }, SECRET_KEY);
-  await existingChat.save();
+  const newRoom = await checkExistingRoom(
+    updatedChat.chatRooms,
+    patterns.chatRoomStatus[0],
+  );
 
-  res.status(201).json(existingChat);
+  return res.status(existingRoom ? 200 : 201).json(newRoom);
 };

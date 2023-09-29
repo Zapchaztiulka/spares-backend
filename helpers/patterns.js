@@ -20,7 +20,7 @@ const productSortRules = [
   'manufacturer.factory',
   'vendorCode',
 ];
-const chatStatus = ['in progress', 'completed'];
+const chatRoomStatus = ['in progress', 'completed'];
 const chatRating = [1, 2, 3, 4, 5];
 const welcomeMessage = username =>
   `Шановний ${
@@ -85,7 +85,7 @@ const patterns = {
   phonePatternMessage,
   orderStatus,
   productSortRules,
-  chatStatus,
+  chatRoomStatus,
   chatRating,
   welcomeMessage,
   companyData,

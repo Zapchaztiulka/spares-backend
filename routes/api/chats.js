@@ -10,7 +10,7 @@ const {
   checkRequestBody,
 } = require('../../middlewares');
 const {
-  chat: { validationCreateChatRoom },
+  chat: { validationUserId },
 } = require('../../models');
 const { patterns } = require('../../helpers');
 
@@ -20,11 +20,20 @@ const router = express.Router();
 // router.get('/:id', isValidId, ctrl.getCategoryById);
 
 router.post(
-  '/',
+  '/auth',
   checkRequestBody,
-  validateBody(validationCreateChatRoom),
+  validateBody(validationUserId),
+  ctrl.authUser,
+);
+
+router.post(
+  '/chatRoom',
+  checkRequestBody,
+  validateBody(validationUserId),
   ctrl.createChatRoom,
 );
+
+router.patch('/chatRoom/:id', isValidId, ctrl.closeChatRoom);
 
 // router.delete(
 //   '/:id',

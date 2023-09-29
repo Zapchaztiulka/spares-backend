@@ -7,31 +7,13 @@ const {
   patterns,
 } = require('../helpers');
 
-const validationCreateChatRoom = Joi.object({
+const validationUserId = Joi.object({
   userId: Joi.string()
     .description('ІД користувача')
     .note('input')
     .example('Введіть ІД користувача')
     .required()
-    .messages(templatesMsgJoi('ІД категорії товару').textRules),
-  // username: Joi.string()
-  //   .description("Ім'я користувача")
-  //   .note('input')
-  //   .example("Введіть ім'я користувача")
-  //   .allow('')
-  //   .min(patterns.min.user)
-  //   .max(patterns.max.user)
-  //   .messages(templatesMsgJoi("Ім'я користувача").textRules),
-  // userPhone: Joi.string()
-  //   .description('Телефон користувача')
-  //   .note('input')
-  //   .example('Введіть телефон користувача')
-  //   .tag('unique')
-  //   .allow('')
-  //   .pattern(patterns.phonePattern)
-  //   .messages(
-  //     templatesMsgJoi('Телефон', patterns.phonePatternMessage).regExpRules,
-  //   ),
+    .messages(templatesMsgJoi('ІД користувача').textRules),
 });
 
 const messageSchema = new Schema(
@@ -56,6 +38,35 @@ const chatRoomSchema = new Schema(
   {
     userId: {
       type: String,
+      default: '',
+    },
+    managerId: {
+      type: String,
+      default: '',
+    },
+    messages: [messageSchema],
+    chatRoomStatus: {
+      type: String,
+      enum: patterns.chatRoomStatus,
+      default: patterns.chatRoomStatus[0],
+    },
+    chatRoomRating: {
+      type: Number,
+      enum: patterns.chatRating,
+      default: null,
+    },
+    chatRoomFeedback: {
+      type: String,
+      default: '',
+    },
+  },
+  { versionKey: false, timestamps: true },
+);
+
+const chatSchema = new Schema(
+  {
+    userId: {
+      type: String,
       required: [true, 'User ID is required'],
     },
     username: {
@@ -66,37 +77,19 @@ const chatRoomSchema = new Schema(
       type: String,
       default: '',
     },
-    managerId: {
-      type: String,
-      default: '',
-    },
-    messages: [messageSchema],
-    chatStatus: {
-      type: String,
-      enum: patterns.chatStatus,
-      default: patterns.chatStatus[0],
-    },
-    chatRating: {
-      type: Number,
-      enum: patterns.chatRating,
-      default: null,
-    },
-    chatFeedback: {
-      type: String,
-      default: '',
-    },
     token: {
       type: String,
       default: null,
     },
+    chatRooms: [chatRoomSchema],
   },
   { versionKey: false, timestamps: true },
 );
 
-chatRoomSchema.post('save', handleMongooseError);
-const Chat = model('chat', chatRoomSchema);
+chatSchema.post('save', handleMongooseError);
+const Chat = model('chat', chatSchema);
 
 module.exports = {
   Chat,
-  validationCreateChatRoom,
+  validationUserId,
 };
