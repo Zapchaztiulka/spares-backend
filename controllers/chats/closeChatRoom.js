@@ -24,7 +24,8 @@ module.exports = async (req, res) => {
   roomToComplete.chatRoomStatus = patterns.chatRoomStatus[1];
 
   await chat.save();
-  return res
-    .status(200)
-    .json({ message: `Chat room with ID:${roomId} was completed` });
+  return res.status(200).json({
+    roomId,
+    message: `Chat room with ID:${roomId} was completed`,
+  });
 };
