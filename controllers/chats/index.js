@@ -4,4 +4,5 @@ module.exports = {
   createChatRoom: ctrlWrapper(require('./createChatRoom')),
   closeChatRoom: ctrlWrapper(require('./closeChatRoom')),
   authUser: ctrlWrapper(require('./authUser')),
+  getChatRoomById: ctrlWrapper(require('./getChatRoomById')),
 };

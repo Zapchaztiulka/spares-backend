@@ -33,7 +33,7 @@ const min = {
   vendorCode: 2,
   price: 0.01,
   weight: 0.001,
-  quantity: 1,
+  quantity: 0,
   alt: 2,
   description: 10,
   manufacturer: 3,

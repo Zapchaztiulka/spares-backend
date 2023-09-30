@@ -17,7 +17,13 @@ const { patterns } = require('../../helpers');
 const router = express.Router();
 
 // router.get('/', ctrl.getAllCategories);
-// router.get('/:id', isValidId, ctrl.getCategoryById);
+router.get(
+  '/chatRoom/:id',
+  checkRequestBody,
+  isValidId,
+  validateBody(validationUserId),
+  ctrl.getChatRoomById,
+);
 
 router.post(
   '/auth',

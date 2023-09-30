@@ -2,8 +2,11 @@ const {
   product: { Product },
   category: { Category },
 } = require('../../models');
-const { HttpError } = require('../../helpers');
-const { checkAccessToAddPhoto } = require('../../helpers/productHelpers');
+const { HttpError, patterns } = require('../../helpers');
+const {
+  checkAccessToAddPhoto,
+  checkQuantityInRequest,
+} = require('../../helpers/productHelpers');
 
 module.exports = async (req, res) => {
   const { _id, access } = req.user;
@@ -21,6 +24,8 @@ module.exports = async (req, res) => {
       categories,
       subcategories = [],
       price,
+      quantity,
+      availability,
       photo,
       ...restFields
     } = productData;
@@ -71,10 +76,14 @@ module.exports = async (req, res) => {
       );
     }
 
+    await checkQuantityInRequest(availability, quantity);
+
     productsToCreate.push({
       ...restFields,
       vendorCode,
       price: { value: price.toFixed(2) },
+      quantity,
+      availability,
       photo,
       categories: categoryData.map(category => ({
         _id: category._id,

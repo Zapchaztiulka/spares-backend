@@ -3,7 +3,10 @@ const {
   category: { Category },
 } = require('../../models');
 const { HttpError, checkNotFound } = require('../../helpers');
-const { checkAccessToAddPhoto } = require('../../helpers/productHelpers');
+const {
+  checkAccessToAddPhoto,
+  checkQuantityInRequest,
+} = require('../../helpers/productHelpers');
 
 module.exports = async (req, res) => {
   const { access } = req.user;
@@ -63,7 +66,9 @@ module.exports = async (req, res) => {
     }));
   }
 
-  const { price } = newProductData;
+  const { price, availability, quantity } = newProductData;
+
+  await checkQuantityInRequest(availability, quantity);
 
   if (price?.value) {
     newProductData.price.value = price.value.toFixed(2);
