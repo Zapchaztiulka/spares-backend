@@ -68,7 +68,7 @@ module.exports = async (req, res) => {
 
   const { price, availability, quantity } = newProductData;
 
-  await checkQuantityInRequest(availability, quantity);
+  await checkQuantityInRequest(availability, quantity, id);
 
   if (price?.value) {
     newProductData.price.value = price.value.toFixed(2);

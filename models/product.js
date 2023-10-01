@@ -156,7 +156,10 @@ const validationAddProducts = Joi.array().items(
           }),
       )
       .required()
-      .messages(templatesMsgJoi('Категорії товару').arrayRules),
+      .messages({
+        ...templatesMsgJoi('Масив категорій товарів').arrayRules,
+        ...templatesMsgJoi('Масив категорій товарів').commonRules,
+      }),
     subcategories: Joi.array()
       .items(
         Joi.string()
