@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
   const skip = (page - 1) * limit;
 
   const formattedQuery = query.trim();
-  let products = [];
+  const productMap = new Map();
 
   if (formattedQuery) {
     for (const field of patterns.productSortRules) {
@@ -17,15 +17,23 @@ module.exports = async (req, res) => {
       };
 
       const existingProducts = await Product.find(filter);
-      products.push(...existingProducts);
+      existingProducts.forEach(product => {
+        productMap.set(product._id.toString(), product);
+      });
     }
   } else {
-    products = await Product.find({});
+    const allProducts = await Product.find({});
+    allProducts.forEach(product => {
+      productMap.set(product._id.toString(), product);
+    });
   }
 
-  const paginatedProducts = products.slice(skip, skip + limit);
+  const paginatedProducts = Array.from(productMap.values()).slice(
+    skip,
+    skip + limit,
+  );
 
   res
     .status(200)
-    .json({ products: paginatedProducts, totalCount: products.length });
+    .json({ products: paginatedProducts, totalCount: productMap.size });
 };

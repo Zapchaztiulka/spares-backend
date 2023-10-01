@@ -22,10 +22,6 @@ const productSortRules = [
 ];
 const chatRoomStatus = ['in progress', 'completed'];
 const chatRating = [1, 2, 3, 4, 5];
-const welcomeMessage = username =>
-  `Шановний ${
-    username.length === 0 ? 'клієнте' : username
-  }. Вас вітає служба підтримки магазину. Очікуйте на з'єднання з менеджером...`;
 
 const min = {
   user: 3,
@@ -87,7 +83,6 @@ const patterns = {
   productSortRules,
   chatRoomStatus,
   chatRating,
-  welcomeMessage,
   companyData,
 };
 
