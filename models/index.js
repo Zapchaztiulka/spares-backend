@@ -4,4 +4,5 @@ module.exports = {
   category: require('./category'),
   order: require('./order'),
   chat: require('./chat'),
+  faq: require('./faq'),
 };

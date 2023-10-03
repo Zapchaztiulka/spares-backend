@@ -4,5 +4,6 @@ module.exports = {
   categoriesRouter: require('./categories'),
   ordersRouter: require('./orders'),
   chatsRouter: require('./chats'),
+  faqsRouter: require('./faqs'),
   optionsRouter: require('./options'),
 };

@@ -11,9 +11,10 @@ const { SECRET_KEY, EXPIRES_TOKEN } = process.env;
 
 module.exports = async (req, res) => {
   const { email, password } = req.body;
+  const pureEmail = email.trim().toLowerCase();
 
-  const user = await User.findOne({ email });
-  await checkAvailableEmail(user, email);
+  const user = await User.findOne({ email: pureEmail });
+  await checkAvailableEmail(user, pureEmail);
 
   if (!user.verify) {
     throw HttpError(
@@ -40,7 +41,7 @@ module.exports = async (req, res) => {
   return res.status(200).json({
     username,
     userSurname,
-    email,
+    email: pureEmail,
     phone,
     role,
     token,

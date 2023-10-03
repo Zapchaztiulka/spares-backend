@@ -35,6 +35,9 @@ const min = {
   manufacturer: 3,
   category: 3,
   adminTag: 2,
+  questionGroup: 2,
+  question: 10,
+  answer: 10,
 };
 
 const max = {
@@ -49,6 +52,9 @@ const max = {
   manufacturer: 100,
   category: 50,
   adminTag: 30,
+  questionGroup: 50,
+  question: 300,
+  answer: 2000,
 };
 
 const namePattern = /^[A-Za-zА-Яа-яёЁЇїІіЄєҐґ0-9]+$/;

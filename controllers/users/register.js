@@ -11,7 +11,7 @@ const { EXPIRES_VERIFICATION_TOKEN } = process.env;
 
 module.exports = async (req, res) => {
   const { email, password, username, userSurname, phone, role } = req.body;
-  const pureEmail = email.trim();
+  const pureEmail = email.trim().toLowerCase();
   const purePassword = password.trim();
   const pureUsername = username?.trim();
   const pureUserSurname = userSurname?.trim();
