@@ -20,7 +20,9 @@ const { patterns } = require('../../helpers');
 
 const router = express.Router();
 
+// for question groups
 router.get('/', ctrl.getNonEmptyGroups);
+
 router.get('/:id', isValidId, ctrl.getQuestionGroupById);
 
 router.post(
@@ -29,16 +31,6 @@ router.post(
   authenticate,
   hasRole([patterns.roles[0], patterns.roles[1]]),
   validateBody(validationAddQuestionGroup),
-  ctrl.addQuestionGroup,
-);
-
-router.post(
-  '/faq/:id',
-  checkRequestBody,
-  authenticate,
-  hasRole([patterns.roles[0], patterns.roles[1]]),
-  isValidId,
-  validateBody(validationAddFAQ),
   ctrl.addQuestionGroup,
 );
 
@@ -58,6 +50,38 @@ router.delete(
   hasRole([patterns.roles[0], patterns.roles[1]]),
   isValidId,
   ctrl.deleteQuestionGroupById,
+);
+
+// for FAQ in their groups
+router.get('/faq/:id', isValidId, ctrl.getFAQByGroupId);
+
+router.post(
+  '/faq/:id',
+  checkRequestBody,
+  authenticate,
+  hasRole([patterns.roles[0], patterns.roles[1]]),
+  isValidId,
+  validateBody(validationAddFAQ),
+  ctrl.addFAQ,
+);
+
+router.patch(
+  '/faq/:id',
+  checkRequestBody,
+  authenticate,
+  hasRole([patterns.roles[0], patterns.roles[1]]),
+  isValidId,
+  validateBody(validationUpdateFAQ),
+  ctrl.updateFAQ,
+);
+
+router.delete(
+  '/faq/:id',
+  checkRequestBody,
+  authenticate,
+  hasRole([patterns.roles[0], patterns.roles[1]]),
+  isValidId,
+  ctrl.deleteFAQ,
 );
 
 module.exports = router;

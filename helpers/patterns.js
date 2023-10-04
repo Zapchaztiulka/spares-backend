@@ -36,7 +36,7 @@ const min = {
   category: 3,
   adminTag: 2,
   questionGroup: 2,
-  question: 10,
+  question: 5,
   answer: 10,
 };
 
@@ -53,7 +53,7 @@ const max = {
   category: 50,
   adminTag: 30,
   questionGroup: 50,
-  question: 300,
+  question: 50,
   answer: 2000,
 };
 

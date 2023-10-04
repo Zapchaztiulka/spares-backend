@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
   if (existedQuestionGroup) {
     throw HttpError(
       409,
-      `Question group: ${existedQuestionGroup} has already existed`,
+      `Question group "${existedQuestionGroup.questionGroup}" has already existed`,
     );
   }
 

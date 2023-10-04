@@ -3,19 +3,21 @@ const {
 } = require('../../models');
 
 module.exports = async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 10, isShow } = req.query;
   const skip = (page - 1) * limit;
 
-  const NonEmptyGroups = await FAQ.find(
-    { questions: { $not: { $size: 0 } } },
-    '-updatedAt',
-    {
-      skip,
-      limit,
-    },
-  );
+  const filter = { questions: { $not: { $size: 0 } } };
 
-  const totalCount = NonEmptyGroups.length;
+  if (isShow !== undefined) {
+    filter.isShowInChat = isShow;
+  }
 
-  res.status(200).json({ totalCount, NonEmptyGroups });
+  const questionGroups = await FAQ.find(filter, '-updatedAt', {
+    skip,
+    limit,
+  });
+
+  const totalCount = questionGroups.length;
+
+  res.status(200).json({ totalCount, questionGroups });
 };

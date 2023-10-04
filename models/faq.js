@@ -61,17 +61,32 @@ const validationAddFAQ = Joi.array().items(
         ...templatesMsgJoi('Запитання').commonRules,
         ...templatesMsgJoi('Запитання').textRules,
       }),
-    answer: Joi.string()
-      .description('Відповідь на запитання')
-      .note('input')
-      .example('Введіть відповідь на запитання')
-      .min(patterns.min.question)
-      .max(patterns.max.question)
+    answer: Joi.object({
+      text: Joi.string()
+        .description('Відповідь на запитання текстом')
+        .note('input')
+        .example('Введіть відповідь на запитання текстом')
+        .min(patterns.min.answer)
+        .max(patterns.max.answer)
+        .required()
+        .messages({
+          ...templatesMsgJoi('Відповідь на запитання текстом').commonRules,
+          ...templatesMsgJoi('Відповідь на запитання текстом').textRules,
+        }),
+      markup: Joi.string()
+        .description('Відповідь на запитання розміткою')
+        .note('input')
+        .example('Введіть відповідь на запитання розміткою')
+        .min(patterns.min.answer)
+        .max(patterns.max.answer)
+        .required()
+        .messages({
+          ...templatesMsgJoi('Відповідь на запитання розміткою').commonRules,
+          ...templatesMsgJoi('Відповідь на запитання розміткою').textRules,
+        }),
+    })
       .required()
-      .messages({
-        ...templatesMsgJoi('Відповідь на запитання').commonRules,
-        ...templatesMsgJoi('Відповідь на запитання').textRules,
-      }),
+      .messages(templatesMsgJoi("Об'єкт відповіді на запитання").commonRules),
     answerImages: Joi.array().items(
       Joi.object({
         url: Joi.string()
@@ -111,6 +126,16 @@ const validationAddFAQ = Joi.array().items(
 );
 
 const validationUpdateFAQ = Joi.object({
+  faqId: Joi.string()
+    .description('ІД запитання')
+    .note('input')
+    .example('Зазначте ІД запитання')
+    .length(24)
+    .required()
+    .messages({
+      ...templatesMsgJoi('ІД запитання').commonRules,
+      ...templatesMsgJoi('ІД запитання').textRules,
+    }),
   question: Joi.string()
     .description('Запитання')
     .note('input')
@@ -118,13 +143,30 @@ const validationUpdateFAQ = Joi.object({
     .min(patterns.min.question)
     .max(patterns.max.question)
     .messages(templatesMsgJoi('Запитання').textRules),
-  answer: Joi.string()
-    .description('Відповідь на запитання')
-    .note('input')
-    .example('Введіть відповідь на запитання')
-    .min(patterns.min.question)
-    .max(patterns.max.question)
-    .messages(templatesMsgJoi('Запитання').textRules),
+  answer: Joi.object({
+    text: Joi.string()
+      .description('Відповідь на запитання текстом')
+      .note('input')
+      .example('Введіть відповідь на запитання текстом')
+      .min(patterns.min.answer)
+      .max(patterns.max.answer)
+      .required()
+      .messages({
+        ...templatesMsgJoi('Відповідь на запитання текстом').commonRules,
+        ...templatesMsgJoi('Відповідь на запитання текстом').textRules,
+      }),
+    markup: Joi.string()
+      .description('Відповідь на запитання розміткою')
+      .note('input')
+      .example('Введіть відповідь на запитання розміткою')
+      .min(patterns.min.answer)
+      .max(patterns.max.answer)
+      .required()
+      .messages({
+        ...templatesMsgJoi('Відповідь на запитання розміткою').commonRules,
+        ...templatesMsgJoi('Відповідь на запитання розміткою').textRules,
+      }),
+  }).messages(templatesMsgJoi("Об'єкт відповіді на запитання").commonRules),
   answerImages: Joi.array().items(
     Joi.object({
       url: Joi.string()
@@ -132,22 +174,14 @@ const validationUpdateFAQ = Joi.object({
         .note('input')
         .example('Завантажте зображення для відповіді')
         .uri()
-        .required()
-        .messages({
-          ...templatesMsgJoi('URL фото').urlRules,
-          ...templatesMsgJoi('URL фото').commonRules,
-        }),
+        .messages(templatesMsgJoi('URL фото').urlRules),
       alt: Joi.string()
         .description('Опис зображення для відповіді')
         .note('input')
         .example('Введіть опис зображення для відповіді')
         .min(patterns.min.alt)
         .max(patterns.max.alt)
-        .required()
-        .messages({
-          ...templatesMsgJoi('Опис зображення для відповіді').textRules,
-          ...templatesMsgJoi('Опис зображення для відповіді').commonRules,
-        }),
+        .messages(templatesMsgJoi('Опис зображення для відповіді').textRules),
     }).messages(templatesMsgJoi('Масив зображень для відповіді').arrayRules),
   ),
   isShowInChat: Joi.boolean()
@@ -157,37 +191,62 @@ const validationUpdateFAQ = Joi.object({
     .messages(templatesMsgJoi('Відображення запитання у чаті').booleanRules),
 });
 
-const answerImages = new Schema({
-  url: {
-    type: String,
-    default: '',
+const answerImagesSchema = new Schema(
+  {
+    url: {
+      type: String,
+      default: '',
+    },
+    alt: {
+      type: String,
+      default: 'Some image',
+    },
   },
-  alt: {
-    type: String,
-    default: 'Some image',
+  {
+    versionKey: false,
   },
-});
+);
 
-const questionSchema = new Schema({
-  question: {
-    type: String,
-    required: true,
+const answerSchema = new Schema(
+  {
+    text: {
+      type: String,
+      default: '',
+    },
+    markup: {
+      type: String,
+      default: '',
+    },
   },
-  answer: {
-    type: String,
-    required: true,
+  {
+    versionKey: false,
+    _id: false,
   },
-  answerImages: [answerImages],
-  isShowInChat: {
-    type: Boolean,
-    default: true,
+);
+
+const questionSchema = new Schema(
+  {
+    question: {
+      type: String,
+      required: true,
+    },
+    answer: {
+      type: answerSchema,
+      required: true,
+    },
+    answerImages: [answerImagesSchema],
+    isShowInChat: {
+      type: Boolean,
+      default: true,
+    },
+    creator: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+      required: true,
+    },
   },
-  creator: {
-    type: Schema.Types.ObjectId,
-    ref: 'user',
-    required: true,
-  },
-});
+  { versionKey: false, timestamps: true },
+);
 
 const questionGroupSchema = new Schema(
   {
