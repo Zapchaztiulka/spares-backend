@@ -1,7 +1,7 @@
 const {
   faq: { FAQ },
 } = require('../../models');
-const { checkNotFound } = require('../../helpers');
+const { HttpError, checkNotFound } = require('../../helpers');
 
 module.exports = async (req, res) => {
   const { id } = req.params;
@@ -17,10 +17,12 @@ module.exports = async (req, res) => {
     questions = questionGroup.questions.filter(
       question => question.isShowInChat === Boolean(!isShow),
     );
-  } else {
+  } else if (isShow === 'true') {
     questions = questionGroup.questions.filter(
       question => question.isShowInChat === Boolean(isShow),
     );
+  } else {
+    throw HttpError(400, 'Parameter "isShow" must be only "true" or "false"');
   }
 
   const totalCount = questions.length;
