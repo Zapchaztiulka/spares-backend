@@ -7,180 +7,175 @@ const {
   patterns,
 } = require('../helpers');
 
-const validationAddProducts = Joi.array().items(
-  Joi.object({
-    name: Joi.string()
-      .description('Назва товару')
-      .note('input')
-      .example('Введіть назву товару')
-      .min(patterns.min.productName)
-      .max(patterns.max.productName)
-      .required()
-      .messages({
-        ...templatesMsgJoi('Назва товару').commonRules,
-        ...templatesMsgJoi('Назва товару').textRules,
-      }),
-    vendorCode: Joi.string()
-      .description('Артикул товару (код виробника)')
-      .note('input')
-      .example('Введіть артикул товару')
-      .min(patterns.min.vendorCode)
-      .max(patterns.max.vendorCode)
-      .allow('')
-      .messages(templatesMsgJoi('Артикул товару').textRules),
-    price: Joi.number()
-      .description('Ціна за одиницю товару')
-      .note('input')
-      .example('Введіть ціну за одиницю товару')
-      .min(patterns.min.price)
-      .max(patterns.max.price)
-      .required()
-      .messages({
-        ...templatesMsgJoi('Ціна').numberRules,
-        ...templatesMsgJoi('Ціна').commonRules,
-      }),
-    availability: Joi.string()
-      .description('Доступність товару на складі')
-      .note('select')
-      .example('Оберіть доступність товару на складі')
-      .valid(...patterns.availability)
-      .required()
-      .messages({
-        ...templatesMsgJoi('Доступність товару', patterns.availability)
-          .enumRules,
-        ...templatesMsgJoi('Доступність товару').commonRules,
-      }),
-    weight: Joi.number()
-      .description('Вага товару (в кг)')
-      .note('input')
-      .example('Введіть вагу товару (в кг)')
-      .min(patterns.min.weight)
-      .max(patterns.max.weight)
-      .messages(templatesMsgJoi('Вага товару').numberRules),
-    units: Joi.string()
-      .description('Одиниця вимірювання товару')
-      .note('select')
-      .example('Оберіть одиниці вимірювання товару')
-      .valid(...patterns.units)
-      .messages(
-        templatesMsgJoi('Одиниця вимірювання', patterns.units).enumRules,
-      ),
-    quantity: Joi.number()
-      .description('Кількість товару')
-      .note('input')
-      .example('Введіть кількість товару')
-      .min(patterns.min.quantity)
-      .max(patterns.max.quantity)
-      .messages({
-        ...templatesMsgJoi('Кількість товару').numberRules,
-        ...templatesMsgJoi('Кількість товару').integerNumberRules,
-        ...templatesMsgJoi('Кількість товару').commonRules,
-      }),
-    photo: Joi.array().items(
-      Joi.object({
-        url: Joi.string()
-          .description('Фото товару')
-          .note('input')
-          .example('Завантажте фото товару')
-          .uri()
-          .required()
-          .messages({
-            ...templatesMsgJoi('URL фото').urlRules,
-            ...templatesMsgJoi('URL фото').commonRules,
-          }),
-        alt: Joi.string()
-          .description('Опис фотографії товару')
-          .note('input')
-          .example('Введіть опис фотографії товару')
-          .min(patterns.min.alt)
-          .max(patterns.max.alt)
-          .required()
-          .messages({
-            ...templatesMsgJoi('Опис фотографії товару').textRules,
-            ...templatesMsgJoi('Опис фотографії товару').commonRules,
-          }),
-      }).messages(templatesMsgJoi('Фотографія товару').arrayRules),
-    ),
-    description: Joi.string()
-      .description('Опис товару')
-      .note('input')
-      .example('Введіть опис товару')
-      .allow('')
-      .min(patterns.min.description)
-      .max(patterns.max.description)
-      .messages(templatesMsgJoi('Опис товару').textRules),
-    manufacturer: Joi.object({
-      country: Joi.string()
-        .description('Країна виробництва товару')
-        .note('input')
-        .example('Введіть країну виробництва товару')
-        .allow('')
-        .min(patterns.min.manufacturer)
-        .max(patterns.max.manufacturer)
-        .messages(templatesMsgJoi('Країна виробництва').textRules),
-      factory: Joi.string()
-        .description('Завод-виробник товару')
-        .note('input')
-        .example('Введіть завод-виробник товару')
-        .allow('')
-        .min(patterns.min.manufacturer)
-        .max(patterns.max.manufacturer)
-        .messages(templatesMsgJoi('Завод-виробник').textRules),
-      trademark: Joi.string()
-        .description('Торгова марка')
-        .note('input')
-        .example('Введіть торгову марка')
-        .min(patterns.min.manufacturer)
-        .max(patterns.max.manufacturer)
-        .required()
-        .messages({
-          ...templatesMsgJoi('Торгова марка').textRules,
-          ...templatesMsgJoi('Торгова марка').commonRules,
-        }),
-    })
-      .required()
-      .messages(
-        templatesMsgJoi('Дані по виробнику і торговій марці').commonRules,
-      ),
-    categories: Joi.array()
-      .items(
-        Joi.string()
-          .description('Категорія товару')
-          .note('input')
-          .example('Оберіть категорію товару')
-          .length(24)
-          .required()
-          .messages({
-            ...templatesMsgJoi('ІД категорії товару').commonRules,
-            ...templatesMsgJoi('ІД категорії товару').textRules,
-          }),
-      )
-      .required()
-      .messages({
-        ...templatesMsgJoi('Масив категорій товарів').arrayRules,
-        ...templatesMsgJoi('Масив категорій товарів').commonRules,
-      }),
-    subcategories: Joi.array()
-      .items(
-        Joi.string()
-          .description('Підкатегорія товару')
-          .note('input')
-          .example('Оберіть підкатегорію товару')
-          .length(24)
-          .required()
-          .messages({
-            ...templatesMsgJoi('ІД підкатегорії товару').commonRules,
-            ...templatesMsgJoi('ІД підкатегорії товару').textRules,
-          }),
-      )
-      .messages(templatesMsgJoi('Підкатегорії товару').arrayRules),
-  })
+const validationAddOneProduct = Joi.object({
+  name: Joi.string()
+    .description('Назва товару')
+    .note('input')
+    .example('Введіть назву товару')
+    .min(patterns.min.productName)
+    .max(patterns.max.productName)
     .required()
     .messages({
-      ...templatesMsgJoi('Додавання нових товарів').arrayRules,
-      ...templatesMsgJoi('Додавання нових товарів').commonRules,
+      ...templatesMsgJoi('Назва товару').commonRules,
+      ...templatesMsgJoi('Назва товару').textRules,
     }),
-);
+  vendorCode: Joi.string()
+    .description('Артикул товару (код виробника)')
+    .note('input')
+    .example('Введіть артикул товару')
+    .min(patterns.min.vendorCode)
+    .max(patterns.max.vendorCode)
+    .allow('')
+    .messages(templatesMsgJoi('Артикул товару').textRules),
+  price: Joi.number()
+    .description('Ціна за одиницю товару')
+    .note('input')
+    .example('Введіть ціну за одиницю товару')
+    .min(patterns.min.price)
+    .max(patterns.max.price)
+    .required()
+    .messages({
+      ...templatesMsgJoi('Ціна').numberRules,
+      ...templatesMsgJoi('Ціна').commonRules,
+    }),
+  availability: Joi.string()
+    .description('Доступність товару на складі')
+    .note('select')
+    .example('Оберіть доступність товару на складі')
+    .valid(...patterns.availability)
+    .required()
+    .messages({
+      ...templatesMsgJoi('Доступність товару', patterns.availability).enumRules,
+      ...templatesMsgJoi('Доступність товару').commonRules,
+    }),
+  weight: Joi.number()
+    .description('Вага товару (в кг)')
+    .note('input')
+    .example('Введіть вагу товару (в кг)')
+    .min(patterns.min.weight)
+    .max(patterns.max.weight)
+    .messages(templatesMsgJoi('Вага товару').numberRules),
+  units: Joi.string()
+    .description('Одиниця вимірювання товару')
+    .note('select')
+    .example('Оберіть одиниці вимірювання товару')
+    .valid(...patterns.units)
+    .messages(templatesMsgJoi('Одиниця вимірювання', patterns.units).enumRules),
+  quantity: Joi.number()
+    .description('Кількість товару')
+    .note('input')
+    .example('Введіть кількість товару')
+    .min(patterns.min.quantity)
+    .max(patterns.max.quantity)
+    .messages({
+      ...templatesMsgJoi('Кількість товару').numberRules,
+      ...templatesMsgJoi('Кількість товару').integerNumberRules,
+      ...templatesMsgJoi('Кількість товару').commonRules,
+    }),
+  photo: Joi.array().items(
+    Joi.object({
+      url: Joi.string()
+        .description('Фото товару')
+        .note('input')
+        .example('Завантажте фото товару')
+        .uri()
+        .required()
+        .messages({
+          ...templatesMsgJoi('URL фото').urlRules,
+          ...templatesMsgJoi('URL фото').commonRules,
+        }),
+      alt: Joi.string()
+        .description('Опис фотографії товару')
+        .note('input')
+        .example('Введіть опис фотографії товару')
+        .min(patterns.min.alt)
+        .max(patterns.max.alt)
+        .required()
+        .messages({
+          ...templatesMsgJoi('Опис фотографії товару').textRules,
+          ...templatesMsgJoi('Опис фотографії товару').commonRules,
+        }),
+    }).messages(templatesMsgJoi('Фотографія товару').arrayRules),
+  ),
+  description: Joi.string()
+    .description('Опис товару')
+    .note('input')
+    .example('Введіть опис товару')
+    .allow('')
+    .min(patterns.min.description)
+    .max(patterns.max.description)
+    .messages(templatesMsgJoi('Опис товару').textRules),
+  manufacturer: Joi.object({
+    country: Joi.string()
+      .description('Країна виробництва товару')
+      .note('input')
+      .example('Введіть країну виробництва товару')
+      .allow('')
+      .min(patterns.min.manufacturer)
+      .max(patterns.max.manufacturer)
+      .messages(templatesMsgJoi('Країна виробництва').textRules),
+    factory: Joi.string()
+      .description('Завод-виробник товару')
+      .note('input')
+      .example('Введіть завод-виробник товару')
+      .allow('')
+      .min(patterns.min.manufacturer)
+      .max(patterns.max.manufacturer)
+      .messages(templatesMsgJoi('Завод-виробник').textRules),
+    trademark: Joi.string()
+      .description('Торгова марка')
+      .note('input')
+      .example('Введіть торгову марка')
+      .min(patterns.min.manufacturer)
+      .max(patterns.max.manufacturer)
+      .required()
+      .messages({
+        ...templatesMsgJoi('Торгова марка').textRules,
+        ...templatesMsgJoi('Торгова марка').commonRules,
+      }),
+  })
+    .required()
+    .messages(
+      templatesMsgJoi('Дані по виробнику і торговій марці').commonRules,
+    ),
+  categories: Joi.array()
+    .items(
+      Joi.string()
+        .description('Категорія товару')
+        .note('input')
+        .example('Оберіть категорію товару')
+        .length(24)
+        .required()
+        .messages({
+          ...templatesMsgJoi('ІД категорії товару').commonRules,
+          ...templatesMsgJoi('ІД категорії товару').textRules,
+        }),
+    )
+    .required()
+    .messages({
+      ...templatesMsgJoi('Масив категорій товарів').arrayRules,
+      ...templatesMsgJoi('Масив категорій товарів').commonRules,
+    }),
+  subcategories: Joi.array()
+    .items(
+      Joi.string()
+        .description('Підкатегорія товару')
+        .note('input')
+        .example('Оберіть підкатегорію товару')
+        .length(24)
+        .messages(templatesMsgJoi('ІД підкатегорії товару').textRules),
+    )
+    .allow(null)
+    .messages(templatesMsgJoi('Підкатегорії товару').arrayRules),
+});
+
+const validationAddProducts = Joi.array()
+  .items(validationAddOneProduct)
+  .required()
+  .messages({
+    ...templatesMsgJoi('Масив додавання товарів').arrayRules,
+    ...templatesMsgJoi('Масив додавання товарів').commonRules,
+  });
 
 const validationUpdateProduct = Joi.object({
   name: Joi.string()
@@ -426,6 +421,7 @@ const Product = model('product', productSchema);
 
 module.exports = {
   Product,
+  validationAddOneProduct,
   validationAddProducts,
   validationUpdateProduct,
   validationProductIdsArray,

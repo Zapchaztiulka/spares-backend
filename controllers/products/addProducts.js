@@ -2,7 +2,7 @@ const {
   product: { Product },
   category: { Category },
 } = require('../../models');
-const { HttpError, patterns } = require('../../helpers');
+const { HttpError } = require('../../helpers');
 const {
   checkAccessToAddPhoto,
   checkQuantityInRequest,

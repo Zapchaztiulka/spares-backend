@@ -32,6 +32,7 @@ router.post(
   uploadFile.single('file'),
   ctrl.uploadProducts,
 );
+
 router.post(
   '/',
   checkRequestBody,

@@ -5,10 +5,10 @@ const {
 
 module.exports = async (products, userId) => {
   for (const product of products) {
-    const categoryIds = JSON.parse(product.categories).map(
+    const categoryIds = product.categories.map(
       id => new mongoose.Types.ObjectId(id),
     );
-    const subcategoryIds = JSON.parse(product.subcategories).map(
+    const subcategoryIds = product.subcategories.map(
       id => new mongoose.Types.ObjectId(id),
     );
 
@@ -29,8 +29,5 @@ module.exports = async (products, userId) => {
       _id: category.subcategories._id,
       subcategoryName: category.subcategories.subcategoryName,
     }));
-
-    product.photo = JSON.parse(product.photo);
-    product.creator = userId;
   }
 };
