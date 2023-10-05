@@ -6,7 +6,7 @@ const { checkNotFound } = require('../../helpers');
 module.exports = async (req, res) => {
   const { _id: userId } = req.user;
   const { id: questionGroupId } = req.params;
-  const { faqId, question, answer } = req.body;
+  const { faqId, question, answer, answerImages, isShowInChat } = req.body;
 
   const existingQuestionGroup = await FAQ.findById(questionGroupId);
   await checkNotFound(existingQuestionGroup, questionGroupId, 'Question group');
@@ -23,6 +23,16 @@ module.exports = async (req, res) => {
 
   if (answer) {
     faqToUpdate.answer = answer;
+    faqToUpdate.creator = userId;
+  }
+
+  if (answerImages) {
+    faqToUpdate.answerImages = answerImages;
+    faqToUpdate.creator = userId;
+  }
+
+  if (isShowInChat !== undefined) {
+    faqToUpdate.isShowInChat = isShowInChat;
     faqToUpdate.creator = userId;
   }
 
