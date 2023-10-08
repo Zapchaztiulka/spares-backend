@@ -1,7 +1,10 @@
 const photoConversion = (photoString, productName) => {
   let photoArray = [];
   if (photoString) {
-    const stringWithoutSpaces = photoString.replace(/\s+/g, '');
+    const stringWithoutSpaces = photoString
+      .toString()
+      .trim()
+      .replace(/\s+/g, '');
     const urls = stringWithoutSpaces.split(',');
     photoArray = urls.map(url => {
       return {
@@ -15,9 +18,9 @@ const photoConversion = (photoString, productName) => {
 
 const manufacturerConversion = (country, factory, trademark) => {
   const manufacturer = {
-    country: country || '',
-    factory: factory || '',
-    trademark,
+    country: country?.toString().trim() || '',
+    factory: factory?.toString().trim() || '',
+    trademark: trademark?.toString().trim(),
   };
 
   return manufacturer;
@@ -26,7 +29,7 @@ const manufacturerConversion = (country, factory, trademark) => {
 const stringToArray = string => {
   let array = [];
   if (string) {
-    const stringWithoutSpaces = string.replace(/\s+/g, '');
+    const stringWithoutSpaces = string?.toString().trim().replace(/\s+/g, '');
     array = stringWithoutSpaces.split(',');
     return array;
   }

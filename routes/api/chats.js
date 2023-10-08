@@ -10,13 +10,17 @@ const {
   checkRequestBody,
 } = require('../../middlewares');
 const {
-  chat: { validationUserId },
+  chat: { validationUserId, validationChatRoomStatus },
 } = require('../../models');
 const { patterns } = require('../../helpers');
 
 const router = express.Router();
 
-// router.get('/', ctrl.getAllCategories);
+router.get(
+  '/',
+  validateBody(validationChatRoomStatus),
+  ctrl.getChatRoomsByStatus,
+);
 router.get(
   '/chatRoom/:id',
   checkRequestBody,

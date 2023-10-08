@@ -32,6 +32,12 @@ socketIO.on('connection', socket => {
     }
   });
 
+  // Обробка чат-кімнати
+  socket.on('newChat', ({ chatRoom }) => {
+    socketIO.emit('newChat', { chatRoom });
+    console.log('🚀 ~ file: server.js:39 ~ socket.on ~ chatRoom:', chatRoom);
+  });
+
   socket.on('disconnect', () => {
     // Видаляємо зв'язок соксета з користовачем при відключенні
     const userId = socketUserMap.get(socket.id);

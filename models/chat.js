@@ -16,6 +16,17 @@ const validationUserId = Joi.object({
     .messages(templatesMsgJoi('ІД користувача').textRules),
 });
 
+const validationChatRoomStatus = Joi.object({
+  chatRoomStatus: Joi.string()
+    .description('Статус чат-кімнати')
+    .note('input')
+    .example('Введіть статус чат-кімнати')
+    .valid(...patterns.chatRoomStatus)
+    .messages(
+      templatesMsgJoi('Статус чат-кімнати', patterns.chatRoomStatus).enumRules,
+    ),
+});
+
 const messageSchema = new Schema(
   {
     messageOwner: {
@@ -92,4 +103,5 @@ const Chat = model('chat', chatSchema);
 module.exports = {
   Chat,
   validationUserId,
+  validationChatRoomStatus,
 };
