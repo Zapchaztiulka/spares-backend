@@ -1,3 +1,5 @@
+const { changeIsUserOnline } = require('../../helpers/chatHelper');
+
 const {
   chat: { Chat },
 } = require('../../models');
@@ -6,6 +8,8 @@ const { checkNotFound, patterns } = require('../../helpers');
 module.exports = async (req, res) => {
   const { id: roomId } = req.params;
   const { userId } = req.body;
+
+  const socketIO = req.app.get('socketIO');
 
   const chat = await Chat.findOne({ userId });
 
@@ -22,6 +26,10 @@ module.exports = async (req, res) => {
   }
 
   roomToComplete.chatRoomStatus = patterns.chatRoomStatus[1];
+
+  chat.isOnline = false;
+
+  await changeIsUserOnline(socketIO, userId, false);
 
   await chat.save();
   return res.status(200).json({

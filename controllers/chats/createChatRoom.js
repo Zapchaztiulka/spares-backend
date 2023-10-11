@@ -20,8 +20,10 @@ module.exports = async (req, res) => {
 
   if (!existingRoom) {
     chat.chatRooms.push({ userId });
-    await chat.save();
   }
+
+  chat.isOnline = true;
+  await chat.save();
 
   const updatedChat = await Chat.findOne({ userId });
 

@@ -16,11 +16,7 @@ const { patterns } = require('../../helpers');
 
 const router = express.Router();
 
-router.get(
-  '/',
-  validateBody(validationChatRoomStatus),
-  ctrl.getChatRoomsByStatus,
-);
+router.get('/', ctrl.getChatRoomsByStatus);
 router.get(
   '/chatRoom/:id',
   checkRequestBody,

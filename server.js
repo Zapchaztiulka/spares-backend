@@ -8,22 +8,26 @@ const cors = require('cors');
 
 const { DB_HOST, PORT = 5000, SECRET_KEY } = process.env;
 
+const { changeIsUserOnline } = require('./helpers/chatHelper');
+
 const socketIO = require('socket.io')(http, {
   cors: {
     origin: '*', // замінити на бойове посилання веб-сайту чату
   },
 });
 
+app.set('socketIO', socketIO);
 const socketUserMap = new Map();
 
 socketIO.on('connection', socket => {
-  socket.on('authentication', ({ token }) => {
+  socket.on('authentication', async ({ token }) => {
     try {
       const decoded = jwt.verify(token, SECRET_KEY);
       const userId = decoded.userId;
 
       // Зв'язуємо соксет с userId
       socketUserMap.set(socket.id, userId);
+      await changeIsUserOnline(socketIO, userId, true);
 
       console.log(`Socket ${socket.id} is authenticated for user ${userId}`);
     } catch (err) {
@@ -35,17 +39,17 @@ socketIO.on('connection', socket => {
   // Обробка чат-кімнати
   socket.on('newChat', ({ chatRoom }) => {
     socketIO.emit('newChat', { chatRoom });
-    console.log('🚀 ~ file: server.js:39 ~ socket.on ~ chatRoom:', chatRoom);
   });
 
-  socket.on('disconnect', () => {
+  socket.on('disconnect', async () => {
     // Видаляємо зв'язок соксета з користовачем при відключенні
     const userId = socketUserMap.get(socket.id);
     if (userId) {
+      await changeIsUserOnline(socketIO, userId, false);
       socketUserMap.delete(socket.id);
       console.log(`${socket.id} socket (userId: ${userId}) was disconnected`);
     } else {
-      console.log(`${socket.id} user was disconnected`);
+      console.log(`${userId} user was disconnected`);
     }
   });
 });
