@@ -43,6 +43,7 @@ const validationOrderByUser = Joi.object({
 const validationOrderByAny = Joi.object({
   phone: Joi.string()
     .pattern(patterns.phonePattern)
+    .required()
     .messages(
       templatesMsgJoi('Phone', patterns.phonePatternMessage).regExpRules,
     ),
@@ -83,6 +84,29 @@ const validationOrderByAny = Joi.object({
 });
 
 const validationUpdateOrder = Joi.object({
+  username: Joi.string()
+    .description("Ім'я користувача")
+    .note('input')
+    .example("Введіть ім'я користувача")
+    .min(patterns.min.user)
+    .max(patterns.max.user)
+    .messages(templatesMsgJoi("Ім'я користувача").textRules),
+  userSurname: Joi.string()
+    .description('Прізвище користувача')
+    .note('input')
+    .example('Введіть прізвище користувача')
+    .min(patterns.min.user)
+    .max(patterns.max.user)
+    .messages(templatesMsgJoi('Прізвище користувача').textRules),
+  phone: Joi.string()
+    .pattern(patterns.phonePattern)
+    .messages(
+      templatesMsgJoi('Phone', patterns.phonePatternMessage).regExpRules,
+    ),
+  email: Joi.string()
+    .email({ minDomainSegments: 2 })
+    .pattern(patterns.emailPattern)
+    .messages(templatesMsgJoi('Email').emailRules),
   status: Joi.string()
     .valid(...patterns.orderStatus)
     .required()
@@ -207,6 +231,10 @@ const orderSchema = new Schema(
       default: 0,
     },
     totalProducts: {
+      type: Number,
+      default: 0,
+    },
+    totalPrice: {
       type: Number,
       default: 0,
     },

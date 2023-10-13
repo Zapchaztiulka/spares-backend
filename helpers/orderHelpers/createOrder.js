@@ -1,5 +1,6 @@
 const {
   product: { Product },
+  user: { User },
 } = require('../../models');
 const { checkNotFound } = require('..');
 const { checkAvailableProductInStock } = require('../productHelpers');
@@ -34,30 +35,44 @@ module.exports = async (products, user, phone, email, adminTag) => {
     0,
   );
 
+  const totalPrice = productDetails.reduce(
+    (total, product) => total + product.quantity * product.price,
+    0,
+  );
+
   const orderData = {
     products: productDetails,
     totalTypeOfProducts: productDetails.length,
     totalProducts,
+    totalPrice,
     adminTag,
   };
 
-  if (user) {
+  let userToUse = user;
+
+  if (!user) {
+    userToUse = await User.findOne({ phone });
+
+    if (!userToUse) {
+      orderData.email = email;
+      orderData.phone = phone;
+    }
+  }
+
+  if (userToUse) {
     const {
       _id,
       username,
       userSurname,
       email: userEmail,
       phone: userPhone,
-    } = user;
+    } = userToUse;
 
     orderData.userId = _id;
     orderData.username = username;
     orderData.userSurname = userSurname;
     orderData.email = userEmail;
     orderData.phone = userPhone;
-  } else {
-    orderData.email = email;
-    orderData.phone = phone;
   }
 
   return orderData;

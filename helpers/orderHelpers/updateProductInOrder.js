@@ -63,6 +63,10 @@ module.exports = async (order, productUpdates) => {
     (total, product) => total + product.quantity,
     0,
   );
+  updatedOrder.totalPrice = updatedOrder.products.reduce(
+    (total, product) => total + product.quantity * product.price,
+    0,
+  );
   updatedOrder.updatedAt = new Date();
 
   return updatedOrder;

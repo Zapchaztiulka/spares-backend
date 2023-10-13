@@ -6,9 +6,18 @@ const {
   updateProductInOrder,
   updateProductQuantitiesInStock,
 } = require('../../helpers/orderHelpers');
+const { checkExistingUserData } = require('../../helpers/userHelpers');
 
 module.exports = async (req, res) => {
-  const { products, status: newStatus, adminTag: newAdminTag } = req.body;
+  const {
+    username: newUsername,
+    userSurname: newUserSurname,
+    phone: newPhone,
+    email: newEmail,
+    products,
+    status: newStatus,
+    adminTag: newAdminTag,
+  } = req.body;
 
   if (!products || !newStatus) {
     throw HttpError(400, 'Missing fields "products" or "status"');
@@ -20,6 +29,24 @@ module.exports = async (req, res) => {
 
   const updatedOrder = await updateProductInOrder(order, products);
   updatedOrder.status = newStatus;
+
+  if (newUsername) {
+    updatedOrder.username = newUsername;
+  }
+
+  if (newUserSurname) {
+    updatedOrder.userSurname = newUserSurname;
+  }
+
+  if (newPhone) {
+    await checkExistingUserData(newPhone, 'phone');
+    updatedOrder.phone = newPhone;
+  }
+
+  if (newEmail) {
+    await checkExistingUserData(newEmail, 'email');
+    updatedOrder.email = newEmail;
+  }
 
   if (newAdminTag) {
     updatedOrder.adminTag = newAdminTag;

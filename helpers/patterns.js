@@ -3,13 +3,6 @@ const alphabet =
 const availability = ['є в наявності', 'під замовлення', 'відсутній'];
 const units = ['кг', 'шт', 'л'];
 const roles = ['superAdmin', 'admin', 'user'];
-// const orderStatus = [
-//   'в обробці',
-//   'підтверджено',
-//   'замовлення виконано',
-//   'замовлення скасовано',
-//   'замовлення повернуто',
-// ];
 const orderStatus = [
   'нове',
   'підтверджено',

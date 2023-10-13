@@ -6,6 +6,7 @@ const {
   user: { User },
 } = require('../../models');
 const { HttpError, patterns } = require('../../helpers');
+const { checkExistingUserData } = require('../../helpers/userHelpers');
 const { sendEmailForVerification } = require('../../helpers/sendEmail');
 const { EXPIRES_VERIFICATION_TOKEN } = process.env;
 
@@ -27,13 +28,8 @@ module.exports = async (req, res) => {
         }
       : {};
 
-  const user = await User.findOne({ email: pureEmail });
-  if (user) {
-    throw HttpError(
-      409,
-      `Email: ${email} has already registered. Please log in`,
-    );
-  }
+  await checkExistingUserData(pureEmail, 'email');
+  await checkExistingUserData(purePhone, 'phone');
 
   const generatedToken = customAlphabet(patterns.alphabet, 20);
   const hashPassword = await bcrypt.hash(purePassword, 10);
