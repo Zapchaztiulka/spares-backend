@@ -3,13 +3,28 @@ const alphabet =
 const availability = ['є в наявності', 'під замовлення', 'відсутній'];
 const units = ['кг', 'шт', 'л'];
 const roles = ['superAdmin', 'admin', 'user'];
+// const orderStatus = [
+//   'в обробці',
+//   'підтверджено',
+//   'замовлення виконано',
+//   'замовлення скасовано',
+//   'замовлення повернуто',
+// ];
 const orderStatus = [
-  'в обробці',
+  'нове',
   'підтверджено',
-  'замовлення виконано',
-  'замовлення скасовано',
-  'замовлення повернуто',
+  'комплектується',
+  'передано в службу доставки',
+  'очікує клієнта в пункті видачі',
+  "очікує вручення кур'єром",
+  'очікується післяплата',
+  'завершено',
+  'рекламація',
+  'повернуто',
+  'забраковано',
+  'скасовано',
 ];
+
 const productSortRules = [
   'name',
   'manufacturer.trademark',
@@ -22,6 +37,7 @@ const productSortRules = [
 ];
 const chatRoomStatus = ['in progress', 'completed'];
 const chatRating = [1, 2, 3, 4, 5];
+const messageType = ['text', 'image'];
 
 const min = {
   user: 3,
@@ -89,6 +105,7 @@ const patterns = {
   productSortRules,
   chatRoomStatus,
   chatRating,
+  messageType,
   companyData,
 };
 

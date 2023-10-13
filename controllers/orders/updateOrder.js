@@ -1,7 +1,7 @@
 const {
   order: { Order },
 } = require('../../models');
-const { HttpError, patterns, checkNotFound } = require('../../helpers');
+const { HttpError, checkNotFound } = require('../../helpers');
 const {
   updateProductInOrder,
   updateProductQuantitiesInStock,
@@ -17,17 +17,6 @@ module.exports = async (req, res) => {
   const { id } = req.params;
   const order = await Order.findById(id);
   await checkNotFound(order, id, 'Order');
-
-  const previousStatus = order.status;
-  if (
-    previousStatus !== patterns.orderStatus[0] &&
-    previousStatus !== patterns.orderStatus[1]
-  ) {
-    throw HttpError(
-      403,
-      `Forbidden. Admin can update the order which has status "${patterns.orderStatus[0]}" or "${patterns.orderStatus[1]}"`,
-    );
-  }
 
   const updatedOrder = await updateProductInOrder(order, products);
   updatedOrder.status = newStatus;

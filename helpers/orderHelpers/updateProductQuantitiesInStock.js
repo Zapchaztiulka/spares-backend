@@ -6,8 +6,9 @@ const { checkAvailableProductInStock } = require('../productHelpers');
 
 module.exports = async (previousProducts, updatedProducts, status) => {
   if (
-    status === patterns.orderStatus[3] ||
-    status === patterns.orderStatus[4]
+    status === patterns.orderStatus[9] ||
+    status === patterns.orderStatus[10] ||
+    status === patterns.orderStatus[11]
   ) {
     // Increase product quantities in stock for cancelled or returned orders
     for (const product of updatedProducts) {

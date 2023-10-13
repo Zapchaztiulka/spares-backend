@@ -41,6 +41,11 @@ socketIO.on('connection', socket => {
     socketIO.emit('newChat', { chatRoom });
   });
 
+  // Обробка статусу клієнта при згортанні чату
+  socket.on('chatMinimized', async ({ userId, isOnline }) => {
+    await changeIsUserOnline(socketIO, userId, isOnline);
+  });
+
   socket.on('disconnect', async () => {
     // Видаляємо зв'язок соксета з користовачем при відключенні
     const userId = socketUserMap.get(socket.id);

@@ -8,6 +8,7 @@ const {
   hasRole,
   checkAccess,
   checkRequestBody,
+  uploadChatImage,
 } = require('../../middlewares');
 const {
   chat: { validationUserId, validationChatRoomStatus },
@@ -40,6 +41,13 @@ router.post(
 );
 
 router.patch('/chatRoom/:id', isValidId, ctrl.closeChatRoom);
+
+router.patch(
+  '/updateChatRoom/:id',
+  isValidId,
+  uploadChatImage.single('chatImageURL'),
+  ctrl.updateChatRoom,
+);
 
 // router.delete(
 //   '/:id',

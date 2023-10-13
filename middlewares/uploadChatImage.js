@@ -10,11 +10,11 @@ cloudinary.config({
   api_secret: CLOUDINARY_SECRET,
 });
 
-const allowedFormats = ['jpg', 'jpeg', 'png'];
+const allowedFormats = ['jpg', 'jpeg', 'png', 'gif'];
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  folder: 'avatarURL',
+  folder: 'chatImageURL',
   allowedFormats,
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -27,7 +27,7 @@ module.exports = multer({
     if (!allowedFormats.includes(file.mimetype.split('/')[1])) {
       cb(
         new Error(
-          'Invalid avatar file format. Only JPG, JPEG, PNG files are allowed',
+          'Invalid image file format. Only JPG, JPEG, PNG, GIF files are allowed',
         ),
       );
     } else {

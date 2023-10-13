@@ -7,5 +7,5 @@ module.exports = {
   checkRequestBody: require('./checkRequestBody'),
   uploadFile: require('./uploadFile'),
   passportConfig: require('./passportConfig'),
-  uploadCloud: require('./uploadAvatar'),
+  uploadChatImage: require('./uploadChatImage'),
 };

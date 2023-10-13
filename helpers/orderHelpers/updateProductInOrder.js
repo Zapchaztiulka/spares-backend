@@ -29,7 +29,8 @@ module.exports = async (order, productUpdates) => {
       updatedOrder.products[existingProductIndex].name = newProduct.name;
       updatedOrder.products[existingProductIndex].vendorCode =
         newProduct.vendorCode;
-      updatedOrder.products[existingProductIndex].price = newProduct.price;
+      updatedOrder.products[existingProductIndex].price =
+        newProduct.price.value;
     } else {
       const newProduct = await Product.findById(productId);
 
@@ -46,7 +47,7 @@ module.exports = async (order, productUpdates) => {
         quantity,
         name: newProduct.name,
         vendorCode: newProduct.vendorCode,
-        price: newProduct.price,
+        price: newProduct.price.value,
       });
     }
   }

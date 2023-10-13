@@ -23,6 +23,11 @@ const messageSchema = new Schema(
       enum: patterns.roles,
       required: [true, 'The owner of message is required'],
     },
+    messageType: {
+      type: String,
+      enum: patterns.messageType,
+      required: [true, 'The type of message is required'],
+    },
     message: {
       type: String,
       required: [true, 'The message is required'],
@@ -41,6 +46,14 @@ const chatRoomSchema = new Schema(
       default: '',
     },
     managerId: {
+      type: String,
+      default: '',
+    },
+    managerName: {
+      type: String,
+      default: '',
+    },
+    managerSurname: {
       type: String,
       default: '',
     },
