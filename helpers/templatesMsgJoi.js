@@ -1,23 +1,23 @@
 module.exports = (key, data) => {
   const commonRules = {
-    'any.required': `${key} є обов'язковим`,
-    'any.empty': `${key} не може бути порожнім`,
+    'any.required': `Поле "${key}" має бути обов'язково`,
+    'any.empty': `Поле "${key}" не може бути порожнім`,
   };
 
   const textRules = {
-    'string.empty': `${key} не може бути порожнім`,
+    'string.empty': `Поле "${key}" не може бути порожнім`,
     'string.min': `${key} має мати від {#limit} символів`,
     'string.max': `${key} має мати до {#limit} символів`,
     'string.length': `${key} має містити {#limit} символів`,
   };
 
   const urlRules = {
-    'string.empty': `${key} не може бути порожнім`,
+    'string.empty': `Поле "${key}" не може бути порожнім`,
     'string.uri': `Недійсний формат URL для ${key}`,
   };
 
   const emailRules = {
-    'string.empty': `${key} не може бути порожнім`,
+    'string.empty': `Поле "${key}" не може бути порожнім`,
     'string.email': `${key} має бути валідною електронною адресою`,
   };
 
@@ -26,7 +26,7 @@ module.exports = (key, data) => {
   };
 
   const numberRules = {
-    'number.base': `Недійсний тип для ${key}, має бути числом`,
+    'number.base': `Недійсний тип для поля "${key}", має бути числом`,
     'number.min': `${key} має бути ≥ {#limit}`,
     'number.max': `${key} має бути ≤ {#limit}`,
     'number.positive': `${key} має бути додатним числом`,
