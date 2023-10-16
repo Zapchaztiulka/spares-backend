@@ -12,8 +12,86 @@ const validationUserId = Joi.object({
     .description('ІД користувача')
     .note('input')
     .example('Введіть ІД користувача')
+    .length(24)
     .required()
     .messages(templatesMsgJoi('ІД користувача').textRules),
+});
+
+const validationAddMessage = Joi.object({
+  userId: Joi.string()
+    .description('ІД користувача')
+    .note('input')
+    .example('Введіть ІД користувача')
+    .length(24)
+    .required()
+    .messages(templatesMsgJoi('ІД користувача').textRules),
+  message: Joi.object({
+    messageOwner: Joi.string()
+      .description('Ініціатор повідомлення')
+      .note('input')
+      .example('Введіть ініціатора повідомлення')
+      .required()
+      .valid(...patterns.roles)
+      .messages({
+        ...templatesMsgJoi('Ініціатор повідомлення').commonRules,
+        ...templatesMsgJoi('Ініціатор повідомлення').enumRules,
+      }),
+    messageType: Joi.string()
+      .description('Тип повідомлення')
+      .note('input')
+      .example('Введіть тип повідомлення')
+      .required()
+      .valid(...patterns.messageType)
+      .messages({
+        ...templatesMsgJoi('Тип повідомлення').textRules,
+        ...templatesMsgJoi('Тип повідомлення').enumRules,
+      }),
+    messageText: Joi.string()
+      .description('Повідомлення')
+      .note('input')
+      .example('Введіть повідомлення')
+      .min(patterns.min.question)
+      .max(patterns.max.question)
+      .required()
+      .messages({
+        ...templatesMsgJoi('Повідомлення').textRules,
+        ...templatesMsgJoi('Повідомлення').commonRules,
+      }),
+  })
+    .required()
+    .messages(templatesMsgJoi("Об'єкт повідомлення").commonRules),
+});
+
+const validationConnectManager = Joi.object({
+  userId: Joi.string()
+    .description('ІД користувача')
+    .note('input')
+    .example('Введіть ІД користувача')
+    .length(24)
+    .required()
+    .messages(templatesMsgJoi('ІД користувача').textRules),
+  managerId: Joi.string()
+    .description('ІД менеджера')
+    .note('input')
+    .example('Введіть ІД менеджера')
+    .length(24)
+    .messages(templatesMsgJoi('ІД менеджера').textRules),
+  managerName: Joi.string()
+    .description("Ім'я менеджера")
+    .note('input')
+    .example("Введіть ім'я менеджера")
+    .allow('')
+    .min(patterns.min.user)
+    .max(patterns.max.user)
+    .messages(templatesMsgJoi("Ім'я менеджера").textRules),
+  managerSurname: Joi.string()
+    .description('Прізвище менеджера')
+    .note('input')
+    .example('Введіть прізвище менеджера')
+    .allow('')
+    .min(patterns.min.user)
+    .max(patterns.max.user)
+    .messages(templatesMsgJoi('Прізвище менеджера').textRules),
 });
 
 const messageSchema = new Schema(
@@ -28,7 +106,7 @@ const messageSchema = new Schema(
       enum: patterns.messageType,
       required: [true, 'The type of message is required'],
     },
-    message: {
+    messageText: {
       type: String,
       required: [true, 'The message is required'],
     },
@@ -109,4 +187,6 @@ const Chat = model('chat', chatSchema);
 module.exports = {
   Chat,
   validationUserId,
+  validationAddMessage,
+  validationConnectManager,
 };

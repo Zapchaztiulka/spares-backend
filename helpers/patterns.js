@@ -62,7 +62,7 @@ const max = {
   category: 50,
   adminTag: 30,
   questionGroup: 50,
-  question: 50,
+  question: 250,
   answer: 2000,
 };
 

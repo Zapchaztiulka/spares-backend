@@ -17,8 +17,7 @@ module.exports = (schema, typeReq) => {
                 keys[0].schema._preferences.messages['string.min']
                   ._template[0] +
                 keys[0].schema._rules[0].args.limit +
-                keys[0].schema._preferences.messages['string.max']
-                  ._template[0] +
+                ' до ' +
                 keys[0].schema._rules[1].args.limit +
                 keys[0].schema._preferences.messages['string.max']._template[
                   keys[0].schema._preferences.messages['string.max']._template
@@ -42,8 +41,7 @@ module.exports = (schema, typeReq) => {
                 keys[0].schema._preferences.messages['string.min']
                   ._template[0] +
                 keys[0].schema._rules[0].args.limit +
-                keys[0].schema._preferences.messages['string.max']
-                  ._template[0] +
+                ' до ' +
                 keys[0].schema._rules[1].args.limit +
                 keys[0].schema._preferences.messages['string.max']._template[
                   keys[0].schema._preferences.messages['string.max']._template
@@ -64,7 +62,7 @@ module.exports = (schema, typeReq) => {
           length:
             keys[1].schema._preferences.messages['string.min']._template[0] +
             keys[1].schema._rules[0].args.limit +
-            keys[1].schema._preferences.messages['string.max']._template[0] +
+            ' до ' +
             keys[1].schema._rules[1].args.limit +
             keys[1].schema._preferences.messages['string.max']._template[
               keys[1].schema._preferences.messages['string.max']._template
@@ -88,8 +86,7 @@ module.exports = (schema, typeReq) => {
                 keys[2].schema._preferences.messages['number.min']
                   ._template[0] +
                 keys[2].schema._rules[0].args.limit +
-                keys[2].schema._preferences.messages['number.max']
-                  ._template[0] +
+                ' та ≤ ' +
                 keys[2].schema._rules[1].args.limit,
               required:
                 keys[2].schema._preferences.messages['any.required'].rendered,
@@ -111,9 +108,7 @@ module.exports = (schema, typeReq) => {
                   'number.min'
                 ]._template[0] +
                 keys[2].schema.$_terms.keys[0].schema._rules[0].args.limit +
-                keys[2].schema.$_terms.keys[0].schema._preferences.messages[
-                  'number.max'
-                ]._template[0] +
+                ' та ≤ ' +
                 keys[2].schema.$_terms.keys[0].schema._rules[1].args.limit,
             },
           },
@@ -155,7 +150,7 @@ module.exports = (schema, typeReq) => {
           length:
             keys[4].schema._preferences.messages['number.min']._template[0] +
             keys[4].schema._rules[0].args.limit +
-            keys[4].schema._preferences.messages['number.max']._template[0] +
+            ' та ≤ ' +
             keys[4].schema._rules[1].args.limit,
         },
       },
@@ -182,7 +177,7 @@ module.exports = (schema, typeReq) => {
           length:
             keys[6].schema._preferences.messages['number.min']._template[0] +
             keys[6].schema._rules[0].args.limit +
-            keys[6].schema._preferences.messages['number.max']._template[0] +
+            ' та ≤ ' +
             keys[6].schema._rules[1].args.limit,
         },
       },
@@ -259,8 +254,7 @@ module.exports = (schema, typeReq) => {
                   ._preferences.messages['string.min']._template[0] +
                 keys[7].schema.$_terms.items[0].$_terms.keys[1].schema._rules[0]
                   .args.limit +
-                keys[7].schema.$_terms.items[0].$_terms.keys[1].schema
-                  ._preferences.messages['string.max']._template[0] +
+                ' до ' +
                 keys[7].schema.$_terms.items[0].$_terms.keys[1].schema._rules[1]
                   .args.limit +
                 keys[7].schema.$_terms.items[0].$_terms.keys[1].schema
@@ -295,8 +289,7 @@ module.exports = (schema, typeReq) => {
                   ._preferences.messages['string.min']._template[0] +
                 keys[7].schema.$_terms.items[0].$_terms.keys[1].schema._rules[0]
                   .args.limit +
-                keys[7].schema.$_terms.items[0].$_terms.keys[1].schema
-                  ._preferences.messages['string.max']._template[0] +
+                ' до ' +
                 keys[7].schema.$_terms.items[0].$_terms.keys[1].schema._rules[1]
                   .args.limit +
                 keys[7].schema.$_terms.items[0].$_terms.keys[1].schema
@@ -319,7 +312,7 @@ module.exports = (schema, typeReq) => {
           length:
             keys[8].schema._preferences.messages['string.min']._template[0] +
             keys[8].schema._rules[0].args.limit +
-            keys[8].schema._preferences.messages['string.max']._template[0] +
+            ' до ' +
             keys[8].schema._rules[1].args.limit +
             keys[8].schema._preferences.messages['string.max']._template[
               keys[8].schema._preferences.messages['string.max']._template
@@ -342,9 +335,7 @@ module.exports = (schema, typeReq) => {
               'string.min'
             ]._template[0] +
             keys[9].schema.$_terms.keys[0].schema._rules[0].args.limit +
-            keys[9].schema.$_terms.keys[0].schema._preferences.messages[
-              'string.max'
-            ]._template[0] +
+            ' до ' +
             keys[9].schema.$_terms.keys[0].schema._rules[1].args.limit +
             keys[9].schema.$_terms.keys[0].schema._preferences.messages[
               'string.max'
@@ -370,9 +361,7 @@ module.exports = (schema, typeReq) => {
               'string.min'
             ]._template[0] +
             keys[9].schema.$_terms.keys[1].schema._rules[0].args.limit +
-            keys[9].schema.$_terms.keys[1].schema._preferences.messages[
-              'string.max'
-            ]._template[0] +
+            ' до ' +
             keys[9].schema.$_terms.keys[1].schema._rules[1].args.limit +
             keys[9].schema.$_terms.keys[1].schema._preferences.messages[
               'string.max'
@@ -401,9 +390,7 @@ module.exports = (schema, typeReq) => {
                   'string.min'
                 ]._template[0] +
                 keys[9].schema.$_terms.keys[2].schema._rules[0].args.limit +
-                keys[9].schema.$_terms.keys[2].schema._preferences.messages[
-                  'string.max'
-                ]._template[0] +
+                ' до ' +
                 keys[9].schema.$_terms.keys[2].schema._rules[1].args.limit +
                 keys[9].schema.$_terms.keys[2].schema._preferences.messages[
                   'string.max'
@@ -434,9 +421,7 @@ module.exports = (schema, typeReq) => {
                   'string.min'
                 ]._template[0] +
                 keys[9].schema.$_terms.keys[2].schema._rules[0].args.limit +
-                keys[9].schema.$_terms.keys[2].schema._preferences.messages[
-                  'string.max'
-                ]._template[0] +
+                ' до ' +
                 keys[9].schema.$_terms.keys[2].schema._rules[1].args.limit +
                 keys[9].schema.$_terms.keys[2].schema._preferences.messages[
                   'string.max'

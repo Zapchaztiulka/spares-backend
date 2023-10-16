@@ -1,11 +1,13 @@
 const { ctrlWrapper } = require('../../helpers');
 
 module.exports = {
-  createChatRoom: ctrlWrapper(require('./createChatRoom')),
-  closeChatRoom: ctrlWrapper(require('./closeChatRoom')),
   authUser: ctrlWrapper(require('./authUser')),
-  updateChatRoom: ctrlWrapper(require('./updateChatRoom')),
+  createChatRoom: ctrlWrapper(require('./createChatRoom')),
+  addMessageInChatRoom: ctrlWrapper(require('./addMessageInChatRoom')),
+  closeChatRoom: ctrlWrapper(require('./closeChatRoom')),
 
   getChatRoomById: ctrlWrapper(require('./getChatRoomById')),
   getChatRoomsByStatus: ctrlWrapper(require('./getChatRoomsByStatus')),
+
+  uploadChatImage: ctrlWrapper(require('./uploadChatImage')),
 };

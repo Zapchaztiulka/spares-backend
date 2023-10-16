@@ -11,7 +11,7 @@ const {
   uploadChatImage,
 } = require('../../middlewares');
 const {
-  chat: { validationUserId, validationChatRoomStatus },
+  chat: { validationUserId, validationAddMessage, validationConnectManager },
 } = require('../../models');
 const { patterns } = require('../../helpers');
 
@@ -40,13 +40,19 @@ router.post(
   ctrl.createChatRoom,
 );
 
+router.patch(
+  '/addMessage/:id',
+  isValidId,
+  validateBody(validationAddMessage),
+  ctrl.addMessageInChatRoom,
+);
+
 router.patch('/chatRoom/:id', isValidId, ctrl.closeChatRoom);
 
-router.patch(
-  '/updateChatRoom/:id',
-  isValidId,
+router.post(
+  '/uploadChatImage',
   uploadChatImage.single('chatImageURL'),
-  ctrl.updateChatRoom,
+  ctrl.uploadChatImage,
 );
 
 // router.delete(

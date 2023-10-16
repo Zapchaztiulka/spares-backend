@@ -6,7 +6,7 @@ module.exports = (key, data) => {
 
   const textRules = {
     'string.empty': `${key} не може бути порожнім`,
-    'string.min': `${key} має мати від {#limit} символів,`,
+    'string.min': `${key} має мати від {#limit} символів. `,
     'string.max': `${key} має мати до {#limit} символів`,
     'string.length': `${key} має містити {#limit} символів`,
   };
