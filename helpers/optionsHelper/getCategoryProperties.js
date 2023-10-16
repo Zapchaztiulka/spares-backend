@@ -17,8 +17,7 @@ module.exports = (schema, typeReq) => {
                 keys[0].schema._preferences.messages['string.min']
                   ._template[0] +
                 keys[0].schema._rules[0].args.limit +
-                keys[0].schema._preferences.messages['string.max']
-                  ._template[0] +
+                ' до ' +
                 keys[0].schema._rules[1].args.limit +
                 keys[0].schema._preferences.messages['string.max']._template[
                   keys[0].schema._preferences.messages['string.max']._template
@@ -42,8 +41,7 @@ module.exports = (schema, typeReq) => {
                 keys[0].schema._preferences.messages['string.min']
                   ._template[0] +
                 keys[0].schema._rules[0].args.limit +
-                keys[0].schema._preferences.messages['string.max']
-                  ._template[0] +
+                ' до ' +
                 keys[0].schema._rules[1].args.limit +
                 keys[0].schema._preferences.messages['string.max']._template[
                   keys[0].schema._preferences.messages['string.max']._template
@@ -73,8 +71,7 @@ module.exports = (schema, typeReq) => {
               .messages['string.min']._template[0] +
             keys[1].schema.$_terms.items[0].$_terms.keys[0].schema._rules[0]
               .args.limit +
-            keys[1].schema.$_terms.items[0].$_terms.keys[0].schema._preferences
-              .messages['string.max']._template[0] +
+            ' до ' +
             keys[1].schema.$_terms.items[0].$_terms.keys[0].schema._rules[1]
               .args.limit +
             keys[1].schema.$_terms.items[0].$_terms.keys[0].schema._preferences

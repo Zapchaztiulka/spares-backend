@@ -6,7 +6,7 @@ module.exports = (key, data) => {
 
   const textRules = {
     'string.empty': `${key} не може бути порожнім`,
-    'string.min': `${key} має мати від {#limit} символів. `,
+    'string.min': `${key} має мати від {#limit} символів`,
     'string.max': `${key} має мати до {#limit} символів`,
     'string.length': `${key} має містити {#limit} символів`,
   };
@@ -27,7 +27,7 @@ module.exports = (key, data) => {
 
   const numberRules = {
     'number.base': `Недійсний тип для ${key}, має бути числом`,
-    'number.min': `${key} має бути ≥ {#limit} цифр,`,
+    'number.min': `${key} має бути ≥ {#limit}`,
     'number.max': `${key} має бути ≤ {#limit}`,
     'number.positive': `${key} має бути додатним числом`,
   };

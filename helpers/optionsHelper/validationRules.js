@@ -17,7 +17,7 @@ function validationRules({
       messages['string.min'] && messages['string.max']
         ? messages['string.min']._template[0] +
           rules[0].args.limit +
-          messages['string.max']._template[0] +
+          ' до ' +
           rules[1].args.limit +
           messages['string.max']._template[2]
         : null;
@@ -26,7 +26,7 @@ function validationRules({
       messages['number.min'] && messages['number.max']
         ? messages['number.min']._template[0] +
           rules[0].args.limit +
-          messages['number.max']._template[0] +
+          ' та ≤ ' +
           rules[1].args.limit +
           messages['number.max']._template[2]
         : null;
