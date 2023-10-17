@@ -150,6 +150,14 @@ const chatRoomSchema = new Schema(
       type: String,
       default: '',
     },
+    isChatRoomOpen: {
+      type: Boolean,
+      default: false,
+    },
+    isChatRoomProcessed: {
+      type: Boolean,
+      default: false,
+    },
   },
   { versionKey: false, timestamps: true },
 );

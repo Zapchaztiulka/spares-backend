@@ -26,6 +26,8 @@ module.exports = async (req, res) => {
   }
 
   roomToComplete.chatRoomStatus = patterns.chatRoomStatus[1];
+  roomToComplete.isChatRoomOpen = false;
+  roomToComplete.isChatRoomProcessed = false;
   chat.isOnline = false;
 
   await changeIsUserOnline(socketIO, userId, false);

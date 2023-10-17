@@ -19,8 +19,15 @@ module.exports = async (req, res) => {
   );
 
   if (!existingRoom) {
-    chat.chatRooms.push({ userId });
+    chat.chatRooms.push({
+      userId,
+      // isChatRoomOpen: true
+    });
   }
+
+  // if (existingRoom) {
+  //   existingRoom.isChatRoomOpen = true;
+  // }
 
   chat.isOnline = true;
   await chat.save();

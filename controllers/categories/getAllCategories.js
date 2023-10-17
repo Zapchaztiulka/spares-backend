@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   const categories = await Category.aggregate([
     {
       $project: {
-        name: 1,
+        categoryName: 1,
         subcategories: 1,
       },
     },

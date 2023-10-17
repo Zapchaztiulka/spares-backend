@@ -8,7 +8,10 @@ const cors = require('cors');
 
 const { DB_HOST, PORT = 5000, SECRET_KEY } = process.env;
 
-const { changeIsUserOnline } = require('./helpers/chatHelper');
+const {
+  changeIsUserOnline,
+  changeIsChatRoomOpen,
+} = require('./helpers/chatHelper');
 
 const socketIO = require('socket.io')(http, {
   cors: {
@@ -24,6 +27,7 @@ socketIO.on('connection', socket => {
     try {
       const decoded = jwt.verify(token, SECRET_KEY);
       const userId = decoded.userId;
+      console.log('🚀 ~ file: server.js:30 ~ socket.on ~ userId:', userId);
 
       // Зв'язуємо соксет с userId
       socketUserMap.set(socket.id, userId);
@@ -31,7 +35,9 @@ socketIO.on('connection', socket => {
 
       console.log(`Socket ${socket.id} is authenticated for user ${userId}`);
     } catch (err) {
-      console.error('Authentication error:', err.message);
+      socket.emit('authenticationError', {
+        message: 'Authentication failed. Unauthorized.',
+      });
       socket.disconnect(); // Відключаємо соксет при помилці
     }
   });
@@ -42,9 +48,12 @@ socketIO.on('connection', socket => {
   });
 
   // Обробка статусу клієнта при згортанні чату
-  socket.on('chatMinimized', async ({ userId, isOnline }) => {
-    await changeIsUserOnline(socketIO, userId, isOnline);
-  });
+  socket.on(
+    'chatRoomOpenChanged',
+    async ({ userId, roomId, isChatRoomOpen }) => {
+      await changeIsChatRoomOpen(socketIO, userId, roomId, isChatRoomOpen);
+    },
+  );
 
   socket.on('disconnect', async () => {
     // Видаляємо зв'язок соксета з користовачем при відключенні
