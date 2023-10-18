@@ -11,6 +11,7 @@ const { DB_HOST, PORT = 5000, SECRET_KEY } = process.env;
 const {
   changeIsUserOnline,
   changeIsChatRoomOpen,
+  addMessageInChatRoom,
 } = require('./helpers/chatHelper');
 
 const socketIO = require('socket.io')(http, {
@@ -23,31 +24,26 @@ app.set('socketIO', socketIO);
 const socketUserMap = new Map();
 
 socketIO.on('connection', socket => {
+  // Processing of user auth
   socket.on('authentication', async ({ token }) => {
     try {
       const decoded = jwt.verify(token, SECRET_KEY);
       const userId = decoded.userId;
-      console.log('🚀 ~ file: server.js:30 ~ socket.on ~ userId:', userId);
 
-      // Зв'язуємо соксет с userId
+      // Connecting a socket with userId
       socketUserMap.set(socket.id, userId);
       await changeIsUserOnline(socketIO, userId, true);
 
       console.log(`Socket ${socket.id} is authenticated for user ${userId}`);
     } catch (err) {
       socket.emit('authenticationError', {
-        message: 'Authentication failed. Unauthorized.',
+        message: 'Авторизація неуспішна. Повторно зайдіть в чат',
       });
-      socket.disconnect(); // Відключаємо соксет при помилці
+      socket.disconnect();
     }
   });
 
-  // Обробка чат-кімнати
-  socket.on('newChat', ({ chatRoom }) => {
-    socketIO.emit('newChat', { chatRoom });
-  });
-
-  // Обробка статусу клієнта при згортанні чату
+  // Processing of user status when chat room is rolling up or unfolding
   socket.on(
     'chatRoomOpenChanged',
     async ({ userId, roomId, isChatRoomOpen }) => {
@@ -55,15 +51,20 @@ socketIO.on('connection', socket => {
     },
   );
 
+  // Processing of new user message
+  socket.on('userMessage', async ({ userId, roomId, message }) => {
+    await addMessageInChatRoom(socketIO, userId, roomId, message);
+  });
+
+  // Processing when user disconnected chat room
   socket.on('disconnect', async () => {
-    // Видаляємо зв'язок соксета з користовачем при відключенні
     const userId = socketUserMap.get(socket.id);
     if (userId) {
       await changeIsUserOnline(socketIO, userId, false);
       socketUserMap.delete(socket.id);
-      console.log(`${socket.id} socket (userId: ${userId}) was disconnected`);
+      // console.log(`${socket.id} socket (userId: ${userId}) was disconnected`);
     } else {
-      console.log(`${userId} user was disconnected`);
+      // console.log('User was disconnected');
     }
   });
 });

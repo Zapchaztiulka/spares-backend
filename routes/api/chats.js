@@ -40,12 +40,12 @@ router.post(
   ctrl.createChatRoom,
 );
 
-router.patch(
-  '/addMessage/:id',
-  isValidId,
-  validateBody(validationAddMessage),
-  ctrl.addMessageInChatRoom,
-);
+// router.patch(
+//   '/addMessage/:id',
+//   isValidId,
+//   validateBody(validationAddMessage),
+//   ctrl.addMessageInChatRoom,
+// );
 
 router.patch('/chatRoom/:id', isValidId, ctrl.closeChatRoom);
 
@@ -58,8 +58,6 @@ router.post(
 // router.delete(
 //   '/:id',
 //   authenticate,
-//   hasRole([patterns.roles[0], patterns.roles[1]]),
-//   checkAccess('deleteCategoryAccess', 'Видалення категорії товару'),
 //   isValidId,
 //   ctrl.deleteCategoryById,
 // );
