@@ -1,7 +1,7 @@
 const sgMail = require('@sendgrid/mail');
 require('dotenv').config();
 
-const { BASE_URL, SENDGRID_API_KEY } = process.env;
+const { BASE_URL, SENDGRID_API_KEY, GATALOG_URL } = process.env;
 
 sgMail.setApiKey(SENDGRID_API_KEY);
 
@@ -60,7 +60,7 @@ module.exports = async (email, verificationToken) => {
         </head>
         <body>
           <div class="image-container">
-            <a href="https://zapchaztiulka-catalog-frontend.vercel.app">
+            <a href="${GATALOG_URL}">
               <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
             <a/>
           </div>
@@ -71,7 +71,7 @@ module.exports = async (email, verificationToken) => {
           </a>
           <p>ВАЖЛИВО! Підтвердити пошту можна лише протягом 24 годин</p>
           <h4>
-            <a href="https://zapchaztiulka-catalog-frontend.vercel.app"> Повернутися в магазин >>> <a/>
+            <a href="${GATALOG_URL}"> Повернутися в магазин >>> <a/>
           </h4>
         </body>
       </html>

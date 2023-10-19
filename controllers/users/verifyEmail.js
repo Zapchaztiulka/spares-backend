@@ -3,6 +3,8 @@ const {
 } = require('../../models');
 const { HttpError, patterns } = require('../../helpers');
 
+const { GATALOG_URL, ADMIN_PANEL_URL } = process.env;
+
 module.exports = async (req, res, next) => {
   const { verificationToken } = req.params;
 
@@ -35,9 +37,9 @@ module.exports = async (req, res, next) => {
 
   try {
     if (user.role === patterns.roles[2]) {
-      res.redirect('https://zapchaztiulka-catalog-frontend.vercel.app');
+      res.redirect(GATALOG_URL);
     } else {
-      res.redirect('https://beamish-pudding-ee7a33.netlify.app/login');
+      res.redirect(ADMIN_PANEL_URL);
     }
   } catch (err) {
     return next(

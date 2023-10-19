@@ -1,7 +1,7 @@
 const sgMail = require('@sendgrid/mail');
 require('dotenv').config();
 
-const { SENDGRID_API_KEY } = process.env;
+const { SENDGRID_API_KEY, GATALOG_URL } = process.env;
 
 sgMail.setApiKey(SENDGRID_API_KEY);
 
@@ -47,7 +47,7 @@ module.exports = async (email, newPassword) => {
         </head>
         <body>
           <div class="image-container">
-            <a href="https://zapchaztiulka-catalog-frontend.vercel.app">
+            <a href="${GATALOG_URL}">
               <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
             <a/>
           </div>
@@ -55,7 +55,7 @@ module.exports = async (email, newPassword) => {
           <p>Наступного разу використовуйте його при вході в магазин</p>
           <p>Також Ви можете змінити пароль в сторінці "Профілю користувача".</p>
           <h3>
-            <a href="https://zapchaztiulka-catalog-frontend.vercel.app"> Повернутися в магазин >>> <a/>
+            <a href="${GATALOG_URL}"> Повернутися в магазин >>> <a/>
           </h3>
         </body>
       </html>

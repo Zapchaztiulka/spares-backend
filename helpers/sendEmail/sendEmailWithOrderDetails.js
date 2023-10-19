@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const { formatDate, formatNumber, patterns } = require('../../helpers');
 
-const { SENDGRID_API_KEY } = process.env;
+const { SENDGRID_API_KEY, GATALOG_URL } = process.env;
 const {
   companyData: { firstPhone, secondPhone, thirdPhone, addressCompany },
 } = patterns;
@@ -122,7 +122,7 @@ module.exports = async orderDetails => {
       <body>
         <div style="margin-bottom: 24px;">
           <div style="padding: 20px; border-radius: 8px; background-color: #FFFFFF; display: flex; align-items: center; width: 210px;">
-            <a href="https://zapchaztiulka-catalog-frontend.vercel.app">
+            <a href="${GATALOG_URL}">
               <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
             <a/>
           </div>
@@ -187,7 +187,7 @@ module.exports = async orderDetails => {
           <p>Адреса доставки: ${addressDelivery}</p>
         </div>
         <h3>
-          <a href="https://zapchaztiulka-catalog-frontend.vercel.app"> Повернутися в магазин >>> <a/>
+          <a href="${GATALOG_URL}"> Повернутися в магазин >>> <a/>
         </h3>
         <div class="footer">
           <p style="margin-right: 12px;">${firstPhone}</p>

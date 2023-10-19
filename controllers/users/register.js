@@ -5,7 +5,7 @@ const { addHours } = require('date-fns');
 const {
   user: { User },
 } = require('../../models');
-const { HttpError, patterns } = require('../../helpers');
+const { patterns } = require('../../helpers');
 const { checkExistingUserData } = require('../../helpers/userHelpers');
 const { sendEmailForVerification } = require('../../helpers/sendEmail');
 const { EXPIRES_VERIFICATION_TOKEN } = process.env;
