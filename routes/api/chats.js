@@ -40,13 +40,6 @@ router.post(
   ctrl.createChatRoom,
 );
 
-// router.patch(
-//   '/addMessage/:id',
-//   isValidId,
-//   validateBody(validationAddMessage),
-//   ctrl.addMessageInChatRoom,
-// );
-
 router.patch('/chatRoom/:id', isValidId, ctrl.closeChatRoom);
 
 router.post(

@@ -13,7 +13,11 @@ module.exports = async (socketIO, userId, roomId, isChatRoomOpen) => {
     if (roomInProgress) {
       roomInProgress.isChatRoomOpen = isChatRoomOpen;
       await chat.save();
-      socketIO.emit('chatRoomOpenChanged', { userId, isChatRoomOpen });
+      socketIO.emit('chatRoomOpenChanged', {
+        userId,
+        isChatRoomOpen,
+        serverMessage: isChatRoomOpen ? 'Чат відкритий' : 'Клієнт згорнув чат',
+      });
     }
   }
 };

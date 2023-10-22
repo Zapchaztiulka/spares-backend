@@ -9,6 +9,10 @@ module.exports = async (socketIO, userId, isOnline) => {
     chat.isOnline = isOnline;
     await chat.save();
 
-    socketIO.emit('userStatusChanged', { userId, isOnline });
+    socketIO.emit('userStatusChanged', {
+      userId,
+      isOnline,
+      serverMessage: isOnline ? 'Клієнт зайшов в чат' : 'Клієнт вийшов з чату',
+    });
   }
 };
