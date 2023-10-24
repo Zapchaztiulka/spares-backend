@@ -20,7 +20,6 @@ module.exports = async (socketIO, managerId) => {
 
     await chat.save();
   }
-  console.log('🚀 chatRoomsInProgress:', chatRoomsInProgress);
 
-  socketIO.emit('disconnectManager', { chatRoomsInProgress });
+  socketIO.emit('disconnectManager', chatRoomsInProgress);
 };
