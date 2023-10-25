@@ -12,7 +12,6 @@ module.exports = async (socketIO, userId, isOnline) => {
     socketIO.emit('userStatusChanged', {
       userId,
       isOnline,
-      serverMessage: isOnline ? 'Клієнт зайшов в чат' : 'Клієнт вийшов з чату',
     });
   }
 };

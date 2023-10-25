@@ -16,7 +16,6 @@ module.exports = async (socketIO, userId, roomId, isChatRoomOpen) => {
       socketIO.emit('chatRoomOpenChanged', {
         userId,
         isChatRoomOpen,
-        serverMessage: isChatRoomOpen ? 'Чат відкритий' : 'Клієнт згорнув чат',
       });
     }
   }

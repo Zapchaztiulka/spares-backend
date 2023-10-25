@@ -11,7 +11,8 @@ const { DB_HOST, PORT = 5000, SECRET_KEY } = process.env;
 const {
   changeIsUserOnline,
   changeIsChatRoomOpen,
-  addMessageInChatRoom,
+  addUserMessage,
+  addManagerMessage,
   connectManager,
   disconnectManager,
 } = require('./helpers/chatHelper');
@@ -66,7 +67,12 @@ socketIO.on('connection', socket => {
 
   // Processing of new user message
   socket.on('userMessage', async ({ userId, roomId, message }) => {
-    await addMessageInChatRoom(socketIO, userId, roomId, message);
+    await addUserMessage(socketIO, userId, roomId, message);
+  });
+
+  // Processing of manager message
+  socket.on('managerMessage', async ({ userId, roomId, message }) => {
+    await addManagerMessage(socketIO, userId, roomId, message);
   });
 
   // Processing when user disconnected chat room
