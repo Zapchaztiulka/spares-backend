@@ -14,6 +14,7 @@ module.exports = async (req, res) => {
   const { userId } = req.body;
 
   let existingUserName = '';
+  let existingUserSurname = '';
   let existingUserPhone = '';
 
   if (userId && isValidObjectId(userId)) {
@@ -29,6 +30,7 @@ module.exports = async (req, res) => {
     if (userById) {
       existingUserPhone = userById.phone;
       existingUserName = userById.username;
+      existingUserSurname = userById.userSurname;
     }
   }
 
@@ -38,6 +40,7 @@ module.exports = async (req, res) => {
     existingChat = await Chat.create({
       userId,
       username: existingUserName,
+      userSurname: existingUserSurname,
       userPhone: existingUserPhone,
     });
   }

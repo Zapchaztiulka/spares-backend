@@ -2,18 +2,14 @@ const express = require('express');
 
 const ctrl = require('../../controllers/chats');
 const {
-  authenticate,
   validateBody,
   isValidId,
-  hasRole,
-  checkAccess,
   checkRequestBody,
   uploadChatImage,
 } = require('../../middlewares');
 const {
-  chat: { validationUserId, validationAddMessage, validationConnectManager },
+  chat: { validationUserId },
 } = require('../../models');
-const { patterns } = require('../../helpers');
 
 const router = express.Router();
 
@@ -40,19 +36,13 @@ router.post(
   ctrl.createChatRoom,
 );
 
-router.patch('/chatRoom/:id', isValidId, ctrl.closeChatRoom);
+router.patch('/closeChatByUser/:id', isValidId, ctrl.closeChatByUser);
+router.patch('/closeChatByManager/:id', isValidId, ctrl.closeChatByManager);
 
 router.post(
   '/uploadChatImage',
   uploadChatImage.single('chatImageURL'),
   ctrl.uploadChatImage,
 );
-
-// router.delete(
-//   '/:id',
-//   authenticate,
-//   isValidId,
-//   ctrl.deleteCategoryById,
-// );
 
 module.exports = router;

@@ -172,6 +172,10 @@ const chatSchema = new Schema(
       type: String,
       default: '',
     },
+    userSurname: {
+      type: String,
+      default: '',
+    },
     userPhone: {
       type: String,
       default: '',

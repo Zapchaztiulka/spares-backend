@@ -4,7 +4,7 @@ const {
 const { patterns } = require('../../helpers');
 
 module.exports = async (req, res) => {
-  const { page = 1, limit = 10, query = '' } = req.query;
+  const { page, limit, query = '' } = req.query;
   const skip = (page - 1) * limit;
 
   const formattedQuery = query.trim();
@@ -28,10 +28,16 @@ module.exports = async (req, res) => {
     });
   }
 
-  const paginatedProducts = Array.from(productMap.values()).slice(
-    skip,
-    skip + limit,
-  );
+  let paginatedProducts = [];
+
+  if (skip >= 0) {
+    paginatedProducts = Array.from(productMap.values()).slice(
+      skip,
+      skip + limit,
+    );
+  } else {
+    paginatedProducts = Array.from(productMap.values());
+  }
 
   res
     .status(200)

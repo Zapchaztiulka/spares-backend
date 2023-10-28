@@ -7,6 +7,8 @@ const { checkExistingRoom } = require('../../helpers/chatHelper');
 module.exports = async (req, res) => {
   const { userId } = req.body;
 
+  const socketIO = req.app.get('socketIO');
+
   const chat = await Chat.findOne({ userId });
 
   if (!chat) {
@@ -31,6 +33,13 @@ module.exports = async (req, res) => {
     updatedChat.chatRooms,
     patterns.chatRoomStatus[0],
   );
+
+  socketIO.emit('createChatByUser', {
+    room: newRoom,
+    isOnline: true,
+    username: chat.username,
+    userSurname: chat.userSurname,
+  });
 
   return res.status(existingRoom ? 200 : 201).json(newRoom);
 };

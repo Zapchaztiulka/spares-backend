@@ -15,6 +15,7 @@ module.exports = async (socketIO, userId, roomId, isChatRoomOpen) => {
       await chat.save();
       socketIO.emit('chatRoomOpenChanged', {
         userId,
+        roomId,
         isChatRoomOpen,
       });
     }

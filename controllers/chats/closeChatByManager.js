@@ -1,5 +1,3 @@
-const { changeIsUserOnline } = require('../../helpers/chatHelper');
-
 const {
   chat: { Chat },
 } = require('../../models');
@@ -26,11 +24,11 @@ module.exports = async (req, res) => {
   }
 
   roomToComplete.chatRoomStatus = patterns.chatRoomStatus[1];
-  roomToComplete.isChatRoomOpen = false;
   roomToComplete.isChatRoomProcessed = false;
+  roomToComplete.isChatRoomOpen = false;
   chat.isOnline = false;
 
-  await changeIsUserOnline(socketIO, userId, false);
+  socketIO.emit('closeChatByManager', { room: roomToComplete });
 
   await chat.save();
 

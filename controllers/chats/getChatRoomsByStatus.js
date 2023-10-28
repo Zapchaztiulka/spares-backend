@@ -10,12 +10,13 @@ module.exports = async (req, res) => {
   const filteredChatRooms = [];
 
   for (const chat of chats) {
-    const { chatRooms, isOnline, username } = chat;
+    const { chatRooms, isOnline, username, userSurname } = chat;
 
     for (const chatRoom of chatRooms) {
       const updatedChatRoom = JSON.parse(JSON.stringify(chatRoom));
       updatedChatRoom.isOnline = isOnline;
       updatedChatRoom.username = username;
+      updatedChatRoom.userSurname = userSurname;
 
       if (!chatRoomStatus) {
         filteredChatRooms.push(updatedChatRoom);
