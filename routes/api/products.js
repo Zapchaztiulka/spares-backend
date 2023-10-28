@@ -25,6 +25,7 @@ const router = express.Router();
 router.get('/', validateBody(validationBodyQuery), ctrl.getProductsByQuery);
 router.get('/:id', isValidId, ctrl.getProductById);
 router.get('/vendorCode/:vendorCode', ctrl.getUniqueVendorCode);
+router.get('/filters/by-product-name', ctrl.getCountriesTrademarksPrices);
 
 router.post(
   '/upload',
