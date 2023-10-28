@@ -15,13 +15,14 @@ const {
     validationAddProducts,
     validationUpdateProduct,
     validationProductIdsArray,
+    validationBodyQuery,
   },
 } = require('../../models');
 const { patterns } = require('../../helpers');
 
 const router = express.Router();
 
-router.get('/', ctrl.getProductsByQuery);
+router.get('/', validateBody(validationBodyQuery), ctrl.getProductsByQuery);
 router.get('/:id', isValidId, ctrl.getProductById);
 router.get('/vendorCode/:vendorCode', ctrl.getUniqueVendorCode);
 

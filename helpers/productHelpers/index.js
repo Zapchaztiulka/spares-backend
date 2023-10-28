@@ -4,5 +4,6 @@ module.exports = {
   checkAccessToAddPhoto: require('./checkAccessToAddPhoto'),
   checkAvailableProductInStock: require('./checkAvailableProductInStock'),
   checkQuantityInRequest: require('./checkQuantityInRequest'),
+  applyFilters: require('./applyFilters'),
   ExcelToJSON: require('./ExcelToJSON'),
 };

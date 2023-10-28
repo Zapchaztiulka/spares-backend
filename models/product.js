@@ -326,6 +326,143 @@ const validationProductIdsArray = Joi.object({
     .messages(templatesMsgJoi('Масив ІД товарів').arrayRules),
 });
 
+const validationBodyQuery = Joi.object({
+  minPrice: Joi.number()
+    .description('Мінімальна ціна')
+    .note('input')
+    .example('Введіть мінімальну ціну')
+    .min(patterns.min.price)
+    .max(patterns.max.price)
+    .messages(templatesMsgJoi('Мінімальна ціна').numberRules),
+  maxPrice: Joi.number()
+    .description('Максимальна ціна')
+    .note('input')
+    .example('Введіть максимальну ціну')
+    .min(patterns.min.price)
+    .max(patterns.max.price)
+    .messages(templatesMsgJoi('Максимальна ціна').numberRules),
+  minPriceUpdateDate: Joi.number()
+    .description('Мінімальна дата актуалізації ціни')
+    .note('input')
+    .example('Введіть мінімальну дату актуалізації ціни')
+    .min(patterns.min.priceUpdateDate)
+    .max(patterns.max.priceUpdateDate)
+    .messages(templatesMsgJoi('Мінімальна дата актуалізації ціни').numberRules),
+  maxPriceUpdateDate: Joi.number()
+    .description('Максимальна дата актуалізації ціни')
+    .note('input')
+    .example('Введіть максимальну дату актуалізації ціни')
+    .min(patterns.min.priceUpdateDate)
+    .max(patterns.max.priceUpdateDate)
+    .messages(
+      templatesMsgJoi('Максимальна дата актуалізації ціни').numberRules,
+    ),
+  minWeight: Joi.number()
+    .description('Мінімальна вага товару (в кг)')
+    .note('input')
+    .example('Введіть мінімальну вагу товару (в кг)')
+    .min(patterns.min.weight)
+    .max(patterns.max.weight)
+    .messages(templatesMsgJoi('Мінімальна вага товару').numberRules),
+  maxWeight: Joi.number()
+    .description('Максимальна вага товару (в кг)')
+    .note('input')
+    .example('Введіть максимальну вагу товару (в кг)')
+    .min(patterns.min.weight)
+    .max(patterns.max.weight)
+    .messages(templatesMsgJoi('Максимальна вага товару').numberRules),
+  minQuantity: Joi.number()
+    .description('Мінімальна кількість товару')
+    .note('input')
+    .example('Введіть мінімальну кількість товару')
+    .min(patterns.min.quantity)
+    .max(patterns.max.quantity)
+    .messages({
+      ...templatesMsgJoi('Мінімальна кількість товару').numberRules,
+      ...templatesMsgJoi('Мінімальна кількість товару').integerNumberRules,
+      ...templatesMsgJoi('Мінімальна кількість товару').commonRules,
+    }),
+  maxQuantity: Joi.number()
+    .description('Максимальна кількість товару')
+    .note('input')
+    .example('Введіть максимальну кількість товару')
+    .min(patterns.min.quantity)
+    .max(patterns.max.quantity)
+    .messages({
+      ...templatesMsgJoi('Максимальна кількість товару').numberRules,
+      ...templatesMsgJoi('Максимальна кількість товару').integerNumberRules,
+      ...templatesMsgJoi('Максимальна кількість товару').commonRules,
+    }),
+  units: Joi.array()
+    .items(
+      Joi.string()
+        .description('Одиниця вимірювання товару')
+        .note('select')
+        .example('Оберіть одиниці вимірювання товару')
+        .valid(...patterns.units)
+        .messages(
+          templatesMsgJoi('Одиниця вимірювання', patterns.units).enumRules,
+        ),
+    )
+    .messages(templatesMsgJoi('Масив одиниць вимірювання товарів').arrayRules),
+  countries: Joi.array()
+    .items(
+      Joi.string()
+        .description('Країна виробництва')
+        .note('input')
+        .example('Введіть країну виробництва')
+        .allow('')
+        .min(patterns.min.manufacturer)
+        .max(patterns.max.manufacturer)
+        .messages(templatesMsgJoi('Країна виробництва').textRules),
+    )
+    .messages(templatesMsgJoi('Масив країн виробництва').arrayRules),
+  factories: Joi.array()
+    .items(
+      Joi.string()
+        .description('Завод-виробник')
+        .note('input')
+        .example('Введіть завод-виробник')
+        .allow('')
+        .min(patterns.min.manufacturer)
+        .max(patterns.max.manufacturer)
+        .messages(templatesMsgJoi('Завод-виробник').textRules),
+    )
+    .messages(templatesMsgJoi('Масив заводів-виробник').arrayRules),
+  trademarks: Joi.array()
+    .items(
+      Joi.string()
+        .description('Торгова марка')
+        .note('input')
+        .example('Введіть торгову марка')
+        .allow('')
+        .min(patterns.min.manufacturer)
+        .max(patterns.max.manufacturer)
+        .messages(templatesMsgJoi('Торгова марка').textRules),
+    )
+    .messages(templatesMsgJoi('Масив торгових марок').arrayRules),
+  categories: Joi.array()
+    .items(
+      Joi.string()
+        .description('Категорія товару')
+        .note('input')
+        .example('Оберіть категорію товару')
+        .length(24)
+        .messages(templatesMsgJoi('ІД категорії товару').textRules),
+    )
+    .messages(templatesMsgJoi('Масив категорій товарів').arrayRules),
+  subcategories: Joi.array()
+    .items(
+      Joi.string()
+        .description('Підкатегорія товару')
+        .note('input')
+        .example('Оберіть підкатегорію товару')
+        .length(24)
+        .messages(templatesMsgJoi('ІД підкатегорії товару').textRules),
+    )
+    .messages(templatesMsgJoi('Масив підкатегорій товарів').arrayRules),
+});
+
 const photoSchema = new Schema({
   url: {
     type: String,
@@ -357,7 +494,7 @@ const priceSchema = new Schema(
     value: {
       type: Number,
       required: true,
-      min: 0,
+      min: patterns.min.price,
     },
   },
   {
@@ -385,7 +522,7 @@ const productSchema = new Schema(
     },
     weight: {
       type: Number,
-      default: 0,
+      default: patterns.min.weight,
     },
     units: {
       type: String,
@@ -425,4 +562,5 @@ module.exports = {
   validationAddProducts,
   validationUpdateProduct,
   validationProductIdsArray,
+  validationBodyQuery,
 };

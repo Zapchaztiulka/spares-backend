@@ -47,6 +47,7 @@ const min = {
   questionGroup: 2,
   question: 5,
   answer: 10,
+  priceUpdateDate: 1672531200000,
 };
 
 const max = {
@@ -56,7 +57,7 @@ const max = {
   price: 1000000000,
   weight: 1000000,
   quantity: 10000,
-  alt: 50,
+  alt: 500,
   description: 2000,
   manufacturer: 100,
   category: 50,
@@ -64,6 +65,7 @@ const max = {
   questionGroup: 50,
   question: 250,
   answer: 2000,
+  priceUpdateDate: Date.now(),
 };
 
 const namePattern = /^[A-Za-zА-Яа-яёЁЇїІіЄєҐґ0-9]+$/;
