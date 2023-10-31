@@ -6,7 +6,7 @@ const { applyFilters } = require('../../helpers/productHelpers');
 
 module.exports = async (req, res) => {
   const { page, limit, query = '' } = req.query;
-  const skip = (page - 1) * limit;
+  const skip = Math.max((parseInt(page, 10) - 1) * parseInt(limit, 10), 0);
 
   // find all products according to query params
   const formattedQuery = query.trim();
@@ -51,7 +51,10 @@ module.exports = async (req, res) => {
   let paginatedProducts = [];
 
   if (skip >= 0) {
-    paginatedProducts = uniqueFilteredProducts.slice(skip, skip + limit);
+    paginatedProducts = uniqueFilteredProducts.slice(
+      skip,
+      skip + parseInt(limit, 10),
+    );
   } else {
     paginatedProducts = uniqueFilteredProducts;
   }
