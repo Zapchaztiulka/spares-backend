@@ -49,19 +49,19 @@ module.exports = (products, bodyQuery) => {
 
     if (
       countries?.length > 0 &&
-      !countries.includes(product.manufacturer.country.toLowerCase())
+      !countries.includes(product.manufacturer.country)
     ) {
       return false;
     }
     if (
       factories?.length > 0 &&
-      !factories.includes(product.manufacturer.factory.toLowerCase())
+      !factories.includes(product.manufacturer.factory)
     ) {
       return false;
     }
     if (
       trademarks?.length > 0 &&
-      !trademarks.includes(product.manufacturer.trademark.toLowerCase())
+      !trademarks.includes(product.manufacturer.trademark)
     ) {
       return false;
     }
