@@ -19,6 +19,13 @@ const validationCategory = Joi.object({
       ...templatesMsgJoi('Назва категорії').commonRules,
       ...templatesMsgJoi('Назва категорії').textRules,
     }),
+  icon: Joi.string()
+    .description('Іконка категорії')
+    .required()
+    .messages({
+      ...templatesMsgJoi('Іконка категорії').commonRules,
+      ...templatesMsgJoi('Іконка категорії').textRules,
+    }),
   subcategories: Joi.array()
     .items(
       Joi.object({
@@ -46,6 +53,13 @@ const validationUpdateCategory = Joi.object({
     .min(patterns.min.category)
     .max(patterns.max.category)
     .messages(templatesMsgJoi('Назва категорії').textRules),
+  icon: Joi.string()
+    .description('Іконка категорії')
+    .required()
+    .messages({
+      ...templatesMsgJoi('Іконка категорії').commonRules,
+      ...templatesMsgJoi('Іконка категорії').textRules,
+    }),
   subcategories: Joi.array()
     .items(
       Joi.object({
@@ -71,6 +85,10 @@ const subcategorySchema = new Schema({
 const categorySchema = new Schema(
   {
     categoryName: {
+      type: String,
+      required: true,
+    },
+    icon: {
       type: String,
       required: true,
     },
