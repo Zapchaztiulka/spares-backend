@@ -10,6 +10,7 @@ module.exports = async (req, res) => {
     {
       $project: {
         categoryName: 1,
+        icon: 1,
         subcategories: 1,
       },
     },
@@ -22,7 +23,8 @@ module.exports = async (req, res) => {
       $skip: skip,
     },
     {
-      $limit: limit,
+      // changed req.query type to number
+      $limit: parseInt(limit),
     },
   ]);
 
