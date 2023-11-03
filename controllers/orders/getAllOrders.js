@@ -1,21 +1,13 @@
-// const {
-//   order: { Order },
-// } = require('../../models');
-
-// module.exports = async (_, res) => {
-//   const orders = await Order.find();
-
-//   res.json({ orders, totalCount: orders.length });
-// };
-
 const {
   order: { Order },
 } = require('../../models');
 
 module.exports = async (req, res) => {
-  let { query = '', limit } = req.query;
+  let { query = '', page = 1, limit = 10 } = req.query;
+  const skip = Math.max((parseInt(page, 10) - 1) * parseInt(limit, 10), 0);
 
-  limit = limit || 10;
+  query = query.trim();
+  query = query.toLowerCase();
 
   let orders = [];
   let result = [];
@@ -28,19 +20,30 @@ module.exports = async (req, res) => {
           orderId: { $toString: '$_id' },
         },
       },
-    ]).limit(limit);
+    ]);
+
     result = response.filter(el => {
       return (
         el.phone.includes(query) ||
-        el.orderId.includes(query) ||
+        el.orderId.slice(18, 24).includes(query) ||
         el.totalPriceStr.includes(query)
       );
     });
 
     orders.push(...(result ?? []));
   } else {
-    orders = await Order.find().limit(limit);
+    orders = await Order.find();
   }
 
-  res.json({ orders, totalCount: orders.length });
+  let paginatedOrders = [];
+
+  if (skip >= 0) {
+    paginatedOrders = orders.slice(skip, skip + parseInt(limit, 10));
+  } else {
+    paginatedOrders = orders;
+  }
+
+  res
+    .status(200)
+    .json({ orders: paginatedOrders, totalCount: orders.length || 0 });
 };
