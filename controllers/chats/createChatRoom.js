@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
   );
 
   if (!existingRoom) {
-    chat.chatRooms.push({ userId });
+    chat.chatRooms.push({ userId, isChatRoomOpen: true });
   }
 
   chat.isOnline = true;
@@ -37,6 +37,7 @@ module.exports = async (req, res) => {
   socketIO.emit('createChatByUser', {
     room: newRoom,
     isOnline: true,
+    isChatRoomOpen: true,
     username: chat.username,
     userSurname: chat.userSurname,
   });
