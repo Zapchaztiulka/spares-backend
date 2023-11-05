@@ -18,9 +18,10 @@ module.exports = async (socketIO, userId, roomId, message) => {
         roomToAddMessage.messages[roomToAddMessage.messages.length - 1];
 
       socketIO.emit('managerMessage', {
-        userId,
+        // userId,
         roomId,
         message: updatedMessage,
+        managerId: roomToAddMessage.managerId,
       });
     }
   }
