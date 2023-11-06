@@ -27,7 +27,7 @@ app.set('socketIO', socketIO);
 const socketUserMap = new Map();
 
 socketIO.on('connection', socket => {
-  // Processing of user auth
+  // Processing of user or manager auth
   socket.on('authentication', async ({ token }) => {
     try {
       const decoded = jwt.verify(token, SECRET_KEY);
@@ -37,7 +37,7 @@ socketIO.on('connection', socket => {
       userId
         ? socketUserMap.set(socket.id, userId)
         : socketUserMap.set(socket.id, id);
-      await changeIsUserOnline(socketIO, userId, true);
+      await changeIsUserOnline(socketIO, userId, true, true);
 
       console.log(
         `Socket ${socket.id} is authenticated for ${
@@ -60,14 +60,19 @@ socketIO.on('connection', socket => {
     },
   );
 
+  // Processing of user message
+  socket.on('userMessage', async ({ userId, roomId, message }) => {
+    await addUserMessage(socketIO, userId, roomId, message);
+  });
+
+  // Processing of user typing
+  socket.on('userTyping', async ({ isTyping }) => {
+    await socketIO.emit('userTyping', { isTyping });
+  });
+
   // Processing of manager connection
   socket.on('managerJoinToChat', async ({ userId, roomId, manager }) => {
     await connectManager(socketIO, userId, roomId, manager);
-  });
-
-  // Processing of new user message
-  socket.on('userMessage', async ({ userId, roomId, message }) => {
-    await addUserMessage(socketIO, userId, roomId, message);
   });
 
   // Processing of manager message
@@ -75,11 +80,17 @@ socketIO.on('connection', socket => {
     await addManagerMessage(socketIO, userId, roomId, message);
   });
 
-  // Processing when user disconnected chat room
+  // Processing of manager typing
+  socket.on('managerTyping', async ({ isTyping, manager }) => {
+    await socketIO.emit('managerTyping', { isTyping, manager });
+  });
+
+  // Processing when user or manager disconnected
   socket.on('disconnect', async () => {
     const userId = socketUserMap.get(socket.id);
+    console.log('🚀 userId:', userId);
     if (userId) {
-      await changeIsUserOnline(socketIO, userId, false);
+      await changeIsUserOnline(socketIO, userId, false, false);
       await disconnectManager(socketIO, userId);
       socketUserMap.delete(socket.id);
       console.log(
