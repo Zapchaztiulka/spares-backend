@@ -88,7 +88,6 @@ socketIO.on('connection', socket => {
   // Processing when user or manager disconnected
   socket.on('disconnect', async () => {
     const userId = socketUserMap.get(socket.id);
-    console.log('🚀 userId:', userId);
     if (userId) {
       await changeIsUserOnline(socketIO, userId, false, false);
       await disconnectManager(socketIO, userId);
