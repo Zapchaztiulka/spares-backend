@@ -7,7 +7,7 @@ const { checkNotFound, patterns } = require('../../helpers');
 
 module.exports = async (req, res) => {
   const { id: roomId } = req.params;
-  const { userId } = req.body;
+  const { userId, username, userSurname } = req.body;
 
   const socketIO = req.app.get('socketIO');
 
@@ -32,7 +32,11 @@ module.exports = async (req, res) => {
 
   await changeIsUserOnline(socketIO, userId, false);
 
-  socketIO.emit('closeChatByUser', { room: roomToComplete });
+  socketIO.emit('closeChatByUser', {
+    room: roomToComplete,
+    username,
+    userSurname,
+  });
 
   await chat.save();
 

@@ -66,8 +66,8 @@ socketIO.on('connection', socket => {
   });
 
   // Processing of user typing
-  socket.on('userTyping', async ({ isTyping }) => {
-    await socketIO.emit('userTyping', { isTyping });
+  socket.on('userTyping', async ({ isTyping, roomId }) => {
+    await socketIO.emit('userTyping', { isTyping, roomId });
   });
 
   // Processing of manager connection
@@ -81,8 +81,8 @@ socketIO.on('connection', socket => {
   });
 
   // Processing of manager typing
-  socket.on('managerTyping', async ({ isTyping, manager }) => {
-    await socketIO.emit('managerTyping', { isTyping, manager });
+  socket.on('managerTyping', async ({ isTyping, roomId }) => {
+    await socketIO.emit('managerTyping', { isTyping, roomId });
   });
 
   // Processing when user or manager disconnected

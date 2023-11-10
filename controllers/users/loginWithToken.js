@@ -9,9 +9,10 @@ module.exports = async (req, res) => {
 
   if (!user) throw HttpError(401, 'Token is invalid');
 
-  const { username, userSurname, role, email, phone, access } = user;
+  const { _id, username, userSurname, role, email, phone, access } = user;
 
   res.status(200).json({
+    id: _id,
     username,
     userSurname,
     role,
