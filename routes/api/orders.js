@@ -7,6 +7,7 @@ const {
   isValidId,
   hasRole,
   checkRequestBody,
+  checkPageLimit,
 } = require('../../middlewares');
 const {
   order: {
@@ -24,6 +25,7 @@ router.get(
   '/',
   authenticate,
   hasRole([patterns.roles[0], patterns.roles[1]]),
+  checkPageLimit,
   ctrl.getAllOrders,
 );
 router.get('/own', authenticate, ctrl.getUserOrders); // for getting user's orders

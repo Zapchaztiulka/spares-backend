@@ -8,6 +8,7 @@ const {
   hasRole,
   checkAccess,
   checkRequestBody,
+  checkPageLimit,
   uploadFile,
 } = require('../../middlewares');
 const {
@@ -22,7 +23,12 @@ const { patterns } = require('../../helpers');
 
 const router = express.Router();
 
-router.get('/', validateBody(validationBodyQuery), ctrl.getProductsByQuery);
+router.get(
+  '/',
+  checkPageLimit,
+  validateBody(validationBodyQuery),
+  ctrl.getProductsByQuery,
+);
 router.get('/:id', isValidId, ctrl.getProductById);
 router.get('/vendorCode/:vendorCode', ctrl.getUniqueVendorCode);
 router.get('/filters/by-product-name', ctrl.getCountriesTrademarksPrices);

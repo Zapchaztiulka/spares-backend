@@ -1,5 +1,7 @@
 const alphabet =
   '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+const isNumeric = value => /^[0-9]+$/.test(value);
+
 const availability = ['є в наявності', 'під замовлення', 'відсутній'];
 const units = ['кг', 'шт', 'л'];
 const roles = ['superAdmin', 'admin', 'user'];
@@ -85,6 +87,7 @@ const companyData = {
 
 const patterns = {
   alphabet,
+  isNumeric,
   availability,
   roles,
   units,
