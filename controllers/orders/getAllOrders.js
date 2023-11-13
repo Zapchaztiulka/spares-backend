@@ -1,7 +1,6 @@
 const {
   order: { Order },
 } = require('../../models');
-const { HttpError } = require('../../helpers');
 
 module.exports = async (req, res) => {
   let { query = '', page = 1, limit = 10 } = req.query;
