@@ -23,7 +23,7 @@ const { patterns } = require('../../helpers');
 
 const router = express.Router();
 
-router.get(
+router.post(
   '/',
   checkPageLimit,
   validateBody(validationBodyQuery),
