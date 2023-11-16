@@ -52,13 +52,18 @@ socketIO.on('connection', socket => {
     }
   });
 
-  // Processing of user status when chat room is rolling up or unfolding
+  // Processing of user status when chat room is minimized or extended
   socket.on(
     'chatRoomOpenChanged',
     async ({ userId, roomId, isChatRoomOpen }) => {
       await changeIsChatRoomOpen(socketIO, userId, roomId, isChatRoomOpen);
     },
   );
+
+  // Processing when chat is minimized or extended
+  socket.on('minimizeChat', async ({ userId, isChatRoomOpen }) => {
+    await socketIO.emit('minimizeChat', { userId, isChatRoomOpen });
+  });
 
   // Processing of user message
   socket.on('userMessage', async ({ userId, roomId, message }) => {

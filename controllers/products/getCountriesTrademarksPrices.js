@@ -53,6 +53,7 @@ module.exports = async (req, res) => {
       ),
       minPrice: Math.min(...prices),
       maxPrice: Math.max(...prices),
+      countProducts: countryProducts.length,
     };
   });
 
@@ -72,6 +73,7 @@ module.exports = async (req, res) => {
       ),
       minPrice: Math.min(...prices),
       maxPrice: Math.max(...prices),
+      countProducts: trademarkProducts.length,
     };
   });
 
