@@ -78,7 +78,20 @@ module.exports = async (req, res) => {
   });
 
   // Sorting of countries and trademarks
-  data.countries.sort((a, b) => a.name.localeCompare(b.name, 'en'));
+  data.countries.sort((a, b) => {
+    const nameA = a.name || '';
+    const nameB = b.name || '';
+
+    if (nameA === '' && nameB === '') {
+      return 0;
+    } else if (nameA === '') {
+      return 1;
+    } else if (nameB === '') {
+      return -1;
+    } else {
+      return nameA.localeCompare(nameB, 'en');
+    }
+  });
   data.trademarks.sort((a, b) => a.name.localeCompare(b.name, 'en'));
 
   res.status(200).json(data);
