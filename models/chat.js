@@ -154,6 +154,10 @@ const chatRoomSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    isLeavePage: {
+      type: Boolean,
+      default: false,
+    },
     isChatRoomProcessed: {
       type: Boolean,
       default: false,

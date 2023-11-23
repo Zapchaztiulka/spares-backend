@@ -1,21 +1,21 @@
 const {
   chat: { Chat },
 } = require('../../models');
+const { patterns } = require('../../helpers');
 
-module.exports = async (socketIO, userId, roomId, isChatRoomOpen) => {
+module.exports = async (socketIO, userId, isChatRoomOpen) => {
   const chat = await Chat.findOne({ userId });
 
   if (chat) {
     const roomInProgress = chat.chatRooms.find(room => {
-      return room._id.toString() === roomId;
+      return room.chatRoomStatus === patterns.chatRoomStatus[0];
     });
 
     if (roomInProgress) {
       roomInProgress.isChatRoomOpen = isChatRoomOpen;
       await chat.save();
-      socketIO.emit('chatRoomOpenChanged', {
+      socketIO.emit('toggleChat', {
         userId,
-        roomId,
         isChatRoomOpen,
       });
     }

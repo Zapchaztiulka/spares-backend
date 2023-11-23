@@ -10,11 +10,12 @@ const { DB_HOST, PORT = 5000, SECRET_KEY } = process.env;
 
 const {
   changeIsUserOnline,
-  changeIsChatRoomOpen,
   addUserMessage,
   addManagerMessage,
   connectManager,
   disconnectManager,
+  toggleChat,
+  leavePage,
 } = require('./helpers/chatHelper');
 
 const socketIO = require('socket.io')(http, {
@@ -37,7 +38,7 @@ socketIO.on('connection', socket => {
       userId
         ? socketUserMap.set(socket.id, userId)
         : socketUserMap.set(socket.id, id);
-      await changeIsUserOnline(socketIO, userId, true, true);
+      await changeIsUserOnline(socketIO, userId, true);
 
       console.log(
         `Socket ${socket.id} is authenticated for ${
@@ -52,17 +53,14 @@ socketIO.on('connection', socket => {
     }
   });
 
-  // Processing of user status when chat room is minimized or extended
-  socket.on(
-    'chatRoomOpenChanged',
-    async ({ userId, roomId, isChatRoomOpen }) => {
-      await changeIsChatRoomOpen(socketIO, userId, roomId, isChatRoomOpen);
-    },
-  );
+  // Processing when chat is minimized or extended
+  socket.on('toggleChat', async ({ userId, isChatRoomOpen }) => {
+    await toggleChat(socketIO, userId, isChatRoomOpen);
+  });
 
   // Processing when chat is minimized or extended
-  socket.on('minimizeChat', async ({ userId, isChatRoomOpen }) => {
-    await socketIO.emit('minimizeChat', { userId, isChatRoomOpen });
+  socket.on('leavePage', async ({ userId, isLeavePage }) => {
+    await leavePage(socketIO, userId, isLeavePage);
   });
 
   // Processing of user message
@@ -85,6 +83,17 @@ socketIO.on('connection', socket => {
     await addManagerMessage(socketIO, userId, roomId, message);
   });
 
+  // Processing of unread manager messages by User
+  socket.on(
+    'countUnreadManagerMessages',
+    async ({ userId, countUnreadManagerMessages }) => {
+      await socketIO.emit('countUnreadManagerMessages', {
+        userId,
+        countUnreadManagerMessages,
+      });
+    },
+  );
+
   // Processing of manager typing
   socket.on('managerTyping', async ({ isTyping, roomId }) => {
     await socketIO.emit('managerTyping', { isTyping, roomId });
@@ -94,7 +103,7 @@ socketIO.on('connection', socket => {
   socket.on('disconnect', async () => {
     const userId = socketUserMap.get(socket.id);
     if (userId) {
-      await changeIsUserOnline(socketIO, userId, false, false);
+      await changeIsUserOnline(socketIO, userId, false);
       await disconnectManager(socketIO, userId);
       socketUserMap.delete(socket.id);
       console.log(
