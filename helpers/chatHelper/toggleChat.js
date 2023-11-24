@@ -14,10 +14,11 @@ module.exports = async (socketIO, userId, isChatRoomOpen) => {
     if (roomInProgress) {
       roomInProgress.isChatRoomOpen = isChatRoomOpen;
       await chat.save();
-      socketIO.emit('toggleChat', {
-        userId,
-        isChatRoomOpen,
-      });
     }
+
+    socketIO.emit('toggleChat', {
+      userId,
+      isChatRoomOpen,
+    });
   }
 };
