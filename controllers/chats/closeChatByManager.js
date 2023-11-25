@@ -30,6 +30,11 @@ module.exports = async (req, res) => {
 
   socketIO.emit('closeChatByManager', { room: roomToComplete });
 
+  socketIO.emit('countUnreadManagerMessages', {
+    userId,
+    countUnreadManagerMessages: null,
+  });
+
   await chat.save();
 
   return res.status(200).json({

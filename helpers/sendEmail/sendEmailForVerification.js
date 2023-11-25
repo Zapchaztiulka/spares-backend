@@ -64,7 +64,7 @@ module.exports = async (email, verificationToken) => {
               <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
             <a/>
           </div>
-          <h3>Вас вітає магазин запасних частин агротехніки "Запчастулька"!</h3>
+          <h3>Вас вітає магазин запасних частин агротехніки "Запчастюлька"!</h3>
           <p>Натисніть кнопку нижче, щоб підтвердити свою електронну адресу:</p>
           <a class="verification-link" target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">
             <p class="verification-text">Підтвердити email</p>

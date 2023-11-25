@@ -38,6 +38,11 @@ module.exports = async (req, res) => {
     userSurname,
   });
 
+  socketIO.emit('countUnreadManagerMessages', {
+    userId,
+    countUnreadManagerMessages: null,
+  });
+
   await chat.save();
 
   return res.status(200).json({
