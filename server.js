@@ -4,6 +4,7 @@ mongoose.set('strictQuery', true);
 
 const app = require('./app');
 const http = require('http').Server(app);
+// eslint-disable-next-line no-unused-vars
 const cors = require('cors');
 
 const { DB_HOST, PORT = 5000, SECRET_KEY } = process.env;

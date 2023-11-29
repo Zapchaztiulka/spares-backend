@@ -42,7 +42,7 @@ router.post(
 );
 
 router.post(
-  '/',
+  '/add',
   checkRequestBody,
   authenticate,
   hasRole([patterns.roles[0], patterns.roles[1]]),

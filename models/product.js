@@ -128,11 +128,8 @@ const validationAddOneProduct = Joi.object({
       .example('Введіть торгову марка')
       .min(patterns.min.manufacturer)
       .max(patterns.max.manufacturer)
-      .required()
-      .messages({
-        ...templatesMsgJoi('Торгова марка').textRules,
-        ...templatesMsgJoi('Торгова марка').commonRules,
-      }),
+      .allow('')
+      .messages(templatesMsgJoi('Торгова марка').textRules),
   })
     .required()
     .messages(
@@ -485,7 +482,7 @@ const manufacturerSchema = new Schema({
   },
   trademark: {
     type: String,
-    required: true,
+    default: '',
   },
 });
 

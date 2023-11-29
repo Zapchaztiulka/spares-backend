@@ -373,66 +373,32 @@ module.exports = (schema, typeReq) => {
         },
       },
     },
-    typeReq === 'add'
-      ? {
-          key: keys[9].schema.$_terms.keys[2].key, // trademark
-          title: keys[9].schema.$_terms.keys[2].schema._flags.description,
-          type: keys[9].schema.$_terms.keys[2].schema.$_terms.notes[0],
-          placeholder:
-            keys[9].schema.$_terms.keys[2].schema.$_terms.examples[0],
-          validation: {
-            min: keys[9].schema.$_terms.keys[2].schema._rules[0].args.limit,
-            max: keys[9].schema.$_terms.keys[2].schema._rules[1].args.limit,
-            required: keys[9].schema.$_terms.keys[2].schema._flags.presence,
-            warningMessages: {
-              length:
-                keys[9].schema.$_terms.keys[2].schema._preferences.messages[
-                  'string.min'
-                ]._template[0] +
-                keys[9].schema.$_terms.keys[2].schema._rules[0].args.limit +
-                ' до ' +
-                keys[9].schema.$_terms.keys[2].schema._rules[1].args.limit +
-                keys[9].schema.$_terms.keys[2].schema._preferences.messages[
-                  'string.max'
-                ]._template[
-                  keys[9].schema.$_terms.keys[2].schema._preferences.messages[
-                    'string.max'
-                  ]._template.length - 1
-                ],
-              required:
-                keys[9].schema.$_terms.keys[2].schema._preferences.messages[
-                  'any.required'
-                ].rendered,
-            },
-          },
-        }
-      : {
-          key: keys[9].schema.$_terms.keys[2].key, // trademark
-          title: keys[9].schema.$_terms.keys[2].schema._flags.description,
-          type: keys[9].schema.$_terms.keys[2].schema.$_terms.notes[0],
-          placeholder:
-            keys[9].schema.$_terms.keys[2].schema.$_terms.examples[0],
-          validation: {
-            min: keys[9].schema.$_terms.keys[2].schema._rules[0].args.limit,
-            max: keys[9].schema.$_terms.keys[2].schema._rules[1].args.limit,
-            warningMessages: {
-              length:
-                keys[9].schema.$_terms.keys[2].schema._preferences.messages[
-                  'string.min'
-                ]._template[0] +
-                keys[9].schema.$_terms.keys[2].schema._rules[0].args.limit +
-                ' до ' +
-                keys[9].schema.$_terms.keys[2].schema._rules[1].args.limit +
-                keys[9].schema.$_terms.keys[2].schema._preferences.messages[
-                  'string.max'
-                ]._template[
-                  keys[9].schema.$_terms.keys[2].schema._preferences.messages[
-                    'string.max'
-                  ]._template.length - 1
-                ],
-            },
-          },
+    {
+      key: keys[9].schema.$_terms.keys[2].key, // trademark
+      title: keys[9].schema.$_terms.keys[2].schema._flags.description,
+      type: keys[9].schema.$_terms.keys[2].schema.$_terms.notes[0],
+      placeholder: keys[9].schema.$_terms.keys[2].schema.$_terms.examples[0],
+      validation: {
+        min: keys[9].schema.$_terms.keys[2].schema._rules[0].args.limit,
+        max: keys[9].schema.$_terms.keys[2].schema._rules[1].args.limit,
+        warningMessages: {
+          length:
+            keys[9].schema.$_terms.keys[2].schema._preferences.messages[
+              'string.min'
+            ]._template[0] +
+            keys[9].schema.$_terms.keys[2].schema._rules[0].args.limit +
+            ' до ' +
+            keys[9].schema.$_terms.keys[2].schema._rules[1].args.limit +
+            keys[9].schema.$_terms.keys[2].schema._preferences.messages[
+              'string.max'
+            ]._template[
+              keys[9].schema.$_terms.keys[2].schema._preferences.messages[
+                'string.max'
+              ]._template.length - 1
+            ],
         },
+      },
+    },
     typeReq === 'add'
       ? {
           key: keys[10].key, // categories
