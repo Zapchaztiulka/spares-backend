@@ -7,7 +7,7 @@ const { checkNotFound, patterns } = require('../../helpers');
 
 module.exports = async (req, res) => {
   const { id: roomId } = req.params;
-  const { userId, username, userSurname } = req.body;
+  const { userId } = req.body;
 
   const socketIO = req.app.get('socketIO');
 
@@ -24,6 +24,8 @@ module.exports = async (req, res) => {
   if (!roomToComplete) {
     await checkNotFound(roomToComplete, roomId, 'Chat room');
   }
+
+  const { username, userSurname } = chat;
 
   roomToComplete.chatRoomStatus = patterns.chatRoomStatus[1];
   roomToComplete.isChatRoomOpen = false;

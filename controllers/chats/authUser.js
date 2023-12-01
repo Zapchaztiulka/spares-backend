@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
 
     if (userById?.role && userById?.role !== patterns.roles[2]) {
       throw HttpError(
-        400,
+        403,
         `Only user with role "${patterns.roles[2]}" can start a chat`,
       );
     }

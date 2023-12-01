@@ -14,13 +14,6 @@ const {
 const router = express.Router();
 
 router.get('/', ctrl.getChatRoomsByStatus);
-router.get(
-  '/chatRoom/:id',
-  checkRequestBody,
-  isValidId,
-  validateBody(validationUserId),
-  ctrl.getChatRoomById,
-);
 
 router.post(
   '/auth',
