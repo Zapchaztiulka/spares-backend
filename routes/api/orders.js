@@ -23,8 +23,8 @@ const router = express.Router();
 
 router.get(
   '/',
-  authenticate,
-  hasRole([patterns.roles[0], patterns.roles[1]]),
+  // authenticate,
+  // hasRole([patterns.roles[0], patterns.roles[1]]),
   checkPageLimit,
   ctrl.getAllOrders,
 );
@@ -36,6 +36,11 @@ router.get(
   hasRole([patterns.roles[0], patterns.roles[1]]),
   isValidId,
   ctrl.getOrderDetails,
+);
+router.get(
+  '/admin-tag/get-orders',
+  validateBody(validationAdminTag),
+  ctrl.getOrdersByAdminTag,
 );
 router.get(
   '/admin-tag/get-orders',
