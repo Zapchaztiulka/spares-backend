@@ -37,40 +37,54 @@ module.exports = async (req, res) => {
   data.countries = Array.from(uniqueCountries).sort();
   data.trademarks = Array.from(uniqueTrademarks).sort();
 
-  // Calculate the minimum and maximum price for each country
+  // Calculate the minimum and maximum price for each country  and product count of each trademark
   data.countries = data.countries.map(country => {
     const countryProducts = products.filter(
       product => product.manufacturer.country === country,
     );
     const prices = countryProducts.map(product => product.price.value);
 
+    const trademarkCounts = Array.from(uniqueTrademarks)
+      .map(tm => {
+        const trademarkCount = countryProducts.reduce(
+          (count, product) =>
+            product.manufacturer.trademark.includes(tm) ? count + 1 : count,
+          0,
+        );
+        return { name: tm, count: trademarkCount };
+      })
+      .filter(trademark => trademark.count > 0);
+
     return {
       name: country,
-      trademarks: Array.from(uniqueTrademarks).filter(tm =>
-        countryProducts.some(product =>
-          product.manufacturer.trademark.includes(tm),
-        ),
-      ),
+      trademarks: trademarkCounts,
       minPrice: Math.min(...prices),
       maxPrice: Math.max(...prices),
       countProducts: countryProducts.length,
     };
   });
 
-  // Calculate the minimum and maximum price for each trademarks
+  // Calculate the minimum and maximum price for each trademark and count of products in each country
   data.trademarks = data.trademarks.map(trademark => {
     const trademarkProducts = products.filter(product =>
       product.manufacturer.trademark.includes(trademark),
     );
     const prices = trademarkProducts.map(product => product.price.value);
 
+    const countriesCount = Array.from(uniqueCountries)
+      .map(country => {
+        const countryCount = trademarkProducts.reduce(
+          (count, product) =>
+            product.manufacturer.country === country ? count + 1 : count,
+          0,
+        );
+        return { name: country, count: countryCount };
+      })
+      .filter(country => country.count > 0);
+
     return {
       name: trademark,
-      countries: Array.from(uniqueCountries).filter(country =>
-        trademarkProducts.some(
-          product => product.manufacturer.country === country,
-        ),
-      ),
+      countries: countriesCount,
       minPrice: Math.min(...prices),
       maxPrice: Math.max(...prices),
       countProducts: trademarkProducts.length,
