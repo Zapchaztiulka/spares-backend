@@ -2,7 +2,7 @@ const {
   product: { Product },
   user: { User },
 } = require('../../models');
-const { checkNotFound } = require('..');
+const { checkNotFound, patterns } = require('..');
 const { checkAvailableProductInStock } = require('../productHelpers');
 
 module.exports = async (products, user, phone, email, adminTag) => {
@@ -24,6 +24,11 @@ module.exports = async (products, user, phone, email, adminTag) => {
       await checkAvailableProductInStock(name, availableQuantity, quantity);
 
       availableProduct.quantity -= quantity;
+
+      if (availableProduct.quantity === 0) {
+        availableProduct.availability = patterns.availability[2];
+      }
+
       await availableProduct.save();
 
       return { productId, quantity, vendorCode, name, price: value, units };
