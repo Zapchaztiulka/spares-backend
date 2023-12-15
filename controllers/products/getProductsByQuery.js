@@ -1,21 +1,41 @@
 const {
   product: { Product },
 } = require('../../models');
-const { patterns } = require('../../helpers');
+const { HttpError, patterns } = require('../../helpers');
 const { applyFilters } = require('../../helpers/productHelpers');
 
 module.exports = async (req, res) => {
-  const { page, limit, query = '' } = req.query;
+  const { page, limit, query = '', mode = '' } = req.query;
   const skip = Math.max((parseInt(page, 10) - 1) * parseInt(limit, 10), 0);
 
   // find all products according to query params
   const formattedQuery = query.trim();
+  const formattedMode = mode.trim();
+
+  if (!patterns.productSortRules.includes(formattedMode)) {
+    throw HttpError(
+      400,
+      `Invalid mode parameter. Must be one of following: ${patterns.productSortRules}`,
+    );
+  }
+
   const productMap = new Map();
 
   if (formattedQuery) {
-    for (const field of patterns.productSortRules) {
+    if (!formattedMode) {
+      for (const field of patterns.productSortRules) {
+        const filter = {
+          [field]: { $regex: formattedQuery, $options: 'i' },
+        };
+
+        const existingProducts = await Product.find(filter);
+        existingProducts.forEach(product => {
+          productMap.set(product._id.toString(), product);
+        });
+      }
+    } else {
       const filter = {
-        [field]: { $regex: formattedQuery, $options: 'i' },
+        [formattedMode]: { $regex: formattedQuery, $options: 'i' },
       };
 
       const existingProducts = await Product.find(filter);
