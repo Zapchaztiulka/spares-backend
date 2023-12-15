@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   const formattedQuery = query.trim();
   const formattedMode = mode.trim();
 
-  if (!patterns.productSortRules.includes(formattedMode)) {
+  if (formattedMode && !patterns.productSortRules.includes(formattedMode)) {
     throw HttpError(
       400,
       `Invalid mode parameter. Must be one of following: ${patterns.productSortRules}`,
