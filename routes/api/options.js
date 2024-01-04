@@ -16,6 +16,8 @@ const {
   getProductProperties,
   getCategoryProperties,
 } = require('../../helpers/optionsHelper');
+const { patterns } = require('../../helpers');
+
 const router = express.Router();
 
 router.get('/user', async (_, res) => {
@@ -96,6 +98,30 @@ router.get('/category', async (_, res) => {
   };
 
   return res.json({ addCategory, updateCategory });
+});
+
+router.get('/patterns', async (_, res) => {
+  // Функція для конвертації об'єктів RegExp у рядки
+  const convertRegExpToString = obj => {
+    const result = {};
+    for (const key in obj) {
+      if (obj[key] instanceof RegExp) {
+        result[key] = obj[key].source;
+      } else {
+        result[key] = obj[key];
+      }
+    }
+    return result;
+  };
+
+  const convertedPatterns = convertRegExpToString(patterns);
+
+  const mainPatterns = {
+    title: 'Патерни бек-енду',
+    patterns: convertedPatterns,
+  };
+
+  return res.json(mainPatterns);
 });
 
 module.exports = router;

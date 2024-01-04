@@ -1,9 +1,10 @@
+const { patterns } = require('../../helpers');
 const {
   order: { Order },
 } = require('../../models');
 
 module.exports = async (req, res) => {
-  let { query = '', page = 1, limit = 10 } = req.query;
+  let { query = '', page = 1, limit = 10, orderStatusIdx } = req.query;
   const skip = Math.max((parseInt(page, 10) - 1) * parseInt(limit, 10), 0);
 
   query = query.trim();
@@ -33,6 +34,13 @@ module.exports = async (req, res) => {
     orders.push(...(result ?? []));
   } else {
     orders = await Order.find();
+  }
+
+  if (orderStatusIdx) {
+    const res = orders.filter(
+      order => order.status === patterns.orderStatus[orderStatusIdx],
+    );
+    orders = res;
   }
 
   let paginatedOrders = [];
