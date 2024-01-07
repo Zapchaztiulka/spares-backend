@@ -3,19 +3,53 @@ const {
 } = require('../../models');
 const { HttpError, patterns } = require('../../helpers');
 const { applyFilters } = require('../../helpers/productHelpers');
+const { calculateTotalPurchased } = require('../../helpers/orderHelpers');
 
 module.exports = async (req, res) => {
-  const { page, limit, query = '', mode = '' } = req.query;
+  const {
+    page,
+    limit,
+    query = '',
+    mode = '',
+    sortType = '',
+    sortBy = '',
+  } = req.query;
   const skip = Math.max((parseInt(page, 10) - 1) * parseInt(limit, 10), 0);
 
   // find all products according to query params
   const formattedQuery = query.trim();
   const formattedMode = mode.trim();
+  const formattedSortType = sortType.trim();
+  const formattedSortBy = sortBy.trim();
 
   if (formattedMode && !patterns.productSortRules.includes(formattedMode)) {
     throw HttpError(
       400,
       `Invalid mode parameter. Must be one of following: ${patterns.productSortRules}`,
+    );
+  }
+
+  if (
+    (formattedSortType && !formattedSortBy) ||
+    (formattedSortBy && !formattedSortType)
+  ) {
+    throw HttpError(
+      400,
+      'Bad query: sort parameters. Both parameters must be specified',
+    );
+  }
+
+  if (formattedSortType && !patterns.sortTypes.includes(formattedSortType)) {
+    throw HttpError(
+      400,
+      `Invalid "sortType" parameter. Must be one of following: ${patterns.sortTypes}`,
+    );
+  }
+
+  if (formattedSortBy && !patterns.sortBy.includes(formattedSortBy)) {
+    throw HttpError(
+      400,
+      `Invalid "sortBy" parameter. Must be one of following: ${patterns.sortBy}`,
     );
   }
 
@@ -67,6 +101,46 @@ module.exports = async (req, res) => {
     }
   });
 
+  // Calculate count of total purchased each product
+  for (const product of uniqueFilteredProducts) {
+    product.totalPurchased = await calculateTotalPurchased(product._id);
+  }
+
+  // Sorting logic based on sortType and sortBy
+  if (formattedSortType && formattedSortBy) {
+    const sortOrder = formattedSortType === 'smallLarge' ? 1 : -1;
+
+    uniqueFilteredProducts.sort((a, b) => {
+      let valueA, valueB;
+
+      switch (formattedSortBy) {
+        case 'name':
+          valueA = a.name.toLowerCase();
+          valueB = b.name.toLowerCase();
+          break;
+        case 'price':
+          valueA = a.price.value;
+          valueB = b.price.value;
+          break;
+        case 'purchased':
+          valueA = a.totalPurchased;
+          valueB = b.totalPurchased;
+          break;
+        default:
+          valueA = 0;
+          valueB = 0;
+      }
+
+      if (valueA < valueB) {
+        return -1 * sortOrder;
+      }
+      if (valueA > valueB) {
+        return 1 * sortOrder;
+      }
+      return 0;
+    });
+  }
+
   // create response with pagination
   let paginatedProducts = [];
 
@@ -79,8 +153,13 @@ module.exports = async (req, res) => {
     paginatedProducts = uniqueFilteredProducts;
   }
 
+  const responseProducts = paginatedProducts.map(product => ({
+    totalPurchased: product.totalPurchased,
+    ...product.toObject(),
+  }));
+
   res.status(200).json({
-    products: paginatedProducts,
+    products: responseProducts,
     totalCount: uniqueFilteredProducts.length || 0,
   });
 };

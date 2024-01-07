@@ -3,7 +3,7 @@ const {
   category: { Category },
 } = require('../../models');
 
-module.exports = async (products, userId) => {
+module.exports = async products => {
   for (const product of products) {
     const categoryIds = product.categories.map(
       id => new mongoose.Types.ObjectId(id),

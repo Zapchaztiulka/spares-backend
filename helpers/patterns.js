@@ -1,10 +1,14 @@
 const alphabet =
   '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
 const isNumeric = value => /^[0-9]+$/.test(value);
 
 const availability = ['в наявності', 'під замовлення', 'відсутній'];
+
 const units = ['кг', 'шт', 'л'];
+
 const roles = ['superAdmin', 'admin', 'user'];
+
 const orderStatus = [
   'нове',
   'підтверджено',
@@ -30,6 +34,10 @@ const productSortRules = [
   'manufacturer.factory',
   'vendorCode',
 ];
+
+const sortTypes = ['smallLarge', 'largeSmall'];
+const sortBy = ['name', 'price', 'purchased'];
+
 const chatRoomStatus = ['in progress', 'completed'];
 const chatRating = [1, 2, 3, 4, 5];
 const messageType = ['text', 'image'];
@@ -101,6 +109,8 @@ const patterns = {
   phonePatternMessage,
   orderStatus,
   productSortRules,
+  sortTypes,
+  sortBy,
   chatRoomStatus,
   chatRating,
   messageType,

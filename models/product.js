@@ -6,6 +6,9 @@ const {
   handleMongooseError,
   patterns,
 } = require('../helpers');
+const {
+  getPropsFromSchema,
+} = require('../helpers/productHelpers/getPropsFromSchema');
 
 const validationAddOneProduct = Joi.object({
   name: Joi.string()
@@ -550,11 +553,14 @@ const productSchema = new Schema(
   { versionKey: false, timestamps: true },
 );
 
+const allFieldsArr = getPropsFromSchema(productSchema);
+
 productSchema.post('save', handleMongooseError);
 const Product = model('product', productSchema);
 
 module.exports = {
   Product,
+  allFieldsArr,
   validationAddOneProduct,
   validationAddProducts,
   validationUpdateProduct,
