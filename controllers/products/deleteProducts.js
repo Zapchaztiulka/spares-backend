@@ -15,7 +15,6 @@ module.exports = async (req, res) => {
 
   if (notFoundProductIds.length === 0) {
     const deleteResult = await Product.deleteMany({ _id: { $in: productIds } });
-    console.log('🚀  deleteResult:', deleteResult);
 
     const { deletedCount } = deleteResult;
     if (deletedCount > 0) {

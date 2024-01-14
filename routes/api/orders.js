@@ -15,6 +15,7 @@ const {
     validationOrderByAny,
     validationUpdateOrder,
     validationAdminTag,
+    validationOrderIdsArray,
   },
 } = require('../../models');
 const { patterns } = require('../../helpers');
@@ -87,12 +88,10 @@ router.put(
 );
 
 router.delete(
-  '/:id',
-  authenticate,
-  hasRole(patterns.roles[2]),
-  isValidId,
-  ctrl.deleteOrderbyUser,
+  '/',
+  checkRequestBody,
+  validateBody(validationOrderIdsArray),
+  ctrl.deleteOrders,
 );
-router.delete('/any/:id', isValidId, ctrl.deleteOrderbyAny);
 
 module.exports = router;

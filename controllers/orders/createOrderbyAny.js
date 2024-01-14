@@ -5,21 +5,23 @@ const { createOrder } = require('../../helpers/orderHelpers');
 const { sendEmailWithOrderDetails } = require('../../helpers/sendEmail');
 
 module.exports = async (req, res) => {
-  const { products, phone, email = '', adminTag } = req.body;
+  const {
+    products,
+    phone,
+    email = '',
+    username = '',
+    userSurname = '',
+    adminTag,
+  } = req.body;
 
-  const orderData = await createOrder(products, null, phone, email, adminTag);
+  const userData = { phone, email, username, userSurname };
+
+  const orderData = await createOrder(products, null, userData, adminTag);
   const newOrder = await Order.create(orderData);
 
   if (email) {
     await sendEmailWithOrderDetails(newOrder);
   }
 
-  const newOrderResponse = newOrder.toObject();
-
-  if (!newOrderResponse.username) {
-    delete newOrderResponse.username;
-    delete newOrderResponse.userSurname;
-  }
-
-  return res.status(201).json(newOrderResponse);
+  return res.status(201).json(newOrder);
 };

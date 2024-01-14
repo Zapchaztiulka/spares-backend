@@ -51,6 +51,20 @@ const validationOrderByAny = Joi.object({
     .email({ minDomainSegments: 2 })
     .pattern(patterns.emailPattern)
     .messages(templatesMsgJoi('Email').emailRules),
+  username: Joi.string()
+    .description("Ім'я користувача")
+    .note('input')
+    .example("Введіть ім'я користувача")
+    .min(patterns.min.user)
+    .max(patterns.max.user)
+    .messages(templatesMsgJoi("Ім'я користувача").textRules),
+  userSurname: Joi.string()
+    .description('Прізвище користувача')
+    .note('input')
+    .example('Введіть прізвище користувача')
+    .min(patterns.min.user)
+    .max(patterns.max.user)
+    .messages(templatesMsgJoi('Прізвище користувача').textRules),
   products: Joi.array()
     .items(
       Joi.object({
@@ -169,6 +183,24 @@ const validationAdminTag = Joi.object({
     ),
 });
 
+const validationOrderIdsArray = Joi.object({
+  orderIds: Joi.array()
+    .items(
+      Joi.string()
+        .description('ІД замовлення')
+        .note('checkBox')
+        .example('Оберіть ІД замовлення')
+        .length(24)
+        .messages({
+          ...templatesMsgJoi('ІД замовлення').textRules,
+          ...templatesMsgJoi('ІД замовлення').commonRules,
+        }),
+    )
+    .min(1)
+    .required()
+    .messages(templatesMsgJoi('Масив ІД замовлень').arrayRules),
+});
+
 const orderProductSchema = new Schema(
   {
     productId: {
@@ -242,6 +274,14 @@ const orderSchema = new Schema(
       type: String,
       default: '',
     },
+    userComment: {
+      type: String,
+      default: '',
+    },
+    adminComment: {
+      type: String,
+      default: '',
+    },
   },
   { versionKey: false, timestamps: true },
 );
@@ -255,4 +295,5 @@ module.exports = {
   validationOrderByAny,
   validationUpdateOrder,
   validationAdminTag,
+  validationOrderIdsArray,
 };
