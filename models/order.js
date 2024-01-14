@@ -38,6 +38,14 @@ const validationOrderByUser = Joi.object({
     .min(patterns.min.adminTag)
     .max(patterns.max.adminTag)
     .messages(templatesMsgJoi('AdminTag').textRules),
+  userComment: Joi.string()
+    .description('Коментар від клієнта')
+    .note('input')
+    .example('Введіть коментар від клієнта')
+    .allow('')
+    .min(patterns.min.description)
+    .max(patterns.max.description)
+    .messages(templatesMsgJoi('Коментар від клієнта').textRules),
 });
 
 const validationOrderByAny = Joi.object({
@@ -95,6 +103,31 @@ const validationOrderByAny = Joi.object({
     .min(patterns.min.adminTag)
     .max(patterns.max.adminTag)
     .messages(templatesMsgJoi('AdminTag').textRules),
+  userComment: Joi.string()
+    .description('Коментар від клієнта')
+    .note('input')
+    .example('Введіть коментар від клієнта')
+    .allow('')
+    .min(patterns.min.description)
+    .max(patterns.max.description)
+    .messages(templatesMsgJoi('Коментар від клієнта').textRules),
+  adminId: Joi.string()
+    .description('ІД менеджера')
+    .note('input')
+    .example('Введіть ІД менеджера')
+    .length(24)
+    .messages({
+      ...templatesMsgJoi('ІД менеджера').textRules,
+      ...templatesMsgJoi('ІД менеджера').commonRules,
+    }),
+  adminComment: Joi.string()
+    .description('Коментар від менеджера')
+    .note('input')
+    .example('Введіть коментар від менеджера')
+    .allow('')
+    .min(patterns.min.description)
+    .max(patterns.max.description)
+    .messages(templatesMsgJoi('Коментар від менеджера').textRules),
 });
 
 const validationUpdateOrder = Joi.object({
@@ -159,6 +192,62 @@ const validationUpdateOrder = Joi.object({
     .min(patterns.min.adminTag)
     .max(patterns.max.adminTag)
     .messages(templatesMsgJoi('AdminTag').textRules),
+  userComment: Joi.string()
+    .description('Коментар від клієнта')
+    .note('input')
+    .example('Введіть коментар від клієнта')
+    .allow('')
+    .min(patterns.min.description)
+    .max(patterns.max.description)
+    .messages(templatesMsgJoi('Коментар від клієнта').textRules),
+  adminComment: Joi.string()
+    .description('Коментар від менеджера')
+    .note('input')
+    .example('Введіть коментар від менеджера')
+    .allow('')
+    .min(patterns.min.description)
+    .max(patterns.max.description)
+    .messages(templatesMsgJoi('Коментар від менеджера').textRules),
+});
+
+const validationUpdateOrdersByAdmin = Joi.object({
+  status: Joi.string()
+    .valid(...patterns.orderStatus)
+    .messages({
+      ...templatesMsgJoi('Status', patterns.orderStatus).enumRules,
+      ...templatesMsgJoi('Status').commonRules,
+    }),
+  adminTag: Joi.string()
+    .description('AdminTag')
+    .note('input')
+    .example('Введіть adminTag')
+    .allow('')
+    .min(patterns.min.adminTag)
+    .max(patterns.max.adminTag)
+    .messages(templatesMsgJoi('AdminTag').textRules),
+  adminComment: Joi.string()
+    .description('Коментар від менеджера')
+    .note('input')
+    .example('Введіть коментар від менеджера')
+    .allow('')
+    .min(patterns.min.description)
+    .max(patterns.max.description)
+    .messages(templatesMsgJoi('Коментар від менеджера').textRules),
+  orderIds: Joi.array()
+    .items(
+      Joi.string()
+        .description('ІД замовлення')
+        .note('checkBox')
+        .example('Оберіть ІД замовлення')
+        .length(24)
+        .messages({
+          ...templatesMsgJoi('ІД замовлення').textRules,
+          ...templatesMsgJoi('ІД замовлення').commonRules,
+        }),
+    )
+    .min(1)
+    .required()
+    .messages(templatesMsgJoi('Масив ІД замовлень').arrayRules),
 });
 
 const validationAdminTag = Joi.object({
@@ -230,6 +319,32 @@ const orderProductSchema = new Schema(
   { _id: false },
 );
 
+const adminDataSchema = new Schema(
+  {
+    adminId: {
+      type: String,
+      default: '',
+    },
+    adminName: {
+      type: String,
+      default: '',
+    },
+    adminSurname: {
+      type: String,
+      default: '',
+    },
+    adminComment: {
+      type: String,
+      default: '',
+    },
+  },
+  {
+    versionKey: false,
+    timestamps: { createdAt: true, updatedAt: false },
+    _id: false,
+  },
+);
+
 const orderSchema = new Schema(
   {
     userId: {
@@ -278,9 +393,9 @@ const orderSchema = new Schema(
       type: String,
       default: '',
     },
-    adminComment: {
-      type: String,
-      default: '',
+    adminData: {
+      type: adminDataSchema,
+      default: null,
     },
   },
   { versionKey: false, timestamps: true },
@@ -294,6 +409,7 @@ module.exports = {
   validationOrderByUser,
   validationOrderByAny,
   validationUpdateOrder,
+  validationUpdateOrdersByAdmin,
   validationAdminTag,
   validationOrderIdsArray,
 };

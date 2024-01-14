@@ -16,6 +16,7 @@ const {
     validationUpdateOrder,
     validationAdminTag,
     validationOrderIdsArray,
+    validationUpdateOrdersByAdmin,
   },
 } = require('../../models');
 const { patterns } = require('../../helpers');
@@ -69,12 +70,13 @@ router.post(
   validateBody(validationAdminTag),
   ctrl.assignAdminTagByPhone,
 );
-router.post(
-  '/assign-admin-tag/:id',
+
+router.patch(
+  '/',
   checkRequestBody,
-  isValidId,
-  validateBody(validationAdminTag),
-  ctrl.assignAdminTagById,
+  hasRole([patterns.roles[0], patterns.roles[1]]),
+  validateBody(validationUpdateOrdersByAdmin),
+  ctrl.updateOrdersByAdmin,
 );
 
 router.put(

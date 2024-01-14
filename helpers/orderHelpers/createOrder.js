@@ -5,7 +5,7 @@ const {
 const { checkNotFound, patterns } = require('..');
 const { checkAvailableProductInStock } = require('../productHelpers');
 
-module.exports = async (products, user, userData, adminTag) => {
+module.exports = async (products, user, additionalData) => {
   const productDetails = await Promise.all(
     products.map(async product => {
       const { productId, quantity } = product;
@@ -45,18 +45,41 @@ module.exports = async (products, user, userData, adminTag) => {
     0,
   );
 
+  const {
+    phone,
+    email = '',
+    username = '',
+    userSurname = '',
+    adminTag = '',
+    userComment = '',
+    adminId = '',
+    adminComment = '',
+  } = additionalData;
+
   const orderData = {
     products: productDetails,
     totalTypeOfProducts: productDetails.length,
     totalProducts,
     totalPrice,
     adminTag,
+    userComment,
   };
+
+  if (adminId) {
+    const admin = await User.findById(adminId);
+    await checkNotFound(admin, adminId, 'Manager');
+
+    orderData.adminData = {
+      adminId,
+      adminName: admin.username,
+      adminSurname: admin.userSurname,
+      adminComment,
+    };
+  }
 
   let userToUse = user;
 
   if (!user) {
-    const { phone, email, username, userSurname } = userData;
     userToUse = await User.findOne({ phone });
 
     if (!userToUse) {

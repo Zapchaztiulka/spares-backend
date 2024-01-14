@@ -10,6 +10,6 @@ module.exports = {
   updateOrder: ctrlWrapper(require('./updateOrder')),
 
   assignAdminTagByPhone: ctrlWrapper(require('./assignAdminTagByPhone')),
-  assignAdminTagById: ctrlWrapper(require('./assignAdminTagById')),
+  updateOrdersByAdmin: ctrlWrapper(require('./updateOrdersByAdmin')),
   getOrdersByAdminTag: ctrlWrapper(require('./getOrdersByAdminTag')),
 };

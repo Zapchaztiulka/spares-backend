@@ -11,12 +11,24 @@ module.exports = async (req, res) => {
     email = '',
     username = '',
     userSurname = '',
-    adminTag,
+    adminTag = '',
+    userComment = '',
+    adminId = '',
+    adminComment = '',
   } = req.body;
 
-  const userData = { phone, email, username, userSurname };
+  const additionalData = {
+    phone,
+    email,
+    username,
+    userSurname,
+    adminTag,
+    userComment,
+    adminId,
+    adminComment,
+  };
 
-  const orderData = await createOrder(products, null, userData, adminTag);
+  const orderData = await createOrder(products, null, additionalData);
   const newOrder = await Order.create(orderData);
 
   if (email) {

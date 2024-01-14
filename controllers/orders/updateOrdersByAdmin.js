@@ -4,7 +4,7 @@ const {
 const { HttpError, checkNotFound } = require('../../helpers');
 
 module.exports = async (req, res) => {
-  const { adminTag } = req.body;
+  const { adminTag, status, adminComment } = req.body;
   const { id } = req.params;
 
   const order = await Order.findById(id);
