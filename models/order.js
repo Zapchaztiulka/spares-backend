@@ -200,6 +200,15 @@ const validationUpdateOrder = Joi.object({
     .min(patterns.min.description)
     .max(patterns.max.description)
     .messages(templatesMsgJoi('Коментар від клієнта').textRules),
+  adminId: Joi.string()
+    .description('ІД менеджера')
+    .note('input')
+    .example('Введіть ІД менеджера')
+    .length(24)
+    .messages({
+      ...templatesMsgJoi('ІД менеджера').textRules,
+      ...templatesMsgJoi('ІД менеджера').commonRules,
+    }),
   adminComment: Joi.string()
     .description('Коментар від менеджера')
     .note('input')

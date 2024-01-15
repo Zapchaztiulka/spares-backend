@@ -71,22 +71,24 @@ router.post(
   ctrl.assignAdminTagByPhone,
 );
 
-router.patch(
-  '/',
-  checkRequestBody,
-  hasRole([patterns.roles[0], patterns.roles[1]]),
-  validateBody(validationUpdateOrdersByAdmin),
-  ctrl.updateOrdersByAdmin,
-);
-
 router.put(
   '/:id',
   checkRequestBody,
+  isValidId,
   authenticate,
   hasRole([patterns.roles[0], patterns.roles[1]]),
-  isValidId,
   validateBody(validationUpdateOrder),
   ctrl.updateOrder,
+);
+
+router.patch(
+  '/byAdmin/:id',
+  checkRequestBody,
+  isValidId,
+  authenticate,
+  hasRole([patterns.roles[0], patterns.roles[1]]),
+  validateBody(validationUpdateOrdersByAdmin),
+  ctrl.updateOrdersByAdmin,
 );
 
 router.delete(
