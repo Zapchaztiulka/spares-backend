@@ -6,4 +6,5 @@ module.exports = {
   chatsRouter: require('./chats'),
   faqsRouter: require('./faqs'),
   optionsRouter: require('./options'),
+  userRequests: require('./userRequests'),
 };

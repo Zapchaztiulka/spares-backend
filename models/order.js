@@ -12,23 +12,31 @@ const validationOrderByUser = Joi.object({
     .items(
       Joi.object({
         productId: Joi.string()
+          .description('Product ID')
+          .note('input')
+          .example('Введіть product ID')
           .length(24)
           .required()
           .messages(templatesMsgJoi('Product ID').commonRules),
         quantity: Joi.number()
+          .description('Кількість товару')
+          .note('input')
+          .example('Введіть кількість товару')
+          .required()
           .min(patterns.min.quantity)
           .max(patterns.max.quantity)
           .messages({
-            ...templatesMsgJoi('Quantity').numberRules,
-            ...templatesMsgJoi('Quantity').integerNumberRules,
-            ...templatesMsgJoi('Quantity').commonRules,
+            ...templatesMsgJoi('Кількість товару').numberRules,
+            ...templatesMsgJoi('Кількість товару').integerNumberRules,
+            ...templatesMsgJoi('Кількість товару').commonRules,
           }),
       }),
     )
+    .min(1)
     .required()
     .messages({
-      ...templatesMsgJoi('Products array in order').arrayRules,
-      ...templatesMsgJoi('Products array in order').commonRules,
+      ...templatesMsgJoi('Масив товарів в замовленні').arrayRules,
+      ...templatesMsgJoi('Масив товарів в замовленні').commonRules,
     }),
   adminTag: Joi.string()
     .description('AdminTag')
@@ -50,15 +58,22 @@ const validationOrderByUser = Joi.object({
 
 const validationOrderByAny = Joi.object({
   phone: Joi.string()
+    .description('Телефон користувача')
+    .note('input')
+    .example('Введіть телефон користувача')
     .pattern(patterns.phonePattern)
     .required()
     .messages(
-      templatesMsgJoi('Phone', patterns.phonePatternMessage).regExpRules,
+      templatesMsgJoi('Телефон користувача', patterns.phonePatternMessage)
+        .regExpRules,
     ),
   email: Joi.string()
+    .description('Електронна адреса')
+    .note('input')
+    .example('Введіть електронну адресу користувача')
     .email({ minDomainSegments: 2 })
     .pattern(patterns.emailPattern)
-    .messages(templatesMsgJoi('Email').emailRules),
+    .messages(templatesMsgJoi('Електронна адреса').emailRules),
   username: Joi.string()
     .description("Ім'я користувача")
     .note('input')
@@ -77,23 +92,31 @@ const validationOrderByAny = Joi.object({
     .items(
       Joi.object({
         productId: Joi.string()
+          .description('Product ID')
+          .note('input')
+          .example('Введіть product ID')
           .length(24)
           .required()
           .messages(templatesMsgJoi('Product ID').commonRules),
         quantity: Joi.number()
+          .description('Кількість товару')
+          .note('input')
+          .example('Введіть кількість товару')
+          .required()
           .min(patterns.min.quantity)
           .max(patterns.max.quantity)
           .messages({
-            ...templatesMsgJoi('Quantity').numberRules,
-            ...templatesMsgJoi('Quantity').integerNumberRules,
-            ...templatesMsgJoi('Quantity').commonRules,
+            ...templatesMsgJoi('Кількість товару').numberRules,
+            ...templatesMsgJoi('Кількість товару').integerNumberRules,
+            ...templatesMsgJoi('Кількість товару').commonRules,
           }),
       }),
     )
+    .min(1)
     .required()
     .messages({
-      ...templatesMsgJoi('Products array in order').arrayRules,
-      ...templatesMsgJoi('Products array in order').commonRules,
+      ...templatesMsgJoi('Масив товарів в замовленні').arrayRules,
+      ...templatesMsgJoi('Масив товарів в замовленні').commonRules,
     }),
   adminTag: Joi.string()
     .description('AdminTag')
@@ -146,43 +169,58 @@ const validationUpdateOrder = Joi.object({
     .max(patterns.max.user)
     .messages(templatesMsgJoi('Прізвище користувача').textRules),
   phone: Joi.string()
+    .description('Телефон користувача')
+    .note('input')
+    .example('Введіть телефон користувача')
     .pattern(patterns.phonePattern)
     .messages(
-      templatesMsgJoi('Phone', patterns.phonePatternMessage).regExpRules,
+      templatesMsgJoi('Телефон користувача', patterns.phonePatternMessage)
+        .regExpRules,
     ),
   email: Joi.string()
+    .description('Електронна адреса')
+    .note('input')
+    .example('Введіть електронну адресу користувача')
     .email({ minDomainSegments: 2 })
     .pattern(patterns.emailPattern)
-    .messages(templatesMsgJoi('Email').emailRules),
+    .messages(templatesMsgJoi('Електронна адреса').emailRules),
   status: Joi.string()
+    .description('Статус замовлення')
+    .note('checkbox')
+    .example('Оберіть статус замовлення')
     .valid(...patterns.orderStatus)
     .required()
     .messages({
-      ...templatesMsgJoi('Status', patterns.orderStatus).enumRules,
-      ...templatesMsgJoi('Status').commonRules,
+      ...templatesMsgJoi('Статус замовлення', patterns.orderStatus).enumRules,
+      ...templatesMsgJoi('Статус замовлення').commonRules,
     }),
   products: Joi.array()
     .items(
       Joi.object({
         productId: Joi.string()
+          .description('Product ID')
+          .note('input')
+          .example('Введіть product ID')
           .length(24)
           .required()
           .messages(templatesMsgJoi('Product ID').commonRules),
         quantity: Joi.number()
+          .description('Кількість товару')
+          .note('input')
+          .example('Введіть кількість товару')
+          .required()
           .min(patterns.min.quantity)
           .max(patterns.max.quantity)
           .messages({
-            ...templatesMsgJoi('Quantity').numberRules,
-            ...templatesMsgJoi('Quantity').integerNumberRules,
-            ...templatesMsgJoi('Quantity').commonRules,
+            ...templatesMsgJoi('Кількість товару').numberRules,
+            ...templatesMsgJoi('Кількість товару').integerNumberRules,
+            ...templatesMsgJoi('Кількість товару').commonRules,
           }),
       }),
     )
-    .min(1)
-    .required()
     .messages({
-      ...templatesMsgJoi('Products array in order').arrayRules,
-      ...templatesMsgJoi('Products array in order').commonRules,
+      ...templatesMsgJoi('Масив товарів в замовленні').arrayRules,
+      ...templatesMsgJoi('Масив товарів в замовленні').commonRules,
     }),
   adminTag: Joi.string()
     .description('AdminTag')
@@ -221,10 +259,13 @@ const validationUpdateOrder = Joi.object({
 
 const validationUpdateOrdersByAdmin = Joi.object({
   status: Joi.string()
+    .description('Статус замовлення')
+    .note('checkbox')
+    .example('Оберіть статус замовлення')
     .valid(...patterns.orderStatus)
     .messages({
-      ...templatesMsgJoi('Status', patterns.orderStatus).enumRules,
-      ...templatesMsgJoi('Status').commonRules,
+      ...templatesMsgJoi('Статус замовлення', patterns.orderStatus).enumRules,
+      ...templatesMsgJoi('Статус замовлення').commonRules,
     }),
   adminTag: Joi.string()
     .description('AdminTag')
@@ -254,8 +295,6 @@ const validationUpdateOrdersByAdmin = Joi.object({
           ...templatesMsgJoi('ІД замовлення').commonRules,
         }),
     )
-    .min(1)
-    .required()
     .messages(templatesMsgJoi('Масив ІД замовлень').arrayRules),
 });
 

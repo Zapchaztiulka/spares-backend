@@ -6,6 +6,7 @@ const { HttpError, checkNotFound } = require('../../helpers');
 const {
   checkAccessToAddPhoto,
   checkQuantityInRequest,
+  informProductAvailability,
 } = require('../../helpers/productHelpers');
 
 module.exports = async (req, res) => {
@@ -67,18 +68,31 @@ module.exports = async (req, res) => {
   }
 
   const { price, availability, quantity } = newProductData;
-
   await checkQuantityInRequest(availability, quantity, id);
 
   if (price?.value) {
     newProductData.price.value = price.value.toFixed(2);
   }
 
-  const product = await Product.findByIdAndUpdate(id, newProductData, {
+  const existingProduct = await Product.findById(id);
+  await checkNotFound(existingProduct, id, 'Product');
+
+  const prevQuantity = existingProduct.quantity;
+
+  const updatedProduct = await Product.findByIdAndUpdate(id, newProductData, {
     new: true,
   });
 
-  await checkNotFound(product, id, 'Product');
+  const updatedProductData = {
+    productId: id,
+    productName: updatedProduct.name,
+    vendorCode: updatedProduct.vendorCode,
+    price: updatedProduct.price.value,
+  };
 
-  return res.status(200).json(product);
+  if (prevQuantity === 0 && quantity > 0) {
+    await informProductAvailability(updatedProductData);
+  }
+
+  return res.status(200).json(updatedProduct);
 };

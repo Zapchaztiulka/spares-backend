@@ -56,6 +56,22 @@ module.exports = async (email, verificationToken) => {
               max-width: 100%;
               height: auto;
             }
+
+            .return-button-wrapper {
+            margin-top: 12px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 16px;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #1570EF;
+          }
+          .return-button-wrapper:hover,
+          .return-button-wrapper:focus {
+            background-color: #1849A9;
+          }
           </style>
         </head>
         <body>
@@ -70,9 +86,9 @@ module.exports = async (email, verificationToken) => {
             <p class="verification-text">Підтвердити email</p>
           </a>
           <p>ВАЖЛИВО! Підтвердити пошту можна лише протягом 24 годин</p>
-          <h4>
-            <a href="${GATALOG_URL}"> Повернутися в магазин >>> <a/>
-          </h4>
+          <div class="return-button-wrapper">
+            <a href="${GATALOG_URL}" style="text-decoration: none; text-align: center; color: white;">Повернутися в магазин</a>
+          </div>
         </body>
       </html>
     `,

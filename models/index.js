@@ -5,4 +5,5 @@ module.exports = {
   order: require('./order'),
   chat: require('./chat'),
   faq: require('./faq'),
+  userRequest: require('./userRequest'),
 };

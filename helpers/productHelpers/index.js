@@ -6,4 +6,5 @@ module.exports = {
   checkQuantityInRequest: require('./checkQuantityInRequest'),
   applyFilters: require('./applyFilters'),
   ExcelToJSON: require('./ExcelToJSON'),
+  informProductAvailability: require('./informProductAvailability'),
 };
