@@ -35,6 +35,17 @@ const productSortRules = [
   'vendorCode',
 ];
 
+const typeUserApplication = [
+  'call',
+  'special',
+  'review',
+  'preorder',
+  'another',
+];
+
+const statusUserApplication = ['new', 'in progress', 'completed'];
+const sortUserApplicationBy = ['type', 'status', 'createdAt'];
+
 const sortTypes = ['smallLarge', 'largeSmall'];
 const sortBy = ['name', 'price', 'purchased'];
 
@@ -108,6 +119,9 @@ const patterns = {
   phonePattern,
   phonePatternMessage,
   orderStatus,
+  typeUserApplication,
+  statusUserApplication,
+  sortUserApplicationBy,
   productSortRules,
   sortTypes,
   sortBy,

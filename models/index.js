@@ -6,4 +6,5 @@ module.exports = {
   chat: require('./chat'),
   faq: require('./faq'),
   userRequest: require('./userRequest'),
+  userMessage: require('./userMessage'),
 };

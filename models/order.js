@@ -252,8 +252,8 @@ const validationUpdateOrder = Joi.object({
     .note('input')
     .example('Введіть коментар від менеджера')
     .allow('')
-    .min(patterns.min.description)
-    .max(patterns.max.description)
+    .min(patterns.min.answer)
+    .max(patterns.max.answer)
     .messages(templatesMsgJoi('Коментар від менеджера').textRules),
 });
 
@@ -295,6 +295,7 @@ const validationUpdateOrdersByAdmin = Joi.object({
           ...templatesMsgJoi('ІД замовлення').commonRules,
         }),
     )
+    .required()
     .messages(templatesMsgJoi('Масив ІД замовлень').arrayRules),
 });
 
@@ -388,7 +389,7 @@ const adminDataSchema = new Schema(
   },
   {
     versionKey: false,
-    timestamps: { createdAt: true, updatedAt: false },
+    timestamps: true,
     _id: false,
   },
 );

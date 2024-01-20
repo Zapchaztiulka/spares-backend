@@ -32,7 +32,6 @@ const userRequestSchema = new Schema(
   {
     email: {
       type: String,
-      unique: true,
       match: patterns.emailPattern,
       required: [
         true,

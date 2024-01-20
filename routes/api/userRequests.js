@@ -5,6 +5,7 @@ const {
   validateBody,
   isValidId,
   checkRequestBody,
+  checkPageLimit,
 } = require('../../middlewares');
 const {
   userRequest: { validationRequest },
@@ -12,7 +13,7 @@ const {
 
 const router = express.Router();
 
-router.get('/', ctrl.getRequests);
+router.get('/', checkPageLimit, ctrl.getRequests);
 
 router.post(
   '/',

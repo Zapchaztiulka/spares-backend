@@ -7,4 +7,5 @@ module.exports = {
   faqsRouter: require('./faqs'),
   optionsRouter: require('./options'),
   userRequests: require('./userRequests'),
+  userMessages: require('./userMessages'),
 };
