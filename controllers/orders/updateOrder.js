@@ -2,7 +2,7 @@ const {
   order: { Order },
   user: { User },
 } = require('../../models');
-const { HttpError, checkNotFound } = require('../../helpers');
+const { HttpError, checkNotFound, patterns } = require('../../helpers');
 const {
   updateProductInOrder,
   updateProductQuantitiesInStock,
@@ -43,13 +43,24 @@ module.exports = async (req, res) => {
   await checkNotFound(order, id, 'Order');
   await checkFieldMatching(additionalData, order);
 
+  const { deliveryMethodId, deliveryRate = 0 } = additionalData;
+
   const updatedOrder = await updateProductInOrder(
     order,
     products,
-    additionalData.deliveryRate,
+    deliveryRate,
   );
   updatedOrder.adminData = adminData;
   updatedOrder.status = newStatus;
+
+  if (!updatedOrder.deliveryData && deliveryMethodId) {
+    updatedOrder.deliveryData = {};
+
+    const { deliveryMethodName } = patterns.deliveryMethods.find(
+      method => method.deliveryMethodId === deliveryMethodId,
+    );
+    updatedOrder.deliveryData.deliveryMethodName = deliveryMethodName;
+  }
 
   Object.keys(additionalData).forEach(async field => {
     if (field === 'phone' || field === 'email') {

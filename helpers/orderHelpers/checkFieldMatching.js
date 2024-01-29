@@ -5,9 +5,12 @@ module.exports = async (additionalData, order) => {
     legalEntityData,
     userType,
     deliveryMethodId,
+    deliveryRegion,
+    deliveryDistrict,
     deliveryCity,
     deliveryAddress,
     deliveryOffice,
+    deliveryRate,
   } = additionalData;
 
   if (!order) {
@@ -108,6 +111,21 @@ module.exports = async (additionalData, order) => {
           'deliveryOffice are required when delivering WITHOUT a courier',
         );
       }
+    }
+
+    if (
+      !deliveryMethodId &&
+      (deliveryRegion ||
+        deliveryDistrict ||
+        deliveryCity ||
+        deliveryAddress ||
+        deliveryOffice ||
+        deliveryRate)
+    ) {
+      throw HttpError(
+        400,
+        'any delivery fields MUST NOT be without a deliveryMethodId',
+      );
     }
   }
 };

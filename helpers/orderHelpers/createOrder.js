@@ -75,20 +75,20 @@ module.exports = async (products, user, additionalData) => {
 
   const orderData = {
     products: productDetails,
-    userType: userType || '',
+    userType,
     legalEntityData,
-    deliveryData: {
-      deliveryMethodId,
-      deliveryMethodName: deliveryMethod
-        ? deliveryMethod.deliveryMethodName
-        : '',
-      deliveryRegion,
-      deliveryDistrict,
-      deliveryCity,
-      deliveryAddress,
-      deliveryOffice,
-      deliveryRate,
-    },
+    deliveryData: deliveryMethodId
+      ? {
+          deliveryMethodId,
+          deliveryMethodName: deliveryMethod.deliveryMethodName,
+          deliveryRegion,
+          deliveryDistrict,
+          deliveryCity,
+          deliveryAddress,
+          deliveryOffice,
+          deliveryRate,
+        }
+      : null,
     adminTag,
     userComment,
     totalTypeOfProducts: productDetails.length,
