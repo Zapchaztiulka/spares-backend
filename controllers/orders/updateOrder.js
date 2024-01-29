@@ -6,21 +6,17 @@ const { HttpError, checkNotFound } = require('../../helpers');
 const {
   updateProductInOrder,
   updateProductQuantitiesInStock,
+  checkFieldMatching,
 } = require('../../helpers/orderHelpers');
 const { checkExistingUserData } = require('../../helpers/userHelpers');
 
 module.exports = async (req, res) => {
   const {
-    username: newUsername,
-    userSurname: newUserSurname,
-    phone: newPhone,
-    email: newEmail,
     products,
     status: newStatus,
-    adminTag: newAdminTag,
-    userComment: newUserComment,
-    adminId: newAdminId,
-    adminComment: newAdminComment = '',
+    adminId,
+    adminComment = '',
+    ...additionalData
   } = req.body;
 
   const { id } = req.params;
@@ -31,55 +27,45 @@ module.exports = async (req, res) => {
 
   let adminData = null;
 
-  if (newAdminId) {
-    const admin = await User.findById(newAdminId);
-    await checkNotFound(admin, newAdminId, 'Manager');
+  if (adminId) {
+    const admin = await User.findById(adminId);
+    await checkNotFound(admin, adminId, 'Manager');
 
     adminData = {
-      adminId: newAdminId,
+      adminId,
       adminName: admin.username,
       adminSurname: admin.userSurname,
-      adminComment: newAdminComment,
+      adminComment,
     };
   }
 
   const order = await Order.findById(id);
   await checkNotFound(order, id, 'Order');
+  await checkFieldMatching(additionalData, order);
 
-  const updatedOrder = await updateProductInOrder(order, products);
+  const updatedOrder = await updateProductInOrder(
+    order,
+    products,
+    additionalData.deliveryRate,
+  );
+  updatedOrder.adminData = adminData;
   updatedOrder.status = newStatus;
 
-  if (newUsername) {
-    updatedOrder.username = newUsername;
-  }
+  Object.keys(additionalData).forEach(async field => {
+    if (field === 'phone' || field === 'email') {
+      await checkExistingUserData(additionalData[field], field);
+    }
 
-  if (newUserSurname) {
-    updatedOrder.userSurname = newUserSurname;
-  }
+    if (field.startsWith('delivery')) {
+      updatedOrder.deliveryData[field] = additionalData[field];
+    } else updatedOrder[field] = additionalData[field];
+  });
 
-  if (newPhone) {
-    await checkExistingUserData(newPhone, 'phone');
-    updatedOrder.phone = newPhone;
-  }
-
-  if (newEmail) {
-    await checkExistingUserData(newEmail, 'email');
-    updatedOrder.email = newEmail;
-  }
-
-  if (newAdminTag) {
-    updatedOrder.adminTag = newAdminTag;
-  }
-
-  if (newUserComment) {
-    updatedOrder.userComment = newUserComment;
-  }
-
-  updatedOrder.adminData = adminData;
-
-  await Order.findByIdAndUpdate(id, updatedOrder);
+  const resultedOrder = await Order.findByIdAndUpdate(id, updatedOrder, {
+    new: true,
+  });
 
   await updateProductQuantitiesInStock(order.products, products, newStatus);
 
-  res.json(updatedOrder);
+  res.json(resultedOrder);
 };

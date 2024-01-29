@@ -43,9 +43,11 @@ module.exports = async (req, res) => {
     if (!updateFields.adminData) {
       updateFields.adminData = {};
     }
+
     if (adminComment) {
       updateFields.adminData.adminComment = adminComment;
     }
+
     updateFields.adminData.adminId = id;
     updateFields.adminData.adminName = admin.username;
     updateFields.adminData.adminSurname = admin.userSurname;

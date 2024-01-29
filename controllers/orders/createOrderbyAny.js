@@ -5,33 +5,12 @@ const { createOrder } = require('../../helpers/orderHelpers');
 const { sendEmailWithOrderDetails } = require('../../helpers/sendEmail');
 
 module.exports = async (req, res) => {
-  const {
-    products,
-    phone,
-    email = '',
-    username = '',
-    userSurname = '',
-    adminTag = '',
-    userComment = '',
-    adminId = '',
-    adminComment = '',
-  } = req.body;
-
-  const additionalData = {
-    phone,
-    email,
-    username,
-    userSurname,
-    adminTag,
-    userComment,
-    adminId,
-    adminComment,
-  };
+  const { products, ...additionalData } = req.body;
 
   const orderData = await createOrder(products, null, additionalData);
   const newOrder = await Order.create(orderData);
 
-  if (email) {
+  if (newOrder.email) {
     await sendEmailWithOrderDetails(newOrder);
   }
 

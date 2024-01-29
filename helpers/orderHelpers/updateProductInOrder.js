@@ -4,7 +4,7 @@ const {
 const { checkNotFound } = require('..');
 const { checkAvailableProductInStock } = require('../productHelpers');
 
-module.exports = async (order, productUpdates) => {
+module.exports = async (order, productUpdates, deliveryRate) => {
   const updatedOrder = JSON.parse(JSON.stringify(order));
 
   for (const productUpdate of productUpdates) {
@@ -63,10 +63,14 @@ module.exports = async (order, productUpdates) => {
     (total, product) => total + product.quantity,
     0,
   );
-  updatedOrder.totalPrice = updatedOrder.products.reduce(
+
+  const totalPrice = updatedOrder.products.reduce(
     (total, product) => total + product.quantity * product.price,
     0,
   );
+  updatedOrder.totalPrice = totalPrice;
+  updatedOrder.totalPriceWithDelivery = totalPrice + deliveryRate;
+
   updatedOrder.updatedAt = new Date();
 
   return updatedOrder;

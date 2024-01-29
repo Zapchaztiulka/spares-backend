@@ -47,6 +47,8 @@ const userRequestSchema = new Schema(
   { versionKey: false, timestamps: { createdAt: true, updatedAt: false } },
 );
 
+userRequestSchema.index({ email: 1 }, { unique: false });
+
 userRequestSchema.post('save', handleMongooseError);
 const UserRequest = model('user_request', userRequestSchema);
 

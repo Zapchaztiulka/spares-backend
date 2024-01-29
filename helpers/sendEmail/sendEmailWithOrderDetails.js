@@ -18,9 +18,15 @@ module.exports = async orderDetails => {
     phone,
     email,
     products,
-    delivery = 'Самовивіз',
-    costDelivery = 0,
-    addressDelivery = 'Самовивіз',
+    deliveryData: {
+      deliveryMethodName,
+      deliveryRate = 0,
+      deliveryRegion = '',
+      deliveryDistrict = '',
+      deliveryCity = '',
+      deliveryAddress = '',
+      deliveryOffice = '',
+    },
     createdAt,
   } = orderDetails;
 
@@ -120,6 +126,7 @@ module.exports = async orderDetails => {
 
           .return-button-wrapper {
             margin-top: 12px;
+            margin-bottom: 12px;
             text-align: left;
             font-weight: 500;
             font-size: 16px;
@@ -183,13 +190,15 @@ module.exports = async orderDetails => {
               </tr>
               <tr class="text">
                 <td colspan="2">Доставка</td>
-                <td style="color: #6B7075; text-align: center; white-space: nowrap;">${delivery}</td>
-                <td style="text-align: center; white-space: nowrap;">${costDelivery} грн.</td>
+                <td style="color: #6B7075; text-align: center; white-space: nowrap;">${deliveryMethodName}</td>
+                <td style="text-align: center; white-space: nowrap;">${
+                  deliveryRate || 'Безкоштовно'
+                } грн.</td>
               </tr>
               <tr class="title" style="color: #1D4ED8;">
                 <td colspan="3" style="text-align: left;">Загалом</td>
                 <td style="text-align: center; white-space: nowrap;">${formatNumber(
-                  totalAmount + costDelivery,
+                  totalAmount + deliveryRate,
                 )}  грн.</td>
               </tr>
             </tbody>
@@ -200,7 +209,11 @@ module.exports = async orderDetails => {
           <p style="margin-bottom: 12px;">${username} ${userSurname}</p>
           <p style="margin-bottom: 12px;">Телефон: ${phone}</p>
           <p style="margin-bottom: 12px;">Email: ${email}</p>
-          <p>Адреса доставки: ${addressDelivery}</p>
+          ${
+            deliveryOffice
+              ? `<p>Отримання товару у відділенні: ${deliveryOffice} ${deliveryAddress}</p>`
+              : `<p>Адреса доставки: ${deliveryRegion}, ${deliveryDistrict}, ${deliveryCity}, ${deliveryAddress}</p>`
+          }
         </div>
         <div class="return-button-wrapper">
           <a href="${GATALOG_URL}" style="text-decoration: none; text-align: center; color: white;">Повернутися в магазин</a>

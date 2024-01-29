@@ -4,8 +4,32 @@ const {
 } = require('../../models');
 const { checkNotFound, patterns } = require('..');
 const { checkAvailableProductInStock } = require('../productHelpers');
+const checkFieldMatching = require('./checkFieldMatching');
 
 module.exports = async (products, user, additionalData) => {
+  const {
+    phone,
+    email = '',
+    username = '',
+    userSurname = '',
+    userMiddleName = '',
+    userType,
+    legalEntityData = null,
+    deliveryMethodId,
+    deliveryRegion = '',
+    deliveryDistrict = '',
+    deliveryCity = '',
+    deliveryAddress = '',
+    deliveryOffice = '',
+    deliveryRate = 0,
+    adminTag = '',
+    userComment = '',
+    adminId = '',
+    adminComment = '',
+  } = additionalData;
+
+  await checkFieldMatching(additionalData, null);
+
   const productDetails = await Promise.all(
     products.map(async product => {
       const { productId, quantity } = product;
@@ -45,24 +69,30 @@ module.exports = async (products, user, additionalData) => {
     0,
   );
 
-  const {
-    phone,
-    email = '',
-    username = '',
-    userSurname = '',
-    adminTag = '',
-    userComment = '',
-    adminId = '',
-    adminComment = '',
-  } = additionalData;
+  const { deliveryMethodName } = patterns.deliveryMethods.find(
+    method => method.deliveryMethodId === deliveryMethodId,
+  );
 
   const orderData = {
     products: productDetails,
+    userType,
+    legalEntityData,
+    deliveryData: {
+      deliveryMethodId,
+      deliveryMethodName,
+      deliveryRegion,
+      deliveryDistrict,
+      deliveryCity,
+      deliveryAddress,
+      deliveryOffice,
+      deliveryRate,
+    },
+    adminTag,
+    userComment,
     totalTypeOfProducts: productDetails.length,
     totalProducts,
     totalPrice,
-    adminTag,
-    userComment,
+    totalPriceWithDelivery: totalPrice + deliveryRate,
   };
 
   if (adminId) {
@@ -87,23 +117,17 @@ module.exports = async (products, user, additionalData) => {
       orderData.phone = phone;
       orderData.username = username;
       orderData.userSurname = userSurname;
+      orderData.userMiddleName = userMiddleName;
     }
   }
 
   if (userToUse) {
-    const {
-      _id,
-      username,
-      userSurname,
-      email: userEmail,
-      phone: userPhone,
-    } = userToUse;
-
-    orderData.userId = _id;
-    orderData.username = username;
-    orderData.userSurname = userSurname;
-    orderData.email = userEmail;
-    orderData.phone = userPhone;
+    orderData.userId = userToUse._id;
+    orderData.username = userToUse.username;
+    orderData.userSurname = userToUse.userSurname;
+    orderData.userMiddleName = userMiddleName;
+    orderData.email = userToUse.email;
+    orderData.phone = userToUse.phone;
   }
 
   return orderData;

@@ -3,4 +3,5 @@ module.exports = {
   updateProductInOrder: require('./updateProductInOrder'),
   updateProductQuantitiesInStock: require('./updateProductQuantitiesInStock'),
   calculateTotalPurchased: require('./calculateTotalPurchased'),
+  checkFieldMatching: require('./checkFieldMatching'),
 };

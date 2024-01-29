@@ -9,6 +9,7 @@ module.exports = (key, data) => {
     'string.min': `${key} має мати від {#limit} символів`,
     'string.max': `${key} має мати до {#limit} символів`,
     'string.length': `${key} має містити {#limit} символів`,
+    'string.digits': `${key} має містити лише цифри`,
   };
 
   const urlRules = {
