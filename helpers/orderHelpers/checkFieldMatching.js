@@ -11,7 +11,7 @@ module.exports = async (additionalData, order) => {
   } = additionalData;
 
   if (!order) {
-    if (userType !== patterns.userTypes[0] && !legalEntityData) {
+    if (userType && userType !== patterns.userTypes[0] && !legalEntityData) {
       throw HttpError(400, 'Legal entity data are required');
     }
 
@@ -19,22 +19,24 @@ module.exports = async (additionalData, order) => {
       throw HttpError(400, 'Legal entity data is prohibited for individuals');
     }
 
-    const { isByCourier } = patterns.deliveryMethods.find(
-      method => method.deliveryMethodId === deliveryMethodId,
-    );
-
-    if (isByCourier && (!deliveryCity || !deliveryAddress)) {
-      throw HttpError(
-        400,
-        'deliveryCity and deliveryAddress are required for delivery by courier',
+    if (deliveryMethodId) {
+      const { isByCourier } = patterns.deliveryMethods.find(
+        method => method.deliveryMethodId === deliveryMethodId,
       );
-    }
 
-    if (!isByCourier && !deliveryOffice) {
-      throw HttpError(
-        400,
-        'deliveryOffice are required when delivering WITHOUT a courier',
-      );
+      if (isByCourier && (!deliveryCity || !deliveryAddress)) {
+        throw HttpError(
+          400,
+          'deliveryCity and deliveryAddress are required for delivery by courier',
+        );
+      }
+
+      if (!isByCourier && !deliveryOffice) {
+        throw HttpError(
+          400,
+          'deliveryOffice are required when delivering WITHOUT a courier',
+        );
+      }
     }
   }
 

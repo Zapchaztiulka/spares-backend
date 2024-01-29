@@ -69,17 +69,19 @@ module.exports = async (products, user, additionalData) => {
     0,
   );
 
-  const { deliveryMethodName } = patterns.deliveryMethods.find(
+  const deliveryMethod = patterns.deliveryMethods.find(
     method => method.deliveryMethodId === deliveryMethodId,
   );
 
   const orderData = {
     products: productDetails,
-    userType,
+    userType: userType || '',
     legalEntityData,
     deliveryData: {
       deliveryMethodId,
-      deliveryMethodName,
+      deliveryMethodName: deliveryMethod
+        ? deliveryMethod.deliveryMethodName
+        : '',
       deliveryRegion,
       deliveryDistrict,
       deliveryCity,

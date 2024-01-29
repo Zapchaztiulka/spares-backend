@@ -558,7 +558,6 @@ const orderSchema = new Schema(
     },
     userType: {
       type: String,
-      enum: patterns.userTypes,
       default: patterns.userTypes[0],
     },
     username: {
@@ -592,7 +591,7 @@ const orderSchema = new Schema(
       enum: patterns.orderStatus,
       default: patterns.orderStatus[0],
     },
-    deliveryData: { type: deliveryDataSchema, required: true },
+    deliveryData: deliveryDataSchema,
     adminTag: {
       type: String,
       default: '',
