@@ -49,11 +49,16 @@ const validationAddUserMessage = Joi.object({
     .example('Введіть деталі заявки')
     .min(patterns.min.description)
     .max(patterns.max.description)
-    .required()
     .messages({
       ...templatesMsgJoi('Деталі заявки').textRules,
       ...templatesMsgJoi('Деталі заявки').commonRules,
     }),
+  productId: Joi.string()
+    .description('Product ID')
+    .note('input')
+    .example('Введіть product ID')
+    .length(24)
+    .messages(templatesMsgJoi('Product ID').textRules),
 });
 
 const validationUpdateUserMessage = Joi.object({
@@ -128,6 +133,28 @@ const adminDataSchema = new Schema(
   },
 );
 
+const productDataSchema = new Schema(
+  {
+    productId: {
+      type: String,
+      default: '',
+    },
+    productName: {
+      type: String,
+      default: '',
+    },
+    vendorCode: {
+      type: String,
+      default: '',
+    },
+  },
+  {
+    versionKey: false,
+    timestamps: false,
+    _id: false,
+  },
+);
+
 const userMessageSchema = new Schema(
   {
     phone: {
@@ -159,6 +186,10 @@ const userMessageSchema = new Schema(
         true,
         'User message is required. Please provide a user message',
       ],
+    },
+    productData: {
+      type: productDataSchema,
+      default: null,
     },
     adminData: {
       type: adminDataSchema,
