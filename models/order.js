@@ -234,9 +234,9 @@ const validationOrderByAny = Joi.object({
       ...templatesMsgJoi('Телефон користувача').commonRules,
     }),
   ...userValidation,
-  legalEntityData: Joi.object({ ...legalEntityDataValidation }).messages(
-    templatesMsgJoi('Дані по юридичній особі').commonRules,
-  ),
+  legalEntityData: Joi.object({ ...legalEntityDataValidation })
+    .allow(null)
+    .messages(templatesMsgJoi('Дані по юридичній особі').commonRules),
   status: Joi.string()
     .description('Статус замовлення')
     .note('checkbox')
