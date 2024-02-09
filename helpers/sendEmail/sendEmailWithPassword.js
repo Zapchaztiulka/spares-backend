@@ -1,9 +1,8 @@
 const sgMail = require('@sendgrid/mail');
-require('dotenv').config();
 
-const { SENDGRID_API_KEY, GATALOG_URL } = process.env;
+const { sendgridApiKey, fromEmail, catalogURL } = require('./getSendgridKeys');
 
-sgMail.setApiKey(SENDGRID_API_KEY);
+sgMail.setApiKey(sendgridApiKey);
 
 module.exports = async (email, newPassword) => {
   const newEmail = {
@@ -58,7 +57,7 @@ module.exports = async (email, newPassword) => {
         </head>
         <body>
           <div class="image-container">
-            <a href="${GATALOG_URL}">
+            <a href="${catalogURL}">
               <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
             <a/>
           </div>
@@ -66,12 +65,12 @@ module.exports = async (email, newPassword) => {
           <p>Наступного разу використовуйте його при вході в магазин</p>
           <p>Також Ви можете змінити пароль в сторінці "Профілю користувача".</p>
           <div class="return-button-wrapper">
-            <a href="${GATALOG_URL}" style="text-decoration: none; text-align: center; color: white;">Повернутися в магазин</a>
+            <a href="${catalogURL}" style="text-decoration: none; text-align: center; color: white;">Повернутися в магазин</a>
           </div>
         </body>
       </html>
     `,
-    from: 'walletservice2023@gmail.com',
+    from: fromEmail,
   };
 
   await sgMail.send(newEmail);

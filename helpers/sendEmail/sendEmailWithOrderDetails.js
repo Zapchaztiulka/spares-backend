@@ -1,14 +1,14 @@
 const sgMail = require('@sendgrid/mail');
-require('dotenv').config();
 
 const { formatDate, formatNumber, patterns } = require('../../helpers');
 
-const { SENDGRID_API_KEY, GATALOG_URL } = process.env;
+const { sendgridApiKey, fromEmail, catalogURL } = require('./getSendgridKeys');
+
 const {
   companyData: { firstPhone, secondPhone, thirdPhone, addressCompany },
 } = patterns;
 
-sgMail.setApiKey(SENDGRID_API_KEY);
+sgMail.setApiKey(sendgridApiKey);
 
 module.exports = async orderDetails => {
   const {
@@ -145,7 +145,7 @@ module.exports = async orderDetails => {
       <body>
         <div style="margin-bottom: 24px;">
           <div style="padding: 20px; border-radius: 8px; background-color: #FFFFFF; display: flex; align-items: center; width: 210px;">
-            <a href="${GATALOG_URL}">
+            <a href="${catalogURL}">
               <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
             <a/>
           </div>
@@ -216,7 +216,7 @@ module.exports = async orderDetails => {
           }
         </div>
         <div class="return-button-wrapper">
-          <a href="${GATALOG_URL}" style="text-decoration: none; text-align: center; color: white;">Повернутися в магазин</a>
+          <a href="${catalogURL}" style="text-decoration: none; text-align: center; color: white;">Повернутися в магазин</a>
         </div>
         <div class="footer">
           <p style="margin-right: 12px;">${firstPhone}</p>
@@ -227,7 +227,7 @@ module.exports = async orderDetails => {
       </body>
     </html>
     `,
-    from: 'walletservice2023@gmail.com',
+    from: fromEmail,
   };
 
   await sgMail.send(newEmail);

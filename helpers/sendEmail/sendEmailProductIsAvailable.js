@@ -1,9 +1,8 @@
 const sgMail = require('@sendgrid/mail');
-require('dotenv').config();
 
-const { SENDGRID_API_KEY, GATALOG_URL } = process.env;
+const { sendgridApiKey, fromEmail, catalogURL } = require('./getSendgridKeys');
 
-sgMail.setApiKey(SENDGRID_API_KEY);
+sgMail.setApiKey(sendgridApiKey);
 
 module.exports = async ({
   productId,
@@ -70,22 +69,22 @@ module.exports = async ({
       <body>
         <div style="margin-bottom: 24px;">
           <div style="padding: 20px; padding-left: 4px; border-radius: 8px; background-color: #FFFFFF; display: flex; align-items: center; width: 210px;">
-            <a href="${GATALOG_URL}">
+            <a href="${catalogURL}">
               <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
             <a/>
           </div>
           <p class="text" style="text-align: left;"> Раді повідомити, що товар "${productName}" доступний для замовлення. Поспішайте - в наявності обмежена кількість. Ціна - ${price} грн. </p>
         </div>
         <div class="buy-button-wrapper">
-          <a href="${GATALOG_URL}/product/${productId}" style="text-decoration: none; text-align: center; color: white;">Купити цей товар</a>
+          <a href="${catalogURL}/product/${productId}" style="text-decoration: none; text-align: center; color: white;">Купити цей товар</a>
         </div>
         <div class="return-button-wrapper">
-          <a href="${GATALOG_URL}" style="text-decoration: none; text-align: center; color: white;">Повернутися в магазин</a>
+          <a href="${catalogURL}" style="text-decoration: none; text-align: center; color: white;">Повернутися в магазин</a>
         </div>
       </body>
     </html>
     `,
-    from: 'walletservice2023@gmail.com',
+    from: fromEmail,
   };
 
   await sgMail.send(newEmail);

@@ -1,9 +1,13 @@
 const sgMail = require('@sendgrid/mail');
-require('dotenv').config();
 
-const { BASE_URL, SENDGRID_API_KEY, GATALOG_URL } = process.env;
+const {
+  sendgridApiKey,
+  fromEmail,
+  catalogURL,
+  baseURL,
+} = require('./getSendgridKeys');
 
-sgMail.setApiKey(SENDGRID_API_KEY);
+sgMail.setApiKey(sendgridApiKey);
 
 module.exports = async (email, verificationToken) => {
   const newEmail = {
@@ -76,23 +80,23 @@ module.exports = async (email, verificationToken) => {
         </head>
         <body>
           <div class="image-container">
-            <a href="${GATALOG_URL}">
+            <a href="${catalogURL}">
               <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
             <a/>
           </div>
           <h3>Вас вітає магазин запасних частин агротехніки "Запчастюлька"!</h3>
           <p>Натисніть кнопку нижче, щоб підтвердити свою електронну адресу:</p>
-          <a class="verification-link" target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">
+          <a class="verification-link" target="_blank" href="${baseURL}/api/users/verify/${verificationToken}">
             <p class="verification-text">Підтвердити email</p>
           </a>
           <p>ВАЖЛИВО! Підтвердити пошту можна лише протягом 24 годин</p>
           <div class="return-button-wrapper">
-            <a href="${GATALOG_URL}" style="text-decoration: none; text-align: center; color: white;">Повернутися в магазин</a>
+            <a href="${catalogURL}" style="text-decoration: none; text-align: center; color: white;">Повернутися в магазин</a>
           </div>
         </body>
       </html>
     `,
-    from: 'walletservice2023@gmail.com',
+    from: fromEmail,
   };
 
   await sgMail.send(newEmail);

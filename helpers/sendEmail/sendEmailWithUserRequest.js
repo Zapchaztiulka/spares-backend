@@ -1,9 +1,8 @@
 const sgMail = require('@sendgrid/mail');
-require('dotenv').config();
 
-const { SENDGRID_API_KEY, GATALOG_URL } = process.env;
+const { sendgridApiKey, fromEmail, catalogURL } = require('./getSendgridKeys');
 
-sgMail.setApiKey(SENDGRID_API_KEY);
+sgMail.setApiKey(sendgridApiKey);
 
 module.exports = async userRequest => {
   const { email, productName, vendorCode } = userRequest;
@@ -63,7 +62,7 @@ module.exports = async userRequest => {
       <body>
         <div style="margin-bottom: 24px;">
           <div style="padding: 20px; padding-left: 4px; border-radius: 8px; background-color: #FFFFFF; display: flex; align-items: center; width: 210px;">
-            <a href="${GATALOG_URL}">
+            <a href="${catalogURL}">
               <img src="https://i.ibb.co/dLzbcCg/logo-blue.jpg" alt="Spare parts store" />
             <a/>
           </div>
@@ -71,12 +70,12 @@ module.exports = async userRequest => {
           <h2 class="title" style="text-align: left; color: #1C1F23; margin-top: 20px; margin-bottom: 12px;">Дякуємо, що Ви з нами!</h2>
         </div>
         <div class="return-button-wrapper">
-          <a href="${GATALOG_URL}" style="text-decoration: none; text-align: center; color: white;">Повернутися в магазин</a>
+          <a href="${catalogURL}" style="text-decoration: none; text-align: center; color: white;">Повернутися в магазин</a>
         </div>
       </body>
     </html>
     `,
-    from: 'walletservice2023@gmail.com',
+    from: fromEmail,
   };
 
   await sgMail.send(newEmail);
