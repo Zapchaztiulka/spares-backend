@@ -17,6 +17,7 @@ module.exports = (products, bodyQuery) => {
       trademarks,
       categories,
       subcategories,
+      availability,
     } = bodyQuery;
 
     if (minPrice && product.price.value < minPrice) return false;
@@ -86,6 +87,8 @@ module.exports = (products, bodyQuery) => {
     ) {
       return false;
     }
+
+    if (availability?.length > 0 && !availability.includes(product.availability)) return false;
 
     return true;
   });

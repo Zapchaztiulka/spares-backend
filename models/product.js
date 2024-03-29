@@ -9,6 +9,7 @@ const {
 const {
   getPropsFromSchema,
 } = require('../helpers/productHelpers/getPropsFromSchema');
+const { availability } = require('../helpers/patterns');
 
 const validationAddOneProduct = Joi.object({
   name: Joi.string()
@@ -461,6 +462,18 @@ const validationBodyQuery = Joi.object({
         .messages(templatesMsgJoi('ІД підкатегорії товару').textRules),
     )
     .messages(templatesMsgJoi('Масив підкатегорій товарів').arrayRules),
+  availability: Joi.array()
+    .items(
+      Joi.string()
+        .description('Наявність товару')
+        .note('select')
+        .example('Оберіть статус наявності товару')
+        .valid(...patterns.availability)
+        .messages(
+          templatesMsgJoi('Статус', patterns.availability).enumRules,
+        ),
+    )
+    .messages(templatesMsgJoi('Масив статусів наявності товару').arrayRules),
 });
 
 const photoSchema = new Schema({
