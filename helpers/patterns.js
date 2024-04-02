@@ -53,6 +53,7 @@ const companyData = {
   thirdPhone: '+38 063 111 22 33',
   addressCompany: 'м. Кропивницький, вул. назва вулиці, номер будинку.',
 };
+const dataTypes = ['number', 'string', 'array'];
 
 // USER PATTERNS
 const roles = ['superAdmin', 'admin', 'user'];
@@ -190,6 +191,7 @@ const patterns = {
   chatRating,
   messageType,
   companyData,
+  dataTypes,
 };
 
 module.exports = patterns;

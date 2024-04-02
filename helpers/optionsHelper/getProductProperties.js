@@ -7,6 +7,7 @@ module.exports = (schema, typeReq) => {
           key: keys[0].key, // name
           title: keys[0].schema._flags.description,
           type: keys[0].schema.$_terms.notes[0],
+          returnDataType: 'string',
           placeholder: keys[0].schema.$_terms.examples[0],
           validation: {
             min: keys[0].schema._rules[0].args.limit,
@@ -26,6 +27,10 @@ module.exports = (schema, typeReq) => {
               required:
                 keys[0].schema._preferences.messages['any.required'].rendered,
             },
+          },
+          render: {
+            position: 1,
+            block: 1,
           },
         }
       : {
@@ -50,10 +55,12 @@ module.exports = (schema, typeReq) => {
             },
           },
         },
+
     {
       key: keys[1].key, // vendorCode
       title: keys[1].schema._flags.description,
       type: keys[1].schema.$_terms.notes[0],
+      returnDataType: 'string',
       placeholder: keys[1].schema.$_terms.examples[0],
       validation: {
         min: keys[1].schema._rules[0].args.limit,
@@ -70,12 +77,18 @@ module.exports = (schema, typeReq) => {
             ],
         },
       },
+      render: {
+        position: 2,
+        block: 1,
+      },
     },
+
     typeReq === 'add'
       ? {
           key: keys[2].key, // price
           title: keys[2].schema._flags.description,
           type: keys[2].schema.$_terms.notes[0],
+          returnDataType: 'number',
           placeholder: keys[2].schema.$_terms.examples[0],
           validation: {
             min: keys[2].schema._rules[0].args.limit,
@@ -91,6 +104,10 @@ module.exports = (schema, typeReq) => {
               required:
                 keys[2].schema._preferences.messages['any.required'].rendered,
             },
+          },
+          render: {
+            position: 3,
+            block: 1,
           },
         }
       : {
@@ -113,11 +130,13 @@ module.exports = (schema, typeReq) => {
             },
           },
         },
+
     typeReq === 'add'
       ? {
           key: keys[3].key, // availability
           title: keys[3].schema._flags.description,
           type: keys[3].schema.$_terms.notes[0],
+          returnDataType: 'string',
           placeholder: keys[3].schema.$_terms.examples[0],
           list: [...keys[3].schema._valids._values],
           validation: {
@@ -126,6 +145,10 @@ module.exports = (schema, typeReq) => {
               required:
                 keys[3].schema._preferences.messages['any.required'].rendered,
             },
+          },
+          render: {
+            position: 4,
+            block: 1,
           },
         }
       : {
@@ -142,6 +165,7 @@ module.exports = (schema, typeReq) => {
       key: keys[4].key, // weight
       title: keys[4].schema._flags.description,
       type: keys[4].schema.$_terms.notes[0],
+      returnDataType: 'number',
       placeholder: keys[4].schema.$_terms.examples[0],
       validation: {
         min: keys[4].schema._rules[0].args.limit,
@@ -154,21 +178,33 @@ module.exports = (schema, typeReq) => {
             keys[4].schema._rules[1].args.limit,
         },
       },
+      render: {
+        position: 2,
+        block: 2,
+      },
     },
+
     {
       key: keys[5].key, // units
       title: keys[5].schema._flags.description,
       type: keys[5].schema.$_terms.notes[0],
+      returnDataType: 'string',
       placeholder: keys[5].schema.$_terms.examples[0],
       list: [...keys[5].schema._valids._values],
       validation: {
         warningMessages: {},
       },
+      render: {
+        position: 5,
+        block: 1,
+      },
     },
+
     {
       key: keys[6].key, // quantity
       title: keys[6].schema._flags.description,
       type: keys[6].schema.$_terms.notes[0],
+      returnDataType: 'number',
       placeholder: keys[6].schema.$_terms.examples[0],
       validation: {
         min: keys[6].schema._rules[0].args.limit,
@@ -181,7 +217,12 @@ module.exports = (schema, typeReq) => {
             keys[6].schema._rules[1].args.limit,
         },
       },
+      render: {
+        position: 6,
+        block: 1,
+      },
     },
+
     typeReq === 'add'
       ? {
           key: keys[7].schema.$_terms.items[0].$_terms.keys[0].key, // photo URL
@@ -190,6 +231,7 @@ module.exports = (schema, typeReq) => {
               .description,
           type: keys[7].schema.$_terms.items[0].$_terms.keys[0].schema.$_terms
             .notes[0],
+          returnDataType: 'string',
           placeholder:
             keys[7].schema.$_terms.items[0].$_terms.keys[0].schema.$_terms
               .examples[0],
@@ -208,6 +250,10 @@ module.exports = (schema, typeReq) => {
                   ._preferences.messages['any.required'].rendered,
             },
           },
+          render: {
+            position: 1,
+            block: 'photo',
+          },
         }
       : {
           key: keys[7].schema.$_terms.items[0].$_terms.keys[0].key, // photo URL
@@ -216,6 +262,7 @@ module.exports = (schema, typeReq) => {
               .description,
           type: keys[7].schema.$_terms.items[0].$_terms.keys[0].schema.$_terms
             .notes[0],
+          returnDataType: 'string',
           placeholder:
             keys[7].schema.$_terms.items[0].$_terms.keys[0].schema.$_terms
               .examples[0],
@@ -229,6 +276,7 @@ module.exports = (schema, typeReq) => {
             },
           },
         },
+
     typeReq === 'add'
       ? {
           key: keys[7].schema.$_terms.items[0].$_terms.keys[1].key, // alt
@@ -267,6 +315,10 @@ module.exports = (schema, typeReq) => {
                   ._preferences.messages['any.required'].rendered,
             },
           },
+          render: {
+            position: 2,
+            block: 'photo',
+          },
         }
       : {
           key: keys[7].schema.$_terms.items[0].$_terms.keys[1].key, // alt
@@ -300,6 +352,7 @@ module.exports = (schema, typeReq) => {
             },
           },
         },
+
     {
       key: keys[8].key, // description
       title: keys[8].schema._flags.description,
@@ -320,7 +373,12 @@ module.exports = (schema, typeReq) => {
             ],
         },
       },
+      render: {
+        position: 1,
+        block: 2,
+      },
     },
+
     {
       key: keys[9].schema.$_terms.keys[0].key, // country
       title: keys[9].schema.$_terms.keys[0].schema._flags.description,
@@ -346,7 +404,12 @@ module.exports = (schema, typeReq) => {
             ],
         },
       },
+      render: {
+        position: 11,
+        block: 1,
+      },
     },
+
     {
       key: keys[9].schema.$_terms.keys[1].key, // factory
       title: keys[9].schema.$_terms.keys[1].schema._flags.description,
@@ -372,7 +435,12 @@ module.exports = (schema, typeReq) => {
             ],
         },
       },
+      render: {
+        position: 10,
+        block: 1,
+      },
     },
+
     {
       key: keys[9].schema.$_terms.keys[2].key, // trademark
       title: keys[9].schema.$_terms.keys[2].schema._flags.description,
@@ -381,6 +449,7 @@ module.exports = (schema, typeReq) => {
       validation: {
         min: keys[9].schema.$_terms.keys[2].schema._rules[0].args.limit,
         max: keys[9].schema.$_terms.keys[2].schema._rules[1].args.limit,
+        required: true,
         warningMessages: {
           length:
             keys[9].schema.$_terms.keys[2].schema._preferences.messages[
@@ -398,7 +467,12 @@ module.exports = (schema, typeReq) => {
             ],
         },
       },
+      render: {
+        position: 9,
+        block: 1,
+      },
     },
+
     typeReq === 'add'
       ? {
           key: keys[10].key, // categories
@@ -427,6 +501,10 @@ module.exports = (schema, typeReq) => {
                 ].rendered,
             },
           },
+          render: {
+            position: 7,
+            block: 'category',
+          },
         }
       : {
           key: keys[10].key, // categories
@@ -451,6 +529,7 @@ module.exports = (schema, typeReq) => {
             },
           },
         },
+
     {
       key: keys[11].key, // subcategories
       title: keys[11].schema.$_terms.items[0]._flags.description,
@@ -472,6 +551,10 @@ module.exports = (schema, typeReq) => {
               ]._template.length - 1
             ],
         },
+      },
+      render: {
+        position: 8,
+        block: 'category',
       },
     },
   ];
