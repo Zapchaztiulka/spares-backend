@@ -1,6 +1,6 @@
 module.exports = (key, data) => {
   const commonRules = {
-    'any.required': `Поле "${key}" має бути обов'язково`,
+    'any.required': `Поле "${key}" повинне бути заповнене`,
     'any.empty': `Поле "${key}" не може бути порожнім`,
   };
 
