@@ -465,6 +465,8 @@ module.exports = (schema, typeReq) => {
                 'string.max'
               ]._template.length - 1
             ],
+            required:
+                keys[9].schema._preferences.messages['any.required'].rendered,
         },
       },
       render: {
